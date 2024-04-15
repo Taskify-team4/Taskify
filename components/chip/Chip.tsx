@@ -1,8 +1,13 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import * as S from './chip.style';
+import { TChipProps } from '@components/chip/chip.type';
 
-function Chip({ children, size }: { children: ReactNode; size: string }) {
-  return <S.BasicChip $size={size}>{children}</S.BasicChip>;
-}
+const Chip = ({ children, size, color }: TChipProps) => {
+  return (
+    <S.BasicChip $size={size} $color={color}>
+      {children}
+    </S.BasicChip>
+  );
+};
 
 export default Chip;

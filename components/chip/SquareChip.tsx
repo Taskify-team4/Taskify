@@ -1,10 +1,13 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import * as S from '@components/chip/chip.style';
+import { TChipProps } from '@components/chip/chip.type';
 
-export const SmallSquareChip = ({ children }: { children: ReactNode }) => {
-  return <S.SquareChip $size="small">{children}</S.SquareChip>;
+const SquareChip = ({ children, color, size }: TChipProps) => {
+  return (
+    <S.SquareChip $color={color} $size={size}>
+      {children}
+    </S.SquareChip>
+  );
 };
 
-export const LargeSquareChip = ({ children }: { children: ReactNode }) => {
-  return <S.SquareChip $size="large">{children}</S.SquareChip>;
-};
+export default SquareChip;
