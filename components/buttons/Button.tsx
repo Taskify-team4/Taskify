@@ -1,7 +1,6 @@
 import React, { MouseEventHandler, ReactNode } from 'react';
 import * as S from '@components/buttons/Button.style';
 import Image from 'next/image';
-import { DashboardData } from '@pages/index';
 
 // Icons
 import addIcon from '@public/icons/add.svg';
@@ -9,10 +8,20 @@ import rightArrowIcon from '@public/icons/right_arrow.svg';
 import leftArrowIcon from '@public/icons/left_arrow.svg';
 import crownIcon from '@public/icons/crown.svg';
 
+export type DashboardData = {
+  color: string;
+  title: string;
+  createdByMe: boolean;
+};
+
 type ButtonProps = {
   children?: ReactNode;
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+};
+
+type DashboardButtonProps = ButtonProps & {
+  dashboardData: DashboardData;
 };
 
 function Button({ children, disabled, onClick }: ButtonProps) {
@@ -84,10 +93,6 @@ function AddDashboard({ children, onClick }: ButtonProps) {
     </S.AddDashboardButton>
   );
 }
-
-type DashboardButtonProps = ButtonProps & {
-  dashboardData: DashboardData;
-};
 
 function Dashboard({ onClick, dashboardData }: DashboardButtonProps) {
   return (
