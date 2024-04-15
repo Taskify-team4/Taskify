@@ -1,24 +1,66 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
 
+:root {
+  /* ============COLOR============ */
+  /* Violet Palette */
+  --violetlight: #f1effd;
+  --violet: #5534da;
+
+  /* Purple Palette */
+  --purple: #760dde;
+
+  /* Pink Palette */
+  --pink: #e876ea;
+
+  /* Orange Palette */
+  --orange: #ffa500;
+
+  /* Blue Palette */
+  --blue: #76a5ea;
+
+  /* Green Palette */
+  --green: #7ac555;
+
+  /* Gray Palette */
+  --gray100: #fafafa;
+  --gray200: #eeeeee;
+  --gray300: #d9d9d9;
+  --gray400: #9fa6b2;
+  --gray500: #787486;
+
+  /* Black Palette */
+  --black100: #4b4b4b;
+  --black200: #333236;
+  --black300: #171717;
+  --black400: #000000;
+
+  /* Others */
+  --white: #ffffff;
+  --red: #d6173a;
+
+  /* ==========FONT SIZE========== */
+  /* --font28: 2.8rem;
+  --font24: 2.4rem;
+  --font20: 2rem;
+  --font18: 1.8rem;
+  --font16: 1.6rem;
+  --font15: 1.5rem;
+  --font14: 1.4rem;
+  --font12: 1.2rem; */
+
+  /* ==========FONT WEIGHT========== */
+  /* --bold: 700;
+  --regular: 400; */
+}
+
 * {
   margin: 0;
   padding: 0;
   border: 0;
   font-size: 10px;
-  font-family:
-    Pretendard,
-    'Pretendard Variable',
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Open Sans',
-    'Helvetica Neue',
-    sans-serif;
+  font-family: Pretendard, 'Pretendard Variable', system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif;
   vertical-align: baseline;
 }
 article,
