@@ -44,6 +44,18 @@ function Reject(props: ButtonProps) {
   return <S.RejectButton {...props} />;
 }
 
+function ModalConfirm(props: ButtonProps) {
+  return <S.ModalConfirmButton {...props} />;
+}
+
+function ModalReject(props: ButtonProps) {
+  return <S.ModalRejectButton {...props} />;
+}
+
+function ModalComment(props: ButtonProps) {
+  return <S.ModalCommentButton {...props} />;
+}
+
 function Delete(props: ButtonProps) {
   return <S.DeleteButton {...props} />;
 }
@@ -120,5 +132,8 @@ Button.PagenationRight = PagenationRight;
 Button.PagenationLeft = PagenationLeft;
 Button.AddDashboard = AddDashboard;
 Button.Dashboard = Dashboard;
+Button.ModalConfirm = ModalConfirm;
+Button.ModalReject = ModalReject;
+Button.ModalComment = ModalComment;
 
 export default Button;
