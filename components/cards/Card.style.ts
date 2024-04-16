@@ -5,19 +5,22 @@ export const CardContainer = styled.div`
   display: inline-flex;
   flex-direction: column;
   gap: 12px;
-
   padding: 20px;
-
+  width: 314px;
   border: var(--gray300) 1px solid;
   border-radius: 6px;
 
   @media ${device.tablet} {
     flex-direction: row;
+    min-width: 400px;
+    max-width: 544px;
   }
 
   @media ${device.mobile} {
     flex-direction: column;
     padding: 10px;
+    min-width: 284px;
+    width: 284px;
   }
 `;
 
