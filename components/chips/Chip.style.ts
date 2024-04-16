@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TChipSize, TColorKey } from '@components/chip/Chip.type';
+import { TChipSize, TColorKey } from '@components/chips/Chip.type';
 
 const chipColorList = {
   green: { background: '#E7F7DB', color: '#86D549' },
@@ -16,10 +16,10 @@ type ChipStyleProps = {
 };
 
 export const BasicChip = styled.span<ChipStyleProps>`
-  display: flex;
+  display: inline-flex;
   align-items: center;
-
-  padding: 1px 7px;
+  
+  padding: 2px 6px;
   height: ${({ $size }) => ($size === 'large' ? 22 : 20)}px;
 
   font-size: ${({ $size }) => ($size === 'large' ? 12 : 10)}px;
@@ -58,6 +58,7 @@ export const ColorPalette = styled.div`
 `;
 
 export const ColorTile = styled.div<ChipStyleProps>`
+  display: inline-block;
   position: relative;
 
   width: ${({ $size }) => colorTileSizeList[$size]}px;
