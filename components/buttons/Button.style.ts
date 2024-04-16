@@ -196,6 +196,23 @@ export const AddDashboardButton = styled.button`
   }
 `;
 
+export const AddInviteButton = styled.button`
+  ${AddButtonStyle}
+  background-color: var(--violet);
+  color: var(--white);
+  width: 105px;
+  height: 32px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 9px;
+  @media ${device.mobile} {
+    width: 86px;
+    height: 28px;
+    font-size: 12px;
+  }
+`;
+
 export const DashboardButton = styled.button`
   ${OutlineButtonStyles}
   ${AddButtonStyle}
