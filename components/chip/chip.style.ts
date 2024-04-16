@@ -52,8 +52,26 @@ export const ColorPalette = styled.div`
 `;
 
 export const ColorTile = styled.span<ChipStyleProps>`
+  position: relative;
+
   width: ${({ $size }) => ($size === 'large' ? 30 : 28)}px;
   height: ${({ $size }) => ($size === 'large' ? 30 : 28)}px;
+
   border-radius: 50%;
   background-color: ${({ $color }) => colorPaletteList[$color]};
+`;
+
+export const ColorCheckIcon = styled.span`
+  color: white;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 `;
