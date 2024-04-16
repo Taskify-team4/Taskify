@@ -45,17 +45,23 @@ const colorPaletteList = {
   gray: 'none',
 };
 
+const colorTileSizeList = {
+  large: 30,
+  small: 28,
+  tiny: 8,
+};
+
 export const ColorPalette = styled.div`
   width: 100%;
   display: flex;
   gap: 10px;
 `;
 
-export const ColorTile = styled.span<ChipStyleProps>`
+export const ColorTile = styled.div<ChipStyleProps>`
   position: relative;
 
-  width: ${({ $size }) => ($size === 'large' ? 30 : 28)}px;
-  height: ${({ $size }) => ($size === 'large' ? 30 : 28)}px;
+  width: ${({ $size }) => colorTileSizeList[$size]}px;
+  height: ${({ $size }) => colorTileSizeList[$size]}px;
 
   border-radius: 50%;
   background-color: ${({ $color }) => colorPaletteList[$color]};

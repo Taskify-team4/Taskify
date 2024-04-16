@@ -8,7 +8,7 @@ export type TColorKey =
   | 'blue'
   | 'gray';
 
-export type TChipSize = 'large' | 'small';
+export type TChipSize = 'large' | 'small' | 'tiny';
 
 export type TChipProps = {
   children: ReactNode;
