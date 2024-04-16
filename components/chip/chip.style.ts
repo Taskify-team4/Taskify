@@ -16,9 +16,13 @@ type ChipStyleProps = {
 };
 
 export const BasicChip = styled.span<ChipStyleProps>`
-  padding: 4px 6px;
-  height: ${({ $size }) => ($size === 'large' ? 22 : 20)} px;
-  font-size: ${({ $size }) => ($size === 'large' ? 12 : 10)} px;
+  display: flex;
+  align-items: center;
+
+  padding: 1px 7px;
+  height: ${({ $size }) => ($size === 'large' ? 22 : 20)}px;
+
+  font-size: ${({ $size }) => ($size === 'large' ? 12 : 10)}px;
   background-color: ${({ $color }) => chipColorList[$color]['background']};
   color: ${({ $color }) => chipColorList[$color]['color']};
 `;
@@ -28,11 +32,6 @@ export const RoundChip = styled(BasicChip)`
 `;
 
 export const SquareChip = styled(BasicChip)`
-  border-radius: 4px;
-`;
-
-export const IconChip = styled(SquareChip)`
-  padding: 3px 6px;
   border-radius: 4px;
 `;
 
