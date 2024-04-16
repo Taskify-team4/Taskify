@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TChipSize, TColorKey } from '@components/chip/Chip.type';
+import { TChipSize, TColorKey } from '@components/chips/Chip.type';
 
 const chipColorList = {
   green: { background: '#E7F7DB', color: '#86D549' },
