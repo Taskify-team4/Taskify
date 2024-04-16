@@ -1,31 +1,44 @@
 import React from 'react';
 import * as S from '@components/cards/Card.style';
-import { SquareChip } from '@components/chip/Chip.style';
 import Image from 'next/image';
+import Chip from '@components/chips/Chip';
 
 // 리소스
 import calendarIcon from '@public/icons/calendar.svg';
-import sampleCardImg from '@public/images/img1.png';
+import { TColorKey } from '@components/chips/Chip.type';
 
-function Card() {
+type ChipProps = {
+  text: string;
+  color: TColorKey;
+};
+
+export type CardProps = {
+  image: string | null;
+  title: string;
+  chips: ChipProps[];
+  date: string;
+};
+
+function Card(props: CardProps) {
   return (
     <S.CardContainer>
-      <S.CardImage>
-        <Image src={sampleCardImg.src} alt={'sample'} fill />
-      </S.CardImage>
+      {props.image ? (
+        <S.CardImage>
+          <Image src={props.image} alt={'Card Image'} fill />
+        </S.CardImage>
+      ) : null}
       <S.CardContent>
-        <S.CardTitle>새로운 일정 관리 Taskify</S.CardTitle>
+        <S.CardTitle>{props.title}</S.CardTitle>
         <S.CardMeta>
           <S.CardChips>
-            <SquareChip $size={'small'} $color={'orange'}>
-              프로젝트
-            </SquareChip>
-            <SquareChip $size={'small'} $color={'pink'}>
-              백엔드
-            </SquareChip>
+            {props.chips.map((chip) => (
+              <Chip.Square size={'small'} color={chip.color}>
+                {chip.text}
+              </Chip.Square>
+            ))}
           </S.CardChips>
           <S.CardDate>
-            <Image src={calendarIcon.src} alt={'calendarIcon'} width={18} height={18} /> 2024.12.12
+            <Image src={calendarIcon.src} alt={'calendarIcon'} width={18} height={18} /> {props.date}
           </S.CardDate>
         </S.CardMeta>
       </S.CardContent>
