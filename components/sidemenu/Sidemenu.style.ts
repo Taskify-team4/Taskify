@@ -67,7 +67,7 @@ export const addBoxImg = styled(Image)`
   width: 20px;
   height: 20px;
 `;
-export const dashBoardsChips = styled.div`
+export const dashBoardsList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -77,7 +77,7 @@ export const dashBoardsChips = styled.div`
     scrollbar-width: none;
   }
 `;
-export const dashBoardsChip = styled.div`
+export const dashBoardsItem = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
