@@ -5,22 +5,25 @@ export const CardContainer = styled.div`
   display: inline-flex;
   flex-direction: column;
   gap: 12px;
+
+  position: relative;
+
+  box-sizing: border-box;
   padding: 20px;
   width: 314px;
+
   border: var(--gray300) 1px solid;
   border-radius: 6px;
 
   @media ${device.tablet} {
     flex-direction: row;
-    min-width: 400px;
-    max-width: 544px;
+    width: 544px;
   }
 
   @media ${device.mobile} {
     flex-direction: column;
     padding: 10px;
-    min-width: 284px;
-    width: 284px;
+    max-width: 284px;
   }
 `;
 
@@ -50,6 +53,7 @@ export const CardContent = styled.div`
 export const CardTitle = styled.div`
   font-size: 16px;
   font-weight: 500;
+
   @media ${device.tablet} {
     font-size: 14px;
   }
@@ -58,6 +62,7 @@ export const CardTitle = styled.div`
 export const CardMeta = styled.div`
   @media ${device.tablet} {
     display: flex;
+    align-items: center;
   }
   @media ${device.mobile} {
     display: block;
@@ -69,11 +74,24 @@ export const CardChips = styled.div`
   gap: 6px;
 `;
 
+export const CardDateOwner = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+
+  @media ${device.tablet} {
+    margin-top: 0;
+  }
+  @media ${device.mobile} {
+    margin-top: 12px;
+  }
+`;
+
 export const CardDate = styled.div`
   display: flex;
   gap: 6px;
   align-items: center;
-  margin-top: 12px;
 
   font-weight: 500;
   font-size: 12px;
@@ -81,12 +99,27 @@ export const CardDate = styled.div`
 
   @media ${device.tablet} {
     margin-left: 10px;
-    margin-top: 0;
   }
 
   @media ${device.mobile} {
     font-size: 10px;
     margin-left: 0;
-    margin-top: 12px;
+  }
+`;
+
+// 임시 컴포넌트, merge 후 수정 예정입니다.
+export const CardOwner = styled.div`
+  width: 24px;
+  height: 24px;
+  color: white;
+  background-color: #7ac555;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  @media ${device.tablet} {
+    position: absolute;
+    right: 20px;
   }
 `;

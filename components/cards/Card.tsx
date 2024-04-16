@@ -17,6 +17,7 @@ export type CardProps = {
   title: string;
   chips: ChipProps[];
   date: string;
+  owner: string;
 };
 
 function Card(props: CardProps) {
@@ -37,9 +38,12 @@ function Card(props: CardProps) {
               </Chip.Square>
             ))}
           </S.CardChips>
-          <S.CardDate>
-            <Image src={calendarIcon.src} alt={'calendarIcon'} width={18} height={18} /> {props.date}
-          </S.CardDate>
+          <S.CardDateOwner>
+            <S.CardDate>
+              <Image src={calendarIcon.src} alt={'calendarIcon'} width={18} height={18} /> {props.date}
+            </S.CardDate>
+            <S.CardOwner>{props.owner[0]}</S.CardOwner>
+          </S.CardDateOwner>
         </S.CardMeta>
       </S.CardContent>
     </S.CardContainer>
