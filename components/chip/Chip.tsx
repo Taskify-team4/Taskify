@@ -1,6 +1,6 @@
 import React from 'react';
-import * as S from './chip.style';
-import { TChipProps } from '@components/chip/chip.type';
+import * as S from './Chip.style';
+import { TChipProps } from '@components/chip/Chip.type';
 
 const Chip = ({ children, size, color }: TChipProps) => {
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import * as S from './chip.style';
-import { TChipSize, TColorKey } from './chip.type';
+import * as S from './Chip.style';
+import { TChipSize, TColorKey } from './Chip.type';
 
 const ColorPalette = ({ size }: { size: TChipSize }) => {
   const colorList: TColorKey[] = ['green', 'purple', 'pink', 'orange', 'blue'];
