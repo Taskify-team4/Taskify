@@ -3,10 +3,13 @@ import logoImg from '@public/icons/logo_img.svg';
 import logoImgTaskify from '@public/icons/logo_taskify.svg';
 import addBoxImg from '@public/icons/add.svg';
 import crownImg from '@public/icons/crown.svg';
+import { ColorTile } from '@components/chips/Chip.style';
+import { TColorKey } from '@components/chips/Chip.type';
+import React, { useState } from 'react';
 
 // 임시로 만듦.
 type dashboard = {
-  color: string;
+  color: TColorKey;
   title: string;
   crown?: boolean;
 };
@@ -14,6 +17,12 @@ type SidemenuProps = {
   dashboards: dashboard[];
 };
 export default function Sidemenu({ dashboards }: SidemenuProps) {
+  const [itemIndex, setItemIndex] = useState<number>();
+
+  const handleItemClick = (index: number) => {
+    setItemIndex(index);
+  };
+
   return (
     <S.SidemenuContainer>
       <S.logoWrapper>
@@ -31,14 +40,15 @@ export default function Sidemenu({ dashboards }: SidemenuProps) {
       <S.dashBoardsList>
         {dashboards &&
           dashboards.map((dashboard, index) => (
-            <S.dashBoardsItem key={`${index} ${dashboard.title}`}>
-              <S.TempChip />
+            <S.dashBoardsItem
+              key={`${index} ${dashboard.title}`}
+              onClick={() => handleItemClick(index)}
+              selected={itemIndex === index}
+            >
+              <ColorTile $size={'tiny'} $color={dashboard.color} />
               <span id="title">{dashboard.title}</span>
               {dashboard.crown && (
-                <S.dashBoardCrown
-                  src={crownImg}
-                  alt="본인이 만든 대시보드일 때 생기는 왕관 아이콘"
-                />
+                <S.dashBoardCrown src={crownImg} alt="본인이 만든 대시보드일 때 생기는 왕관 아이콘" />
               )}
             </S.dashBoardsItem>
           ))}

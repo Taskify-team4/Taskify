@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import device from '@utils/breakpointsDevice';
 import Image from 'next/image';
 
@@ -77,13 +77,19 @@ export const dashBoardsList = styled.div`
     scrollbar-width: none;
   }
 `;
-export const dashBoardsItem = styled.div`
+
+export const dashBoardsItem = styled.div<{ selected: boolean }>`
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 12px;
   border-radius: 4px;
   cursor: pointer;
+  ${(props) =>
+    props.selected &&
+    css`
+      background-color: var(--violetlight);
+    `}
   #title {
     color: var(--gray500);
     font-size: 18px;
