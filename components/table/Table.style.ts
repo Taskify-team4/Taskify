@@ -1,9 +1,23 @@
+import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
 
-export const Container = styled.section`
-  border: 1px solid red;
+interface ContainerProps {
+  $isInvitedDash?: boolean;
+}
+
+export const TableContainer = styled.section<ContainerProps>`
+  border: 1px solid black;
   border-radius: 8px;
   background-color: var(--white);
-  width: 620px;
-  padding: 26px 28px 4px;
+  max-width: ${({ $isInvitedDash }) => ($isInvitedDash ? 1022 : 620)}px;
+  padding: 26px 0 4px;
+
+  @media ${device.mobile} {
+    width: ${({ $isInvitedDash }) => ($isInvitedDash ? 260 : 284)}px;
+    padding: 22px 0 4px;
+  }
+`;
+
+export const ListsContainer = styled.div`
+  display: flex;
 `;

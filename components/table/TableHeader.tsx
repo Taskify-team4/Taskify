@@ -5,7 +5,7 @@ import { HeaderProps } from './Table.type';
 
 function TableHeader({ title, isInvite, isPagenation }: HeaderProps) {
   return (
-    <S.Container>
+    <S.TableHeaderContainer>
       <S.HeaderTitle>{title}</S.HeaderTitle>
       <S.HeaderButtons>
         {isPagenation && (
@@ -15,9 +15,13 @@ function TableHeader({ title, isInvite, isPagenation }: HeaderProps) {
             <Button.PagenationRight />
           </S.Pagenation>
         )}
-        {isInvite && <Button.AddInvite>초대하기</Button.AddInvite>}
+        {isInvite && (
+          <S.InviteButtonWrapper>
+            <Button.AddInvite>초대하기</Button.AddInvite>
+          </S.InviteButtonWrapper>
+        )}
       </S.HeaderButtons>
-    </S.Container>
+    </S.TableHeaderContainer>
   );
 }
 

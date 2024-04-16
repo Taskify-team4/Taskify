@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from '@components/table/TableList.style';
 import Button from '@components/buttons/Button';
-import { DataListProps } from '../Table.type';
+import { DataListProps } from '@components/table/Table.type';
 
 function MemberList({ data, buttonText }: DataListProps) {
   return (

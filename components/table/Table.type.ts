@@ -1,10 +1,5 @@
+import { Invitation, User } from '@utils/testData';
 import { ReactNode } from 'react';
-
-export type User = {
-  nickname: string;
-  email: string;
-  id: number;
-};
 
 export type HeaderProps = {
   title: string;
@@ -14,10 +9,15 @@ export type HeaderProps = {
 
 export type TableListsProps = {
   children: ReactNode;
-  title: string;
+  title?: string;
+  isInvitedDash?: boolean;
 };
 
 export type DataListProps = {
   data: User[];
   buttonText?: string;
+};
+
+export type InvitedDashListProps = {
+  data: Invitation[];
 };

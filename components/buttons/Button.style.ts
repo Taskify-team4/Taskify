@@ -25,7 +25,7 @@ const PagenationButtonStyle = `
   align-items: center;
   @media ${device.mobile} {
     width: 36px;
-    width: 36px;
+    height: 36px;
   }
 `;
 
