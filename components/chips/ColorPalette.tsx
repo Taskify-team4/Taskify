@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as S from './Chip.style';
 import { TChipSize, TColorKey } from './Chip.type';
 
-const ColorPalette = ({ size }: { size: TChipSize }) => {
+function ColorPalette({ size }: { size: TChipSize }) {
   const colorList: TColorKey[] = ['green', 'purple', 'pink', 'orange', 'blue'];
   const [selectedColor, setSelectedColor] = useState(0);
 
@@ -25,6 +25,6 @@ const ColorPalette = ({ size }: { size: TChipSize }) => {
       })}
     </S.ColorPalette>
   );
-};
+}
 
 export default ColorPalette;
