@@ -16,6 +16,9 @@ type ChipStyleProps = {
 };
 
 export const BasicChip = styled.span<ChipStyleProps>`
+  display: inline-flex;
+  align-items: center;
+  
   padding: 2px 6px;
   height: ${({ $size }) => ($size === 'large' ? 22 : 20)}px;
 
