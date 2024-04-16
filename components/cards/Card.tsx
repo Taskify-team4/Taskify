@@ -7,42 +7,42 @@ import Chip from '@components/chips/Chip';
 import calendarIcon from '@public/icons/calendar.svg';
 import { TColorKey } from '@components/chips/Chip.type';
 
-type ChipProps = {
+type TagProps = {
   text: string;
   color: TColorKey;
 };
 
 export type CardProps = {
-  image: string | null;
+  imageUrl: string | null;
   title: string;
-  chips: ChipProps[];
-  date: string;
-  owner: string;
+  tags: TagProps[];
+  dueDate: string;
+  assignee: { nickname: string };
 };
 
 function Card(props: CardProps) {
   return (
     <S.CardContainer>
-      {props.image ? (
+      {props.imageUrl ? (
         <S.CardImage>
-          <Image src={props.image} alt={'Card Image'} fill />
+          <Image src={props.imageUrl} alt={'Card Image'} fill />
         </S.CardImage>
       ) : null}
       <S.CardContent>
         <S.CardTitle>{props.title}</S.CardTitle>
         <S.CardMeta>
           <S.CardChips>
-            {props.chips.map((chip) => (
-              <Chip.Square size={'small'} color={chip.color}>
-                {chip.text}
+            {props.tags.map((tag) => (
+              <Chip.Square size={'small'} color={tag.color}>
+                {tag.text}
               </Chip.Square>
             ))}
           </S.CardChips>
           <S.CardDateOwner>
             <S.CardDate>
-              <Image src={calendarIcon.src} alt={'calendarIcon'} width={18} height={18} /> {props.date}
+              <Image src={calendarIcon.src} alt={'calendarIcon'} width={18} height={18} /> {props.dueDate}
             </S.CardDate>
-            <S.CardOwner>{props.owner[0]}</S.CardOwner>
+            <S.CardOwner>{props.assignee.nickname[0]}</S.CardOwner>
           </S.CardDateOwner>
         </S.CardMeta>
       </S.CardContent>
