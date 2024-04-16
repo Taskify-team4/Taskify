@@ -1,7 +1,10 @@
 import React from 'react';
 import SelectBox from '@components/inputs/modalInput/selectBox/SelectBox';
+import ImageInput from '@components/inputs/modalInput/imageInput/ImageInput';
 
 function Home() {
+  const sampleList = ['To Do', 'on Progress', 'Done'];
+  const inputSelectType = true;
   return (
     <div style={{ padding: '15px' }}>
       {/* <span>
@@ -10,7 +13,19 @@ function Home() {
         cupiditate cum illo eius inventore tenetur, et, delectus quidem ex
         fugiat.
       </span> */}
-      <SelectBox>상태</SelectBox>
+      <SelectBox onData={sampleList}>상태</SelectBox>
+      <br />
+      <br />
+      <br />
+      <br />
+      <SelectBox onData={sampleList} onType={inputSelectType}>
+        담당자
+      </SelectBox>
+      <br />
+      <br />
+      <br />
+      <br />
+      <ImageInput />
     </div>
   );
 }

@@ -19,9 +19,15 @@ export const SelectTitle = styled.button`
   background-color: var(--white);
 `;
 
+export const SelectTitleInput = styled.input`
+  color: var(--black200);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+`;
+
 export const SelectOption = styled.div`
   width: 217px;
-  height: 118px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,10 +38,10 @@ export const SelectOption = styled.div`
 `;
 
 export const Select = styled.div`
-  height: 35px;
+  height: 39px;
   display: flex;
   align-items: center;
-  padding: 13px 87px 13px 6px;
+  padding: 13px 87px 13px 8px;
   gap: 6px;
   cursor: pointer;
 

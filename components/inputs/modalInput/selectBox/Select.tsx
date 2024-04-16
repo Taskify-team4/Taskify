@@ -5,8 +5,12 @@ import { RoundChip } from '@components/chips/Chip.style';
 import dropDownIcon from '@public/icons/drop_down.svg';
 import checkIcon from '@public/icons/check.svg';
 
-function Select() {
-  const sampleList = ['To Do', 'on Progress', 'Done'];
+type SelectProps = {
+  onData: string[];
+  onType?: boolean;
+};
+
+function Select({ onData, onType }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => {
@@ -16,23 +20,35 @@ function Select() {
   return (
     <S.SelectContainer>
       <S.SelectTitle onClick={handleOpen}>
-        <RoundChip $size={'large'} $color={'purple'}>
-          <S.SelectTile $size={'tiny'} $color={'purple'} />
-          dkssud
-        </RoundChip>
+        {onType ? (
+          <S.SelectTitleInput placeholder="이름을 입력해 주세요." />
+        ) : (
+          <RoundChip $size={'large'} $color={'purple'}>
+            <S.SelectTile $size={'tiny'} $color={'purple'} />
+            To Do
+          </RoundChip>
+        )}
         <Image src={dropDownIcon.src} width={26} height={26} alt="dropDownIcon" />
       </S.SelectTitle>
       {isOpen && (
         <S.SelectOption>
-          {sampleList.map((item) => (
-            <S.Select key={item}>
-              <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />
-              <RoundChip $size={'large'} $color={'purple'}>
-                <S.SelectTile $size={'tiny'} $color={'purple'} />
-                {item}
-              </RoundChip>
-            </S.Select>
-          ))}
+          {onType
+            ? onData.map((item: string) => (
+                <S.Select key={item}>
+                  <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />
+                  <S.SelectTile $size={'tiny'} $color={'purple'} />
+                  {item}
+                </S.Select>
+              ))
+            : onData.map((item: string) => (
+                <S.Select key={item}>
+                  <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />
+                  <RoundChip $size={'large'} $color={'purple'}>
+                    <S.SelectTile $size={'tiny'} $color={'purple'} />
+                    {item}
+                  </RoundChip>
+                </S.Select>
+              ))}
         </S.SelectOption>
       )}
     </S.SelectContainer>
