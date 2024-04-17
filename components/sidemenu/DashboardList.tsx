@@ -22,7 +22,7 @@ function DashboardList({ dashboards }: SidemenuProps) {
               <ColorTile $size={'tiny'} $color={dashboard.color} />
               <S.DashBoardTitle>{dashboard.title}</S.DashBoardTitle>
               {dashboard.crown && (
-                <S.DashBoardCrown src={crownImg.src} alt="본인이 만든 대시보드일 때 생기는 왕관 아이콘" />
+                <S.DashBoardCrown src={crownImg} alt="본인이 만든 대시보드일 때 생기는 왕관 아이콘" />
               )}
             </S.DashBoardsItem>
           ))
