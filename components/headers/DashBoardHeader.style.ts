@@ -1,6 +1,7 @@
 import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
 import { Header } from './Header.style';
+import Image from 'next/image';
 
 export const DashBoardHeader = styled(Header)`
   @media ${device.tablet} {
@@ -27,6 +28,7 @@ export const MyDashBoard = styled.div`
 
 export const ManagementContainer = styled.div`
   display: flex;
+  gap: 32px;
 `;
 
 export const Buttons = styled.div`
@@ -60,7 +62,7 @@ export const Button = styled.button`
   }
 `;
 
-export const Icon = styled.img`
+export const Icon = styled(Image)`
   width: 20px;
   height: 20px;
 
@@ -72,7 +74,6 @@ export const Icon = styled.img`
 export const Line = styled.div`
   height: 38px;
   border-left: 1px solid var(--gray300);
-  margin: 0 24px;
 
   @media ${device.mobile} {
     height: 34px;
@@ -86,28 +87,7 @@ export const Profile = styled.div`
   gap: 12px;
 `;
 
-export const ProfileIcon = styled.div`
-  width: 38px;
-  height: 38px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  background-color: #a3c4a2;
-  color: var(--white);
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: normal;
-
-  @media ${device.mobile} {
-    width: 34px;
-    height: 34px;
-    font-size: 14px;
-  }
-`;
-
-export const ProfileName = styled.div`
+export const MyProfileName = styled.div`
   color: var(--black200);
   font-size: 16px;
   font-weight: 500;

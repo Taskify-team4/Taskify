@@ -1,5 +1,6 @@
 import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
+import Image from 'next/image';
 
 export const LogoContainer = styled.div`
   display: flex;
@@ -8,12 +9,12 @@ export const LogoContainer = styled.div`
   cursor: pointer;
 `;
 
-export const LogoImg = styled.img`
+export const LogoImg = styled(Image)`
   width: 28.797px;
   height: 33.069px;
 `;
 
-export const LogoText = styled.img`
+export const LogoText = styled(Image)`
   width: 80px;
   height: 22px;
 
