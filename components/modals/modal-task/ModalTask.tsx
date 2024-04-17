@@ -33,7 +33,7 @@ function ModalTask({ close, imageUrl, title, explanation, tags, dueDate, assigne
           <Image src={imageUrl} alt="Card Image" fill />
         </CardImage>
       ) : null}
-      <TaskDeadline />
+      <TaskDeadline {...{ dueDate, assignee }} />
     </S.ModalTaskContainer>
   );
 }

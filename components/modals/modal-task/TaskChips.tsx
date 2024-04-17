@@ -12,8 +12,8 @@ function TaskChips({ tags }: TaskChipsProps) {
       </Chip.Round>
       <S.ChipStroke />
       <S.ColorChips>
-        {tags.map((tag) => (
-          <Chip.Square size={'small'} color={tag.color}>
+        {tags.map((tag, index) => (
+          <Chip.Square key={`${index} ${tag.text}`} size={'small'} color={tag.color}>
             {tag.text}
           </Chip.Square>
         ))}
