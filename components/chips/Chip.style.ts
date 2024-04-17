@@ -18,7 +18,7 @@ type ChipStyleProps = {
 export const BasicChip = styled.span<ChipStyleProps>`
   display: inline-flex;
   align-items: center;
-  
+
   padding: 2px 6px;
   height: ${({ $size }) => ($size === 'large' ? 22 : 20)}px;
 
@@ -48,7 +48,7 @@ const colorPaletteList = {
 const colorTileSizeList = {
   large: 30,
   small: 28,
-  tiny: 8,
+  tiny: 6,
 };
 
 export const ColorPalette = styled.div`
