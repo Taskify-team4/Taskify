@@ -3,7 +3,6 @@ import device from '@utils/breakpointsDevice';
 import Button from '@components/buttons/Button';
 
 export const ModalContainer = styled.div`
-  width: 540px;
   height: 250px;
 
   display: flex;
@@ -17,7 +16,6 @@ export const ModalContainer = styled.div`
   font-weight: 500;
 
   @media ${device.mobile} {
-    width: 327px;
     height: 220px;
 
     font-size: 16px;
