@@ -15,8 +15,12 @@ export const SelectTitle = styled.button`
   justify-content: space-between;
   padding: 0 16px;
   border-radius: 6px;
-  border: 1px solid var(--violet);
+  border: 1px solid var(--gray300);
   background-color: var(--white);
+
+  &:hover {
+    border: 1px solid var(--violet);
+  }
 `;
 
 export const SelectTitleInput = styled.input`
