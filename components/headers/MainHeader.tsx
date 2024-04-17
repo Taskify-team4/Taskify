@@ -1,7 +1,7 @@
 import Header from './Header';
 import * as S from './MainHeader.style';
-import logoImg from '../../public/icons/logo_img.svg';
-import logoText from '../../public/icons/logo_taskify.svg';
+import logoImg from '@public/icons/logo_img.svg';
+import logoText from '@public/icons/logo_taskify.svg';
 
 function MainHeader() {
   const handleLogoClick = () => {
@@ -19,8 +19,8 @@ function MainHeader() {
   return (
     <Header>
       <S.LogoContainer onClick={handleLogoClick}>
-        <S.LogoImg src={logoImg.src} alt="로고 이미지" />
-        <S.LogoText src={logoText.src} alt="로고 Text" />
+        <S.LogoImg src={logoImg} alt="로고 이미지" />
+        <S.LogoText src={logoText} alt="로고 Text" />
       </S.LogoContainer>
 
       <S.ButtonContainer>
