@@ -1,12 +1,22 @@
+import Button from '@components/buttons/Button';
+import ModalBase from '@components/modals/ModalBase';
+import Modal from '@components/modals/Modal';
+import TestModal from '@components/modals/TestModal';
 import React from 'react';
 
 function Home() {
   return (
     <div>
-      <span>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam id voluptas laboriosam ipsam eum obcaecati
-        tenetur. Distinctio ipsa enim cupiditate cum illo eius inventore tenetur, et, delectus quidem ex fugiat.
-      </span>
+      <Modal
+        content={
+          <ModalBase>
+            {/* 모달 content */}
+            <TestModal />
+          </ModalBase>
+        }
+      >
+        <Button.ModalComment>모달 여는 버튼</Button.ModalComment>
+      </Modal>
     </div>
   );
 }
