@@ -1,26 +1,21 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
+import { ModalProps, PortalProps } from './Modal.type';
 
 const BackdropContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
   color: var(--black300);
-  border-radius: 8px;
   font-size: 30px;
   padding: 28px;
 `;
-
-interface PortalProps {
-  isOpen: boolean;
-  children: ReactNode;
-}
 
 function Portal({ isOpen, children }: PortalProps) {
   const [portal, setPortal] = useState<HTMLElement | null>();
@@ -36,13 +31,6 @@ function Portal({ isOpen, children }: PortalProps) {
     return null;
   }
   return createPortal(children, portal as HTMLElement);
-}
-
-interface ModalProps {
-  children: ReactNode;
-  content: JSX.Element;
-  isConfirm?: boolean;
-  initialOpen?: boolean;
 }
 
 function Modal({ children, content, isConfirm = false, initialOpen = false }: ModalProps) {
