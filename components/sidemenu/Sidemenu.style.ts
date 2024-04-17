@@ -2,14 +2,6 @@ import styled, { css } from 'styled-components';
 import device from '@utils/breakpointsDevice';
 import Image from 'next/image';
 
-// 임시로 만듦.
-export const TempChip = styled.span`
-  width: 8px;
-  height: 8px;
-  background-color: #7ac555;
-  border-radius: 4px;
-`;
-
 export const SidemenuContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,7 +13,7 @@ export const SidemenuContainer = styled.div`
     align-items: center;
   }
 `;
-export const logoWrapper = styled.div`
+export const LogoWrapper = styled.div`
   display: flex;
   align-items: baseline;
   padding: 20px 8px 60px 8px;
@@ -29,7 +21,7 @@ export const logoWrapper = styled.div`
     padding-bottom: 40px;
   }
 `;
-export const logoImg = styled(Image)`
+export const LogoImg = styled(Image)`
   width: 28px;
   height: 32px;
   @media ${device.mobile} {
@@ -37,14 +29,14 @@ export const logoImg = styled(Image)`
     height: 28px;
   }
 `;
-export const logoImgTaskify = styled(Image)`
+export const LogoImgTaskify = styled(Image)`
   width: 80px;
   height: 22px;
   @media ${device.mobile} {
     display: none;
   }
 `;
-export const dashBoardsWrapper = styled.div`
+export const DashBoardsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,7 +47,7 @@ export const dashBoardsWrapper = styled.div`
     gap: 0px;
   }
 `;
-export const dashBoardsText = styled.div`
+export const DashBoardsText = styled.div`
   color: var(--gray500);
   font-size: 12px;
   font-weight: 700;
@@ -63,11 +55,11 @@ export const dashBoardsText = styled.div`
     display: none;
   }
 `;
-export const addBoxImg = styled(Image)`
+export const AddBoxImg = styled(Image)`
   width: 20px;
   height: 20px;
 `;
-export const dashBoardsList = styled.div`
+export const DashBoardsList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -78,42 +70,39 @@ export const dashBoardsList = styled.div`
   }
 `;
 
-export const dashBoardsItem = styled.div<{ selected: boolean }>`
+export const DashBoardsItem = styled.div<{ selected: boolean }>`
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 12px;
   border-radius: 4px;
   cursor: pointer;
-  ${(props) =>
-    props.selected &&
-    css`
-      background-color: var(--violetlight);
-    `}
-  #title {
-    color: var(--gray500);
-    font-size: 18px;
-    font-weight: 500;
-    max-width: 196px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
   &:hover {
     background-color: var(--violetlight);
   }
+  ${({ selected }) =>
+    selected &&
+    css`
+      background-color: var(--violetlight);
+    `}
+`;
+export const DashBoardTitle = styled.span`
+  color: var(--gray500);
+  font-size: 18px;
+  font-weight: 500;
+  width: inherit;
+  max-width: 196px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   @media ${device.tablet} {
-    #title {
-      max-width: 68px;
-    }
+    max-width: 68px;
   }
   @media ${device.mobile} {
-    #title {
-      display: none;
-    }
+    display: none;
   }
 `;
-export const dashBoardCrown = styled(Image)`
+export const DashBoardCrown = styled(Image)`
   width: 15px;
   height: 12px;
   @media ${device.mobile} {
