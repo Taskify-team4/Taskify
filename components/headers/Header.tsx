@@ -4,12 +4,12 @@ interface HeaderProps {
   children?: React.ReactNode;
 }
 
-const Header = ({ children }: HeaderProps) => {
+function Header({ children }: HeaderProps) {
   return (
     <>
       <S.Header> {children} </S.Header>
     </>
   );
-};
+}
 
 export default Header;

@@ -2,7 +2,7 @@ import * as S from './DashBoardHeader.style';
 import setting from '@public/icons/setting.svg';
 import add from '@public/icons/add.svg';
 
-const DashBoardHeader = () => {
+function DashBoardHeader() {
   return (
     <S.DashBoardHeader>
       <S.MyDashBoard>내 대시보드</S.MyDashBoard>
@@ -25,6 +25,6 @@ const DashBoardHeader = () => {
       </S.ManagementContainer>
     </S.DashBoardHeader>
   );
-};
+}
 
 export default DashBoardHeader;

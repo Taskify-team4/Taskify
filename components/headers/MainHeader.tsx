@@ -3,7 +3,7 @@ import * as S from './MainHeader.style';
 import logoImg from '../../public/icons/logo_img.svg';
 import logoText from '../../public/icons/logo_taskify.svg';
 
-const MainHeader = () => {
+function MainHeader() {
   const handleLogoClick = () => {
     // 메인페이지로 이동
   };
@@ -29,6 +29,6 @@ const MainHeader = () => {
       </S.ButtonContainer>
     </Header>
   );
-};
+}
 
 export default MainHeader;
