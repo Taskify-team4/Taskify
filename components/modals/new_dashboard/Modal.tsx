@@ -3,8 +3,13 @@ import * as S from './Modal.style';
 import ColorPalette from '@components/chips/ColorPalette';
 import Button from '@components/buttons/Button';
 import ModalInput from '@components/inputs/modalInput/ModalInput';
+import { ModalBaseProps } from '@components/modals/Modal.type';
 
-function Modal() {
+function NewDashBoardModal({ close }: ModalBaseProps) {
+  const trigger = () => {
+    return close && close();
+  };
+
   return (
     <S.ModalContainer>
       <S.ModalTitle>새로운 대시보드</S.ModalTitle>
@@ -13,11 +18,11 @@ function Modal() {
       </ModalInput>
       <ColorPalette size={'large'} />
       <S.ModalButtons>
-        <Button.ModalReject>취소</Button.ModalReject>
-        <Button.ModalConfirm>생성</Button.ModalConfirm>
+        <Button.ModalReject onClick={trigger}>취소</Button.ModalReject>
+        <Button.ModalConfirm onClick={trigger}>생성</Button.ModalConfirm>
       </S.ModalButtons>
     </S.ModalContainer>
   );
 }
 
-export default Modal;
+export default NewDashBoardModal;
