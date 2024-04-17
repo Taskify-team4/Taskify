@@ -1,7 +1,6 @@
-import Header from './Header';
 import * as S from './DashBoardHeader.style';
-import setting from '../../public/icons/setting.svg';
-import add from '../../public/icons/add.svg';
+import setting from '@public/icons/setting.svg';
+import add from '@public/icons/add.svg';
 
 const DashBoardHeader = () => {
   return (
