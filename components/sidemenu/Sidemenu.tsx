@@ -10,8 +10,8 @@ function Sidemenu({ dashboards }: SidemenuProps) {
   return (
     <S.SidemenuContainer>
       <S.LogoWrapper>
-        <S.LogoImg src={logoImg} alt="logo" />
-        <S.LogoImgTaskify src={logoImgTaskify} alt="logo Taskify" />
+        <S.LogoImg src={logoImg.src} alt="logo" />
+        <S.LogoImgTaskify src={logoImgTaskify.src} alt="logo Taskify" />
       </S.LogoWrapper>
       <S.DashBoardsWrapper
         onClick={() => {
@@ -19,7 +19,7 @@ function Sidemenu({ dashboards }: SidemenuProps) {
         }}
       >
         <S.DashBoardsText>Dash Boards</S.DashBoardsText>
-        <S.AddBoxImg src={addBoxImg} alt="add box" />
+        <S.AddBoxImg src={addBoxImg.src} alt="add box" />
       </S.DashBoardsWrapper>
       <DashboardList dashboards={dashboards} />
     </S.SidemenuContainer>
