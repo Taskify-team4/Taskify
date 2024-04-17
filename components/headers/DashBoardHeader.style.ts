@@ -31,7 +31,6 @@ export const ManagementContainer = styled.div`
 
 export const Buttons = styled.div`
   display: flex;
-  gap: 16px;
 
   @media ${device.mobile} {
     gap: 6px;
@@ -42,6 +41,7 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   padding: 10px 16px;
+  margin: 0 8px;
   gap: 8px;
   flex-wrap: nowrap;
   white-space: nowrap;
@@ -72,7 +72,7 @@ export const Icon = styled.img`
 export const Line = styled.div`
   height: 38px;
   border-left: 1px solid var(--gray300);
-  margin: 0 24px 0 32px;
+  margin: 0 24px;
 
   @media ${device.mobile} {
     height: 34px;
