@@ -27,7 +27,7 @@ export const DateInputRequired = styled.span`
 `;
 
 export const DateInputContent = styled.div`
-  width: 450px;
+  width: 100%;
   height: 48px;
   display: flex;
   align-items: center;

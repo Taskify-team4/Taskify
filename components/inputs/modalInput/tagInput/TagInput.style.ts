@@ -27,7 +27,7 @@ export const TagInputRequired = styled.span`
 `;
 
 export const TagInputContent = styled.div`
-  width: 450px;
+  width: 100%;
   height: 48px;
   display: flex;
   align-items: center;
