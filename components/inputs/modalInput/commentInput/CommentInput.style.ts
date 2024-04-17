@@ -2,7 +2,6 @@ import { ModalCommentButton } from '@components/buttons/Button.style';
 import styled from 'styled-components';
 
 export const CommentInputContainer = styled.div`
-  width: 450px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -17,7 +16,7 @@ export const CommentInputLabel = styled.label`
 `;
 
 export const CommentInput = styled.textarea`
-  width: 450px;
+  width: 100%;
   height: 110px;
   padding: 16px;
   border-radius: 6px;

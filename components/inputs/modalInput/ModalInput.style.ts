@@ -27,7 +27,7 @@ export const ModalInputRequired = styled.span`
 `;
 
 export const ModalInput = styled.input`
-  width: 450px;
+  width: 100%;
   height: 48px;
   padding: 14px 16px;
   border: 1px solid var(--gray300);

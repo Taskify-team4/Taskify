@@ -6,9 +6,6 @@ import DatePicker from './DatePicker';
 
 type TagInputProps = {
   children: ReactNode;
-  // id: string;
-  // type: string;
-  // placeholder: string;
   onRequired?: boolean;
 };
 
@@ -22,7 +19,6 @@ function DateInput({ children, onRequired }: TagInputProps) {
       <S.DateInputContent>
         <Image src={calendarIcon} width={20} height={20} alt="calendarIcon" />
         <DatePicker />
-        {/* <S.DateInput id={id} type={type} placeholder={placeholder} /> */}
       </S.DateInputContent>
     </S.DateInputContainer>
   );
