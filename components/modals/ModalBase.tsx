@@ -1,10 +1,9 @@
-import React, { Children, ReactElement, cloneElement, isValidElement } from 'react';
+import React, { Children, cloneElement, isValidElement, ReactElement } from 'react';
 import styled from 'styled-components';
 import { ModalBaseProps } from './Modal.type';
 
 const ModalBaseContainer = styled.div`
-  width: 500;
-  height: 500;
+  width: 80%;
   background-color: white;
   position: absolute;
   top: 50%;
@@ -31,4 +30,5 @@ function ModalBase({ children, close }: ModalBaseProps) {
     </ModalBaseContainer>
   );
 }
+
 export default ModalBase;
