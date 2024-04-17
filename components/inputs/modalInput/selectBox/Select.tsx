@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Chip from '@components/chips/Chip';
 import * as S from '@components/inputs/modalInput/selectBox/Select.style';
-import { RoundChip } from '@components/chips/Chip.style';
 import dropDownIcon from '@public/icons/drop_down.svg';
 import checkIcon from '@public/icons/check.svg';
 
@@ -23,10 +23,10 @@ function Select({ onData, onType }: SelectProps) {
         {onType ? (
           <S.SelectTitleInput placeholder="이름을 입력해 주세요." />
         ) : (
-          <RoundChip $size={'large'} $color={'purple'}>
+          <Chip.Round size={'large'} color={'purple'}>
             <S.SelectTile $size={'tiny'} $color={'purple'} />
             To Do
-          </RoundChip>
+          </Chip.Round>
         )}
         <Image src={dropDownIcon.src} width={26} height={26} alt="dropDownIcon" />
       </S.SelectTitle>
@@ -43,10 +43,10 @@ function Select({ onData, onType }: SelectProps) {
             : onData.map((item: string) => (
                 <S.Select key={item}>
                   <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />
-                  <RoundChip $size={'large'} $color={'purple'}>
+                  <Chip.Round size={'large'} color={'purple'}>
                     <S.SelectTile $size={'tiny'} $color={'purple'} />
                     {item}
-                  </RoundChip>
+                  </Chip.Round>
                 </S.Select>
               ))}
         </S.SelectOption>
