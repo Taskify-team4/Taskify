@@ -5,7 +5,6 @@ import * as S from '@components/inputs/textInput/TextInput.style';
 type TextInputProps = {
   children: ReactNode;
   id: string;
-  type: string;
   placeholder: string;
 };
 
