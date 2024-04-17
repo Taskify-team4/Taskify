@@ -3,7 +3,6 @@ import device from '@utils/breakpointsDevice';
 import Button from '@components/buttons/Button';
 
 export const ModalContainer = styled.div`
-  border: 1px solid red;
   height: 250px;
   width: 484px;
   display: flex;
