@@ -2,21 +2,17 @@ import styled from 'styled-components';
 import device from '@utils/breakpointsDevice';
 
 export const ModalContainer = styled.div`
-  height: 334px;
-
-  position: relative;
-  padding: 30px;
-
+  width: 540px;
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 40px;
 
-  border-radius: 8px;
+  @media ${device.tablet} {
+    width: 100%;
+  }
 
   @media ${device.mobile} {
-    height: 293px;
-    padding: 0;
-
     justify-content: center;
   }
 `;

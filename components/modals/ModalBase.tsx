@@ -13,10 +13,15 @@ const ModalBaseContainer = styled.div`
   color: var(--black300);
   border-radius: 8px;
   font-size: 30px;
-  padding: 28px;
+  padding: 32px 28px 28px;
 
   @media ${device.tablet} {
     width: 80%;
+  }
+
+  @media ${device.mobile} {
+    width: 80%;
+    padding: 28px 20px;
   }
 `;
 
