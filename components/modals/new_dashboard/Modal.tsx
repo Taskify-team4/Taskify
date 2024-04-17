@@ -1,8 +1,8 @@
 import React from 'react';
 import * as S from './Modal.style';
-import ModalInput from '@components/inputs/modalInput/ModalInput';
 import ColorPalette from '@components/chips/ColorPalette';
 import Button from '@components/buttons/Button';
+import ModalInput from '@components/inputs/modalInput/ModalInput';
 
 function Modal() {
   return (
