@@ -16,10 +16,6 @@ export const ModalContainer = styled.div`
   font-size: 18px;
   font-weight: 500;
 
-  background-color: white;
-  border: 1px solid gray; // 확인 용도로 추가한 코드입니다.
-  border-radius: 8px;
-
   @media ${device.mobile} {
     width: 327px;
     height: 220px;
@@ -31,11 +27,10 @@ export const ModalContainer = styled.div`
 
 export const ModalConfirmButton = styled(Button.ModalConfirm)`
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 0;
+  right: 0;
 
   @media ${device.mobile} {
-    bottom: 20px;
     right: 0;
     left: 0;
     margin: auto;
