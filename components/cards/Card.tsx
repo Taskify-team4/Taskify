@@ -25,7 +25,7 @@ function Card(props: CardProps) {
     <S.CardContainer>
       {props.imageUrl ? (
         <S.CardImage>
-          <Image src={props.imageUrl} alt={'Card Image'} fill />
+          <Image src={props.imageUrl} alt="Card Image" fill />
         </S.CardImage>
       ) : null}
       <S.CardContent>
@@ -40,7 +40,7 @@ function Card(props: CardProps) {
           </S.CardChips>
           <S.CardDateOwner>
             <S.CardDate>
-              <Image src={calendarIcon.src} alt={'calendarIcon'} width={18} height={18} /> {props.dueDate}
+              <Image src={calendarIcon.src} alt="Calendar Icon" width={18} height={18} /> {props.dueDate}
             </S.CardDate>
             <S.CardOwner>{props.assignee.nickname[0]}</S.CardOwner>
           </S.CardDateOwner>
