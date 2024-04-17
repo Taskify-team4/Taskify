@@ -3,21 +3,23 @@ import device from '@utils/breakpointsDevice';
 import Button from '@components/buttons/Button';
 
 export const ModalContainer = styled.div`
+  border: 1px solid red;
   height: 250px;
-
+  width: 484px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   position: relative;
-
   font-size: 18px;
   font-weight: 500;
 
+  @media ${device.tablet} {
+    width: 100%;
+  }
+
   @media ${device.mobile} {
     height: 220px;
-
     font-size: 16px;
     padding-bottom: 40px;
   }
