@@ -32,7 +32,7 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  color: var(--black-black_333236, #333236);
+  color: var(--black200);
   font-size: 16px;
   font-weight: 400;
   line-height: normal;
