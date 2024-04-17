@@ -1,8 +1,5 @@
 import * as S from './Header.style';
-
-interface HeaderProps {
-  children?: React.ReactNode;
-}
+import { HeaderProps } from './Header.type';
 
 function Header({ children }: HeaderProps) {
   return (
