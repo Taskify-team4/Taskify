@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 2px;
 `;
 
@@ -35,6 +36,8 @@ export const SelectOption = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: absolute;
+  top: 50px;
   border-radius: 6px;
   border: 1px solid var(--gray300);
   background: var(--white);
@@ -56,4 +59,11 @@ export const Select = styled.div`
 
 export const SelectTile = styled(ColorTile)`
   margin-right: 6px;
+`;
+
+export const SelectTileItem = styled.span`
+  color: var(--black200);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
 `;
