@@ -1,28 +1,14 @@
-import React, { MouseEventHandler, ReactNode } from 'react';
+import React from 'react';
 import * as S from '@components/buttons/Button.style';
+import { ButtonProps, DashboardButtonProps } from './Button.type';
 import Image from 'next/image';
 
 // Icons
 import addIcon from '@public/icons/add.svg';
+import addWhiteIcon from '@public/icons/add_white.svg';
 import rightArrowIcon from '@public/icons/right_arrow.svg';
 import leftArrowIcon from '@public/icons/left_arrow.svg';
 import crownIcon from '@public/icons/crown.svg';
-
-export type DashboardData = {
-  color: string;
-  title: string;
-  createdByMe: boolean;
-};
-
-type ButtonProps = {
-  children?: ReactNode;
-  disabled?: boolean;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-};
-
-type DashboardButtonProps = ButtonProps & {
-  dashboardData: DashboardData;
-};
 
 function Button({ children, disabled, onClick }: ButtonProps) {
   return (
@@ -81,6 +67,24 @@ function AddTodo({ onClick }: ButtonProps) {
   );
 }
 
+function AddDashboard({ children, onClick }: ButtonProps) {
+  return (
+    <S.AddDashboardButton onClick={onClick}>
+      {children}
+      <Image src={addIcon.src} width={30} height={30} alt="임시 add 아이콘" />
+    </S.AddDashboardButton>
+  );
+}
+
+function AddInvite({ children, onClick }: ButtonProps) {
+  return (
+    <S.AddInviteButton onClick={onClick}>
+      <Image src={addWhiteIcon.src} width={13} height={13} alt="add 하얀색 아이콘" />
+      {children}
+    </S.AddInviteButton>
+  );
+}
+
 function PagenationLeft({ onClick }: ButtonProps) {
   return (
     <S.PagenationLeftButton onClick={onClick}>
@@ -94,15 +98,6 @@ function PagenationRight({ onClick }: ButtonProps) {
     <S.PagenationRightButton onClick={onClick}>
       <Image src={rightArrowIcon.src} width={16} height={16} alt="오른쪽 화살표 아이콘" />
     </S.PagenationRightButton>
-  );
-}
-
-function AddDashboard({ children, onClick }: ButtonProps) {
-  return (
-    <S.AddDashboardButton onClick={onClick}>
-      {children}
-      <Image src={addIcon.src} width={30} height={30} alt="임시 add 아이콘" />
-    </S.AddDashboardButton>
   );
 }
 
@@ -121,17 +116,27 @@ function Dashboard({ onClick, dashboardData }: DashboardButtonProps) {
   );
 }
 
+// primary buttons
 Button.Login = Login;
 Button.Confirm = Confirm;
 Button.Reject = Reject;
 Button.Delete = Delete;
+
+// buttons with plus icon
 Button.AddColumn = AddColumn;
 Button.AddTodo = AddTodo;
-Button.DeleteDashboard = DeleteDashboard;
+Button.AddDashboard = AddDashboard;
+Button.AddInvite = AddInvite;
+
+// pagenation buttons
 Button.PagenationRight = PagenationRight;
 Button.PagenationLeft = PagenationLeft;
-Button.AddDashboard = AddDashboard;
+
+// extra buttons
+Button.DeleteDashboard = DeleteDashboard;
 Button.Dashboard = Dashboard;
+
+//modal buttons
 Button.ModalConfirm = ModalConfirm;
 Button.ModalReject = ModalReject;
 Button.ModalComment = ModalComment;
