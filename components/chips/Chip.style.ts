@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TChipSize, TColorKey } from '@components/chips/Chip.type';
+import { TChipSize, TColorCode, TColorKey } from '@components/chips/Chip.type';
 
 const chipColorList = {
   green: { background: '#E7F7DB', color: '#86D549' },
@@ -12,7 +12,7 @@ const chipColorList = {
 
 type ChipStyleProps = {
   $size: TChipSize;
-  $color: TColorKey;
+  $color: TColorKey | TColorCode;
 };
 
 export const BasicChip = styled.span<ChipStyleProps>`
@@ -35,16 +35,6 @@ export const SquareChip = styled(BasicChip)`
   border-radius: 4px;
 `;
 
-// 컬러 팔레트 관련 스타일
-const colorPaletteList = {
-  green: 'var(--green)',
-  purple: 'var(--purple)',
-  pink: 'var(--pink)',
-  orange: 'var(--orange)',
-  blue: 'var(--blue)',
-  gray: 'none',
-};
-
 const colorTileSizeList = {
   large: 30,
   small: 28,
@@ -65,7 +55,7 @@ export const ColorTile = styled.div<ChipStyleProps>`
   height: ${({ $size }) => colorTileSizeList[$size]}px;
 
   border-radius: 50%;
-  background-color: ${({ $color }) => colorPaletteList[$color]};
+  background-color: ${({ $color }) => $color};
 `;
 
 export const ColorCheckIcon = styled.span`

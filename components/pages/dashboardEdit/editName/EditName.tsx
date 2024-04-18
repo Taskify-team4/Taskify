@@ -2,12 +2,12 @@ import React from 'react';
 import * as S from './EditName.style';
 import TextInput from '@components/inputs/textInput/TextInput';
 import { ColorTile } from '@components/chips/Chip.style';
-import { TColorKey } from '@components/chips/Chip.type';
+import { TColorCode, TColorKey } from '@components/chips/Chip.type';
 
 type EditNameProps = {
   isMobile: boolean;
   title: string;
-  color: TColorKey;
+  color: TColorKey | TColorCode;
 };
 
 function EditName({ isMobile, title, color }: EditNameProps) {
