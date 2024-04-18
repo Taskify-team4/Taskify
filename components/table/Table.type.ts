@@ -1,5 +1,6 @@
 import { Invitation, User } from '@utils/testData';
 import { ReactNode } from 'react';
+import { DashBoardMember } from '@utils/editDashboard/edit.type';
 
 export type HeaderProps = {
   title: string;
@@ -14,7 +15,7 @@ export type TableListsProps = {
 };
 
 export type DataListProps = {
-  data: User[];
+  data: User[] | DashBoardMember[];
   buttonText?: string;
 };
 

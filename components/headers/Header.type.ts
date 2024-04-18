@@ -1,3 +1,5 @@
+import { DashBoardMember } from '@utils/editDashboard/edit.type';
+
 export type HeaderProps = {
   children?: React.ReactNode;
 };
@@ -19,7 +21,7 @@ export type ProfileProps = {
 export type DashBoardPros = {
   title: string;
   mydata: User;
-  userList: User[];
+  userList: User[] | DashBoardMember[];
   crown?: boolean;
 };
 
