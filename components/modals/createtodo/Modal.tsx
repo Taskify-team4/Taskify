@@ -25,7 +25,7 @@ function CreateToDoModal({ children, onModify }: CreateToDoPorps) {
               상태
             </SelectBox>
           )}
-          <SelectBox onData={test} onType={true}>
+          <SelectBox onData={test} onType={true} onModify={true}>
             담당자
           </SelectBox>
         </S.CreateToDoSelectContainer>

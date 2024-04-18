@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ModalCommentButton } from '@components/buttons/Button.style';
+import device from '@utils/breakpointsDevice';
 
 export const CommentInputContainer = styled.div`
   display: flex;
@@ -18,6 +19,10 @@ export const CommentInputLabel = styled.label<{ onModal?: boolean }>`
   font-size: ${({ onModal }) => (onModal ? '18px' : '16px')};
   font-weight: 500;
   line-height: normal;
+
+  @media ${device.mobile} {
+    font-size: ${({ onModal }) => (onModal ? '16px' : '14px')};
+  }
 `;
 
 export const CommentInputRequired = styled.span`
@@ -26,6 +31,10 @@ export const CommentInputRequired = styled.span`
   font-size: 18px;
   font-weight: 500;
   line-height: normal;
+
+  @media ${device.mobile} {
+    font-size: 16px;
+  }
 `;
 
 export const CommentInput = styled.textarea<{ onModal?: boolean }>`
@@ -46,6 +55,10 @@ export const CommentInput = styled.textarea<{ onModal?: boolean }>`
   &:focus {
     border: 1px solid var(--violet);
     outline: none;
+  }
+
+  @media ${device.mobile} {
+    height: ${({ onModal }) => (onModal ? '84px' : '70px')};
   }
 `;
 
