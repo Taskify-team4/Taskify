@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import device from '@utils/breakpointsDevice';
+import ProfileIcon from '@components/profileIcon/ProfileIcon';
 
 export const CardContainer = styled.div`
   display: inline-flex;
@@ -107,13 +108,11 @@ export const CardDate = styled.div`
   }
 `;
 
-// 임시 컴포넌트, merge 후 수정 예정입니다.
-export const CardOwner = styled.div`
+export const CardOwner = styled(ProfileIcon)`
   width: 24px;
   height: 24px;
-  color: white;
-  background-color: #7ac555;
-  border-radius: 50%;
+  font-size: 12px;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;

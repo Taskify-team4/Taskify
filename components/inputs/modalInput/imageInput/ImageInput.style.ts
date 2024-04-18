@@ -1,5 +1,18 @@
 import styled from 'styled-components';
 
+export const ImageInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const ImageInputLabel = styled.label`
+  color: var(--black200);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+`;
+
 export const ImageWrapper = styled.div`
   width: 76px;
   height: 76px;
