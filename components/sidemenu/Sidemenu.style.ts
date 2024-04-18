@@ -3,6 +3,8 @@ import device from '@utils/breakpointsDevice';
 import Image from 'next/image';
 
 export const SidemenuContainer = styled.div`
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
   width: fit-content;
