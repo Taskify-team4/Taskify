@@ -1,4 +1,3 @@
-import { User } from '@utils/testData';
 import { ReactNode } from 'react';
 import { DashBoardMember, Invitations } from '@utils/editDashboard/edit.type';
 
@@ -16,8 +15,9 @@ export type TableListsProps = {
 };
 
 export type DataListProps = {
-  data: User[] | DashBoardMember[];
+  data: DashBoardMember[];
   buttonText?: string;
+  onDeleteClick?: any;
 };
 
 export type InvitedDashListProps = {

@@ -78,6 +78,16 @@ export const postDashboardInvites = async (id: string, email: string) => {
   });
 };
 
+export const reactDashboardInvites = async (id: number) => {
+  await axios.put(`invitations/${id}`, JSON.stringify({ inviteAccepted: true }), {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization:
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMywidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDYwOTg1LCJpc3MiOiJzcC10YXNraWZ5In0.buN9b0vinYtRXVKYcylLuJUO-MKqNrTuJ1K-xjv6uQ0',
+    },
+  });
+};
+
 export const getDashboardCreate = async () => {
   await axios.post('dashboards', JSON.stringify({ title: 'test', color: '#111111' }), {
     headers: {
@@ -113,6 +123,15 @@ export const updateDashboard = async (id: string, title: string, color: string) 
 
 export const deleteInvite = async (id: string, inviteId: number) => {
   await axios.delete(`dashboards/${id}/invitations/${inviteId}`, {
+    headers: {
+      Authorization:
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMiwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDI5OTU1LCJpc3MiOiJzcC10YXNraWZ5In0.1la3IrwbTBb9QjVdSl-1YpLnr64Fq74XXQpa_tqQp0A',
+    },
+  });
+};
+
+export const deleteMember = async (id: number) => {
+  await axios.delete(`members/${id}`, {
     headers: {
       Authorization:
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMiwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDI5OTU1LCJpc3MiOiJzcC10YXNraWZ5In0.1la3IrwbTBb9QjVdSl-1YpLnr64Fq74XXQpa_tqQp0A',

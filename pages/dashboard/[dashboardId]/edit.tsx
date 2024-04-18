@@ -11,6 +11,7 @@ import size from '@constants/breakpointsSize';
 import InviteTable from '@components/table/invite/InviteTable';
 import {
   deleteInvite,
+  deleteMember,
   getDashboard,
   getDashboardInvites,
   getDashboardList,
@@ -46,7 +47,7 @@ export async function getServerSideProps(context: any) {
 function Edit({
   dashboardData: initialDashboardData,
   invitees: initialInvitees,
-  members,
+  members: initialMembers,
   myData,
   dashboardList: initialDashboardList,
 }: {
@@ -62,6 +63,7 @@ function Edit({
   const [dashboardData, setDashboardData] = useState(initialDashboardData);
   const [dashboardName, setDashboardName] = useState(initialDashboardData.title);
   const [invitees, setInvitees] = useState(initialInvitees);
+  const [members, setMembers] = useState(initialMembers);
   const router = useRouter();
   const dashboardId = router.query['dashboardId']?.toString();
 
@@ -90,6 +92,14 @@ function Edit({
 
       const newInvitees = await getDashboardInvites(dashboardId);
       setInvitees(newInvitees);
+    }
+  };
+
+  const handleDeleteMemberClick = async (deleteId: number) => {
+    if (dashboardId) {
+      await deleteMember(deleteId);
+      const newMembers = await getDashboardMembers(dashboardId);
+      setMembers(newMembers);
     }
   };
 
@@ -138,7 +148,7 @@ function Edit({
             onClick={handleUpdateClick}
             onChange={setDashboardName}
           />
-          <MemberTable members={members} />
+          <MemberTable members={members} onDeleteClick={handleDeleteMemberClick} />
           <InviteTable
             users={invitees}
             onCancelInviteClick={handleCancelInviteClick}

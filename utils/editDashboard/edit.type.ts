@@ -14,5 +14,5 @@ export type DashBoardMember = {
 
 export type Invitations = {
   id: number;
-  invitee: User[];
+  invitee: User;
 };
