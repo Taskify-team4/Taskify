@@ -16,6 +16,7 @@ import {
   getDashboardList,
   getDashboardMembers,
   getMyData,
+  postDashboardInvites,
   updateDashboard,
 } from '@utils/editDashboard/api';
 import { DashBoardMember, DashBoardNameData } from '@utils/editDashboard/edit.type';
@@ -44,7 +45,7 @@ export async function getServerSideProps(context: any) {
 
 function Edit({
   dashboardData: initialDashboardData,
-  invitees,
+  invitees: initialInvitees,
   members,
   myData,
   dashboardList: initialDashboardList,
@@ -60,6 +61,8 @@ function Edit({
   const [dashboardList, setDashboardList] = useState(initialDashboardList);
   const [dashboardData, setDashboardData] = useState(initialDashboardData);
   const [dashboardName, setDashboardName] = useState(initialDashboardData.title);
+  const [invitees, setInvitees] = useState(initialInvitees);
+  const [inviteId, setInviteId] = useState('');
   const router = useRouter();
   const dashboardId = router.query['dashboardId'];
 
@@ -72,6 +75,12 @@ function Edit({
       setDashboardData(newDashboardData);
       setDashboardList(newDashboardList);
     }
+  };
+  console.log(inviteId);
+  const handleInviteClick = async () => {
+    await postDashboardInvites(Number(dashboardId), inviteId);
+    const newInvitees = await getDashboardInvites(Number(dashboardId));
+    setInvitees(newInvitees);
   };
 
   // 브라우저 넓이 받아오기
@@ -120,7 +129,7 @@ function Edit({
             onChange={setDashboardName}
           />
           <MemberTable members={members} />
-          <InviteTable users={invitees} />
+          <InviteTable users={invitees} onInviteClick={handleInviteClick} onChange={setInviteId} />
           <S.DeleteDashboardButton> 대시보드 삭제하기 </S.DeleteDashboardButton>
         </S.PageContents>
       </S.RightSection>

@@ -5,10 +5,10 @@ import TableLists from '@components/table/TableList';
 import InviteList from '@components/table/invite/InviteList';
 import { User } from '@utils/testData';
 
-function InviteTable({ users }: { users: User[] }) {
+function InviteTable({ users, onInviteClick, onChange }: { users: User[]; onInviteClick?: any; onChange?: any }) {
   return (
     <S.TableContainer>
-      <TableHeader title="초대 내역" isInvite isPagenation />
+      <TableHeader title="초대 내역" isInvite isPagenation onInviteClick={onInviteClick} onChange={onChange} />
       <TableLists title="이메일">
         <InviteList data={users} buttonText="취소" />
       </TableLists>

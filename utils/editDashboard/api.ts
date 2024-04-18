@@ -66,8 +66,8 @@ export const getMyData = async (): Promise<DashBoardMember[]> => {
   return res.data;
 };
 
-export const postDashboardInvites = async () => {
-  const res = await axios.post(`dashboards/${6029}/invitations`, JSON.stringify({ email: 'asdf1234@naver.com' }), {
+export const postDashboardInvites = async (id: number, email: string) => {
+  const res = await axios.post(`dashboards/${id}/invitations`, JSON.stringify({ email }), {
     headers: {
       'Content-Type': 'application/json',
       Authorization:

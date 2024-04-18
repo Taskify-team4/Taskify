@@ -6,6 +6,8 @@ export type HeaderProps = {
   title: string;
   isInvite?: boolean;
   isPagenation?: boolean;
+  onInviteClick?: any;
+  onChange?: any;
 };
 
 export type TableListsProps = {

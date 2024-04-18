@@ -7,16 +7,17 @@ type ModalInputProps = {
   type: string;
   placeholder: string;
   onRequired?: boolean;
+  onChange?: any;
 };
 
-function ModalInput({ children, id, type, placeholder, onRequired }: ModalInputProps) {
+function ModalInput({ children, id, type, placeholder, onRequired, onChange }: ModalInputProps) {
   return (
     <S.ModalInputContainer>
       <S.ModalInputTitleContainer>
         <S.ModalInputLabel htmlFor={id}>{children}</S.ModalInputLabel>
         {onRequired && <S.ModalInputRequired>*</S.ModalInputRequired>}
       </S.ModalInputTitleContainer>
-      <S.ModalInput id={id} type={type} placeholder={placeholder} />
+      <S.ModalInput id={id} type={type} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} />
     </S.ModalInputContainer>
   );
 }
