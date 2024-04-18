@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import Button from '@components/buttons/Button';
 import ColorPalette from '@components/chips/ColorPalette';
+import device from '@utils/breakpointsDevice';
 
 export const EditDashboardName = styled.div`
-  width: 80%;
+  max-width: 620px;
   height: 256px;
 
   padding: 30px;
@@ -15,6 +16,10 @@ export const EditDashboardName = styled.div`
   gap: 20px;
 
   background-color: white;
+
+  @media ${device.mobile} {
+    max-width: 100%;
+  }
 `;
 
 export const EditNameTitle = styled.div`

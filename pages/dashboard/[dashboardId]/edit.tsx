@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SidemenuProps } from '@components/sidemenu/Sidemenu.type';
 import Sidemenu from '@components/sidemenu/Sidemenu';
 import * as S from '@pages/dashboard/[dashboardId]/edit.style';
@@ -9,6 +9,7 @@ import InviteTable from '@components/table/invite/InviteTable';
 import leftarrowIcon from '@public/icons/left_arrow.svg';
 import Image from 'next/image';
 import EditName from '@components/pages/dashboardEdit/editName/EditName';
+import size from '@constants/breakpointsSize';
 
 function Edit() {
   const SidemenuData: SidemenuProps = {
@@ -39,6 +40,25 @@ function Edit() {
     crown: true,
   };
 
+  const [windowWidth, setWindowWidth] = useState(1920);
+
+  // 브라우저 넓이 받아오기
+  useEffect(() => {
+    const resizeHandler = () => {
+      setTimeout(() => {
+        setWindowWidth(window.innerWidth);
+      }, 500);
+    };
+
+    resizeHandler();
+
+    window.addEventListener('resize', resizeHandler);
+
+    return () => {
+      window.removeEventListener('resize', resizeHandler);
+    };
+  }, []);
+
   return (
     <S.PageContainer>
       <div>
@@ -50,7 +70,7 @@ function Edit() {
           <S.GoBackButton>
             <Image src={leftarrowIcon.src} width={20} height={20} alt="돌아가기 버튼" /> 돌아가기
           </S.GoBackButton>
-          <EditName />
+          {windowWidth > size.tablet ? <EditName isMobile={false} /> : <EditName isMobile={true} />}
           <MemberTable />
           <InviteTable />
           <S.DeleteDashboardButton> 대시보드 삭제하기 </S.DeleteDashboardButton>
