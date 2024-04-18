@@ -2,18 +2,13 @@ import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
 
 export const CreateToDoContainer = styled.div`
-  width: 506px;
-  height: 907px;
+  width: 450px;
+  height: 847px;
   display: flex;
   flex-direction: column;
-  padding: 32px 28px 28px;
 
   @media ${device.tablet} {
     width: 100%;
-  }
-
-  @media ${device.mobile} {
-    padding: 28px 20px 20px;
   }
 `;
 
@@ -37,6 +32,11 @@ export const CreateToDoInputContainer = styled.div`
   @media ${device.mobile} {
     gap: 24px;
   }
+`;
+
+export const CreateToDoSelectContainer = styled.div`
+  display: flex;
+  gap: 16px;
 `;
 
 export const CreateToDoBtnContainer = styled.div`

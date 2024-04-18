@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import * as S from '@components/modals/createtodo/Modal.style';
 import SelectBox from '@components/inputs/modalInput/selectBox/SelectBox';
 import ModalInput from '@components/inputs/modalInput/ModalInput';
@@ -8,15 +8,27 @@ import TagInput from '@components/inputs/modalInput/tagInput/TagInput';
 import ImageInput from '@components/inputs/modalInput/imageInput/ImageInput';
 import Button from '@components/buttons/Button';
 
-function CreateToDoModal({ children }: any) {
+type CreateToDoPorps = {
+  children: ReactNode;
+  onModify?: boolean;
+};
+
+function CreateToDoModal({ children, onModify }: CreateToDoPorps) {
   const test = ['가나다', '라마바'];
   return (
     <S.CreateToDoContainer>
       <S.CreateToDoTitle>{children}</S.CreateToDoTitle>
       <S.CreateToDoInputContainer>
-        <SelectBox onData={test} onType={true}>
-          담당자
-        </SelectBox>
+        <S.CreateToDoSelectContainer>
+          {onModify && (
+            <SelectBox onData={test} onType={false}>
+              상태
+            </SelectBox>
+          )}
+          <SelectBox onData={test} onType={true}>
+            담당자
+          </SelectBox>
+        </S.CreateToDoSelectContainer>
         <ModalInput id="title" type="text" placeholder="제목을 입력해 주세요." onRequired={true}>
           제목
         </ModalInput>
