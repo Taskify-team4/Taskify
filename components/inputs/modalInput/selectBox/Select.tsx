@@ -23,11 +23,13 @@ function Select({ onData, onType, onModify }: SelectProps) {
       <S.SelectTitle onClick={handleOpen}>
         {onType ? (
           <>
-            {!onModify && <S.SelectTitleInput placeholder="이름을 입력해 주세요." />}
-            <S.SelectTitleContainer>
-              <S.SelectTitleName str="가나다" />
-              <S.SelectTileItem>가나다</S.SelectTileItem>
-            </S.SelectTitleContainer>
+            <S.SelectTitleInput placeholder="이름을 입력해 주세요." />
+            {!onModify && (
+              <S.SelectTitleContainer>
+                <S.SelectTitleName str="가나다" />
+                <S.SelectTileItem>가나다</S.SelectTileItem>
+              </S.SelectTitleContainer>
+            )}
           </>
         ) : (
           <Chip.Round size={'large'} color={'purple'}>
