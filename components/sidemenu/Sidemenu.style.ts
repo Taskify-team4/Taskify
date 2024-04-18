@@ -3,12 +3,15 @@ import device from '@utils/breakpointsDevice';
 import Image from 'next/image';
 
 export const SidemenuContainer = styled.div`
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
   width: fit-content;
   height: 100vh;
   padding: 0 12px;
   border-right: 1px solid var(--gray300);
+  background-color: var(--white);
   @media ${device.mobile} {
     align-items: center;
   }
@@ -41,11 +44,8 @@ export const DashBoardsWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 12px 12px 16px 12px;
-  gap: 160px;
+  justify-content: space-between;
   cursor: pointer;
-  @media ${device.tablet} {
-    gap: 0px;
-  }
 `;
 export const DashBoardsText = styled.div`
   color: var(--gray500);

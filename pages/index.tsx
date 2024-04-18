@@ -5,13 +5,7 @@ import React from 'react';
 import CreateToDoModal from '@components/modals/createtodo/Modal';
 
 function Home() {
-  return (
-    <div>
-      <Modal content={<ModalBase>{/* 모달 content */}</ModalBase>}>
-        <Button.ModalComment>모달 여는 버튼</Button.ModalComment>
-      </Modal>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default Home;

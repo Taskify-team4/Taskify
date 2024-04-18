@@ -6,7 +6,6 @@ interface ContainerProps {
 }
 
 export const TableContainer = styled.section<ContainerProps>`
-  border: 1px solid black;
   border-radius: 8px;
   background-color: var(--white);
   max-width: ${({ $isInvitedDash }) => ($isInvitedDash ? 1022 : 620)}px;
