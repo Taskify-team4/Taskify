@@ -1,14 +1,41 @@
+import Image from 'next/image';
 import styled from 'styled-components';
 
 export const ModalTaskContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
 `;
+export const TaskContentTop = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+`;
+export const TaskContentTopLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: fit-content;
+  padding-right: 24px;
+`;
+
 export const TaskTitle = styled.span`
   color: var(--black200);
   font-size: 24px;
   font-weight: 700;
 `;
+export const TaskExplanation = styled.div`
+  max-width: 450px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+`;
+export const CardImage = styled.span`
+  position: relative;
+  width: 450px;
+  height: 270px;
+`;
+// TaskChips Style
 export const Chips = styled.span`
   display: flex;
   align-items: center;
@@ -23,12 +50,7 @@ export const ColorChips = styled.span`
   display: flex;
   gap: 6px;
 `;
-export const TaskExplanation = styled.span`
-  width: 420px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 24px;
-`;
+// TaskDeadline style
 export const DeadlineContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,6 +59,7 @@ export const DeadlineContainer = styled.div`
   border-radius: 8px;
   border: 1px solid var(--gray300);
   width: 180px;
+  height: fit-content;
 `;
 export const DeadlineWrapper = styled.div`
   display: flex;
@@ -72,4 +95,76 @@ export const DeadlineDate = styled.span`
   color: var(--black200);
   font-size: 14px;
   font-weight: 400;
+`;
+export const CloseImage = styled(Image)`
+  position: absolute;
+  right: 0;
+  width: 32px;
+  height: 32px;
+`;
+export const MoreImage = styled(Image)`
+  position: absolute;
+  top: 2px;
+  right: 56px;
+  width: 28px;
+  height: 28px;
+`;
+// TaskComment style
+export const CommentContainer = styled.div``;
+export const CommentList = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  width: 450px;
+  height: inherit;
+`;
+export const CommentItem = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+`;
+export const AuthorProfile = styled.span`
+  width: 32px;
+  height: 32px;
+  color: var(--white);
+  background-color: var(--green);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const CommentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+export const CommentInfo = styled.div`
+  display: flex;
+  gap: 8px;
+  padding: 8px 0;
+`;
+export const AuthorName = styled.span`
+  color: var(--black200);
+  font-size: 14px;
+  font-weight: 600;
+`;
+export const CreatedTime = styled.span`
+  color: var(--gray400);
+  font-size: 12px;
+  font-weight: 400;
+`;
+export const CommentContent = styled.span`
+  color: var(--black200);
+  font-size: 14px;
+  font-weight: 400;
+  padding-bottom: 12px;
+`;
+export const Buttons = styled.span`
+  display: flex;
+  gap: 12px;
+`;
+export const CommentButton = styled.button`
+  color: var(--gray400);
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration-line: underline;
 `;
