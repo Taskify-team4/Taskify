@@ -4,7 +4,7 @@ import { ButtonProps, DashboardButtonProps } from './Button.type';
 import Image from 'next/image';
 
 // Icons
-import addIcon from '@public/icons/add.svg';
+import addIcon from '@public/icons/add_button_color.svg';
 import addWhiteIcon from '@public/icons/add_white.svg';
 import rightArrowIcon from '@public/icons/right_arrow.svg';
 import leftArrowIcon from '@public/icons/left_arrow.svg';
@@ -54,7 +54,7 @@ function AddColumn({ children, onClick }: ButtonProps) {
   return (
     <S.AddColumnButton onClick={onClick}>
       {children}
-      <Image src={addIcon.src} width={30} height={30} alt="임시 add 아이콘" />
+      <Image src={addIcon.src} width={22} height={22} alt="임시 add 아이콘" />
     </S.AddColumnButton>
   );
 }
@@ -62,7 +62,7 @@ function AddColumn({ children, onClick }: ButtonProps) {
 function AddTodo({ onClick }: ButtonProps) {
   return (
     <S.AddTodoButton onClick={onClick}>
-      <Image src={addIcon.src} width={30} height={30} alt="임시 add 아이콘" />
+      <Image src={addIcon.src} width={22} height={22} alt="임시 add 아이콘" />
     </S.AddTodoButton>
   );
 }
