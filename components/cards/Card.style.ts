@@ -3,6 +3,7 @@ import device from '@utils/breakpointsDevice';
 import ProfileIcon from '@components/profileIcon/ProfileIcon';
 
 export const CardContainer = styled.div`
+  background-color: white;
   display: inline-flex;
   flex-direction: column;
   gap: 12px;
