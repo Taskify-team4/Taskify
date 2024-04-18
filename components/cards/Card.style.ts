@@ -4,6 +4,7 @@ import ProfileIcon from '@components/profileIcon/ProfileIcon';
 import Image from 'next/image';
 
 export const CardContainer = styled.div`
+  background-color: white;
   display: inline-flex;
   flex-direction: column;
   gap: 12px;

@@ -5,7 +5,7 @@ import device from '@utils/breakpointsDevice';
 
 const ModalBaseContainer = styled.div`
   background-color: white;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
