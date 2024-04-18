@@ -42,7 +42,7 @@ function Card(props: CardProps) {
             <S.CardDate>
               <Image src={calendarIcon.src} alt="Calendar Icon" width={18} height={18} /> {props.dueDate}
             </S.CardDate>
-            <S.CardOwner>{props.assignee.nickname[0]}</S.CardOwner>
+            <S.CardOwner str={props.assignee.nickname[0]} />
           </S.CardDateOwner>
         </S.CardMeta>
       </S.CardContent>

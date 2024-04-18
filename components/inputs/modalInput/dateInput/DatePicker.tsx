@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import * as S from '@components/inputs/modalInput/dateInput/DatePicker.style';
 
 const DatePicker = () => {
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [startDate, setStartDate] = useState<Date | null>(null);
   const CustomInput = forwardRef((props, ref: React.ForwardedRef<HTMLInputElement>) => {
     return (
       <S.CalendarInputWrap>

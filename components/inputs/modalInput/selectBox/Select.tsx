@@ -21,7 +21,9 @@ function Select({ onData, onType }: SelectProps) {
     <S.SelectContainer>
       <S.SelectTitle onClick={handleOpen}>
         {onType ? (
-          <S.SelectTitleInput placeholder="이름을 입력해 주세요." />
+          <>
+            <S.SelectTitleInput placeholder="이름을 입력해 주세요." />
+          </>
         ) : (
           <Chip.Round size={'large'} color={'purple'}>
             <S.SelectTile $size={'tiny'} $color={'purple'} />
@@ -37,7 +39,7 @@ function Select({ onData, onType }: SelectProps) {
                 <S.Select key={item}>
                   <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />
                   <S.SelectTile $size={'tiny'} $color={'purple'} />
-                  {item}
+                  <S.SelectTileItem>{item}</S.SelectTileItem>
                 </S.Select>
               ))
             : onData.map((item: string) => (
@@ -45,7 +47,7 @@ function Select({ onData, onType }: SelectProps) {
                   <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />
                   <Chip.Round size={'large'} color={'purple'}>
                     <S.SelectTile $size={'tiny'} $color={'purple'} />
-                    {item}
+                    <S.SelectTileItem>{item}</S.SelectTileItem>
                   </Chip.Round>
                 </S.Select>
               ))}

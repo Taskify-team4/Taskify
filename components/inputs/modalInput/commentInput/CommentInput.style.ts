@@ -1,5 +1,5 @@
-import { ModalCommentButton } from '@components/buttons/Button.style';
 import styled from 'styled-components';
+import { ModalCommentButton } from '@components/buttons/Button.style';
 
 export const CommentInputContainer = styled.div`
   display: flex;
@@ -8,16 +8,29 @@ export const CommentInputContainer = styled.div`
   gap: 10px;
 `;
 
-export const CommentInputLabel = styled.label`
+export const CommentInputTitleContainer = styled.div`
+  display: flex;
+  gap: 5px;
+`;
+
+export const CommentInputLabel = styled.label<{ onModal?: boolean }>`
   color: var(--black200);
-  font-size: 16px;
+  font-size: ${({ onModal }) => (onModal ? '18px' : '16px')};
   font-weight: 500;
   line-height: normal;
 `;
 
-export const CommentInput = styled.textarea`
+export const CommentInputRequired = styled.span`
+  color: var(--violet);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+export const CommentInput = styled.textarea<{ onModal?: boolean }>`
   width: 100%;
-  height: 110px;
+  height: ${({ onModal }) => (onModal ? '96px' : '110px')};
   padding: 16px;
   border-radius: 6px;
   border: 1px solid var(--gray300);
