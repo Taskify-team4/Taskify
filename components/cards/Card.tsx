@@ -24,9 +24,9 @@ function Card(props: CardProps) {
   return (
     <S.CardContainer>
       {props.imageUrl ? (
-        <S.CardImage>
-          <Image src={props.imageUrl} alt="Card Image" fill />
-        </S.CardImage>
+        <S.CardImageContainer>
+          <S.CardImage src={props.imageUrl} alt="Card Image" fill />
+        </S.CardImageContainer>
       ) : null}
       <S.CardContent>
         <S.CardTitle>{props.title}</S.CardTitle>
