@@ -4,6 +4,7 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%;
 `;
 
 export const InputLabel = styled.label`
@@ -14,7 +15,7 @@ export const InputLabel = styled.label`
 `;
 
 export const Input = styled.input`
-  width: 520px;
+  width: 100%;
   height: 50px;
   padding: 15px 16px;
   border: 1px solid var(--gray300);
