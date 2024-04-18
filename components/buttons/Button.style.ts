@@ -25,7 +25,7 @@ const PagenationButtonStyle = `
   align-items: center;
   @media ${device.mobile} {
     width: 36px;
-    width: 36px;
+    height: 36px;
   }
 `;
 
@@ -193,6 +193,23 @@ export const AddDashboardButton = styled.button`
     width: 260px;
     height: 58px;
     font-size: 14px;
+  }
+`;
+
+export const AddInviteButton = styled.button`
+  ${AddButtonStyle}
+  background-color: var(--violet);
+  color: var(--white);
+  width: 105px;
+  height: 32px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 9px;
+  @media ${device.mobile} {
+    width: 86px;
+    height: 28px;
+    font-size: 12px;
   }
 `;
 
