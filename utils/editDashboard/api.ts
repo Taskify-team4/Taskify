@@ -1,6 +1,6 @@
 import baseAxios from '@node_modules/axios';
 import { User } from '@utils/testData';
-import { DashBoardMember, DashBoardNameData } from '@pages/dashboard/[dashboardId]/edit.type';
+import { DashBoardMember, DashBoardNameData } from '@utils/editDashboard/edit.type';
 
 const axios = baseAxios.create({
   baseURL: 'https://sp-taskify-api.vercel.app/4-4/',
