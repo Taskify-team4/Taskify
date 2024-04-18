@@ -2,12 +2,10 @@ import * as S from '@components/modals/modal-task/ModalTask.style';
 import Image from 'next/image';
 import { TColorKey } from '@components/chips/Chip.type';
 import { ModalBaseProps } from '@components/modals/Modal.type';
-import TaskChips from './TaskChips';
-import TaskDeadline from './TaskDeadline';
-import TaskComment from './TaskComment';
+import TaskComments from './TaskComments';
 import closeImg from '@public/icons/close.svg';
 import moreImg from '@public/icons/more.svg';
-import CommentInput from '@components/inputs/modalInput/commentInput/CommentInput';
+import TaskContentInfo from './TaskContentInfo';
 
 type TagProps = {
   text: string;
@@ -29,22 +27,13 @@ function ModalTask({ close, imageUrl, title, explanation, tags, dueDate, assigne
   return (
     <S.ModalTaskContainer>
       <S.TaskTitle>{title}</S.TaskTitle>
-      <S.TaskContentTop>
-        <TaskDeadline {...{ dueDate, assignee }} />
-        <S.TaskContentTopLeft>
-          <TaskChips {...{ tags }} />
-          <S.TaskExplanation>{explanation}</S.TaskExplanation>
-        </S.TaskContentTopLeft>
-      </S.TaskContentTop>
+      <TaskContentInfo {...{ explanation, tags, dueDate, assignee }} />
       {imageUrl ? (
         <S.CardImage>
-          <Image src={imageUrl} alt="Card Image" fill />
+          <Image src={imageUrl} alt="Card Image" width={0} height={0} layout="responsive" />
         </S.CardImage>
       ) : null}
-      <CommentInput id="임시 아이디" placeholder="댓글 작성하기">
-        댓글
-      </CommentInput>
-      <TaskComment />
+      <TaskComments />
 
       <S.MoreImage src={moreImg} alt="more button" />
       <S.CloseImage src={closeImg} alt="close button" onClick={trigger} />

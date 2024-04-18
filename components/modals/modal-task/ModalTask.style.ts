@@ -1,45 +1,62 @@
 import Image from 'next/image';
+import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
 
 export const ModalTaskContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  max-height: 90vh;
+  gap: 24px;
 `;
-export const TaskContentTop = styled.div`
+export const TaskContentInfo = styled.div`
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
+  @media ${device.tablet} {
+    flex-direction: column;
+    gap: 12px;
+  }
 `;
-export const TaskContentTopLeft = styled.div`
+export const InfoLeft = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: fit-content;
+  width: 100%;
   padding-right: 24px;
+  @media ${device.tablet} {
+    padding-right: 0;
+  }
 `;
 
 export const TaskTitle = styled.span`
   color: var(--black200);
   font-size: 24px;
   font-weight: 700;
+  @media ${device.tablet} {
+    margin-top: 36px;
+  }
 `;
 export const TaskExplanation = styled.div`
-  max-width: 450px;
+  max-width: 100%;
   font-size: 14px;
   font-weight: 400;
   line-height: 24px;
 `;
-export const CardImage = styled.span`
-  position: relative;
-  width: 450px;
-  height: 270px;
+export const CardImage = styled.div`
+  max-width: 450px;
 `;
 // TaskChips Style
 export const Chips = styled.span`
   display: flex;
   align-items: center;
+  width: 450px;
   gap: 20px;
+  @media ${device.tablet} {
+    width: 100%;
+  }
 `;
 export const ChipStroke = styled.span`
   width: 0px;
@@ -48,6 +65,7 @@ export const ChipStroke = styled.span`
 `;
 export const ColorChips = styled.span`
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 `;
 // TaskDeadline style
@@ -58,13 +76,20 @@ export const DeadlineContainer = styled.div`
   padding: 16px;
   border-radius: 8px;
   border: 1px solid var(--gray300);
-  width: 180px;
+  width: 200px;
   height: fit-content;
+  @media ${device.tablet} {
+    flex-direction: row;
+    width: 100%;
+  }
 `;
 export const DeadlineWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
+  @media ${device.tablet} {
+    margin-right: auto;
+  }
 `;
 export const DeadlineText = styled.div`
   font-size: 12px;
@@ -90,11 +115,18 @@ export const OwnerName = styled.span`
   color: var(--black200);
   font-size: 14px;
   font-weight: 400;
+  @media ${device.mobile} {
+    font-size: 12px;
+  }
 `;
 export const DeadlineDate = styled.span`
   color: var(--black200);
   font-size: 14px;
   font-weight: 400;
+  padding-top: 6px;
+  @media ${device.mobile} {
+    font-size: 12px;
+  }
 `;
 export const CloseImage = styled(Image)`
   position: absolute;
@@ -114,14 +146,13 @@ export const CommentContainer = styled.div``;
 export const CommentList = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
-  width: 450px;
-  height: inherit;
+  /* overflow-y: scroll;
+  scrollbar-width: none; */
 `;
 export const CommentItem = styled.div`
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 `;
 export const AuthorProfile = styled.span`
   width: 32px;
