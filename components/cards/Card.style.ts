@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import device from '@utils/breakpointsDevice';
 import ProfileIcon from '@components/profileIcon/ProfileIcon';
+import Image from 'next/image';
 
 export const CardContainer = styled.div`
   display: inline-flex;
@@ -28,7 +29,7 @@ export const CardContainer = styled.div`
   }
 `;
 
-export const CardImage = styled.div`
+export const CardImageContainer = styled.div`
   position: relative;
 
   width: 270px;
@@ -42,6 +43,11 @@ export const CardImage = styled.div`
     width: 260px;
     height: 152px;
   }
+`;
+
+export const CardImage = styled(Image)`
+  border-radius: 6px;
+  object-fit: cover;
 `;
 
 export const CardContent = styled.div`
