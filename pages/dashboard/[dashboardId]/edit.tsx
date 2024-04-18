@@ -12,6 +12,7 @@ import EditName from '@components/pages/dashboardEdit/editName/EditName';
 import size from '@constants/breakpointsSize';
 
 function Edit() {
+  // sample data
   const SidemenuData: SidemenuProps = {
     dashboards: [
       { color: 'green', title: 'sample', crown: true },
@@ -70,7 +71,11 @@ function Edit() {
           <S.GoBackButton>
             <Image src={leftarrowIcon.src} width={20} height={20} alt="돌아가기 버튼" /> 돌아가기
           </S.GoBackButton>
-          {windowWidth > size.tablet ? <EditName isMobile={false} /> : <EditName isMobile={true} />}
+          <EditName
+            isMobile={windowWidth <= size.tablet}
+            title={HeaderData.title}
+            color={SidemenuData.dashboards[0].color}
+          />
           <MemberTable />
           <InviteTable />
           <S.DeleteDashboardButton> 대시보드 삭제하기 </S.DeleteDashboardButton>
