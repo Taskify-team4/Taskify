@@ -26,4 +26,5 @@ export type DashBoardPros = {
 export type ProfileIconProps = {
   str: string;
   children?: React.ReactNode;
+  className?: string;
 };
