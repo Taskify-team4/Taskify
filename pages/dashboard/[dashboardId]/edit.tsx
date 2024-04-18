@@ -1,46 +1,57 @@
 import React, { useEffect, useState } from 'react';
-import { SidemenuProps } from '@components/sidemenu/Sidemenu.type';
+import { dashboard } from '@components/sidemenu/Sidemenu.type';
 import Sidemenu from '@components/sidemenu/Sidemenu';
 import * as S from '@pages/dashboard/[dashboardId]/edit.style';
 import DashBoardHeader from '@components/headers/DashBoardHeader';
-import { DashBoardPros } from '@components/headers/Header.type';
 import MemberTable from '@components/table/member/MemberTable';
-import InviteTable from '@components/table/invite/InviteTable';
 import leftarrowIcon from '@public/icons/left_arrow.svg';
 import Image from 'next/image';
 import EditName from '@components/pages/dashboardEdit/editName/EditName';
 import size from '@constants/breakpointsSize';
+import InviteTable from '@components/table/invite/InviteTable';
+import { User } from '@utils/testData';
+import {
+  getDashboard,
+  getDashboardInvites,
+  getDashboardList,
+  getDashboardMembers,
+  getMyData,
+} from '@utils/editDashboard/api';
+import { DashBoardMember, DashBoardNameData } from '@utils/editDashboard/edit.type';
 
-function Edit() {
-  // sample data
-  const SidemenuData: SidemenuProps = {
-    dashboards: [
-      { color: 'green', title: 'sample', crown: true },
-      { color: 'pink', title: 'sample2', crown: false },
-    ],
-  };
-  const HeaderData: DashBoardPros = {
-    title: 'sample',
-    mydata: {
-      id: 1,
-      nickname: '김준영',
-      email: 'www@www.com',
+export async function getServerSideProps(context: any) {
+  const dashboardId = context.query['dashboardId'];
+
+  const dashboardData = await getDashboard(dashboardId);
+  const invitees = await getDashboardInvites(dashboardId);
+  const members = await getDashboardMembers(dashboardId);
+  const myData = await getMyData();
+  const dashboardList = await getDashboardList();
+
+  return {
+    props: {
+      dashboardData,
+      invitees,
+      members,
+      myData,
+      dashboardList,
     },
-    userList: [
-      {
-        id: 1,
-        nickname: '김준영',
-        email: 'www@www.com',
-      },
-      {
-        id: 2,
-        nickname: '최정훈',
-        email: 'www@www.com',
-      },
-    ],
-    crown: true,
   };
+}
 
+function Edit({
+  dashboardData,
+  invitees,
+  members,
+  myData,
+  dashboardList,
+}: {
+  dashboardData: DashBoardNameData;
+  invitees: User[];
+  members: DashBoardMember[];
+  myData: DashBoardMember;
+  dashboardList: dashboard[];
+}) {
   const [windowWidth, setWindowWidth] = useState(1920);
 
   // 브라우저 넓이 받아오기
@@ -63,21 +74,26 @@ function Edit() {
   return (
     <S.PageContainer>
       <div>
-        <Sidemenu dashboards={SidemenuData.dashboards} />
+        <Sidemenu dashboards={dashboardList} />
       </div>
       <S.RightSection>
-        <DashBoardHeader {...HeaderData} />
+        <DashBoardHeader
+          title={dashboardData.title}
+          mydata={{
+            id: myData.userId,
+            nickname: myData.nickname,
+            email: myData.email || '',
+          }}
+          userList={members}
+          crown={true}
+        />
         <S.PageContents>
           <S.GoBackButton>
             <Image src={leftarrowIcon.src} width={20} height={20} alt="돌아가기 버튼" /> 돌아가기
           </S.GoBackButton>
-          <EditName
-            isMobile={windowWidth <= size.tablet}
-            title={HeaderData.title}
-            color={SidemenuData.dashboards[0].color}
-          />
-          <MemberTable />
-          <InviteTable />
+          <EditName isMobile={windowWidth <= size.tablet} title={dashboardData.title} color={dashboardData.color} />
+          <MemberTable members={members} />
+          <InviteTable users={invitees} />
           <S.DeleteDashboardButton> 대시보드 삭제하기 </S.DeleteDashboardButton>
         </S.PageContents>
       </S.RightSection>
