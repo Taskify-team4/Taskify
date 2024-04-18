@@ -78,11 +78,13 @@ function Edit({
     }
   };
 
-  const handleInviteClick = async (inviteId: string) => {
-    if (dashboardId) {
-      await postDashboardInvites(dashboardId, inviteId);
+  const handleInviteClick = async (inviteEmail: string) => {
+    if (dashboardId && !invitees.some((item) => item.invitee.email === inviteEmail)) {
+      await postDashboardInvites(dashboardId, inviteEmail);
       const newInvitees = await getDashboardInvites(dashboardId);
       setInvitees(newInvitees);
+    } else if (invitees.some((item) => item.invitee.email === inviteEmail)) {
+      alert('이미 초대된 사용자입니다.');
     }
   };
 
