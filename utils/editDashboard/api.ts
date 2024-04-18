@@ -6,8 +6,8 @@ const axios = baseAxios.create({
   baseURL: 'https://sp-taskify-api.vercel.app/4-4/',
 });
 
-export const getDashboard = async (): Promise<DashBoardNameData> => {
-  const res = await axios.get(`dashboards/${6029}`, {
+export const getDashboard = async (id: number): Promise<DashBoardNameData> => {
+  const res = await axios.get(`dashboards/${id}`, {
     headers: {
       Authorization:
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMiwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDI5OTU1LCJpc3MiOiJzcC10YXNraWZ5In0.1la3IrwbTBb9QjVdSl-1YpLnr64Fq74XXQpa_tqQp0A',
@@ -16,8 +16,8 @@ export const getDashboard = async (): Promise<DashBoardNameData> => {
   return res.data;
 };
 
-export const getDashboardInvites = async () => {
-  const res = await axios.get(`dashboards/${6029}/invitations`, {
+export const getDashboardInvites = async (id: number) => {
+  const res = await axios.get(`dashboards/${id}/invitations`, {
     headers: {
       Authorization:
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMiwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDI5OTU1LCJpc3MiOiJzcC10YXNraWZ5In0.1la3IrwbTBb9QjVdSl-1YpLnr64Fq74XXQpa_tqQp0A',
@@ -34,8 +34,8 @@ export const getDashboardInvites = async () => {
   return newInvitees;
 };
 
-export const getDashboardMembers = async (): Promise<DashBoardMember[]> => {
-  const res = await axios.get(`members?dashboardId=${6029}`, {
+export const getDashboardMembers = async (id: number): Promise<DashBoardMember[]> => {
+  const res = await axios.get(`members?dashboardId=${id}`, {
     headers: {
       Authorization:
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMiwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDI5OTU1LCJpc3MiOiJzcC10YXNraWZ5In0.1la3IrwbTBb9QjVdSl-1YpLnr64Fq74XXQpa_tqQp0A',
