@@ -17,8 +17,10 @@ export type ProfileProps = {
 };
 
 export type DashBoardPros = {
+  title: string;
   mydata: User;
   userList: User[];
+  crown?: boolean;
 };
 
 export type ProfileIconProps = {

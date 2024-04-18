@@ -13,7 +13,13 @@ export const DashBoardHeader = styled(Header)`
   }
 `;
 
-export const MyDashBoard = styled.div`
+export const DashBoardTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const Title = styled.div`
   margin-left: calc(340px - 26.2px);
   color: var(--black200);
   font-size: 20px;
@@ -24,6 +30,11 @@ export const MyDashBoard = styled.div`
   @media ${device.tablet} {
     display: none;
   }
+`;
+
+export const CrownIcon = styled(Image)`
+  width: 20.103px;
+  height: 16px;
 `;
 
 export const ManagementContainer = styled.div`
