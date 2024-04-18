@@ -6,6 +6,7 @@ import TaskComments from './TaskComments';
 import closeImg from '@public/icons/close.svg';
 import moreImg from '@public/icons/more.svg';
 import TaskContentInfo from './TaskContentInfo';
+import { useState } from 'react';
 
 type TagProps = {
   text: string;
@@ -21,9 +22,13 @@ export type ModalTaskProps = ModalBaseProps & {
 };
 
 function ModalTask({ close, imageUrl, title, explanation, tags, dueDate, assignee }: ModalTaskProps) {
+  const [more, setMore] = useState(false);
+
   const trigger = () => {
+    setMore(false);
     return close && close();
   };
+
   return (
     <S.ModalTaskContainer>
       <S.TaskTitle>{title}</S.TaskTitle>
@@ -35,8 +40,14 @@ function ModalTask({ close, imageUrl, title, explanation, tags, dueDate, assigne
       ) : null}
       <TaskComments />
 
-      <S.MoreImage src={moreImg} alt="more button" />
       <S.CloseImage src={closeImg} alt="close button" onClick={trigger} />
+      <S.MoreImage src={moreImg} alt="more button" onClick={() => setMore(!more)} />
+      {more ? (
+        <S.MoreList>
+          <S.MoreItem>수정하기</S.MoreItem>
+          <S.MoreItem>삭제하기</S.MoreItem>
+        </S.MoreList>
+      ) : null}
     </S.ModalTaskContainer>
   );
 }

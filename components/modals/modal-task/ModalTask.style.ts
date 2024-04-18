@@ -24,7 +24,7 @@ export const InfoLeft = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 100%;
+  max-width: 450px;
   padding-right: 24px;
   @media ${device.tablet} {
     padding-right: 0;
@@ -141,13 +141,41 @@ export const MoreImage = styled(Image)`
   width: 28px;
   height: 28px;
 `;
+export const MoreList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 32px;
+  right: 56px;
+  width: 86px;
+  height: 74px;
+  border-radius: 6px;
+  border: 1px solid var(--gray300);
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+  background-color: var(--white);
+`;
+export const MoreItem = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 74px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  color: var(--violet);
+  font-size: 12px;
+  font-weight: 400;
+  &:hover {
+    background-color: var(--violetlight);
+  }
+`;
 // TaskComment style
 export const CommentContainer = styled.div``;
 export const CommentList = styled.div`
   display: flex;
   flex-direction: column;
-  /* overflow-y: scroll;
-  scrollbar-width: none; */
 `;
 export const CommentItem = styled.div`
   display: flex;
