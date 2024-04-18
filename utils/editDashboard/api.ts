@@ -96,3 +96,15 @@ export const getDashboardList = async (): Promise<dashboard[]> => {
 
   return res.data.dashboards;
 };
+
+export const updateDashboard = async (id: number, title: string, color: string) => {
+  const res = await axios.put(`dashboards/${id}`, JSON.stringify({ title, color: color }), {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization:
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMiwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDI5OTU1LCJpc3MiOiJzcC10YXNraWZ5In0.1la3IrwbTBb9QjVdSl-1YpLnr64Fq74XXQpa_tqQp0A',
+    },
+  });
+
+  return res.data.dashboards;
+};

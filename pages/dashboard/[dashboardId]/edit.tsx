@@ -16,8 +16,11 @@ import {
   getDashboardList,
   getDashboardMembers,
   getMyData,
+  updateDashboard,
 } from '@utils/editDashboard/api';
 import { DashBoardMember, DashBoardNameData } from '@utils/editDashboard/edit.type';
+import { TColorCode } from '@components/chips/Chip.type';
+import { useRouter } from 'next/router';
 
 export async function getServerSideProps(context: any) {
   const dashboardId = context.query['dashboardId'];
@@ -40,11 +43,11 @@ export async function getServerSideProps(context: any) {
 }
 
 function Edit({
-  dashboardData,
+  dashboardData: initialDashboardData,
   invitees,
   members,
   myData,
-  dashboardList,
+  dashboardList: initialDashboardList,
 }: {
   dashboardData: DashBoardNameData;
   invitees: User[];
@@ -53,6 +56,23 @@ function Edit({
   dashboardList: dashboard[];
 }) {
   const [windowWidth, setWindowWidth] = useState(1920);
+  const [selectedColor, setSelectedColor] = useState<TColorCode>(initialDashboardData.color);
+  const [dashboardList, setDashboardList] = useState(initialDashboardList);
+  const [dashboardData, setDashboardData] = useState(initialDashboardData);
+  const [dashboardName, setDashboardName] = useState(initialDashboardData.title);
+  const router = useRouter();
+  const dashboardId = router.query['dashboardId'];
+
+  const handleUpdateClick = async () => {
+    if (dashboardId) {
+      await updateDashboard(Number(dashboardId), dashboardName, selectedColor);
+      const newDashboardList = await getDashboardList();
+      const newDashboardData = await getDashboard(Number(dashboardId));
+
+      setDashboardData(newDashboardData);
+      setDashboardList(newDashboardList);
+    }
+  };
 
   // 브라우저 넓이 받아오기
   useEffect(() => {
@@ -91,7 +111,14 @@ function Edit({
           <S.GoBackButton>
             <Image src={leftarrowIcon.src} width={20} height={20} alt="돌아가기 버튼" /> 돌아가기
           </S.GoBackButton>
-          <EditName isMobile={windowWidth <= size.tablet} title={dashboardData.title} color={dashboardData.color} />
+          <EditName
+            isMobile={windowWidth <= size.tablet}
+            title={dashboardData.title}
+            color={dashboardData.color}
+            onTileClick={setSelectedColor}
+            onClick={handleUpdateClick}
+            onChange={setDashboardName}
+          />
           <MemberTable members={members} />
           <InviteTable users={invitees} />
           <S.DeleteDashboardButton> 대시보드 삭제하기 </S.DeleteDashboardButton>
