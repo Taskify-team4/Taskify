@@ -5,10 +5,13 @@ import * as S from '@pages/dashboard/Dashboard.style';
 import { DASH_DATA, USER_LIST } from '@utils/testData';
 import Column from '@components/pages/dashboard/Column';
 import Button from '@components/buttons/Button';
+import Modal from '@components/modals/Modal';
+import ModalBase from '@components/modals/ModalBase';
+import NewColumnModal from '@components/modals/new_column/Modal';
 
 const initialDash = DASH_DATA[0];
 
-function dashboard() {
+function Dashboard() {
   return (
     <S.DashboardContainer>
       <Sidemenu dashboards={DASH_DATA} />
@@ -24,7 +27,15 @@ function dashboard() {
           <Column />
           <Column />
           <S.AddColumnButtonWrapper>
-            <Button.AddColumn>새로운 컬럼 추가하기</Button.AddColumn>
+            <Modal
+              content={
+                <ModalBase>
+                  <NewColumnModal />
+                </ModalBase>
+              }
+            >
+              <Button.AddColumn>새로운 컬럼 추가하기</Button.AddColumn>
+            </Modal>
           </S.AddColumnButtonWrapper>
         </S.ColumnContainer>
       </div>
@@ -32,4 +43,4 @@ function dashboard() {
   );
 }
 
-export default dashboard;
+export default Dashboard;
