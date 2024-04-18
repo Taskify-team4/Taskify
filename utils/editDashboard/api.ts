@@ -1,13 +1,13 @@
 import baseAxios from '@node_modules/axios';
 import { User } from '@utils/testData';
-import { DashBoardMember, DashBoardNameData } from '@utils/editDashboard/edit.type';
+import { DashBoardMember, DashBoardNameData, Invitations } from '@utils/editDashboard/edit.type';
 import { dashboard } from '@components/sidemenu/Sidemenu.type';
 
 const axios = baseAxios.create({
   baseURL: 'https://sp-taskify-api.vercel.app/4-4/',
 });
 
-export const getDashboard = async (id: number): Promise<DashBoardNameData> => {
+export const getDashboard = async (id: string): Promise<DashBoardNameData> => {
   const res = await axios.get(`dashboards/${id}`, {
     headers: {
       Authorization:
@@ -17,7 +17,7 @@ export const getDashboard = async (id: number): Promise<DashBoardNameData> => {
   return res.data;
 };
 
-export const getDashboardInvites = async (id: number) => {
+export const getDashboardInvites = async (id: string) => {
   const res = await axios.get(`dashboards/${id}/invitations`, {
     headers: {
       Authorization:
@@ -26,16 +26,18 @@ export const getDashboardInvites = async (id: number) => {
   });
   const data = res.data.invitations;
   const newInvitees: User[] = [];
+  const newInvitations: Invitations[] = [];
 
   data.forEach((newData: any) => {
     if (!newInvitees.some((prevData) => prevData.id === newData.invitee.id)) {
-      newInvitees.push(newData.invitee);
+      newInvitations.push({ id: newData.id, invitee: newData.invitee });
     }
   });
-  return newInvitees;
+
+  return newInvitations;
 };
 
-export const getDashboardMembers = async (id: number): Promise<DashBoardMember[]> => {
+export const getDashboardMembers = async (id: string): Promise<DashBoardMember[]> => {
   const res = await axios.get(`members?dashboardId=${id}`, {
     headers: {
       Authorization:
@@ -66,8 +68,8 @@ export const getMyData = async (): Promise<DashBoardMember[]> => {
   return res.data;
 };
 
-export const postDashboardInvites = async (id: number, email: string) => {
-  const res = await axios.post(`dashboards/${id}/invitations`, JSON.stringify({ email }), {
+export const postDashboardInvites = async (id: string, email: string) => {
+  await axios.post(`dashboards/${id}/invitations`, JSON.stringify({ email }), {
     headers: {
       'Content-Type': 'application/json',
       Authorization:
@@ -77,7 +79,7 @@ export const postDashboardInvites = async (id: number, email: string) => {
 };
 
 export const getDashboardCreate = async () => {
-  const res = await axios.post('dashboards', JSON.stringify({ title: 'test', color: '#111111' }), {
+  await axios.post('dashboards', JSON.stringify({ title: 'test', color: '#111111' }), {
     headers: {
       'Content-Type': 'application/json',
       Authorization:
@@ -97,7 +99,7 @@ export const getDashboardList = async (): Promise<dashboard[]> => {
   return res.data.dashboards;
 };
 
-export const updateDashboard = async (id: number, title: string, color: string) => {
+export const updateDashboard = async (id: string, title: string, color: string) => {
   const res = await axios.put(`dashboards/${id}`, JSON.stringify({ title, color: color }), {
     headers: {
       'Content-Type': 'application/json',
@@ -107,4 +109,13 @@ export const updateDashboard = async (id: number, title: string, color: string) 
   });
 
   return res.data.dashboards;
+};
+
+export const deleteInvite = async (id: string, inviteId: number) => {
+  await axios.delete(`dashboards/${id}/invitations/${inviteId}`, {
+    headers: {
+      Authorization:
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMiwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDI5OTU1LCJpc3MiOiJzcC10YXNraWZ5In0.1la3IrwbTBb9QjVdSl-1YpLnr64Fq74XXQpa_tqQp0A',
+    },
+  });
 };

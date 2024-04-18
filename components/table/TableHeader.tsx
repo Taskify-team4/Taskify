@@ -6,7 +6,7 @@ import Modal from '@components/modals/Modal';
 import ModalBase from '@components/modals/ModalBase';
 import InviteModal from '@components/modals/invite/Modal';
 
-function TableHeader({ title, isInvite, isPagenation, onInviteClick, onChange }: HeaderProps) {
+function TableHeader({ title, isInvite, isPagenation, onInviteClick }: HeaderProps) {
   return (
     <S.TableHeaderContainer>
       <S.HeaderTitle>{title}</S.HeaderTitle>
@@ -24,7 +24,7 @@ function TableHeader({ title, isInvite, isPagenation, onInviteClick, onChange }:
               content={
                 <ModalBase>
                   {/* 모달 content */}
-                  <InviteModal onInviteClick={onInviteClick} onChange={onChange} />
+                  <InviteModal onInviteClick={onInviteClick} />
                 </ModalBase>
               }
             >

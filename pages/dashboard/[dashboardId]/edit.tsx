@@ -9,8 +9,8 @@ import Image from 'next/image';
 import EditName from '@components/pages/dashboardEdit/editName/EditName';
 import size from '@constants/breakpointsSize';
 import InviteTable from '@components/table/invite/InviteTable';
-import { User } from '@utils/testData';
 import {
+  deleteInvite,
   getDashboard,
   getDashboardInvites,
   getDashboardList,
@@ -19,7 +19,7 @@ import {
   postDashboardInvites,
   updateDashboard,
 } from '@utils/editDashboard/api';
-import { DashBoardMember, DashBoardNameData } from '@utils/editDashboard/edit.type';
+import { DashBoardMember, DashBoardNameData, Invitations } from '@utils/editDashboard/edit.type';
 import { TColorCode } from '@components/chips/Chip.type';
 import { useRouter } from 'next/router';
 
@@ -51,7 +51,7 @@ function Edit({
   dashboardList: initialDashboardList,
 }: {
   dashboardData: DashBoardNameData;
-  invitees: User[];
+  invitees: Invitations[];
   members: DashBoardMember[];
   myData: DashBoardMember;
   dashboardList: dashboard[];
@@ -62,25 +62,35 @@ function Edit({
   const [dashboardData, setDashboardData] = useState(initialDashboardData);
   const [dashboardName, setDashboardName] = useState(initialDashboardData.title);
   const [invitees, setInvitees] = useState(initialInvitees);
-  const [inviteId, setInviteId] = useState('');
   const router = useRouter();
-  const dashboardId = router.query['dashboardId'];
+  const dashboardId = router.query['dashboardId']?.toString();
 
   const handleUpdateClick = async () => {
     if (dashboardId) {
-      await updateDashboard(Number(dashboardId), dashboardName, selectedColor);
+      await updateDashboard(dashboardId, dashboardName, selectedColor);
       const newDashboardList = await getDashboardList();
-      const newDashboardData = await getDashboard(Number(dashboardId));
+      const newDashboardData = await getDashboard(dashboardId);
 
       setDashboardData(newDashboardData);
       setDashboardList(newDashboardList);
     }
   };
-  console.log(inviteId);
-  const handleInviteClick = async () => {
-    await postDashboardInvites(Number(dashboardId), inviteId);
-    const newInvitees = await getDashboardInvites(Number(dashboardId));
-    setInvitees(newInvitees);
+
+  const handleInviteClick = async (inviteId: string) => {
+    if (dashboardId) {
+      await postDashboardInvites(dashboardId, inviteId);
+      const newInvitees = await getDashboardInvites(dashboardId);
+      setInvitees(newInvitees);
+    }
+  };
+
+  const handleCancelInviteClick = async (cancelId: number) => {
+    if (dashboardId) {
+      await deleteInvite(dashboardId, cancelId);
+
+      const newInvitees = await getDashboardInvites(dashboardId);
+      setInvitees(newInvitees);
+    }
   };
 
   // 브라우저 넓이 받아오기
@@ -129,7 +139,11 @@ function Edit({
             onChange={setDashboardName}
           />
           <MemberTable members={members} />
-          <InviteTable users={invitees} onInviteClick={handleInviteClick} onChange={setInviteId} />
+          <InviteTable
+            users={invitees}
+            onCancelInviteClick={handleCancelInviteClick}
+            onInviteClick={handleInviteClick}
+          />
           <S.DeleteDashboardButton> 대시보드 삭제하기 </S.DeleteDashboardButton>
         </S.PageContents>
       </S.RightSection>
