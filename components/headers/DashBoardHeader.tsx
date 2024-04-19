@@ -6,7 +6,7 @@ import settingIcon from '@public/icons/setting.svg';
 import addIcon from '@public/icons/add.svg';
 import crownIcon from '@public/icons/crown.svg';
 import ModalBase from '@components/modals/ModalBase';
-import InviteModal from '@components/modals/invite/Modal';
+import InviteModal from '@components/modals/edit_dashboard/InviteModal';
 import Modal from '@components/modals/Modal';
 import React from 'react';
 import { useRouter } from 'next/router';

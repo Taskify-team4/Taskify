@@ -24,6 +24,9 @@ import { TColorCode } from '@components/chips/Chip.type';
 import { useRouter } from 'next/router';
 import { PAGE_SIZE } from '@constants/page';
 import { EditPageProps } from '@utils/editDashboard/edit.type';
+import ModalBase from '@components/modals/ModalBase';
+import Modal from '@components/modals/Modal';
+import DeleteDashboardModal from '@components/modals/edit_dashboard/DeleteDashboardModal';
 
 export async function getServerSideProps(context: any) {
   const dashboardId = context.query['dashboardId'];
@@ -234,7 +237,15 @@ function Edit({
             onNextClick={handleNextInvitesPageClick}
             pageInfo={{ current: invitesPage, limit: limitInvitePage }}
           />
-          <S.DeleteDashboardButton onClick={handleDeleteDashboardClick}> 대시보드 삭제하기 </S.DeleteDashboardButton>
+          <Modal
+            content={
+              <ModalBase>
+                <DeleteDashboardModal onDeleteClick={handleDeleteDashboardClick} />
+              </ModalBase>
+            }
+          >
+            <S.DeleteDashboardButton> 대시보드 삭제하기 </S.DeleteDashboardButton>
+          </Modal>
         </S.PageContents>
       </S.RightSection>
     </S.PageContainer>

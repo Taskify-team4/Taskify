@@ -4,6 +4,9 @@ import Button from '@components/buttons/Button';
 import { DataListProps } from '@components/table/Table.type';
 import Image from 'next/image';
 import ProfileIcon from '@components/profileIcon/ProfileIcon';
+import ModalBase from '@components/modals/ModalBase';
+import Modal from '@components/modals/Modal';
+import DeleteMemberModal from '@components/modals/edit_dashboard/DeleteMemberModal';
 
 function MemberList({ data, buttonText, onDeleteClick }: DataListProps) {
   return (
@@ -20,7 +23,19 @@ function MemberList({ data, buttonText, onDeleteClick }: DataListProps) {
             )}
             <S.ListData>{item.nickname}</S.ListData>
           </S.MemberDataContainer>
-          {!item.isOwner ? <Button.Delete onClick={() => onDeleteClick(item.id)}>{buttonText}</Button.Delete> : <></>}
+          {!item.isOwner ? (
+            <Modal
+              content={
+                <ModalBase>
+                  <DeleteMemberModal onDeleteClick={() => onDeleteClick(item.id)} />
+                </ModalBase>
+              }
+            >
+              <Button.Delete>{buttonText}</Button.Delete>
+            </Modal>
+          ) : (
+            <></>
+          )}
         </S.TableList>
       ))}
     </>

@@ -4,7 +4,7 @@ import * as S from '@components/table/TableHeader.style';
 import { HeaderProps } from './Table.type';
 import Modal from '@components/modals/Modal';
 import ModalBase from '@components/modals/ModalBase';
-import InviteModal from '@components/modals/invite/Modal';
+import InviteModal from '@components/modals/edit_dashboard/InviteModal';
 
 function TableHeader({
   title,
@@ -33,7 +33,6 @@ function TableHeader({
             <Modal
               content={
                 <ModalBase>
-                  {/* 모달 content */}
                   <InviteModal onInviteClick={onInviteClick} />
                 </ModalBase>
               }
