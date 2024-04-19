@@ -23,6 +23,7 @@ export type DashBoardPros = {
   mydata: User;
   userList: User[] | DashBoardMember[];
   crown?: boolean;
+  onInviteClick?: any;
 };
 
 export type ProfileIconProps = {
