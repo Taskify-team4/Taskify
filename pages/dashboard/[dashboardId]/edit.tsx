@@ -207,7 +207,7 @@ function Edit({
           crown={true}
         />
         <S.PageContents>
-          <S.GoBackButton>
+          <S.GoBackButton href={`/dashboards/${dashboardId}`}>
             <Image src={leftarrowIcon.src} width={20} height={20} alt="돌아가기 버튼" /> 돌아가기
           </S.GoBackButton>
           <EditName
