@@ -3,10 +3,26 @@ import * as S from '@components/modals/edit_column/Modal.style';
 import Button from '@components/buttons/Button';
 import ModalInput from '@components/inputs/modalInput/ModalInput';
 import { ModalBaseProps } from '@components/modals/Modal.type';
+import { deleteColumn } from '@pages/dashboard/api';
 
-function EditColumnModal({ close }: ModalBaseProps) {
+type TEditColumnModalProps = ModalBaseProps & {
+  columnid: number;
+};
+
+function EditColumnModal({ close, columnid }: TEditColumnModalProps) {
   const trigger = () => {
     return close && close();
+  };
+
+  const fetchDeleteColumn = async () => {
+    const res = await deleteColumn(columnid);
+    if (res.ok) {
+      window.location.reload();
+    }
+  };
+
+  const handleDeleteButton = () => {
+    fetchDeleteColumn();
   };
 
   return (
@@ -18,7 +34,7 @@ function EditColumnModal({ close }: ModalBaseProps) {
 
       <S.EditButtonsContainer>
         <S.DeleteButtonWrapper>
-          <S.DeleteColumnButton>삭제하기</S.DeleteColumnButton>
+          <S.DeleteColumnButton onClick={handleDeleteButton}>삭제하기</S.DeleteColumnButton>
         </S.DeleteButtonWrapper>
 
         <S.ModalButtons>

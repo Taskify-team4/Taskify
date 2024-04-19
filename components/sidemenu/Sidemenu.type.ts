@@ -4,7 +4,7 @@ import { TColorKey } from '@components/chips/Chip.type';
 export type Dashboard = {
   color: TColorKey;
   title: string;
-  crown?: boolean;
+  createdByMe?: boolean;
 };
 export type SidemenuProps = {
   dashboards: Dashboard[];

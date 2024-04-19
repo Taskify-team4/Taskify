@@ -72,12 +72,12 @@ export const INVITATION_LIST: Invitation[] = [
 ];
 
 export const DASH_DATA: Dashboard[] = [
-  { color: 'blue', title: 'dahs', crown: true },
-  { color: 'green', title: 'asffa', crown: true },
-  { color: 'orange', title: 'asdweawd', crown: false },
-  { color: 'pink', title: 'asdasfa', crown: false },
-  { color: 'purple', title: 'rgdfgdfgdfgdfgf', crown: false },
-  { color: 'blue', title: 'qwe1', crown: true },
+  { color: 'blue', title: 'dahs', createdByMe: true },
+  { color: 'green', title: 'asffa', createdByMe: true },
+  { color: 'orange', title: 'asdweawd', createdByMe: false },
+  { color: 'pink', title: 'asdasfa', createdByMe: false },
+  { color: 'purple', title: 'rgdfgdfgdfgdfgf', createdByMe: false },
+  { color: 'blue', title: 'qwe1', createdByMe: true },
 ];
 
 export const CARD: CardProps[] = [
