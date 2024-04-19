@@ -21,3 +21,5 @@ export type TDashInfo = {
 export type TDashboards = TDashInfo[];
 
 export type TColumnForm = { title: string; dashboardId: number };
+
+export type TColumnTitleChange = { title: string; dashboardId: number };

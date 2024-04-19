@@ -1,4 +1,4 @@
-import { TColumnForm } from "./Dashboard.type";
+import { TColumnForm } from './Dashboard.type';
 
 const BASE_URL = 'https://sp-taskify-api.vercel.app/4-4';
 const ACCESS_TOKEN =
@@ -51,7 +51,7 @@ export async function postNewColumn(columnData: TColumnForm) {
   return response.json();
 }
 
-// 특정 컬럼 삭제
+// 컬럼 삭제
 export async function deleteColumn(id: number) {
   const url = `${BASE_URL}/columns/${id}`;
   const response = await fetch(url, {
@@ -59,6 +59,20 @@ export async function deleteColumn(id: number) {
     headers: {
       Authorization: `Bearer ${ACCESS_TOKEN}`,
     },
+  });
+  return response;
+}
+
+// 컬럼 이름 수정
+export async function postChangeColumnTitle(id: number, title: { title: string }) {
+  const url = `${BASE_URL}/columns/${id}`;
+  const response = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(title),
   });
   return response;
 }
