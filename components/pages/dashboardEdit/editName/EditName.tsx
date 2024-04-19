@@ -23,7 +23,7 @@ function EditName({ isMobile, title, color, onTileClick, onClick, onChange }: Ed
           <S.StyledColorPalette size={'large'} onClick={onTileClick} initialColor={color} />
         )}
       </S.EditNameTitle>
-      <TextInput id={'dashboardName'} placeholder={title} onChange={onChange}>
+      <TextInput id={'dashboardName'} placeholder={title} onChange={onChange} defaultValue={title}>
         대시보드 이름
       </TextInput>
       <S.EditNameButton children={'변경'} onClick={onClick} />

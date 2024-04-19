@@ -31,6 +31,7 @@ export const EditNameTitle = styled.div`
 export const DashboardName = styled.div`
   font-size: 20px;
   font-weight: 700;
+  width: 100%;
 `;
 
 export const StyledColorPalette = styled(ColorPalette)`

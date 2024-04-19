@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Button from '@components/buttons/Button';
 import device from '@utils/breakpointsDevice';
+import Link from 'next/link';
 
 export const PageContainer = styled.div`
   display: flex;
@@ -25,10 +26,11 @@ export const PageContents = styled.div`
   gap: 20px;
 `;
 
-export const GoBackButton = styled.div`
+export const GoBackButton = styled(Link)`
   font-size: 16px;
   font-weight: 500;
   color: var(--black200);
+  text-decoration: none;
 
   display: flex;
   align-items: center;

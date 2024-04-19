@@ -1,3 +1,4 @@
+import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
 
 export const DateInputContainer = styled.div`
@@ -16,6 +17,10 @@ export const DateInputLabel = styled.label`
   font-size: 18px;
   font-weight: 500;
   line-height: normal;
+
+  @media ${device.tablet} {
+    font-size: 16px;
+  }
 `;
 
 export const DateInputRequired = styled.span`
@@ -24,6 +29,10 @@ export const DateInputRequired = styled.span`
   font-size: 18px;
   font-weight: 500;
   line-height: normal;
+
+  @media ${device.tablet} {
+    font-size: 16px;
+  }
 `;
 
 export const DateInputContent = styled.div`
@@ -36,6 +45,10 @@ export const DateInputContent = styled.div`
   border: 1px solid var(--gray300);
   border-radius: 6px;
   background-color: var(--white);
+
+  @media ${device.tablet} {
+    height: 42px;
+  }
 `;
 
 export const DateInput = styled.input`
