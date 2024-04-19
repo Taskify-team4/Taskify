@@ -23,8 +23,8 @@ export const BasicChip = styled.span<ChipStyleProps>`
   height: ${({ $size }) => ($size === 'large' ? 22 : 20)}px;
 
   font-size: ${({ $size }) => ($size === 'large' ? 12 : 10)}px;
-  background-color: ${({ $color }) => chipColorList[$color]['background']};
-  color: ${({ $color }) => chipColorList[$color]['color']};
+  /* background-color: ${({ $color }) => $color || chipColorList[$color]['background']};
+  color: ${({ $color }) => '#ffffff' || chipColorList[$color]['color']}; */
 `;
 
 export const RoundChip = styled(BasicChip)`
@@ -65,7 +65,7 @@ export const ColorTile = styled.div<ChipStyleProps>`
   height: ${({ $size }) => colorTileSizeList[$size]}px;
 
   border-radius: 50%;
-  background-color: ${({ $color }) => colorPaletteList[$color]};
+  background-color: ${({ $color }) => colorPaletteList[$color] || $color};
 `;
 
 export const ColorCheckIcon = styled.span`
