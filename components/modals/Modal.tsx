@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { ModalProps, PortalProps } from './Modal.type';
+import usePreventScroll from '@hooks/usePreventScroll';
 
 const BackdropContainer = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -41,6 +42,7 @@ function Modal({ children, content, isConfirm = false, initialOpen = false }: Mo
   };
 
   const Content = () => {
+    usePreventScroll();
     return React.cloneElement(content, { close: modalHandler });
   };
 
