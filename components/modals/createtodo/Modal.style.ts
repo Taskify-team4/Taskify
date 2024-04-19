@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 export const CreateToDoContainer = styled.div`
   width: 450px;
-  height: 847px;
   display: flex;
   flex-direction: column;
 
@@ -20,6 +19,7 @@ export const CreateToDoTitle = styled.span`
   line-height: normal;
 
   @media ${device.mobile} {
+    padding-bottom: 24px;
     font-size: 20px;
   }
 `;
@@ -37,6 +37,12 @@ export const CreateToDoInputContainer = styled.div`
 export const CreateToDoSelectContainer = styled.div`
   display: flex;
   gap: 16px;
+
+  @media ${device.mobile} {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
 `;
 
 export const CreateToDoBtnContainer = styled.div`
@@ -47,5 +53,6 @@ export const CreateToDoBtnContainer = styled.div`
 
   @media ${device.mobile} {
     padding-top: 24px;
+    gap: 11px;
   }
 `;
