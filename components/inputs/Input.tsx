@@ -7,9 +7,10 @@ type InputProps = {
   type: string;
   placeholder: string;
   onChange: any;
+  defaultValue?: string;
 };
 
-function Input({ children, id, type, placeholder, onChange }: InputProps) {
+function Input({ children, id, type, placeholder, onChange, defaultValue }: InputProps) {
   return (
     <S.InputContainer>
       <S.InputLabel htmlFor={id}>{children}</S.InputLabel>
@@ -17,6 +18,7 @@ function Input({ children, id, type, placeholder, onChange }: InputProps) {
         id={id}
         type={type}
         placeholder={placeholder}
+        defaultValue={defaultValue}
         onChange={(e) => {
           onChange(e.target.value);
         }}

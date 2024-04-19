@@ -203,7 +203,7 @@ function Edit({
             nickname: myData.nickname,
             email: myData.email || '',
           }}
-          userList={members}
+          userList={initialMembers}
           crown={true}
         />
         <S.PageContents>
