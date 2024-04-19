@@ -4,7 +4,7 @@ import Button from '@components/buttons/Button';
 import { InvitedDashListProps } from '@components/table/Table.type';
 import ModalBase from '@components/modals/ModalBase';
 import Modal from '@components/modals/Modal';
-import CancelInviteModal from '@components/modals/edit_dashboard/CancelInviteModal';
+import ConfirmModal from '@components/modals/edit_dashboard/ConfirmModal';
 
 function InviteList({ data, buttonText, onCancelInviteClick }: InvitedDashListProps) {
   return (
@@ -16,7 +16,10 @@ function InviteList({ data, buttonText, onCancelInviteClick }: InvitedDashListPr
             <Modal
               content={
                 <ModalBase>
-                  <CancelInviteModal onCancelInviteClick={() => onCancelInviteClick(item.id)} />
+                  <ConfirmModal
+                    text={'정말 초대를 취소하시겠습니까?'}
+                    onConfirmClick={() => onCancelInviteClick(item.id)}
+                  />
                 </ModalBase>
               }
             >

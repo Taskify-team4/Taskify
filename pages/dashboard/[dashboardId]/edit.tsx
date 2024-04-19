@@ -26,7 +26,7 @@ import { PAGE_SIZE } from '@constants/page';
 import { EditPageProps } from '@utils/editDashboard/edit.type';
 import ModalBase from '@components/modals/ModalBase';
 import Modal from '@components/modals/Modal';
-import DeleteDashboardModal from '@components/modals/edit_dashboard/DeleteDashboardModal';
+import ConfirmModal from '@components/modals/edit_dashboard/ConfirmModal';
 
 export async function getServerSideProps(context: any) {
   const dashboardId = context.query['dashboardId'];
@@ -240,7 +240,7 @@ function Edit({
           <Modal
             content={
               <ModalBase>
-                <DeleteDashboardModal onDeleteClick={handleDeleteDashboardClick} />
+                <ConfirmModal text={'정말 대시보드를 삭제하시겠습니까?'} onConfirmClick={handleDeleteDashboardClick} />
               </ModalBase>
             }
           >

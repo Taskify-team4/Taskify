@@ -6,7 +6,7 @@ import Image from 'next/image';
 import ProfileIcon from '@components/profileIcon/ProfileIcon';
 import ModalBase from '@components/modals/ModalBase';
 import Modal from '@components/modals/Modal';
-import DeleteMemberModal from '@components/modals/edit_dashboard/DeleteMemberModal';
+import ConfirmModal from '@components/modals/edit_dashboard/ConfirmModal';
 
 function MemberList({ data, buttonText, onDeleteClick }: DataListProps) {
   return (
@@ -27,7 +27,7 @@ function MemberList({ data, buttonText, onDeleteClick }: DataListProps) {
             <Modal
               content={
                 <ModalBase>
-                  <DeleteMemberModal onDeleteClick={() => onDeleteClick(item.id)} />
+                  <ConfirmModal text={'정말 멤버를 삭제하시겠습니까?'} onConfirmClick={() => onDeleteClick(item.id)} />
                 </ModalBase>
               }
             >
