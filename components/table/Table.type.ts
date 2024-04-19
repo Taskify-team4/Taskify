@@ -6,6 +6,9 @@ export type HeaderProps = {
   isInvite?: boolean;
   isPagenation?: boolean;
   onInviteClick?: any;
+  onNextClick?: any;
+  onPreviousClick?: any;
+  pageInfo?: { current: number; limit: number };
 };
 
 export type TableListsProps = {

@@ -17,8 +17,8 @@ export const getDashboard = async (id: string): Promise<DashBoardNameData> => {
   return res.data;
 };
 
-export const getDashboardInvites = async (id: string) => {
-  const res = await axios.get(`dashboards/${id}/invitations`, {
+export const getDashboardInvites = async (id: string, page: number) => {
+  const res = await axios.get(`dashboards/${id}/invitations?page=${page}&size=10`, {
     headers: {
       Authorization:
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMiwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDI5OTU1LCJpc3MiOiJzcC10YXNraWZ5In0.1la3IrwbTBb9QjVdSl-1YpLnr64Fq74XXQpa_tqQp0A',
@@ -34,7 +34,7 @@ export const getDashboardInvites = async (id: string) => {
     }
   });
 
-  return newInvitations;
+  return { invitees: newInvitations, totalInvitees: res.data.totalCount };
 };
 
 export const getDashboardMembers = async (id: string): Promise<DashBoardMember[]> => {
@@ -132,6 +132,15 @@ export const deleteInvite = async (id: string, inviteId: number) => {
 
 export const deleteMember = async (id: number) => {
   await axios.delete(`members/${id}`, {
+    headers: {
+      Authorization:
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMiwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDI5OTU1LCJpc3MiOiJzcC10YXNraWZ5In0.1la3IrwbTBb9QjVdSl-1YpLnr64Fq74XXQpa_tqQp0A',
+    },
+  });
+};
+
+export const deleteDashboard = async (id: string) => {
+  await axios.delete(`dashboards/${id}`, {
     headers: {
       Authorization:
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMiwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDI5OTU1LCJpc3MiOiJzcC10YXNraWZ5In0.1la3IrwbTBb9QjVdSl-1YpLnr64Fq74XXQpa_tqQp0A',

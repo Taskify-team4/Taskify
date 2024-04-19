@@ -10,6 +10,7 @@ import EditName from '@components/pages/dashboardEdit/editName/EditName';
 import size from '@constants/breakpointsSize';
 import InviteTable from '@components/table/invite/InviteTable';
 import {
+  deleteDashboard,
   deleteInvite,
   deleteMember,
   getDashboard,
@@ -28,7 +29,7 @@ export async function getServerSideProps(context: any) {
   const dashboardId = context.query['dashboardId'];
 
   const dashboardData = await getDashboard(dashboardId);
-  const invitees = await getDashboardInvites(dashboardId);
+  const { invitees, totalInvitees } = await getDashboardInvites(dashboardId, 1);
   const members = await getDashboardMembers(dashboardId);
   const myData = await getMyData();
   const dashboardList = await getDashboardList();
@@ -40,6 +41,7 @@ export async function getServerSideProps(context: any) {
       members,
       myData,
       dashboardList,
+      totalInvitees,
     },
   };
 }
@@ -47,12 +49,14 @@ export async function getServerSideProps(context: any) {
 function Edit({
   dashboardData: initialDashboardData,
   invitees: initialInvitees,
+  totalInvitees,
   members: initialMembers,
   myData,
   dashboardList: initialDashboardList,
 }: {
   dashboardData: DashBoardNameData;
   invitees: Invitations[];
+  totalInvitees: number;
   members: DashBoardMember[];
   myData: DashBoardMember;
   dashboardList: dashboard[];
@@ -64,6 +68,8 @@ function Edit({
   const [dashboardName, setDashboardName] = useState(initialDashboardData.title);
   const [invitees, setInvitees] = useState(initialInvitees);
   const [members, setMembers] = useState(initialMembers);
+  const [invitesPage, setInvitesPage] = useState(1);
+  const limitPage = Number(Math.ceil(totalInvitees / 10));
   const router = useRouter();
   const dashboardId = router.query['dashboardId']?.toString();
 
@@ -81,7 +87,7 @@ function Edit({
   const handleInviteClick = async (inviteEmail: string) => {
     if (dashboardId && !invitees.some((item) => item.invitee.email === inviteEmail)) {
       await postDashboardInvites(dashboardId, inviteEmail);
-      const newInvitees = await getDashboardInvites(dashboardId);
+      const { invitees: newInvitees } = await getDashboardInvites(dashboardId, 1);
       setInvitees(newInvitees);
     } else if (invitees.some((item) => item.invitee.email === inviteEmail)) {
       alert('이미 초대된 사용자입니다.');
@@ -92,7 +98,7 @@ function Edit({
     if (dashboardId) {
       await deleteInvite(dashboardId, cancelId);
 
-      const newInvitees = await getDashboardInvites(dashboardId);
+      const { invitees: newInvitees } = await getDashboardInvites(dashboardId, 1);
       setInvitees(newInvitees);
     }
   };
@@ -103,6 +109,34 @@ function Edit({
       const newMembers = await getDashboardMembers(dashboardId);
       setMembers(newMembers);
     }
+  };
+
+  const handleDeleteDashboardClick = async () => {
+    if (dashboardId) {
+      await deleteDashboard(dashboardId);
+      router.push(`/dashboard/${dashboardId}`);
+    }
+  };
+
+  const handlePageClick = async () => {
+    if (dashboardId) {
+      const { invitees: newInvitees } = await getDashboardInvites(dashboardId, invitesPage);
+      setInvitees(newInvitees);
+    }
+  };
+
+  const handlePreviousPageClick = () => {
+    setInvitesPage((prev) => {
+      if (prev > 1) return prev - 1;
+      return prev;
+    });
+  };
+
+  const handleNextPageClick = () => {
+    setInvitesPage((prev) => {
+      if (prev < limitPage) return prev + 1;
+      return prev;
+    });
   };
 
   // 브라우저 넓이 받아오기
@@ -121,6 +155,12 @@ function Edit({
       window.removeEventListener('resize', resizeHandler);
     };
   }, []);
+
+  useEffect(() => {
+    if (dashboardId) {
+      handlePageClick();
+    }
+  }, [invitesPage]);
 
   return (
     <S.PageContainer>
@@ -155,8 +195,11 @@ function Edit({
             users={invitees}
             onCancelInviteClick={handleCancelInviteClick}
             onInviteClick={handleInviteClick}
+            onPreviousClick={handlePreviousPageClick}
+            onNextClick={handleNextPageClick}
+            pageInfo={{ current: invitesPage, limit: limitPage }}
           />
-          <S.DeleteDashboardButton> 대시보드 삭제하기 </S.DeleteDashboardButton>
+          <S.DeleteDashboardButton onClick={handleDeleteDashboardClick}> 대시보드 삭제하기 </S.DeleteDashboardButton>
         </S.PageContents>
       </S.RightSection>
     </S.PageContainer>
