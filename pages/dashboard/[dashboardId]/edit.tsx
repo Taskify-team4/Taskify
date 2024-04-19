@@ -205,6 +205,7 @@ function Edit({
           }}
           userList={initialMembers}
           crown={true}
+          onInviteClick={handleInviteClick}
         />
         <S.PageContents>
           <S.GoBackButton href={`/dashboards/${dashboardId}`}>
