@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { dashboard } from '@components/sidemenu/Sidemenu.type';
 import Sidemenu from '@components/sidemenu/Sidemenu';
 import * as S from '@pages/dashboard/[dashboardId]/edit.style';
 import DashBoardHeader from '@components/headers/DashBoardHeader';
@@ -21,16 +20,17 @@ import {
   postDashboardInvites,
   updateDashboard,
 } from '@utils/editDashboard/api';
-import { DashBoardMember, DashBoardNameData, Invitations } from '@utils/editDashboard/edit.type';
 import { TColorCode } from '@components/chips/Chip.type';
 import { useRouter } from 'next/router';
+import { PAGE_SIZE } from '@constants/page';
+import { EditPageProps } from '@utils/editDashboard/edit.type';
 
 export async function getServerSideProps(context: any) {
   const dashboardId = context.query['dashboardId'];
 
   const dashboardData = await getDashboard(dashboardId);
   const { invitees, totalInvitees } = await getDashboardInvites(dashboardId, 1);
-  const members = await getDashboardMembers(dashboardId);
+  const { members, totalMembers } = await getDashboardMembers(dashboardId, 1);
   const myData = await getMyData();
   const dashboardList = await getDashboardList();
 
@@ -42,6 +42,7 @@ export async function getServerSideProps(context: any) {
       myData,
       dashboardList,
       totalInvitees,
+      totalMembers,
     },
   };
 }
@@ -51,25 +52,25 @@ function Edit({
   invitees: initialInvitees,
   totalInvitees,
   members: initialMembers,
+  totalMembers,
   myData,
   dashboardList: initialDashboardList,
-}: {
-  dashboardData: DashBoardNameData;
-  invitees: Invitations[];
-  totalInvitees: number;
-  members: DashBoardMember[];
-  myData: DashBoardMember;
-  dashboardList: dashboard[];
-}) {
+}: EditPageProps) {
   const [windowWidth, setWindowWidth] = useState(1920);
   const [selectedColor, setSelectedColor] = useState<TColorCode>(initialDashboardData.color);
+
   const [dashboardList, setDashboardList] = useState(initialDashboardList);
   const [dashboardData, setDashboardData] = useState(initialDashboardData);
   const [dashboardName, setDashboardName] = useState(initialDashboardData.title);
+
   const [invitees, setInvitees] = useState(initialInvitees);
   const [members, setMembers] = useState(initialMembers);
   const [invitesPage, setInvitesPage] = useState(1);
-  const limitPage = Number(Math.ceil(totalInvitees / 10));
+  const [memberPage, setMemberPage] = useState(1);
+
+  const limitInvitePage = Number(Math.ceil(totalInvitees / PAGE_SIZE));
+  const limitMemberPage = Number(Math.ceil(totalMembers / PAGE_SIZE));
+
   const router = useRouter();
   const dashboardId = router.query['dashboardId']?.toString();
 
@@ -98,7 +99,7 @@ function Edit({
     if (dashboardId) {
       await deleteInvite(dashboardId, cancelId);
 
-      const { invitees: newInvitees } = await getDashboardInvites(dashboardId, 1);
+      const { invitees: newInvitees } = await getDashboardInvites(dashboardId, invitesPage);
       setInvitees(newInvitees);
     }
   };
@@ -106,7 +107,7 @@ function Edit({
   const handleDeleteMemberClick = async (deleteId: number) => {
     if (dashboardId) {
       await deleteMember(deleteId);
-      const newMembers = await getDashboardMembers(dashboardId);
+      const { members: newMembers } = await getDashboardMembers(dashboardId, memberPage);
       setMembers(newMembers);
     }
   };
@@ -118,23 +119,44 @@ function Edit({
     }
   };
 
-  const handlePageClick = async () => {
+  const handleInvitesPageClick = async () => {
     if (dashboardId) {
       const { invitees: newInvitees } = await getDashboardInvites(dashboardId, invitesPage);
       setInvitees(newInvitees);
     }
   };
 
-  const handlePreviousPageClick = () => {
+  const handleMembersPageClick = async () => {
+    if (dashboardId) {
+      const { members: newMembers } = await getDashboardMembers(dashboardId, memberPage);
+      setMembers(newMembers);
+    }
+  };
+
+  const handlePreviousInvitesPageClick = () => {
     setInvitesPage((prev) => {
       if (prev > 1) return prev - 1;
       return prev;
     });
   };
 
-  const handleNextPageClick = () => {
+  const handleNextInvitesPageClick = () => {
     setInvitesPage((prev) => {
-      if (prev < limitPage) return prev + 1;
+      if (prev < limitInvitePage) return prev + 1;
+      return prev;
+    });
+  };
+
+  const handlePreviousMembersPageClick = () => {
+    setMemberPage((prev) => {
+      if (prev > 1) return prev - 1;
+      return prev;
+    });
+  };
+
+  const handleNextMembersPageClick = () => {
+    setMemberPage((prev) => {
+      if (prev < limitMemberPage) return prev + 1;
       return prev;
     });
   };
@@ -158,9 +180,15 @@ function Edit({
 
   useEffect(() => {
     if (dashboardId) {
-      handlePageClick();
+      handleInvitesPageClick();
     }
   }, [invitesPage]);
+
+  useEffect(() => {
+    if (dashboardId) {
+      handleMembersPageClick();
+    }
+  }, [memberPage]);
 
   return (
     <S.PageContainer>
@@ -190,14 +218,20 @@ function Edit({
             onClick={handleUpdateClick}
             onChange={setDashboardName}
           />
-          <MemberTable members={members} onDeleteClick={handleDeleteMemberClick} />
+          <MemberTable
+            members={members}
+            onDeleteClick={handleDeleteMemberClick}
+            onNextClick={handleNextMembersPageClick}
+            onPreviousClick={handlePreviousMembersPageClick}
+            pageInfo={{ current: memberPage, limit: limitMemberPage }}
+          />
           <InviteTable
             users={invitees}
             onCancelInviteClick={handleCancelInviteClick}
             onInviteClick={handleInviteClick}
-            onPreviousClick={handlePreviousPageClick}
-            onNextClick={handleNextPageClick}
-            pageInfo={{ current: invitesPage, limit: limitPage }}
+            onPreviousClick={handlePreviousInvitesPageClick}
+            onNextClick={handleNextInvitesPageClick}
+            pageInfo={{ current: invitesPage, limit: limitInvitePage }}
           />
           <S.DeleteDashboardButton onClick={handleDeleteDashboardClick}> 대시보드 삭제하기 </S.DeleteDashboardButton>
         </S.PageContents>

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { DashBoardMember, Invitations } from '@utils/editDashboard/edit.type';
+import { DashBoardMember, Invitations, PagenationInfo } from '@utils/editDashboard/edit.type';
 
 export type HeaderProps = {
   title: string;
@@ -8,7 +8,7 @@ export type HeaderProps = {
   onInviteClick?: any;
   onNextClick?: any;
   onPreviousClick?: any;
-  pageInfo?: { current: number; limit: number };
+  pageInfo?: PagenationInfo;
 };
 
 export type TableListsProps = {

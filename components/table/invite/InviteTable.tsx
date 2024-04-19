@@ -3,7 +3,7 @@ import * as S from '@components/table/Table.style';
 import TableHeader from '@components/table/TableHeader';
 import TableLists from '@components/table/TableList';
 import InviteList from '@components/table/invite/InviteList';
-import { Invitations } from '@utils/editDashboard/edit.type';
+import { Invitations, PagenationInfo } from '@utils/editDashboard/edit.type';
 
 function InviteTable({
   users,
@@ -18,7 +18,7 @@ function InviteTable({
   onCancelInviteClick?: any;
   onNextClick?: any;
   onPreviousClick?: any;
-  pageInfo?: { current: number; limit: number };
+  pageInfo?: PagenationInfo;
 }) {
   return (
     <S.TableContainer>

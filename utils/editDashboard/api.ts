@@ -2,6 +2,7 @@ import baseAxios from '@node_modules/axios';
 import { User } from '@utils/testData';
 import { DashBoardMember, DashBoardNameData, Invitations } from '@utils/editDashboard/edit.type';
 import { dashboard } from '@components/sidemenu/Sidemenu.type';
+import { PAGE_SIZE } from '@constants/page';
 
 const axios = baseAxios.create({
   baseURL: 'https://sp-taskify-api.vercel.app/4-4/',
@@ -18,7 +19,7 @@ export const getDashboard = async (id: string): Promise<DashBoardNameData> => {
 };
 
 export const getDashboardInvites = async (id: string, page: number) => {
-  const res = await axios.get(`dashboards/${id}/invitations?page=${page}&size=10`, {
+  const res = await axios.get(`dashboards/${id}/invitations?page=${page}&size=${PAGE_SIZE}`, {
     headers: {
       Authorization:
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMiwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDI5OTU1LCJpc3MiOiJzcC10YXNraWZ5In0.1la3IrwbTBb9QjVdSl-1YpLnr64Fq74XXQpa_tqQp0A',
@@ -37,8 +38,8 @@ export const getDashboardInvites = async (id: string, page: number) => {
   return { invitees: newInvitations, totalInvitees: res.data.totalCount };
 };
 
-export const getDashboardMembers = async (id: string): Promise<DashBoardMember[]> => {
-  const res = await axios.get(`members?dashboardId=${id}`, {
+export const getDashboardMembers = async (id: string, page: number) => {
+  const res = await axios.get(`members?page=${page}&size=${PAGE_SIZE}&dashboardId=${id}`, {
     headers: {
       Authorization:
         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMiwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDI5OTU1LCJpc3MiOiJzcC10YXNraWZ5In0.1la3IrwbTBb9QjVdSl-1YpLnr64Fq74XXQpa_tqQp0A',
@@ -54,7 +55,7 @@ export const getDashboardMembers = async (id: string): Promise<DashBoardMember[]
     }
   });
 
-  return newMembers;
+  return { members: newMembers, totalMembers: res.data.totalCount };
 };
 
 export const getMyData = async (): Promise<DashBoardMember[]> => {
