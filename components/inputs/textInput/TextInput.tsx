@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode } from 'react';
 import Input from '@components/inputs/Input';
 import * as S from '@components/inputs/textInput/TextInput.style';
 
@@ -6,13 +6,14 @@ type TextInputProps = {
   children: ReactNode;
   id: string;
   placeholder: string;
+  onChange?: any;
 };
 
-function TextInput({ children, id, placeholder }: TextInputProps) {
+function TextInput({ children, id, placeholder, onChange }: TextInputProps) {
   return (
     <S.TextInputContainer>
       <S.TextInputWrapper>
-        <Input id={id} type="text" placeholder={placeholder}>
+        <Input id={id} type="text" placeholder={placeholder} onChange={onChange}>
           {children}
         </Input>
       </S.TextInputWrapper>

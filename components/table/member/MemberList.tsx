@@ -3,7 +3,7 @@ import * as S from '@components/table/TableList.style';
 import Button from '@components/buttons/Button';
 import { DataListProps } from '@components/table/Table.type';
 
-function MemberList({ data, buttonText }: DataListProps) {
+function MemberList({ data, buttonText, onDeleteClick }: DataListProps) {
   return (
     <>
       {data.map((item) => (
@@ -12,7 +12,7 @@ function MemberList({ data, buttonText }: DataListProps) {
             <S.MemberProfile>{item.nickname[0]}</S.MemberProfile>
             <S.ListData>{item.nickname}</S.ListData>
           </S.MemberDataContainer>
-          <Button.Delete>{buttonText}</Button.Delete>
+          {!item.isOwner ? <Button.Delete onClick={() => onDeleteClick(item.id)}>{buttonText}</Button.Delete> : <></>}
         </S.TableList>
       ))}
     </>
