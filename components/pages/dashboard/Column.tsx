@@ -15,9 +15,10 @@ import ModalTask from '@components/modals/modal-task/ModalTask';
 
 type TColumnProps = {
   column: TColumn;
+  fetchColumns: () => void;
 };
 
-function Column({ column }: TColumnProps) {
+function Column({ column, fetchColumns }: TColumnProps) {
   const [cards, setCards] = useState<CardProps[]>([]);
 
   const fetchCards = async () => {
@@ -41,7 +42,7 @@ function Column({ column }: TColumnProps) {
         <Modal
           content={
             <ModalBase>
-              <EditColumnModal columnid={column.id} />
+              <EditColumnModal columnid={column.id} fetchColumns={fetchColumns} />
             </ModalBase>
           }
         >

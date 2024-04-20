@@ -30,7 +30,7 @@ function NewColumnModal({ close, dashboardId, fetchColumns }: TNewColumnModalPro
       const res = await postNewColumn(columnData);
       if (res.id) {
         trigger();
-        await fetchColumns();
+        fetchColumns();
       }
     } catch (error) {
       console.error('컬럼 생성 실패', error);

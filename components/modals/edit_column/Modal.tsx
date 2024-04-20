@@ -7,9 +7,10 @@ import { deleteColumn, postChangeColumnTitle } from '@pages/dashboard/api';
 
 type TEditColumnModalProps = ModalBaseProps & {
   columnid: number;
+  fetchColumns: () => void;
 };
 
-function EditColumnModal({ close, columnid }: TEditColumnModalProps) {
+function EditColumnModal({ close, columnid, fetchColumns }: TEditColumnModalProps) {
   const [columnTitle, setColumnTitle] = useState({ title: '' });
   const trigger = () => {
     return close && close();
@@ -36,7 +37,8 @@ function EditColumnModal({ close, columnid }: TEditColumnModalProps) {
   const fetchDeleteColumn = async () => {
     const res = await deleteColumn(columnid);
     if (res.ok) {
-      window.location.reload();
+      trigger();
+      fetchColumns();
     }
   };
 
