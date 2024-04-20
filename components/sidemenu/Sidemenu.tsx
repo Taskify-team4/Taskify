@@ -4,13 +4,8 @@ import logoImgTaskify from '@public/icons/logo_taskify.svg';
 import addBoxImg from '@public/icons/add.svg';
 import React from 'react';
 import DashboardList from './DashboardList';
-import { TDashboards } from '@pages/dashboard/Dashboard.type';
 
-type TSidemenuProps = {
-  dashboards: TDashboards;
-};
-
-function Sidemenu({ dashboards }: TSidemenuProps) {
+function Sidemenu() {
   return (
     <S.SidemenuContainer>
       <S.LogoWrapper>
@@ -25,7 +20,7 @@ function Sidemenu({ dashboards }: TSidemenuProps) {
         <S.DashBoardsText>Dash Boards</S.DashBoardsText>
         <S.AddBoxImg src={addBoxImg} alt="add box" />
       </S.DashBoardsWrapper>
-      <DashboardList dashboards={dashboards} />
+      <DashboardList />
     </S.SidemenuContainer>
   );
 }

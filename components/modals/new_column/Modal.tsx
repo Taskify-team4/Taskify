@@ -5,13 +5,10 @@ import ModalInput from '@components/inputs/modalInput/ModalInput';
 import { ModalBaseProps } from '@components/modals/Modal.type';
 import { TColumnForm } from '@pages/dashboard/Dashboard.type';
 import { postNewColumn } from '@pages/dashboard/api';
+import { useDashContext } from '@contexts/dashContext';
 
-type TNewColumnModalProps = ModalBaseProps & {
-  dashboardId: number;
-  fetchColumns: () => void;
-};
-
-function NewColumnModal({ close, dashboardId, fetchColumns }: TNewColumnModalProps) {
+function NewColumnModal({ close }: ModalBaseProps) {
+  const { dashboardId, fetchColumns } = useDashContext();
   const [columnData, setColumnData] = useState<TColumnForm>({ title: '', dashboardId: 0 });
 
   const trigger = () => {
@@ -21,7 +18,7 @@ function NewColumnModal({ close, dashboardId, fetchColumns }: TNewColumnModalPro
   const handleChange = (title: string) => {
     setColumnData({
       title: title,
-      dashboardId: dashboardId,
+      dashboardId: Number(dashboardId),
     });
   };
 

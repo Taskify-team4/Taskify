@@ -1,6 +1,5 @@
 import Button from '@components/buttons/Button';
 import Card, { CardProps } from '@components/cards/Card';
-import { CARD } from '@utils/testData';
 import React, { useEffect, useState } from 'react';
 import * as S from '@components/pages/dashboard/Column.style';
 import { ColorTile } from '@components/chips/Chip.style';
@@ -15,10 +14,9 @@ import ModalTask from '@components/modals/modal-task/ModalTask';
 
 type TColumnProps = {
   column: TColumn;
-  fetchColumns: () => void;
 };
 
-function Column({ column, fetchColumns }: TColumnProps) {
+function Column({ column }: TColumnProps) {
   const [cards, setCards] = useState<CardProps[]>([]);
 
   const fetchCards = async () => {
@@ -42,7 +40,7 @@ function Column({ column, fetchColumns }: TColumnProps) {
         <Modal
           content={
             <ModalBase>
-              <EditColumnModal columnid={column.id} fetchColumns={fetchColumns} />
+              <EditColumnModal columnid={column.id} />
             </ModalBase>
           }
         >
