@@ -73,7 +73,7 @@ function Dashboard() {
             <Modal
               content={
                 <ModalBase>
-                  <NewColumnModal dashboardId={Number(dashboardId)} />
+                  <NewColumnModal dashboardId={Number(dashboardId)} fetchColumns={fetchColumns} />
                 </ModalBase>
               }
             >

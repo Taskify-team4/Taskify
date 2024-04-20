@@ -8,9 +8,10 @@ import { postNewColumn } from '@pages/dashboard/api';
 
 type TNewColumnModalProps = ModalBaseProps & {
   dashboardId: number;
+  fetchColumns: () => void;
 };
 
-function NewColumnModal({ close, dashboardId }: TNewColumnModalProps) {
+function NewColumnModal({ close, dashboardId, fetchColumns }: TNewColumnModalProps) {
   const [columnData, setColumnData] = useState<TColumnForm>({ title: '', dashboardId: 0 });
 
   const trigger = () => {
@@ -28,7 +29,8 @@ function NewColumnModal({ close, dashboardId }: TNewColumnModalProps) {
     try {
       const res = await postNewColumn(columnData);
       if (res.id) {
-        window.location.reload();
+        trigger();
+        await fetchColumns();
       }
     } catch (error) {
       console.error('컬럼 생성 실패', error);
