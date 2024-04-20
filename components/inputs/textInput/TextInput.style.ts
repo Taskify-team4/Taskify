@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const TextInputContainer = styled.div`
-  width: 520px;
+  width: 100%;
 `;
 
 export const TextInputWrapper = styled.div`
