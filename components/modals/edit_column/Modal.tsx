@@ -25,9 +25,9 @@ function EditColumnModal({ close, columnid, fetchColumns }: TEditColumnModalProp
   const fetchPostChangeColumnTitle = async () => {
     try {
       const res = await postChangeColumnTitle(columnid, columnTitle);
-      console.log(res);
       if (res.ok) {
-        window.location.reload();
+        trigger();
+        fetchColumns();
       }
     } catch (error) {
       console.error('컬럼 이름 수정 실패', error);
