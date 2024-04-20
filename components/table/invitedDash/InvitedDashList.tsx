@@ -13,21 +13,22 @@ function InvitedDashList({ data }: InvitedDashListProps) {
           <span>수락여부</span>
         </S.ListData>
       </S.InvitedDashListTitleContainer>
-
-      {data.map((item) => (
-        <S.TableList key={item.id}>
-          <S.ListData $isInvitedDash>
-            <S.DashTitle>{item.dashboard.title}</S.DashTitle>
-            <S.InviterName>{item.inviter.nickname}</S.InviterName>
-            <span>
-              <S.InvitedDashButtonsContainer>
-                <Button.Confirm>수락</Button.Confirm>
-                <Button.Reject>거절</Button.Reject>
-              </S.InvitedDashButtonsContainer>
-            </span>
-          </S.ListData>
-        </S.TableList>
-      ))}
+      <S.TableListScrollBox>
+        {data.map((item) => (
+          <S.TableList key={item.id}>
+            <S.ListData $isInvitedDash>
+              <S.DashTitle>{item.dashboard.title}</S.DashTitle>
+              <S.InviterName>{item.inviter.nickname}</S.InviterName>
+              <span>
+                <S.InvitedDashButtonsContainer>
+                  <Button.Confirm>수락</Button.Confirm>
+                  <Button.Reject>거절</Button.Reject>
+                </S.InvitedDashButtonsContainer>
+              </span>
+            </S.ListData>
+          </S.TableList>
+        ))}
+      </S.TableListScrollBox>
     </>
   );
 }

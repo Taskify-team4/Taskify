@@ -181,16 +181,16 @@ export const PagenationRightButton = styled.button`
 export const AddDashboardButton = styled.button`
   ${OutlineButtonStyles}
   ${AddButtonStyle}
-  width: 332px;
-  height: 70px;
+  /* width: 332px;
+  height: 70px; */
   font-size: 16px;
   font-weight: 600;
   @media ${device.tablet} {
-    width: 247px;
-    height: 68px;
+    /* width: 247px;
+    height: 68px; */
   }
   @media ${device.mobile} {
-    width: 260px;
+    /* width: 260px; */
     height: 58px;
     font-size: 14px;
   }
@@ -216,18 +216,18 @@ export const AddInviteButton = styled.button`
 export const DashboardButton = styled.button`
   ${OutlineButtonStyles}
   ${AddButtonStyle}
-  width: 332px;
-  height: 70px;
+  /* max-width: 332px;
+  height: 70px; */
   font-size: 16px;
   font-weight: 600;
   padding: 20px;
   @media ${device.tablet} {
-    width: 247px;
-    height: 68px;
+    /* width: 247px;
+    height: 68px; */
   }
   @media ${device.mobile} {
-    width: 260px;
-    height: 58px;
+    /* width: 260px;
+    height: 58px; */
     font-size: 14px;
   }
 `;
@@ -257,7 +257,17 @@ export const DashboardTitle = styled.span`
   font-size: 16px;
   font-weight: 600;
   margin: 0 8px 0 16px;
+  //
+  max-width: 164px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media ${device.tablet} {
+    max-width: 82px;
+  }
+  //
   @media ${device.mobile} {
     font-size: 14px;
+    max-width: 156px;
   }
 `;

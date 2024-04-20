@@ -69,6 +69,51 @@ export const INVITATION_LIST: Invitation[] = [
       title: '유닛 A',
     },
   },
+  {
+    id: 2,
+    inviter: {
+      nickname: '장혁',
+    },
+    dashboard: {
+      title: '유닛 A',
+    },
+  },
+  {
+    id: 2,
+    inviter: {
+      nickname: '장혁',
+    },
+    dashboard: {
+      title: '유닛 A',
+    },
+  },
+  {
+    id: 2,
+    inviter: {
+      nickname: '장혁',
+    },
+    dashboard: {
+      title: '유닛 A',
+    },
+  },
+  {
+    id: 2,
+    inviter: {
+      nickname: '장혁',
+    },
+    dashboard: {
+      title: '유닛 A',
+    },
+  },
+  {
+    id: 2,
+    inviter: {
+      nickname: '장혁',
+    },
+    dashboard: {
+      title: '유닛 A',
+    },
+  },
 ];
 
 export const DASH_DATA: Dashboard[] = [

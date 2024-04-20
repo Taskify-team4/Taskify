@@ -130,3 +130,7 @@ export const InvitedDashListTitleContainer = styled.div`
     display: none;
   }
 `;
+export const TableListScrollBox = styled.div`
+  max-height: 320px;
+  overflow-y: scroll;
+`;

@@ -20,3 +20,16 @@ export const TableContainer = styled.section<ContainerProps>`
 export const ListsContainer = styled.div`
   display: flex;
 `;
+
+export const EmptyInvitation = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 128px;
+`;
+export const EmptyText = styled.span`
+  color: var(--gray400);
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+`;
