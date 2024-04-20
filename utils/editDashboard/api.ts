@@ -95,7 +95,7 @@ export const getDashboardMembers = async (id: string, page: number) => {
     });
 };
 
-export const getMyData = async (): Promise<DashBoardMember[]> => {
+export const getMyData = async (): Promise<DashBoardMember> => {
   return await axios
     .get(`users/me`, {
       headers: {
@@ -105,8 +105,8 @@ export const getMyData = async (): Promise<DashBoardMember[]> => {
     })
     .then((res) => res.data)
     .catch((error: Error) => {
-      if (error.message === ERROR_404_MESSAGE) return alert(NO_USER_MESSAGE);
-      else if (error.message === ERROR_401_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
+      if (error.message === ERROR_404_MESSAGE) alert(NO_USER_MESSAGE);
+      else if (error.message === ERROR_401_MESSAGE) alert(NO_AUTHORITY_MESSAGE);
       throw NETWORK_ERROR(error);
     });
 };

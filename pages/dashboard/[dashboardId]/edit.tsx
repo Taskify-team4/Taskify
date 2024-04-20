@@ -16,7 +16,6 @@ import {
   getDashboardInvites,
   getDashboardList,
   getDashboardMembers,
-  getMyData,
   postDashboardInvites,
   updateDashboard,
 } from '@utils/editDashboard/api';
@@ -28,6 +27,7 @@ import ModalBase from '@components/modals/ModalBase';
 import Modal from '@components/modals/Modal';
 import ConfirmModal from '@components/modals/edit_dashboard/ConfirmModal';
 import useWindowSize from '@hooks/useWindowSize';
+import { useMyData } from '@contexts/myDataContext';
 
 export async function getServerSideProps(context: any) {
   const dashboardId = context.query['dashboardId'];
@@ -35,7 +35,7 @@ export async function getServerSideProps(context: any) {
   const dashboardData = await getDashboard(dashboardId);
   const { invitees, totalInvitees } = await getDashboardInvites(dashboardId, 1);
   const { members, totalMembers } = await getDashboardMembers(dashboardId, 1);
-  const myData = await getMyData();
+
   const dashboardList = await getDashboardList();
 
   return {
@@ -43,7 +43,6 @@ export async function getServerSideProps(context: any) {
       dashboardData,
       invitees,
       members,
-      myData,
       dashboardList,
       totalInvitees,
       totalMembers,
@@ -57,7 +56,6 @@ function Edit({
   totalInvitees,
   members: initialMembers,
   totalMembers,
-  myData,
   dashboardList: initialDashboardList,
 }: EditPageProps) {
   const [selectedColor, setSelectedColor] = useState<TColorCode>(initialDashboardData.color);
@@ -74,6 +72,7 @@ function Edit({
   const limitInvitePage = Number(Math.ceil(totalInvitees / PAGE_SIZE));
   const limitMemberPage = Number(Math.ceil(totalMembers / PAGE_SIZE));
 
+  const { myData } = useMyData();
   const { windowWidth } = useWindowSize();
   const router = useRouter();
   const dashboardId = router.query['dashboardId']?.toString();
