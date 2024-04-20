@@ -1,10 +1,14 @@
-import { Invitation, User } from '@utils/testData';
 import { ReactNode } from 'react';
+import { DashBoardMember, Invitations, PagenationInfo } from '@utils/editDashboard/edit.type';
 
 export type HeaderProps = {
   title: string;
   isInvite?: boolean;
   isPagenation?: boolean;
+  onInviteClick?: any;
+  onNextClick?: any;
+  onPreviousClick?: any;
+  pageInfo?: PagenationInfo;
 };
 
 export type TableListsProps = {
@@ -14,10 +18,13 @@ export type TableListsProps = {
 };
 
 export type DataListProps = {
-  data: User[];
+  data: DashBoardMember[];
   buttonText?: string;
+  onDeleteClick?: any;
 };
 
 export type InvitedDashListProps = {
-  data: Invitation[];
+  data: Invitations[];
+  buttonText?: string;
+  onCancelInviteClick?: any;
 };

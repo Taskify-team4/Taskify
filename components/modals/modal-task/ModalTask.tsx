@@ -15,13 +15,13 @@ type TagProps = {
 export type ModalTaskProps = ModalBaseProps & {
   imageUrl: string | null;
   title: string;
-  explanation: string;
+  description: string;
   tags: TagProps[];
   dueDate: string;
   assignee: { nickname: string };
 };
 
-function ModalTask({ close, imageUrl, title, explanation, tags, dueDate, assignee }: ModalTaskProps) {
+function ModalTask({ close, imageUrl, title, description, tags, dueDate, assignee }: ModalTaskProps) {
   const [more, setMore] = useState(false);
 
   const trigger = () => {
@@ -32,7 +32,7 @@ function ModalTask({ close, imageUrl, title, explanation, tags, dueDate, assigne
   return (
     <S.ModalTaskContainer>
       <S.TaskTitle>{title}</S.TaskTitle>
-      <TaskContentInfo {...{ explanation, tags, dueDate, assignee }} />
+      <TaskContentInfo {...{ description, tags, dueDate, assignee }} />
       {imageUrl ? (
         <S.CardImage>
           <Image src={imageUrl} alt="Card Image" width={0} height={0} layout="responsive" />
