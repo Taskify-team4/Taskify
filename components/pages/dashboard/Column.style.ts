@@ -25,6 +25,9 @@ export const TitleWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
+export const ColumnSettingButtonWrapper = styled.div`
+  cursor: pointer;
+`;
 
 export const ColumnTitle = styled.span`
   font-size: 18px;

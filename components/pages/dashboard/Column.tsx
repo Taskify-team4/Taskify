@@ -1,7 +1,7 @@
 import Button from '@components/buttons/Button';
-import Card from '@components/cards/Card';
+import Card, { CardProps } from '@components/cards/Card';
 import { CARD } from '@utils/testData';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from '@components/pages/dashboard/Column.style';
 import { ColorTile } from '@components/chips/Chip.style';
 import Image from 'next/image';
@@ -9,24 +9,45 @@ import settingIcon from '@public/icons/setting.svg';
 import Modal from '@components/modals/Modal';
 import ModalBase from '@components/modals/ModalBase';
 import EditColumnModal from '@components/modals/edit_column/Modal';
+import { TColumn } from '@pages/dashboard/Dashboard.type';
+import { getCards } from '@pages/dashboard/api';
+import ModalTask from '@components/modals/modal-task/ModalTask';
 
-function Column({}) {
+type TColumnProps = {
+  column: TColumn;
+};
+
+function Column({ column }: TColumnProps) {
+  const [cards, setCards] = useState<CardProps[]>([]);
+
+  const fetchCards = async () => {
+    const res = await getCards(column.id);
+    const result = res.cards;
+    setCards(result);
+  };
+
+  useEffect(() => {
+    fetchCards();
+  }, [column.id]);
+
   return (
     <S.ColumnContainer>
       <S.ColumnHeader>
         <S.TitleWrapper>
           <ColorTile $size={'tiny'} $color="purple" />
-          <S.ColumnTitle>To Do</S.ColumnTitle>
-          <S.CardsCount>{CARD.length}</S.CardsCount>
+          <S.ColumnTitle>{column.title}</S.ColumnTitle>
+          <S.CardsCount>{cards.length}</S.CardsCount>
         </S.TitleWrapper>
         <Modal
           content={
             <ModalBase>
-              <EditColumnModal />
+              <EditColumnModal columnid={column.id} />
             </ModalBase>
           }
         >
-          <Image src={settingIcon} width={24} height={24} alt="설정 아이콘" />
+          <S.ColumnSettingButtonWrapper>
+            <Image src={settingIcon} width={24} height={24} alt="설정 아이콘" />
+          </S.ColumnSettingButtonWrapper>
         </Modal>
       </S.ColumnHeader>
 
@@ -35,12 +56,17 @@ function Column({}) {
         <Button.AddTodo />
       </Modal>
 
-      {CARD.map((card, idx) => (
-        <li key={idx}>
-          <Modal content={<ModalBase></ModalBase>}>
-            <Card {...card} />
-          </Modal>
-        </li>
+      {cards.map((card, idx) => (
+        <Modal
+          content={
+            <ModalBase>
+              <ModalTask {...card} />
+            </ModalBase>
+          }
+          key={idx}
+        >
+          <Card {...card} />
+        </Modal>
       ))}
     </S.ColumnContainer>
   );
