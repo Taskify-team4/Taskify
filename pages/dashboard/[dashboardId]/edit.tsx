@@ -28,6 +28,7 @@ import Modal from '@components/modals/Modal';
 import ConfirmModal from '@components/modals/edit_dashboard/ConfirmModal';
 import useWindowSize from '@hooks/useWindowSize';
 import { useMyData } from '@contexts/myDataContext';
+import { useDashboardList } from '@contexts/DashboardListContext';
 
 export async function getServerSideProps(context: any) {
   const dashboardId = context.query['dashboardId'];
@@ -36,14 +37,11 @@ export async function getServerSideProps(context: any) {
   const { invitees, totalInvitees } = await getDashboardInvites(dashboardId, 1);
   const { members, totalMembers } = await getDashboardMembers(dashboardId, 1);
 
-  const dashboardList = await getDashboardList();
-
   return {
     props: {
       dashboardData,
       invitees,
       members,
-      dashboardList,
       totalInvitees,
       totalMembers,
     },
@@ -56,11 +54,10 @@ function Edit({
   totalInvitees,
   members: initialMembers,
   totalMembers,
-  dashboardList: initialDashboardList,
 }: EditPageProps) {
   const [selectedColor, setSelectedColor] = useState<TColorCode>(initialDashboardData.color);
+  const { dashboardList, setDashboardList } = useDashboardList();
 
-  const [dashboardList, setDashboardList] = useState(initialDashboardList);
   const [dashboardData, setDashboardData] = useState(initialDashboardData);
   const [dashboardName, setDashboardName] = useState(initialDashboardData.title);
 
