@@ -6,13 +6,14 @@ type SelectBoxProps = {
   children: ReactNode;
   onData: string[];
   onType?: boolean;
+  onModify?: boolean;
 };
 
-function SelectBox({ children, onData, onType }: SelectBoxProps) {
+function SelectBox({ children, onData, onType, onModify }: SelectBoxProps) {
   return (
     <S.SelectBoxContainer>
       <S.SelectBoxTitle>{children}</S.SelectBoxTitle>
-      <Select onData={onData} onType={onType} />
+      <Select onData={onData} onType={onType} onModify={onModify} />
     </S.SelectBoxContainer>
   );
 }

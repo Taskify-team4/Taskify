@@ -1,3 +1,4 @@
+import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
 
 export const ModalInputContainer = styled.div`
@@ -16,6 +17,10 @@ export const ModalInputLabel = styled.label`
   font-size: 18px;
   font-weight: 500;
   line-height: normal;
+
+  @media ${device.mobile} {
+    font-size: 16px;
+  }
 `;
 
 export const ModalInputRequired = styled.span`
@@ -24,6 +29,10 @@ export const ModalInputRequired = styled.span`
   font-size: 18px;
   font-weight: 500;
   line-height: normal;
+
+  @media ${device.mobile} {
+    font-size: 16px;
+  }
 `;
 
 export const ModalInput = styled.input`
@@ -42,5 +51,9 @@ export const ModalInput = styled.input`
 
   &:focus {
     border: 1px solid var(--violet);
+  }
+
+  @media ${device.mobile} {
+    height: 42px;
   }
 `;

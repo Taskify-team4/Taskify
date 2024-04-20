@@ -1,3 +1,4 @@
+import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
 
 export const ImageInputContainer = styled.div`
@@ -11,6 +12,10 @@ export const ImageInputLabel = styled.label`
   font-size: 18px;
   font-weight: 500;
   line-height: normal;
+
+  @media ${device.tablet} {
+    font-size: 16px;
+  }
 `;
 
 export const ImageWrapper = styled.div`
@@ -19,6 +24,12 @@ export const ImageWrapper = styled.div`
   padding: 24px;
   border-radius: 6px;
   background-color: #f5f5f5;
+
+  @media ${device.tablet} {
+    width: 58px;
+    height: 58px;
+    padding: 18.316px;
+  }
 `;
 
 export const ImageContent = styled.div`
@@ -28,5 +39,10 @@ export const ImageContent = styled.div`
 
   img {
     object-fit: cover;
+  }
+
+  @media ${device.tablet} {
+    width: 21.368px;
+    height: 21.368px;
   }
 `;

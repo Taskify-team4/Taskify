@@ -30,9 +30,11 @@ export const TableList = styled.li`
   align-items: center;
   padding: 16px 28px;
   border-bottom: 1px solid var(--gray200);
+
   &:last-child {
     border-bottom: 0;
   }
+
   @media ${device.mobile} {
     padding: 12px 20px;
   }
@@ -45,17 +47,21 @@ export const ListData = styled.span<ListDataProps>`
   justify-content: space-between;
   align-items: center;
   width: ${({ $isInvitedDash }) => $isInvitedDash && '100%'};
+
   span {
     font-size: 16px;
     color: var(--black200);
     width: 100%;
+
     &:last-child {
       min-width: 154px;
     }
+
     @media ${device.mobile} {
       font-size: 14px;
     }
   }
+
   @media ${device.tablet} {
     gap: 20px;
   }
@@ -74,19 +80,12 @@ export const MemberDataContainer = styled.div`
 `;
 
 export const MemberProfile = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--green);
   width: 37px;
   height: 37px;
-  color: var(--white);
   border-radius: 50%;
-  font-size: 16px;
   @media ${device.mobile} {
     width: 32px;
     height: 32px;
-    font-size: 14px;
   }
 `;
 
@@ -123,9 +122,11 @@ export const InviterName = styled.span`
 export const InvitedDashListTitleContainer = styled.div`
   margin-bottom: 8px;
   padding: 0 28px;
+
   span {
     color: var(--gray400);
   }
+
   @media ${device.mobile} {
     display: none;
   }

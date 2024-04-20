@@ -16,7 +16,7 @@ function CommentInput({ children, placeholder, onRequired, onModal }: CommentInp
         {onRequired && <S.CommentInputRequired>*</S.CommentInputRequired>}
       </S.CommentInputTitleContainer>
       <S.CommentInput placeholder={placeholder} onModal={onModal} />
-      <S.CommentBtn>입력</S.CommentBtn>
+      {!onModal && <S.CommentBtn>입력</S.CommentBtn>}
     </S.CommentInputContainer>
   );
 }
