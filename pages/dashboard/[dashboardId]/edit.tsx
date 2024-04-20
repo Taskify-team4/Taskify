@@ -60,7 +60,6 @@ function Edit({
   myData,
   dashboardList: initialDashboardList,
 }: EditPageProps) {
-  const { windowWidth } = useWindowSize();
   const [selectedColor, setSelectedColor] = useState<TColorCode>(initialDashboardData.color);
 
   const [dashboardList, setDashboardList] = useState(initialDashboardList);
@@ -75,6 +74,7 @@ function Edit({
   const limitInvitePage = Number(Math.ceil(totalInvitees / PAGE_SIZE));
   const limitMemberPage = Number(Math.ceil(totalMembers / PAGE_SIZE));
 
+  const { windowWidth } = useWindowSize();
   const router = useRouter();
   const dashboardId = router.query['dashboardId']?.toString();
 
