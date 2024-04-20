@@ -27,6 +27,7 @@ import { EditPageProps } from '@utils/editDashboard/edit.type';
 import ModalBase from '@components/modals/ModalBase';
 import Modal from '@components/modals/Modal';
 import ConfirmModal from '@components/modals/edit_dashboard/ConfirmModal';
+import useWindowSize from '@hooks/useWindowSize';
 
 export async function getServerSideProps(context: any) {
   const dashboardId = context.query['dashboardId'];
@@ -59,7 +60,7 @@ function Edit({
   myData,
   dashboardList: initialDashboardList,
 }: EditPageProps) {
-  const [windowWidth, setWindowWidth] = useState(1920);
+  const { windowWidth } = useWindowSize();
   const [selectedColor, setSelectedColor] = useState<TColorCode>(initialDashboardData.color);
 
   const [dashboardList, setDashboardList] = useState(initialDashboardList);
@@ -163,23 +164,6 @@ function Edit({
       return prev;
     });
   };
-
-  // 브라우저 넓이 받아오기
-  useEffect(() => {
-    const resizeHandler = () => {
-      setTimeout(() => {
-        setWindowWidth(window.innerWidth);
-      }, 500);
-    };
-
-    resizeHandler();
-
-    window.addEventListener('resize', resizeHandler);
-
-    return () => {
-      window.removeEventListener('resize', resizeHandler);
-    };
-  }, []);
 
   useEffect(() => {
     if (dashboardId) {
