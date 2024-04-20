@@ -8,6 +8,7 @@ function stringToColor(str: string) {
     const color = (hash * 127 + 128).toString(16);
     return color;
   }
+  return '#111111';
 }
 
 export default stringToColor;

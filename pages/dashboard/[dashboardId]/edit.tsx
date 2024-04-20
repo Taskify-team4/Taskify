@@ -56,7 +56,6 @@ function Edit({
   totalMembers,
 }: EditPageProps) {
   const [selectedColor, setSelectedColor] = useState<TColorCode>(initialDashboardData.color);
-  const { dashboardList, setDashboardList } = useDashboardList();
 
   const [dashboardData, setDashboardData] = useState(initialDashboardData);
   const [dashboardName, setDashboardName] = useState(initialDashboardData.title);
@@ -69,8 +68,10 @@ function Edit({
   const limitInvitePage = Number(Math.ceil(totalInvitees / PAGE_SIZE));
   const limitMemberPage = Number(Math.ceil(totalMembers / PAGE_SIZE));
 
+  const { dashboardList, setDashboardList } = useDashboardList();
   const { myData } = useMyData();
   const { windowWidth } = useWindowSize();
+
   const router = useRouter();
   const dashboardId = router.query['dashboardId']?.toString();
 
@@ -115,7 +116,7 @@ function Edit({
   const handleDeleteDashboardClick = async () => {
     if (dashboardId) {
       await deleteDashboard(dashboardId);
-      router.push(`/dashboard/${dashboardId}`);
+      await router.push(`/dashboard/${dashboardId}`);
     }
   };
 
