@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode } from 'react';
 import Input from '@components/inputs/Input';
 import * as S from '@components/inputs/textInput/TextInput.style';
 
@@ -7,14 +7,15 @@ type TextInputProps = {
   id: string;
   placeholder: string;
   disabled?: boolean;
+  onChange?: any;
+  defaultValue?: string;
 };
 
-function TextInput({ children, id, placeholder, disabled }: TextInputProps) {
-  const [error, setError] = useState(false);
+function TextInput({ children, id, placeholder, disabled, onChange, defaultValue }: TextInputProps) {
   return (
     <S.TextInputContainer>
       <S.TextInputWrapper>
-        <Input id={id} type="text" placeholder={placeholder} disabled={disabled}>
+        <Input id={id} type="text" placeholder={placeholder} disabled={disabled} onChange={onChange} defaultValue={defaultValue}>
           {children}
         </Input>
       </S.TextInputWrapper>

@@ -1,7 +1,13 @@
+import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
 
 export const TextInputContainer = styled.div`
+  max-width: 520px;
   width: 100%;
+
+  @media ${device.mobile} {
+    width: 100%;
+  }
 `;
 
 export const TextInputWrapper = styled.div`

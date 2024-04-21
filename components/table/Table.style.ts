@@ -12,7 +12,7 @@ export const TableContainer = styled.section<ContainerProps>`
   padding: 26px 0 4px;
 
   @media ${device.mobile} {
-    width: ${({ $isInvitedDash }) => ($isInvitedDash ? 260 : 284)}px;
+    width: ${({ $isInvitedDash }) => ($isInvitedDash ? '260px' : '100%')};
     padding: 22px 0 4px;
   }
 `;
