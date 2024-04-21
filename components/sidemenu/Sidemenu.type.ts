@@ -7,5 +7,5 @@ export type Dashboard = {
   crown?: boolean;
 };
 export type SidemenuProps = {
-  dashboards: Dashboard[];
+  dashboards?: Dashboard[];
 };

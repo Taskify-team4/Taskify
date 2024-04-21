@@ -6,17 +6,19 @@ type TextInputProps = {
   children: ReactNode;
   id: string;
   placeholder: string;
+  disabled?: boolean;
 };
 
-function TextInput({ children, id, placeholder }: TextInputProps) {
+function TextInput({ children, id, placeholder, disabled }: TextInputProps) {
+  const [error, setError] = useState(false);
   return (
     <S.TextInputContainer>
       <S.TextInputWrapper>
-        <Input id={id} type="text" placeholder={placeholder}>
+        <Input id={id} type="text" placeholder={placeholder} disabled={disabled}>
           {children}
         </Input>
       </S.TextInputWrapper>
-      <S.ErrorMessage>ErrorMessage</S.ErrorMessage>
+      {error && <S.ErrorMessage>ErrorMessage</S.ErrorMessage>}
     </S.TextInputContainer>
   );
 }

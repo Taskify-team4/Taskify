@@ -21,14 +21,15 @@ export const ImageInputLabel = styled.label`
 export const ImageWrapper = styled.div`
   width: 76px;
   height: 76px;
-  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 6px;
   background-color: #f5f5f5;
 
   @media ${device.tablet} {
     width: 58px;
     height: 58px;
-    padding: 18.316px;
   }
 `;
 

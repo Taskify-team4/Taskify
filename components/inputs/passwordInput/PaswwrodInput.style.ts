@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const PasswordInputContainer = styled.div`
-  width: 520px;
+  width: 100%;
 `;
 
 export const PasswordInputContent = styled.div`

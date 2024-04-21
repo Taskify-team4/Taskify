@@ -6,13 +6,14 @@ type InputProps = {
   id: string;
   type: string;
   placeholder: string;
+  disabled?: boolean;
 };
 
-function Input({ children, id, type, placeholder }: InputProps) {
+function Input({ children, id, type, placeholder, disabled }: InputProps) {
   return (
     <S.InputContainer>
       <S.InputLabel htmlFor={id}>{children}</S.InputLabel>
-      <S.Input id={id} type={type} placeholder={placeholder} />
+      <S.Input id={id} type={type} placeholder={placeholder} disabled={disabled} />
     </S.InputContainer>
   );
 }
