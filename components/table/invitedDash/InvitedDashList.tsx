@@ -17,8 +17,8 @@ function InvitedDashList({ data }: InvitedDashListProps) {
         {data.map((item) => (
           <S.TableList key={item.id}>
             <S.ListData $isInvitedDash>
-              <S.DashTitle>{item.dashboard.title}</S.DashTitle>
-              <S.InviterName>{item.inviter.nickname}</S.InviterName>
+              {/* <S.DashTitle>{item.dashboard.title}</S.DashTitle> */}
+              <S.InviterName>{item.invitee.nickname}</S.InviterName>
               <span>
                 <S.InvitedDashButtonsContainer>
                   <Button.Confirm>수락</Button.Confirm>

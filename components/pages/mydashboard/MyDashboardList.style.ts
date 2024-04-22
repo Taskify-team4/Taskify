@@ -4,12 +4,12 @@ import styled from 'styled-components';
 export const MyDashBoardListContainer = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 1022px;
   gap: 12px;
 `;
 export const MyDashBoardList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  max-width: 1022px;
   /* height: 150px; */
   gap: 10px;
   @media ${device.tablet} {

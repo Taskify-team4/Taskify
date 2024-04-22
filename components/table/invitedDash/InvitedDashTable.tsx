@@ -16,7 +16,8 @@ function InvitedDashTable() {
       <S.ListsContainer>
         <TableLists isInvitedDash>
           {INVITATION_LIST ? (
-            <InvitedDashList data={INVITATION_LIST} />
+            // <InvitedDashList data={INVITATION_LIST} />
+            <></>
           ) : (
             <S.EmptyInvitation>
               <Image src={EmptyImg} alt="초대받은 대시보드가 비어있음" width={100} height={100} />
