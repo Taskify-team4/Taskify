@@ -6,19 +6,20 @@ type TextInputProps = {
   children: ReactNode;
   id: string;
   placeholder: string;
+  disabled?: boolean;
   onChange?: (value: string) => void;
   defaultValue?: string;
 };
 
-function TextInput({ children, id, placeholder, onChange, defaultValue }: TextInputProps) {
+function TextInput({ children, id, placeholder, disabled, onChange, defaultValue }: TextInputProps) {
   return (
     <S.TextInputContainer>
       <S.TextInputWrapper>
-        <Input id={id} type="text" placeholder={placeholder} onChange={onChange} defaultValue={defaultValue}>
+        <Input id={id} type="text" placeholder={placeholder} disabled={disabled} onChange={onChange} defaultValue={defaultValue}>
           {children}
         </Input>
       </S.TextInputWrapper>
-      <S.ErrorMessage>ErrorMessage</S.ErrorMessage>
+      {error && <S.ErrorMessage>ErrorMessage</S.ErrorMessage>}
     </S.TextInputContainer>
   );
 }
