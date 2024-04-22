@@ -7,7 +7,7 @@ type TextInputProps = {
   id: string;
   placeholder: string;
   disabled?: boolean;
-  onChange?: any;
+  onChange?: (value: string) => void;
   defaultValue?: string;
 };
 

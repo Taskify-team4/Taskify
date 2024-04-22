@@ -13,9 +13,9 @@ function MemberTable({
   pageInfo,
 }: {
   members: DashBoardMember[];
-  onDeleteClick: any;
-  onNextClick?: any;
-  onPreviousClick?: any;
+  onDeleteClick: (deleteId: number) => void;
+  onNextClick?: () => void;
+  onPreviousClick?: () => void;
   pageInfo?: PagenationInfo;
 }) {
   return (

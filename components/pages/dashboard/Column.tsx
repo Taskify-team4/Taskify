@@ -1,6 +1,5 @@
 import Button from '@components/buttons/Button';
 import Card, { CardProps } from '@components/cards/Card';
-import { CARD } from '@utils/testData';
 import React, { useEffect, useState } from 'react';
 import * as S from '@components/pages/dashboard/Column.style';
 import { ColorTile } from '@components/chips/Chip.style';

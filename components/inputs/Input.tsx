@@ -7,7 +7,7 @@ type InputProps = {
   type: string;
   placeholder: string;
   disabled?: boolean;
-  onChange: any;
+  onChange?: (value: string) => void;
   defaultValue?: string;
 };
 
@@ -21,8 +21,10 @@ function Input({ children, id, type, placeholder, disabled, onChange, defaultVal
         placeholder={placeholder}
         disabled={disabled}
         defaultValue={defaultValue}
-        onChange={(e) => {
-          onChange(e.target.value);
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          if (onChange) {
+            onChange(e.target.value);
+          }
         }}
       />
     </S.InputContainer>
