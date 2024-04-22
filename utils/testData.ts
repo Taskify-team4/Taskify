@@ -41,33 +41,33 @@ export type Invitation = {
 };
 
 export const INVITATION_LIST: Invitation[] = [
-  {
-    id: 0,
-    inviter: {
-      nickname: '손동희',
-    },
-    dashboard: {
-      title: '프로덕트 디자인',
-    },
-  },
-  {
-    id: 1,
-    inviter: {
-      nickname: '안귀영',
-    },
-    dashboard: {
-      title: '새로운 기획 문서',
-    },
-  },
-  {
-    id: 2,
-    inviter: {
-      nickname: '장혁',
-    },
-    dashboard: {
-      title: '유닛 A',
-    },
-  },
+  // {
+  //   id: 0,
+  //   inviter: {
+  //     nickname: '손동희',
+  //   },
+  //   dashboard: {
+  //     title: '프로덕트 디자인',
+  //   },
+  // },
+  // {
+  //   id: 1,
+  //   inviter: {
+  //     nickname: '안귀영',
+  //   },
+  //   dashboard: {
+  //     title: '새로운 기획 문서',
+  //   },
+  // },
+  // {
+  //   id: 2,
+  //   inviter: {
+  //     nickname: '장혁',
+  //   },
+  //   dashboard: {
+  //     title: '유닛 A',
+  //   },
+  // },
 ];
 
 export const DASH_DATA: Dashboard[] = [

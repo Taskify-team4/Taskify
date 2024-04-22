@@ -2,21 +2,25 @@ import * as S from '@components/pages/mydashboard/MyDashboardList.style';
 import Button from '@components/buttons/Button';
 
 // test
-import { testDashBoard } from '@pages/mydashboard/test';
-function MyDashboardList() {
+import { TDashboards } from '@pages/dashboard/Dashboard.type';
+
+type TMyDashboardListProps = {
+  dashboards: TDashboards;
+};
+function MyDashboardList({ dashboards }: TMyDashboardListProps) {
   return (
     <S.MyDashBoardListContainer>
       <S.MyDashBoardList>
         <Button.AddDashboard>대시보드 생성하기</Button.AddDashboard>
-        {testDashBoard ? (
-          testDashBoard.map((dashboard, index) => (
-            <Button.Dashboard key={`${index} ${dashboard.dashboardData.title}`} {...dashboard} />
+        {dashboards ? (
+          dashboards.map((dashboard, index) => (
+            <Button.Dashboard key={`${index} ${dashboard.title}`} dashboardData={dashboard} />
           ))
         ) : (
           <></>
         )}
       </S.MyDashBoardList>
-      {testDashBoard ? (
+      {dashboards ? (
         <S.MyDashBoardPagenation>
           <S.PagenationText>1 페이지 중 1</S.PagenationText>
           <S.PagenationButton>

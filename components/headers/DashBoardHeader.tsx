@@ -50,10 +50,14 @@ function DashBoardHeader({ title, mydata, userList, crown, onInviteClick }: Dash
         </S.Buttons>
         <ProfileIconContainer data={userList} />
         <S.Line />
-        <S.Profile>
-          <ProfileIcon str={mydata.nickname} />
-          <S.MyProfileName>{mydata.nickname}</S.MyProfileName>
-        </S.Profile>
+        {mydata ? (
+          <S.Profile>
+            <ProfileIcon str={mydata.nickname} />
+            <S.MyProfileName>{mydata.nickname}</S.MyProfileName>
+          </S.Profile>
+        ) : (
+          <></>
+        )}
       </S.ManagementContainer>
     </S.DashBoardHeader>
   );

@@ -23,8 +23,30 @@ export type DataListProps = {
   onDeleteClick?: any;
 };
 
+export type TInvitation = {
+  id: number;
+  inviter: {
+    nickname: string;
+    email: string;
+    id: number;
+  };
+  teamId: string;
+  dashboard: {
+    title: string;
+    id: number;
+  };
+  invitee: {
+    nickname: string;
+    email: string;
+    id: number;
+  };
+  inviteAccepted: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type InvitedDashListProps = {
-  data: Invitations[];
+  data: TInvitation[];
   buttonText?: string;
   onCancelInviteClick?: any;
 };

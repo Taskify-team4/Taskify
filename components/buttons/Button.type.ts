@@ -1,9 +1,14 @@
 import { MouseEventHandler, ReactNode } from 'react';
+import { TDashInfo } from '@pages/dashboard/Dashboard.type';
 
 export type DashboardData = {
   color: string;
-  title: string;
+  createdAt: string;
   createdByMe: boolean;
+  id: number;
+  title: string;
+  updatedAt: string;
+  userId: number;
 };
 
 export type ButtonProps = {
@@ -13,5 +18,5 @@ export type ButtonProps = {
 };
 
 export type DashboardButtonProps = ButtonProps & {
-  dashboardData: DashboardData;
+  dashboardData: TDashInfo;
 };
