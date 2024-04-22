@@ -3,12 +3,10 @@ import React, { useState } from 'react';
 import { ColorTile } from '@components/chips/Chip.style';
 import crownImg from '@public/icons/crown.svg';
 import { TDashboards } from '@pages/dashboard/Dashboard.type';
+import { useDashContext } from '@contexts/dashContext';
 
-type TDashboardListProps = {
-  dashboards: TDashboards;
-};
-
-function DashboardList({ dashboards }: TDashboardListProps) {
+function DashboardList() {
+  const { dashboards } = useDashContext();
   const [itemIndex, setItemIndex] = useState<number>();
 
   const handleItemClick = (index: number) => {
