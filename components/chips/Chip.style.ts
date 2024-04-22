@@ -12,7 +12,7 @@ const chipColorList = {
 
 type ChipStyleProps = {
   $size: TChipSize;
-  $color: TColorKey | TColorCode;
+  $color: TColorKey | string;
 };
 
 export const BasicChip = styled.span<ChipStyleProps>`
