@@ -4,7 +4,7 @@ import point2 from '@public/images/point2.png';
 
 function Point2() {
   return (
-    <S.Point2>
+    <S.Point2 data-aos="fade-up" data-aos-offset="500">
       <S.Point2Title>Point2</S.Point2Title>
       <S.Point2Description>
         해야 할 일을

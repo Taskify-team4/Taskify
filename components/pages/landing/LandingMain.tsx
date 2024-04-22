@@ -9,7 +9,10 @@ function LandingMain() {
       <S.Title>
         <S.MainTitle>
           새로운 일정 관리
-          <S.Violet> Taskify</S.Violet>
+          <S.Violet data-aos="zoom-in-up" data-aos-offset="400" data-aos-once="true">
+            {' '}
+            Taskify
+          </S.Violet>
         </S.MainTitle>
       </S.Title>
       <S.MainSubTitle>서비스의 메인 설명 들어갑니다.</S.MainSubTitle>
