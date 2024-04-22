@@ -11,7 +11,7 @@ export const Settings = styled.div`
   justify-content: center;
   overflow: hidden;
 
-  @media ${device.tablet} {
+  @media screen and (max-width: 1300px) {
     grid-template-columns: auto 0 0;
     gap: 48px 0;
   }
@@ -36,7 +36,7 @@ export const Card1 = styled(SettingCard)`
   grid-column: 1;
   grid-row: 2;
 
-  @media ${device.tablet} {
+  @media screen and (max-width: 1300px) {
     grid-column: 1;
     grid-row: 2;
   }
@@ -45,7 +45,8 @@ export const Card1 = styled(SettingCard)`
 export const Card2 = styled(SettingCard)`
   grid-column: 2;
   grid-row: 2;
-  @media ${device.tablet} {
+
+  @media screen and (max-width: 1300px) {
     grid-column: 1;
     grid-row: 3;
   }
@@ -54,7 +55,8 @@ export const Card2 = styled(SettingCard)`
 export const Card3 = styled(SettingCard)`
   grid-column: 3;
   grid-row: 2;
-  @media ${device.tablet} {
+
+  @media screen and (max-width: 1300px) {
     grid-column: 1;
     grid-row: 4;
   }

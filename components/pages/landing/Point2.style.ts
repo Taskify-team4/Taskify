@@ -6,7 +6,7 @@ import device from '@utils/breakpointsDevice';
 export const Point2 = styled(Point1)`
   grid-template-columns: 644px 230px auto;
 
-  @media ${device.tablet} {
+  @media screen and (max-width: 1300px) {
     grid-template-columns: 63px 230px auto;
   }
 

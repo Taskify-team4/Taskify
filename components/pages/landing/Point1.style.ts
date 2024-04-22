@@ -15,7 +15,7 @@ export const Point1 = styled.div`
   flex-wrap: wrap;
   overflow: hidden;
 
-  @media ${device.tablet} {
+  @media screen and (max-width: 1300px) {
     max-width: 664px;
     height: 972px;
     grid-template-rows: 63px 126px auto;
