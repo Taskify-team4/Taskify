@@ -1,7 +1,6 @@
 import baseAxios from '@node_modules/axios';
 import { User } from '@utils/testData';
 import { DashBoardMember, DashBoardNameData, Invitations } from '@utils/editDashboard/edit.type';
-import { dashboard } from '@components/sidemenu/Sidemenu.type';
 import { PAGE_SIZE } from '@constants/page';
 import {
   CONSISTENT_INVITATION,
@@ -18,12 +17,13 @@ import {
   NO_INVITATION_MESSAGE,
   NO_USER_MESSAGE,
 } from '@constants/error';
+import { TDashInfo } from '@pages/dashboard/Dashboard.type';
 
 const axios = baseAxios.create({
   baseURL: 'https://sp-taskify-api.vercel.app/4-4/',
 });
 
-export const getDashboard = async (id: string): Promise<DashBoardNameData | void> => {
+export const getDashboard = async (id: string): Promise<DashBoardNameData> => {
   return await axios
     .get(`dashboards/${id}`, {
       headers: {
@@ -33,9 +33,10 @@ export const getDashboard = async (id: string): Promise<DashBoardNameData | void
     })
     .then((res) => res.data)
     .catch((error: Error) => {
-      if (error.message === ERROR_404_MESSAGE) return alert(NO_DASHBOARD_MESSAGE);
-      else if (error.message === ERROR_401_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
+      if (error.message === ERROR_404_MESSAGE) alert(NO_DASHBOARD_MESSAGE);
+      else if (error.message === ERROR_401_MESSAGE) alert(NO_AUTHORITY_MESSAGE);
       throw NETWORK_ERROR(error);
+      return { title: null, color: null, createdByMe: false };
     });
 };
 
@@ -60,8 +61,9 @@ export const getDashboardInvites = async (id: string, page: number) => {
       return { invitees: newInvitations, totalInvitees: data.totalCount };
     })
     .catch((error: Error) => {
-      if (error.message === ERROR_403_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
-      else if (error.message === ERROR_404_MESSAGE) return alert(NO_DASHBOARD_MESSAGE);
+      if (error.message === ERROR_403_MESSAGE) alert(NO_AUTHORITY_MESSAGE);
+      else if (error.message === ERROR_404_MESSAGE) alert(NO_DASHBOARD_MESSAGE);
+      return { invitees: [], totalInvitees: 0 };
     });
 };
 
@@ -86,13 +88,14 @@ export const getDashboardMembers = async (id: string, page: number) => {
       return { members: newMembers, totalMembers: data.totalCount };
     })
     .catch((error: Error) => {
-      if (error.message === ERROR_404_MESSAGE) return alert(NO_DASHBOARD_MEMBER_MESSAGE);
-      else if (error.message === ERROR_401_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
+      if (error.message === ERROR_404_MESSAGE) alert(NO_DASHBOARD_MEMBER_MESSAGE);
+      else if (error.message === ERROR_401_MESSAGE) alert(NO_AUTHORITY_MESSAGE);
       throw NETWORK_ERROR(error);
+      return { members: [], totalMembers: 0 };
     });
 };
 
-export const getMyData = async (): Promise<DashBoardMember[]> => {
+export const getMyData = async (): Promise<DashBoardMember> => {
   return await axios
     .get(`users/me`, {
       headers: {
@@ -102,8 +105,8 @@ export const getMyData = async (): Promise<DashBoardMember[]> => {
     })
     .then((res) => res.data)
     .catch((error: Error) => {
-      if (error.message === ERROR_404_MESSAGE) return alert(NO_USER_MESSAGE);
-      else if (error.message === ERROR_401_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
+      if (error.message === ERROR_404_MESSAGE) alert(NO_USER_MESSAGE);
+      else if (error.message === ERROR_401_MESSAGE) alert(NO_AUTHORITY_MESSAGE);
       throw NETWORK_ERROR(error);
     });
 };
@@ -153,7 +156,7 @@ export const getDashboardCreate = async () => {
   });
 };
 
-export const getDashboardList = async (): Promise<dashboard[]> => {
+export const getDashboardList = async (): Promise<TDashInfo[]> => {
   return await axios
     .get(`dashboards?navigationMethod=infiniteScroll`, {
       headers: {

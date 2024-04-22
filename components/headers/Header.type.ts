@@ -19,9 +19,11 @@ export type ProfileProps = {
 };
 
 export type DashBoardPros = {
+  title: string;
   mydata: User;
   userList: User[] | DashBoardMember[];
-  onInviteClick?: any;
+  crown?: boolean;
+  onInviteClick?: (inviteEmail: string) => void;
 };
 
 export type ProfileIconProps = {

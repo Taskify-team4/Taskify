@@ -6,7 +6,7 @@ type InputProps = {
   id: string;
   type: string;
   placeholder: string;
-  onChange: any;
+  onChange?: (value: string) => void;
   defaultValue?: string;
 };
 
@@ -19,8 +19,10 @@ function Input({ children, id, type, placeholder, onChange, defaultValue }: Inpu
         type={type}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        onChange={(e) => {
-          onChange(e.target.value);
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          if (onChange) {
+            onChange(e.target.value);
+          }
         }}
       />
     </S.InputContainer>

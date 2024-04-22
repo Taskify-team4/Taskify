@@ -2,14 +2,15 @@ import React from 'react';
 import * as S from './EditName.style';
 import TextInput from '@components/inputs/textInput/TextInput';
 import { ColorTile } from '@components/chips/Chip.style';
+import { TColorCode } from '@components/chips/Chip.type';
 
 type EditNameProps = {
   isMobile: boolean;
   title: string;
-  color: string;
-  onTileClick?: any;
-  onClick?: any;
-  onChange?: any;
+  color: TColorCode;
+  onTileClick?: (color: TColorCode) => void;
+  onClick?: () => void;
+  onChange?: (value: string) => void;
 };
 
 function EditName({ isMobile, title, color, onTileClick, onClick, onChange }: EditNameProps) {
