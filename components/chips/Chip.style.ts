@@ -55,7 +55,7 @@ export const ColorTile = styled.div<ChipStyleProps>`
   height: ${({ $size }) => colorTileSizeList[$size]}px;
 
   border-radius: 50%;
-  background-color: ${({ $color }) => colorPaletteList[$color] || $color};
+  background-color: ${({ $color }) => $color};
 `;
 
 export const ColorCheckIcon = styled.span`
