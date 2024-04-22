@@ -3,14 +3,14 @@ import TaskChips from './TaskChips';
 import TaskDeadline from './TaskDeadline';
 import { ModalTaskProps } from './ModalTask';
 
-type TaskContentInfoProps = Pick<ModalTaskProps, 'explanation' | 'tags' | 'dueDate' | 'assignee'>;
-function TaskContentInfo({ explanation, tags, dueDate, assignee }: TaskContentInfoProps) {
+type TaskContentInfoProps = Pick<ModalTaskProps, 'description' | 'tags' | 'dueDate' | 'assignee'>;
+function TaskContentInfo({ description, tags, dueDate, assignee }: TaskContentInfoProps) {
   return (
     <S.TaskContentInfo>
       <TaskDeadline {...{ dueDate, assignee }} />
       <S.InfoLeft>
         <TaskChips {...{ tags }} />
-        <S.TaskExplanation>{explanation}</S.TaskExplanation>
+        <S.TaskExplanation>{description}</S.TaskExplanation>
       </S.InfoLeft>
     </S.TaskContentInfo>
   );

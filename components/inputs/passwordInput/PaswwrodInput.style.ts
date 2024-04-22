@@ -1,7 +1,13 @@
+import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
 
 export const PasswordInputContainer = styled.div`
-  width: 520px;
+  max-width: 520px;
+  width: 100%;
+
+  @media ${device.mobile} {
+    width: 100%;
+  }
 `;
 
 export const PasswordInputContent = styled.div`
