@@ -45,9 +45,9 @@ export const getMyDashboardsByPagination = async (tempNumber: number) => {
     console.error(error);
   }
 };
-export const postAddDashboard = async () => {
+export const postAddDashboard = async (title: string, color: string) => {
   // temp
-  await instance.post('/dashboards', JSON.stringify({ title: 'test123', color: '#111111' }), {
+  await instance.post('/dashboards', JSON.stringify({ title: title, color: color }), {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${TEMP_TOKEN}`,

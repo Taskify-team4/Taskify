@@ -2,7 +2,6 @@ import * as S from '@components/sidemenu/Sidemenu.style';
 import React, { useState } from 'react';
 import { ColorTile } from '@components/chips/Chip.style';
 import crownImg from '@public/icons/crown.svg';
-import { TDashboards } from '@pages/dashboard/Dashboard.type';
 import { useDashContext } from '@contexts/dashContext';
 
 function DashboardList() {
