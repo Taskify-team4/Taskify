@@ -21,7 +21,7 @@ export const LandingFooter = styled.div`
 `;
 
 export const CodeIT = styled.div`
-  color: var(--gray-gray_9FA6B2, #9fa6b2);
+  color: var(--gray400);
   font-size: 16px;
   font-weight: 400;
 
@@ -43,7 +43,7 @@ export const Terms = styled.div`
 `;
 
 export const Policy = styled.div`
-  color: var(--gray-gray_9FA6B2, #9fa6b2);
+  color: var(--gray400);
   font-size: 16px;
   font-weight: 400;
 
@@ -53,7 +53,7 @@ export const Policy = styled.div`
 `;
 
 export const FAQ = styled.div`
-  color: var(--gray-gray_9FA6B2, #9fa6b2);
+  color: var(--gray400);
   font-size: 16px;
   font-weight: 400;
 

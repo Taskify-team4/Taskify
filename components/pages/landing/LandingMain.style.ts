@@ -40,7 +40,7 @@ export const Title = styled.div`
 `;
 
 export const MainTitle = styled.span`
-  color: var(--white); // 색변경
+  color: var(--black400);
   font-size: 76px;
   font-weight: 700;
   line-height: 160%;
@@ -71,7 +71,7 @@ export const Violet = styled.span`
 `;
 
 export const MainSubTitle = styled.p`
-  color: var(--white); // 색변경
+  color: var(--black400);
   font-size: 18px;
   font-weight: 400;
   line-height: normal;

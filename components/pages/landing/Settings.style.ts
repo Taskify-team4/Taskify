@@ -18,7 +18,7 @@ export const Settings = styled.div`
 `;
 
 export const SettingTitle = styled.p`
-  color: var(--white);
+  color: var(--black400);
   font-size: 28px;
   font-weight: 700;
   line-height: normal;

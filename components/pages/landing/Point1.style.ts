@@ -10,7 +10,7 @@ export const Point1 = styled.div`
   grid-template-columns: 60px 302px auto;
   grid-template-rows: 123px 126px auto;
   position: relative;
-  background: var(--black-black_171717, #171717);
+  background: var(--gray100);
   border-radius: 8px;
   flex-wrap: wrap;
   overflow: hidden;
@@ -32,7 +32,7 @@ export const Point1 = styled.div`
 export const Point1Title = styled.p`
   width: 100%;
 
-  color: var(--gray400);
+  color: var(--black100);
   font-size: 22px;
   font-weight: 500;
   grid-column: 2;
@@ -47,7 +47,7 @@ export const Point1Title = styled.p`
 
 export const Point1Description = styled.p`
   width: 100%;
-  color: var(--white);
+  color: var(--black400);
   font-size: 48px;
   font-weight: 700;
   line-height: 64px; /* 133.333% */

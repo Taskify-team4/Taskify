@@ -16,7 +16,7 @@ export const SettingImgWrap = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 8px 8px 0px 0px;
-  background: var(--black100);
+  background: var(--gray200);
 `;
 
 export const SettingImg = styled(Image)`
@@ -30,7 +30,7 @@ export const SettingTextWrap = styled.div`
   flex-direction: column;
   gap: 18px;
   padding: 33px 32px;
-  background: var(--black-black_171717, #171717);
+  background: var(--gray100);
   border-radius: 0px 0px 8px 8px;
 
   @media ${device.mobile} {
@@ -39,14 +39,14 @@ export const SettingTextWrap = styled.div`
 `;
 
 export const SettingTitle = styled.p`
-  color: var(--white);
+  color: var(--black400);
   font-size: 18px;
   font-weight: 700;
   word-break: keep-all;
 `;
 
 export const SettingDescription = styled.p`
-  color: var(--white);
+  color: var(--black400);
   font-size: 16px;
   font-weight: 500;
   word-break: keep-all;
