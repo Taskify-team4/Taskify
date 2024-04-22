@@ -5,9 +5,9 @@ export type HeaderProps = {
   title: string;
   isInvite?: boolean;
   isPagenation?: boolean;
-  onInviteClick?: any;
-  onNextClick?: any;
-  onPreviousClick?: any;
+  onInviteClick?: (inviteEmail: string) => void;
+  onNextClick?: () => void;
+  onPreviousClick?: () => void;
   pageInfo?: PagenationInfo;
 };
 
@@ -20,7 +20,7 @@ export type TableListsProps = {
 export type DataListProps = {
   data: DashBoardMember[];
   buttonText?: string;
-  onDeleteClick?: any;
+  onDeleteClick?: (deleteId: number) => void;
 };
 
 export type TInvitation = {
@@ -48,5 +48,5 @@ export type TInvitation = {
 export type InvitedDashListProps = {
   data: TInvitation[];
   buttonText?: string;
-  onCancelInviteClick?: any;
+  onCancelInviteClick?: (cancelId: number) => void;
 };

@@ -16,7 +16,9 @@
       "@*": ["./*"],
       "@pages": ["./*/pages"],
       "@components": ["./*/components"],
-      "@public": ["./*/public"]
+      "@public": ["./*/public"],
+      "@hooks": ["./*/hooks"],
+      "@contexts": ["./*/contexts"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

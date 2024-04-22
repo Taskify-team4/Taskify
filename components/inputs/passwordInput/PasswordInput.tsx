@@ -6,12 +6,13 @@ import * as S from '@components/inputs/passwordInput/PaswwrodInput.style';
 type PasswordInputProps = {
   children: ReactNode;
   id: string;
-  type: string;
+  type?: string;
   placeholder: string;
 };
 
 function PasswordInput({ children, id, placeholder }: PasswordInputProps) {
   const [isValue, setIsValue] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleValueChange = () => {
     setIsValue(!isValue);
@@ -20,11 +21,7 @@ function PasswordInput({ children, id, placeholder }: PasswordInputProps) {
   return (
     <S.PasswordInputContainer>
       <S.PasswordInputContent>
-        <Input
-          id={id}
-          type={isValue ? 'text' : 'password'}
-          placeholder={placeholder}
-        >
+        <Input id={id} type={isValue ? 'text' : 'password'} placeholder={placeholder}>
           {children}
         </Input>
         <S.ImageWrapper>
@@ -36,7 +33,7 @@ function PasswordInput({ children, id, placeholder }: PasswordInputProps) {
           />
         </S.ImageWrapper>
       </S.PasswordInputContent>
-      <S.ErrorMessage>ErrorMessage</S.ErrorMessage>
+      {error && <S.ErrorMessage>ErrorMessage</S.ErrorMessage>}
     </S.PasswordInputContainer>
   );
 }

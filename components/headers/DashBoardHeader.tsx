@@ -10,8 +10,11 @@ import InviteModal from '@components/modals/edit_dashboard/InviteModal';
 import Modal from '@components/modals/Modal';
 import React from 'react';
 import { useRouter } from 'next/router';
+import { useDashContext } from '@contexts/dashContext';
 
-function DashBoardHeader({ title, mydata, userList, crown, onInviteClick }: DashBoardPros) {
+function DashBoardHeader({ mydata, userList, onInviteClick }: DashBoardPros) {
+  const { dashInfo } = useDashContext();
+
   const router = useRouter();
   // 세팅페이지 이동
   const handleSettingClick = () => {
@@ -25,8 +28,8 @@ function DashBoardHeader({ title, mydata, userList, crown, onInviteClick }: Dash
   return (
     <S.DashBoardHeader>
       <S.DashBoardTitle>
-        <S.Title>{title}</S.Title>
-        {crown ? <S.CrownIcon src={crownIcon} alt="왕관 아이콘" /> : null}
+        <S.Title>{dashInfo.title}</S.Title>
+        {dashInfo.createdByMe ? <S.CrownIcon src={crownIcon} alt="왕관 아이콘" /> : null}
       </S.DashBoardTitle>
       <S.ManagementContainer>
         <S.Buttons>

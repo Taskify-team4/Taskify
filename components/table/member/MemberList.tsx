@@ -27,7 +27,10 @@ function MemberList({ data, buttonText, onDeleteClick }: DataListProps) {
             <Modal
               content={
                 <ModalBase>
-                  <ConfirmModal text={'정말 멤버를 삭제하시겠습니까?'} onConfirmClick={() => onDeleteClick(item.id)} />
+                  <ConfirmModal
+                    text={'정말 멤버를 삭제하시겠습니까?'}
+                    onConfirmClick={() => onDeleteClick && onDeleteClick(item.id)}
+                  />
                 </ModalBase>
               }
             >

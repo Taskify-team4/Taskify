@@ -5,7 +5,7 @@ import { ModalBaseProps } from '@components/modals/Modal.type';
 
 export type ConfirmModalProps = ModalBaseProps & {
   text: string;
-  onConfirmClick: any;
+  onConfirmClick: () => void;
 };
 
 function ConfirmModal({ close, text, onConfirmClick }: ConfirmModalProps) {
