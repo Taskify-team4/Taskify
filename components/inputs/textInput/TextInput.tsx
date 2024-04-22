@@ -6,7 +6,7 @@ type TextInputProps = {
   children: ReactNode;
   id: string;
   placeholder: string;
-  onChange?: any;
+  onChange?: (value: string) => void;
   defaultValue?: string;
 };
 

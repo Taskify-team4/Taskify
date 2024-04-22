@@ -15,7 +15,7 @@ export const DashboardListProvider = ({ children }: { children: ReactNode }) => 
     {
       title: '',
       color: 'gray',
-      crown: false,
+      createdByMe: false,
     },
   ]);
   const fetchData = async () => {
