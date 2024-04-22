@@ -1,21 +1,25 @@
 // 현재 접속한 유저가 속한 대시보드 리스트
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { getDashboardList } from '@utils/editDashboard/api';
-import { Dashboard } from '@components/sidemenu/Sidemenu.type';
+import { TDashInfo } from '@pages/dashboard/Dashboard.type';
 
 type DashboardListContextType = {
-  dashboardList: Dashboard[];
-  setDashboardList: React.Dispatch<React.SetStateAction<Dashboard[]>>;
+  dashboardList: TDashInfo[];
+  setDashboardList: React.Dispatch<React.SetStateAction<TDashInfo[]>>;
 };
 
 const DashboardListContext = createContext<DashboardListContextType | undefined>(undefined);
 
 export const DashboardListProvider = ({ children }: { children: ReactNode }) => {
-  const [dashboardList, setDashboardList] = useState<Dashboard[]>([
+  const [dashboardList, setDashboardList] = useState<TDashInfo[]>([
     {
-      title: '',
-      color: 'gray',
+      color: '',
+      createdAt: '',
       createdByMe: false,
+      id: 0,
+      title: '',
+      updatedAt: '',
+      userId: 0,
     },
   ]);
   const fetchData = async () => {

@@ -1,7 +1,6 @@
 import baseAxios from '@node_modules/axios';
 import { User } from '@utils/testData';
 import { DashBoardMember, DashBoardNameData, Invitations } from '@utils/editDashboard/edit.type';
-import { Dashboard } from '@components/sidemenu/Sidemenu.type';
 import { PAGE_SIZE } from '@constants/page';
 import {
   CONSISTENT_INVITATION,
@@ -18,6 +17,7 @@ import {
   NO_INVITATION_MESSAGE,
   NO_USER_MESSAGE,
 } from '@constants/error';
+import { TDashInfo } from '@pages/dashboard/Dashboard.type';
 
 const axios = baseAxios.create({
   baseURL: 'https://sp-taskify-api.vercel.app/4-4/',
@@ -156,7 +156,7 @@ export const getDashboardCreate = async () => {
   });
 };
 
-export const getDashboardList = async (): Promise<Dashboard[]> => {
+export const getDashboardList = async (): Promise<TDashInfo[]> => {
   return await axios
     .get(`dashboards?navigationMethod=infiniteScroll`, {
       headers: {
