@@ -177,7 +177,7 @@ function Edit({
   return (
     <S.PageContainer>
       <div>
-        <Sidemenu dashboards={dashboardList} />
+        <Sidemenu />
       </div>
       <S.RightSection>
         <DashBoardHeader
@@ -192,7 +192,7 @@ function Edit({
           onInviteClick={handleInviteClick}
         />
         <S.PageContents>
-          <S.GoBackButton href={`/dashboards/${dashboardId}`}>
+          <S.GoBackButton href={`/dashboard/${dashboardId}`}>
             <Image src={leftarrowIcon.src} width={20} height={20} alt="돌아가기 버튼" /> 돌아가기
           </S.GoBackButton>
           <EditName
