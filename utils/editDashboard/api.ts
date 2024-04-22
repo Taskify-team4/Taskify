@@ -36,7 +36,7 @@ export const getDashboard = async (id: string): Promise<DashBoardNameData> => {
       if (error.message === ERROR_404_MESSAGE) alert(NO_DASHBOARD_MESSAGE);
       else if (error.message === ERROR_401_MESSAGE) alert(NO_AUTHORITY_MESSAGE);
       throw NETWORK_ERROR(error);
-      return { title: null, color: null };
+      return { title: null, color: null, createdByMe: false };
     });
 };
 

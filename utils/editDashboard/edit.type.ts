@@ -2,7 +2,7 @@ import { TColorCode } from '@components/chips/Chip.type';
 import { User } from '@utils/testData';
 import { Dashboard } from '@components/sidemenu/Sidemenu.type';
 
-export type DashBoardNameData = { title: string; color: TColorCode };
+export type DashBoardNameData = { title: string; color: TColorCode; createdByMe: boolean };
 
 export type DashBoardMember = {
   id: number;

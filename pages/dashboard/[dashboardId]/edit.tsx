@@ -188,7 +188,7 @@ function Edit({
             email: myData.email || '',
           }}
           userList={initialMembers}
-          crown={true}
+          crown={dashboardData.createdByMe}
           onInviteClick={handleInviteClick}
         />
         <S.PageContents>
