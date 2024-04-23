@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Image from 'next/image';
 import Button from '@components/buttons/Button';
 import device from '@utils/breakpointsDevice';
@@ -55,11 +55,32 @@ export const MainTitle = styled.span`
   }
 `;
 
+const typing = keyframes`
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+    border-color: transparent
+  }
+`;
+
+const blink = keyframes`
+  from { border-color: transparent }
+  to { border-color: black; }
+`;
+
 export const Violet = styled.span`
+  margin-left: 28px;
   color: var(--violet);
   font-size: 90px;
   font-weight: 700;
-  line-height: 65px;
+  /* line-height: 65px; */
+
+  /* 애니메이션 */
+  white-space: nowrap;
+  color: transparent;
+  position: relative;
 
   @media ${device.tablet} {
     font-size: 70px;
@@ -67,6 +88,22 @@ export const Violet = styled.span`
 
   @media ${device.mobile} {
     font-size: 42px;
+  }
+
+  &:before {
+    content: 'Taskify';
+    padding-right: 10px;
+    position: absolute;
+    color: var(--violet);
+    overflow: hidden;
+    /* top: 0;
+    left: 0; */
+    width: 100%;
+    /* height: 100%; */
+    border-right: 15px solid black;
+    animation:
+      ${typing} 1s steps(18) 1,
+      ${blink} 0.8s infinite;
   }
 `;
 
