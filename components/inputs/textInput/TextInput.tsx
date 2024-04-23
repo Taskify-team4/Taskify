@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Input from '@components/inputs/Input';
 import * as S from '@components/inputs/textInput/TextInput.style';
 
@@ -11,14 +11,25 @@ type TextInputProps = {
 };
 
 function TextInput({ children, id, placeholder, onChange, defaultValue }: TextInputProps) {
+  const [errorMsg, setErrorMsg] = useState('');
+
   return (
     <S.TextInputContainer>
       <S.TextInputWrapper>
-        <Input id={id} type="text" placeholder={placeholder} onChange={onChange} defaultValue={defaultValue}>
+        <Input
+          id={id}
+          type="text"
+          inputType="text"
+          placeholder={placeholder}
+          onChange={onChange}
+          onError={setErrorMsg}
+          errorMsg={errorMsg}
+          defaultValue={defaultValue}
+        >
           {children}
         </Input>
       </S.TextInputWrapper>
-      <S.ErrorMessage>ErrorMessage</S.ErrorMessage>
+      {errorMsg && <S.ErrorMessage>{errorMsg}</S.ErrorMessage>}
     </S.TextInputContainer>
   );
 }

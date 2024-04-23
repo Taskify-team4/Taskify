@@ -8,10 +8,12 @@ type PasswordInputProps = {
   id: string;
   type: string;
   placeholder: string;
+  onChange?: any;
 };
 
-function PasswordInput({ children, id, placeholder }: PasswordInputProps) {
+function PasswordInput({ children, id, placeholder, onChange }: PasswordInputProps) {
   const [isValue, setIsValue] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleValueChange = () => {
     setIsValue(!isValue);
@@ -23,7 +25,11 @@ function PasswordInput({ children, id, placeholder }: PasswordInputProps) {
         <Input
           id={id}
           type={isValue ? 'text' : 'password'}
+          inputType="password"
           placeholder={placeholder}
+          onChange={onChange}
+          onError={setErrorMsg}
+          errorMsg={errorMsg}
         >
           {children}
         </Input>
@@ -36,7 +42,7 @@ function PasswordInput({ children, id, placeholder }: PasswordInputProps) {
           />
         </S.ImageWrapper>
       </S.PasswordInputContent>
-      <S.ErrorMessage>ErrorMessage</S.ErrorMessage>
+      {errorMsg && <S.ErrorMessage>{errorMsg}</S.ErrorMessage>}
     </S.PasswordInputContainer>
   );
 }
