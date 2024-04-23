@@ -1,3 +1,5 @@
+import { DashBoardMember } from '@utils/editDashboard/edit.type';
+
 export type HeaderProps = {
   children?: React.ReactNode;
 };
@@ -19,11 +21,13 @@ export type ProfileProps = {
 export type DashBoardPros = {
   title: string;
   mydata: User;
-  userList: User[];
+  userList: User[] | DashBoardMember[];
   crown?: boolean;
+  onInviteClick?: (inviteEmail: string) => void;
 };
 
 export type ProfileIconProps = {
   str: string;
   children?: React.ReactNode;
+  className?: string;
 };

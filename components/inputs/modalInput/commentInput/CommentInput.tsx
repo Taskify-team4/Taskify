@@ -3,16 +3,20 @@ import * as S from '@components/inputs/modalInput/commentInput/CommentInput.styl
 
 type CommentInputProps = {
   children: ReactNode;
-  id: string;
   placeholder: string;
+  onRequired?: boolean;
+  onModal?: boolean;
 };
 
-function CommentInput({ children, id, placeholder }: CommentInputProps) {
+function CommentInput({ children, placeholder, onRequired, onModal }: CommentInputProps) {
   return (
     <S.CommentInputContainer>
-      <S.CommentInputLabel htmlFor={id}>{children}</S.CommentInputLabel>
-      <S.CommentInput id={id} placeholder={placeholder} />
-      <S.CommentBtn>입력</S.CommentBtn>
+      <S.CommentInputTitleContainer>
+        <S.CommentInputLabel onModal={onModal}>{children}</S.CommentInputLabel>
+        {onRequired && <S.CommentInputRequired>*</S.CommentInputRequired>}
+      </S.CommentInputTitleContainer>
+      <S.CommentInput placeholder={placeholder} onModal={onModal} />
+      {!onModal && <S.CommentBtn>입력</S.CommentBtn>}
     </S.CommentInputContainer>
   );
 }

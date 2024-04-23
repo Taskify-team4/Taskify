@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import device from '@utils/breakpointsDevice';
+import ProfileIcon from '@components/profileIcon/ProfileIcon';
+import Image from 'next/image';
 
 export const CardContainer = styled.div`
+  background-color: white;
   display: inline-flex;
   flex-direction: column;
   gap: 12px;
@@ -27,7 +30,7 @@ export const CardContainer = styled.div`
   }
 `;
 
-export const CardImage = styled.div`
+export const CardImageContainer = styled.div`
   position: relative;
 
   width: 270px;
@@ -41,6 +44,11 @@ export const CardImage = styled.div`
     width: 260px;
     height: 152px;
   }
+`;
+
+export const CardImage = styled(Image)`
+  border-radius: 6px;
+  object-fit: cover;
 `;
 
 export const CardContent = styled.div`
@@ -107,13 +115,11 @@ export const CardDate = styled.div`
   }
 `;
 
-// 임시 컴포넌트, merge 후 수정 예정입니다.
-export const CardOwner = styled.div`
+export const CardOwner = styled(ProfileIcon)`
   width: 24px;
   height: 24px;
-  color: white;
-  background-color: #7ac555;
-  border-radius: 50%;
+  font-size: 12px;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;

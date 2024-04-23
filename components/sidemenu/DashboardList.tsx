@@ -1,10 +1,12 @@
 import * as S from '@components/sidemenu/Sidemenu.style';
-import { SidemenuProps } from '@components/sidemenu/Sidemenu.type';
 import React, { useState } from 'react';
 import { ColorTile } from '@components/chips/Chip.style';
 import crownImg from '@public/icons/crown.svg';
+import { TDashboards } from '@pages/dashboard/Dashboard.type';
+import { useDashContext } from '@contexts/dashContext';
 
-function DashboardList({ dashboards }: SidemenuProps) {
+function DashboardList() {
+  const { dashboards } = useDashContext();
   const [itemIndex, setItemIndex] = useState<number>();
 
   const handleItemClick = (index: number) => {
@@ -21,7 +23,7 @@ function DashboardList({ dashboards }: SidemenuProps) {
             >
               <ColorTile $size={'tiny'} $color={dashboard.color} />
               <S.DashBoardTitle>{dashboard.title}</S.DashBoardTitle>
-              {dashboard.crown && (
+              {dashboard.createdByMe && (
                 <S.DashBoardCrown src={crownImg} alt="본인이 만든 대시보드일 때 생기는 왕관 아이콘" />
               )}
             </S.DashBoardsItem>

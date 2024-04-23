@@ -1,12 +1,11 @@
 import * as S from '@components/sidemenu/Sidemenu.style';
-import { SidemenuProps } from '@components/sidemenu/Sidemenu.type';
 import logoImg from '@public/icons/logo_img.svg';
 import logoImgTaskify from '@public/icons/logo_taskify.svg';
 import addBoxImg from '@public/icons/add.svg';
 import React from 'react';
 import DashboardList from './DashboardList';
 
-function Sidemenu(props: SidemenuProps) {
+function Sidemenu() {
   return (
     <S.SidemenuContainer>
       <S.LogoWrapper>
@@ -21,7 +20,7 @@ function Sidemenu(props: SidemenuProps) {
         <S.DashBoardsText>Dash Boards</S.DashBoardsText>
         <S.AddBoxImg src={addBoxImg} alt="add box" />
       </S.DashBoardsWrapper>
-      <DashboardList {...props} />
+      <DashboardList />
     </S.SidemenuContainer>
   );
 }

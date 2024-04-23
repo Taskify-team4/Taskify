@@ -1,24 +1,33 @@
 import React, { useState } from 'react';
 import * as S from './Chip.style';
-import { TChipSize, TColorKey } from './Chip.type';
+import { TChipSize, TColorCode } from './Chip.type';
 
-function ColorPalette({ size }: { size: TChipSize }) {
-  const colorList: TColorKey[] = ['green', 'purple', 'pink', 'orange', 'blue'];
-  const [selectedColor, setSelectedColor] = useState(0);
+function ColorPalette({
+  size,
+  className,
+  onClick,
+  initialColor,
+}: {
+  size: TChipSize;
+  className?: string;
+  onClick?: (color: TColorCode) => void;
+  initialColor: string;
+}) {
+  const colorList: TColorCode[] = ['#760dde', '#e876ea', '#ffa500', '#76a5ea', '#7ac555'];
+  const [selectedColor, setSelectedColor] = useState(initialColor);
+
+  const handleClickTile = (color: TColorCode) => {
+    setSelectedColor(color);
+    if (onClick) onClick(color);
+  };
 
   return (
-    <S.ColorPalette>
+    <S.ColorPalette className={className}>
       {colorList.map((color, idx) => {
         return (
           <>
-            <S.ColorTile
-              $color={color}
-              $size={size}
-              onClick={() => setSelectedColor(idx)}
-            >
-              {selectedColor === idx ? (
-                <S.ColorCheckIcon>✓</S.ColorCheckIcon>
-              ) : null}
+            <S.ColorTile key={idx} $color={color} $size={size} onClick={() => handleClickTile(color)}>
+              {selectedColor === color ? <S.ColorCheckIcon>✓</S.ColorCheckIcon> : null}
             </S.ColorTile>
           </>
         );

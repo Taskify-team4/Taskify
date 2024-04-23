@@ -15,6 +15,7 @@ type TagProps = {
 export type CardProps = {
   imageUrl: string | null;
   title: string;
+  description: string;
   tags: TagProps[];
   dueDate: string;
   assignee: { nickname: string };
@@ -24,17 +25,17 @@ function Card(props: CardProps) {
   return (
     <S.CardContainer>
       {props.imageUrl ? (
-        <S.CardImage>
-          <Image src={props.imageUrl} alt="Card Image" fill />
-        </S.CardImage>
+        <S.CardImageContainer>
+          <S.CardImage src={props.imageUrl} alt="Card Image" fill />
+        </S.CardImageContainer>
       ) : null}
       <S.CardContent>
         <S.CardTitle>{props.title}</S.CardTitle>
         <S.CardMeta>
           <S.CardChips>
-            {props.tags.map((tag) => (
-              <Chip.Square size={'small'} color={tag.color}>
-                {tag.text}
+            {props.tags.map((tag, idx) => (
+              <Chip.Square size={'small'} key={idx} color="#3f9fff">
+                {tag}
               </Chip.Square>
             ))}
           </S.CardChips>
@@ -42,7 +43,7 @@ function Card(props: CardProps) {
             <S.CardDate>
               <Image src={calendarIcon.src} alt="Calendar Icon" width={18} height={18} /> {props.dueDate}
             </S.CardDate>
-            <S.CardOwner>{props.assignee.nickname[0]}</S.CardOwner>
+            <S.CardOwner str={props.assignee.nickname[0]} />
           </S.CardDateOwner>
         </S.CardMeta>
       </S.CardContent>

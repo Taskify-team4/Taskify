@@ -1,11 +1,11 @@
 import React, { Children, cloneElement, isValidElement, ReactElement } from 'react';
 import styled from 'styled-components';
 import { ModalBaseProps } from './Modal.type';
+import device from '@utils/breakpointsDevice';
 
 const ModalBaseContainer = styled.div`
-  width: 80%;
   background-color: white;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -13,7 +13,16 @@ const ModalBaseContainer = styled.div`
   color: var(--black300);
   border-radius: 8px;
   font-size: 30px;
-  padding: 28px;
+  padding: 32px 28px 28px;
+
+  @media ${device.tablet} {
+    width: 80%;
+  }
+
+  @media ${device.mobile} {
+    width: 80%;
+    padding: 28px 20px;
+  }
 `;
 
 function ModalBase({ children, close }: ModalBaseProps) {
