@@ -2,15 +2,14 @@ import * as S from '@components/pages/mydashboard/MyDashboardList.style';
 import Button from '@components/buttons/Button';
 
 // test
-import { TDashboards } from '@pages/dashboard/Dashboard.type';
 import { useDashContext } from '@contexts/dashContext';
-import { useState } from 'react';
 import Modal from '@components/modals/Modal';
 import ModalBase from '@components/modals/ModalBase';
 import NewDashBoardModal from '@components/modals/new_dashboard/Modal';
 
 function MyDashboardList() {
-  const { dashboards } = useDashContext();
+  const { Pdashboards, dashPage, dashPageLimit } = useDashContext();
+  const { handleNextClick, handlePrevClick } = useDashContext();
   return (
     <S.MyDashBoardListContainer>
       <S.MyDashBoardList>
@@ -23,20 +22,22 @@ function MyDashboardList() {
         >
           <Button.AddDashboard>대시보드 생성하기</Button.AddDashboard>
         </Modal>
-        {dashboards ? (
-          dashboards.map((dashboard, index) => (
+        {Pdashboards ? (
+          Pdashboards.map((dashboard, index) => (
             <Button.Dashboard key={`${index} ${dashboard.title}`} dashboardData={dashboard} />
           ))
         ) : (
           <></>
         )}
       </S.MyDashBoardList>
-      {dashboards ? (
+      {Pdashboards ? (
         <S.MyDashBoardPagenation>
-          <S.PagenationText>1 페이지 중 1</S.PagenationText>
+          <S.PagenationText>
+            {dashPageLimit} 페이지 중 {dashPage}
+          </S.PagenationText>
           <S.PagenationButton>
-            <Button.PagenationLeft />
-            <Button.PagenationRight />
+            <Button.PagenationLeft onClick={handlePrevClick} />
+            <Button.PagenationRight onClick={handleNextClick} />
           </S.PagenationButton>
         </S.MyDashBoardPagenation>
       ) : (

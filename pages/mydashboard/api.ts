@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Dashboard } from '@components/sidemenu/Sidemenu.type';
 
 const TEMP_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAyNSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNTk5NjAzLCJpc3MiOiJzcC10YXNraWZ5In0.LEYdnW0mcRvx9mAKczvnJWXGqZrQBA3ALmmqdM7iMq0';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAyNSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzODQ1ODQ5LCJpc3MiOiJzcC10YXNraWZ5In0.TX6XvmAngZjr9geZyBxPISigXYsFmxJK9_B7ydCQ6cU';
 
 const instance = axios.create({ baseURL: 'https://sp-taskify-api.vercel.app/4-4' });
 
@@ -32,9 +32,9 @@ export const getMyDashboards = async () => {
     console.error(error);
   }
 };
-export const getMyDashboardsByPagination = async (tempNumber: number) => {
+export const getMyDashboardsByPagination = async (page: number) => {
   try {
-    const res = await instance.get(`/dashboards?navigationMethod=pagination&cursorId=1&page=1&size=${tempNumber}`, {
+    const res = await instance.get(`/dashboards?navigationMethod=pagination&page=${page}&size=5`, {
       headers: {
         Authorization: `Bearer ${TEMP_TOKEN}`,
       },
@@ -47,12 +47,13 @@ export const getMyDashboardsByPagination = async (tempNumber: number) => {
 };
 export const postAddDashboard = async (title: string, color: string) => {
   // temp
-  await instance.post('/dashboards', JSON.stringify({ title: title, color: color }), {
+  const response = await instance.post('/dashboards', JSON.stringify({ title: title, color: color }), {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${TEMP_TOKEN}`,
     },
   });
+  return response;
 };
 export const getInvitations = async () => {
   try {

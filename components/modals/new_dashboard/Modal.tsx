@@ -5,15 +5,25 @@ import Button from '@components/buttons/Button';
 import ModalInput from '@components/inputs/modalInput/ModalInput';
 import { ModalBaseProps } from '@components/modals/Modal.type';
 import { postAddDashboard } from '@pages/mydashboard/api';
+import { useDashContext } from '@contexts/dashContext';
 
 function NewDashBoardModal({ close }: ModalBaseProps) {
   const trigger = () => {
     return close && close();
   };
+  const { fetchDashboards } = useDashContext();
   const [selectedColor, setSelectedColor] = useState('#760dde');
-  const handleCreateClick = () => {
+  const handleCreateClick = async () => {
     let inputValue = (document.getElementById('dashboardName') as HTMLInputElement).value;
-    postAddDashboard(inputValue, selectedColor);
+    try {
+      const res = await postAddDashboard(inputValue, selectedColor);
+      if (res.status) {
+        trigger();
+        fetchDashboards();
+      }
+    } catch (error) {
+      console.error('대시보드 생성 실패', error);
+    }
   };
   return (
     <S.ModalContainer>

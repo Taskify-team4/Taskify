@@ -2,6 +2,7 @@ import { TColumns, TDashInfo, TDashboards } from '@pages/dashboard/Dashboard.typ
 import { getColumns, getDashboardInfo, getDashboards } from '@pages/dashboard/api';
 import { useRouter } from 'next/router';
 import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react';
+import { getMyDashboardsByPagination } from '@pages/mydashboard/api';
 
 type ProviderProps = {
   children: ReactNode;
@@ -16,6 +17,13 @@ const initialContext = {
   fetchDashboardInfo: () => {},
   fetchDashboards: () => {},
   fetchColumns: () => {},
+  //
+  Pdashboards: [] as TDashboards,
+  dashPage: 1,
+  dashPageLimit: 1,
+  fetchDashboardsPagination: () => {},
+  handlePrevClick: () => {},
+  handleNextClick: () => {},
 };
 
 const DashContext = createContext(initialContext);
@@ -52,6 +60,40 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     setColumns(result);
   };
 
+  const [Pdashboards, setPDashboards] = useState<TDashboards>([]);
+  const [dashPage, setDashPage] = useState(1);
+  const [dashPageLimit, setdashPageLimit] = useState(1);
+  const fetchDashboardsPagination = async () => {
+    const res = await getMyDashboardsByPagination(dashPage);
+    const result = res.dashboards;
+
+    setPDashboards(result);
+    setdashPageLimit(Math.ceil(res.totalCount / 5));
+  };
+  const handlePrevClick = () => {
+    setDashPage((prev) => {
+      if (prev > 1) return prev - 1;
+      return prev;
+    });
+  };
+  const handleNextClick = () => {
+    setDashPage((prev) => {
+      if (prev < dashPageLimit) return prev + 1;
+      return prev;
+    });
+  };
+  const handleDashPageClick = async () => {
+    const { dashboards: nowDashboards } = await getMyDashboardsByPagination(dashPage);
+    console.log(nowDashboards);
+    setPDashboards(nowDashboards);
+  };
+  useEffect(() => {
+    fetchDashboardsPagination();
+  }, []);
+  useEffect(() => {
+    handleDashPageClick();
+  }, [dashPage]);
+
   useEffect(() => {
     if (!dashboardId) return;
     fetchDashboardInfo();
@@ -67,6 +109,13 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     fetchDashboardInfo,
     fetchDashboards,
     fetchColumns,
+    //
+    Pdashboards,
+    dashPage,
+    dashPageLimit,
+    fetchDashboardsPagination,
+    handlePrevClick,
+    handleNextClick,
   };
 
   return <DashContext.Provider value={values}>{children}</DashContext.Provider>;

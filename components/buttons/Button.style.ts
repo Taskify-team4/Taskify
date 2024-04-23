@@ -185,6 +185,8 @@ export const AddDashboardButton = styled.button`
   height: 70px; */
   font-size: 16px;
   font-weight: 600;
+  min-height: 60px;
+  width: -webkit-fill-available;
   @media ${device.tablet} {
     /* width: 247px;
     height: 68px; */

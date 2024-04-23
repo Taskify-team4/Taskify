@@ -19,7 +19,7 @@ export type ProfileProps = {
 };
 
 export type DashBoardPros = {
-  title: string;
+  title?: string;
   mydata: User | undefined;
   userList: User[] | DashBoardMember[];
   crown?: boolean;

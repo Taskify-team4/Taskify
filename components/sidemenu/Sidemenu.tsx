@@ -4,6 +4,9 @@ import logoImgTaskify from '@public/icons/logo_taskify.svg';
 import addBoxImg from '@public/icons/add.svg';
 import React from 'react';
 import DashboardList from './DashboardList';
+import Modal from '@components/modals/Modal';
+import ModalBase from '@components/modals/ModalBase';
+import NewDashBoardModal from '@components/modals/new_dashboard/Modal';
 
 function Sidemenu() {
   return (
@@ -12,14 +15,19 @@ function Sidemenu() {
         <S.LogoImg src={logoImg} alt="logo" />
         <S.LogoImgTaskify src={logoImgTaskify} alt="logo Taskify" />
       </S.LogoWrapper>
-      <S.DashBoardsWrapper
-        onClick={() => {
-          console.log('모달떠야함');
-        }}
+      <Modal
+        content={
+          <ModalBase>
+            <NewDashBoardModal />
+          </ModalBase>
+        }
       >
-        <S.DashBoardsText>Dash Boards</S.DashBoardsText>
-        <S.AddBoxImg src={addBoxImg} alt="add box" />
-      </S.DashBoardsWrapper>
+        <S.DashBoardsWrapper>
+          <S.DashBoardsText>Dash Boards</S.DashBoardsText>
+          <S.AddBoxImg src={addBoxImg} alt="add box" />
+        </S.DashBoardsWrapper>
+      </Modal>
+
       <DashboardList />
     </S.SidemenuContainer>
   );
