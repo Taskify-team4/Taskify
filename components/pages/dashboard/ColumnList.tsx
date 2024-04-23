@@ -4,10 +4,9 @@ import Column from './Column';
 
 function ColumnList() {
   const { columns } = useDashContext();
-  console.log(columns);
   return (
     <>
-      {columns.map((column) => (
+      {columns?.map((column) => (
         <Column column={column} key={column.id} />
       ))}
     </>

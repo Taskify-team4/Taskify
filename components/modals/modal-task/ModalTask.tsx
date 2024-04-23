@@ -7,26 +7,52 @@ import closeImg from '@public/icons/close.svg';
 import moreImg from '@public/icons/more.svg';
 import TaskContentInfo from './TaskContentInfo';
 import { useState } from 'react';
+import { deleteCard } from '@pages/dashboard/api';
+import { useDashContext } from '@contexts/dashContext';
 
 type TagProps = {
   text: string;
   color: TColorKey;
 };
 export type ModalTaskProps = ModalBaseProps & {
+  id: number;
   imageUrl: string | null;
   title: string;
   description: string;
   tags: TagProps[];
   dueDate: string;
   assignee: { nickname: string };
+  columnid: number;
+  fetchCards: (columnid: number) => {};
 };
 
-function ModalTask({ close, imageUrl, title, description, tags, dueDate, assignee }: ModalTaskProps) {
+function ModalTask({
+  id,
+  close,
+  imageUrl,
+  title,
+  description,
+  tags,
+  dueDate,
+  assignee,
+  columnid,
+  fetchCards,
+}: ModalTaskProps) {
   const [more, setMore] = useState(false);
 
   const trigger = () => {
     setMore(false);
     return close && close();
+  };
+
+  const handleDeleteButtonClick = async () => {
+    try {
+      await deleteCard(id);
+      trigger();
+      fetchCards(columnid);
+    } catch (error) {
+      console.error('카드 삭제 실패', error);
+    }
   };
 
   return (
@@ -45,7 +71,9 @@ function ModalTask({ close, imageUrl, title, description, tags, dueDate, assigne
       {more ? (
         <S.MoreList>
           <S.MoreItem>수정하기</S.MoreItem>
-          <S.MoreItem>삭제하기</S.MoreItem>
+          <button onClick={handleDeleteButtonClick}>
+            <S.MoreItem>삭제하기</S.MoreItem>
+          </button>
         </S.MoreList>
       ) : null}
     </S.ModalTaskContainer>

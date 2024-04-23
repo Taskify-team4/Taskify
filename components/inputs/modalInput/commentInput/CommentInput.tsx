@@ -6,16 +6,23 @@ type CommentInputProps = {
   placeholder: string;
   onRequired?: boolean;
   onModal?: boolean;
+  onChange?: (description: string) => void;
 };
 
-function CommentInput({ children, placeholder, onRequired, onModal }: CommentInputProps) {
+function CommentInput({ children, placeholder, onRequired, onModal, onChange }: CommentInputProps) {
+  const handleInputChange = (e: { target: { value: string } }) => {
+    if (onChange) {
+      onChange(e.target.value);
+    }
+  };
+
   return (
     <S.CommentInputContainer>
       <S.CommentInputTitleContainer>
         <S.CommentInputLabel onModal={onModal}>{children}</S.CommentInputLabel>
         {onRequired && <S.CommentInputRequired>*</S.CommentInputRequired>}
       </S.CommentInputTitleContainer>
-      <S.CommentInput placeholder={placeholder} onModal={onModal} />
+      <S.CommentInput placeholder={placeholder} onModal={onModal} onChange={handleInputChange} />
       {!onModal && <S.CommentBtn>입력</S.CommentBtn>}
     </S.CommentInputContainer>
   );
