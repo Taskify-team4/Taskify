@@ -116,7 +116,7 @@ function Edit({
   const handleDeleteDashboardClick = async () => {
     if (dashboardId) {
       await deleteDashboard(dashboardId);
-      await router.push(`/dashboard/${dashboardId}`);
+      await router.push(`/mydashboard`);
     }
   };
 
