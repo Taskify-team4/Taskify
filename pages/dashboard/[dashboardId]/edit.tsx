@@ -12,9 +12,7 @@ import {
   deleteDashboard,
   deleteInvite,
   deleteMember,
-  getDashboard,
   getDashboardInvites,
-  getDashboardList,
   getDashboardMembers,
   postDashboardInvites,
   updateDashboard,
@@ -28,18 +26,16 @@ import Modal from '@components/modals/Modal';
 import ConfirmModal from '@components/modals/edit_dashboard/ConfirmModal';
 import useWindowSize from '@hooks/useWindowSize';
 import { useMyData } from '@contexts/myDataContext';
-import { useDashboardList } from '@contexts/DashboardListContext';
+import { useDashContext } from '@contexts/dashContext';
 
 export async function getServerSideProps(context: any) {
   const dashboardId = context.query['dashboardId'];
 
-  const dashboardData = await getDashboard(dashboardId);
   const { invitees, totalInvitees } = await getDashboardInvites(dashboardId, 1);
   const { members, totalMembers } = await getDashboardMembers(dashboardId, 1);
 
   return {
     props: {
-      dashboardData,
       invitees,
       members,
       totalInvitees,
@@ -48,17 +44,15 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-function Edit({
-  dashboardData: initialDashboardData,
-  invitees: initialInvitees,
-  totalInvitees,
-  members: initialMembers,
-  totalMembers,
-}: EditPageProps) {
-  const [selectedColor, setSelectedColor] = useState<TColorCode>(initialDashboardData.color);
+function Edit({ invitees: initialInvitees, totalInvitees, members: initialMembers, totalMembers }: EditPageProps) {
+  const { fetchDashboards, fetchDashboardInfo, dashInfo } = useDashContext();
 
-  const [dashboardData, setDashboardData] = useState(initialDashboardData);
-  const [dashboardName, setDashboardName] = useState(initialDashboardData.title);
+  const { myData } = useMyData();
+  const { windowWidth } = useWindowSize();
+
+  const [selectedColor, setSelectedColor] = useState<TColorCode>(dashInfo.color);
+
+  const [dashboardName, setDashboardName] = useState(dashInfo.title);
 
   const [invitees, setInvitees] = useState(initialInvitees);
   const [members, setMembers] = useState(initialMembers);
@@ -68,21 +62,15 @@ function Edit({
   const limitInvitePage = Number(Math.ceil(totalInvitees / PAGE_SIZE));
   const limitMemberPage = Number(Math.ceil(totalMembers / PAGE_SIZE));
 
-  const { dashboardList, setDashboardList } = useDashboardList();
-  const { myData } = useMyData();
-  const { windowWidth } = useWindowSize();
-
   const router = useRouter();
   const dashboardId = router.query['dashboardId']?.toString();
 
   const handleUpdateClick = async () => {
     if (dashboardId) {
       await updateDashboard(dashboardId, dashboardName, selectedColor);
-      const newDashboardList = await getDashboardList();
-      const newDashboardData = await getDashboard(dashboardId);
 
-      setDashboardData(newDashboardData);
-      setDashboardList(newDashboardList);
+      fetchDashboardInfo();
+      fetchDashboards();
     }
   };
 
@@ -181,14 +169,13 @@ function Edit({
       </div>
       <S.RightSection>
         <DashBoardHeader
-          title={dashboardData.title}
           mydata={{
             id: myData.userId,
             nickname: myData.nickname,
             email: myData.email || '',
           }}
           userList={initialMembers}
-          crown={dashboardData.createdByMe}
+          crown={dashInfo.createdByMe}
           onInviteClick={handleInviteClick}
         />
         <S.PageContents>
@@ -197,8 +184,8 @@ function Edit({
           </S.GoBackButton>
           <EditName
             isMobile={windowWidth <= size.tablet}
-            title={dashboardData.title}
-            color={dashboardData.color}
+            title={dashInfo.title}
+            color={dashInfo.color}
             onTileClick={setSelectedColor}
             onClick={handleUpdateClick}
             onChange={setDashboardName}
