@@ -58,10 +58,11 @@ export const MainTitle = styled.span`
 const typing = keyframes`
   0% {
     width: 0%;
+    border-color: black
   }
   100% {
     width: 100%;
-    border-color: transparent
+    border-color: black
   }
 `;
 
@@ -100,10 +101,8 @@ export const Violet = styled.span`
     left: 0; */
     width: 100%;
     /* height: 100%; */
-    border-right: 15px solid black;
-    animation:
-      ${typing} 1s steps(18) 1,
-      ${blink} 0.8s infinite;
+    border-right: 10px solid transparent;
+    animation: ${typing} 1s steps(18) 1;
   }
 `;
 
