@@ -10,7 +10,7 @@ function Point1() {
         일의 우선순위를
         <br /> 관리하세요
       </S.Point1Description>
-      <S.Point1Img src={point1} alt="포인트1 이미지" />
+      <S.Point1Img src={point1} alt="포인트1 이미지" priority />
     </S.Point1>
   );
 }

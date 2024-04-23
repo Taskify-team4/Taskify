@@ -17,9 +17,9 @@ function LandingFooter() {
         </button>
       </S.Terms>
       <S.FooterIcons>
-        <S.Icon src={email} alt="이메일" />
-        <S.Icon src={facebook} alt="페이스북 아이콘" />
-        <S.Icon src={instagram} alt="인스타그램 아이콘" />
+        <S.Icon src={email} alt="이메일" priority />
+        <S.Icon src={facebook} alt="페이스북 아이콘" priority />
+        <S.Icon src={instagram} alt="인스타그램 아이콘" priority />
       </S.FooterIcons>
     </S.LandingFooter>
   );

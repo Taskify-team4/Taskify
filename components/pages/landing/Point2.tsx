@@ -10,7 +10,7 @@ function Point2() {
         해야 할 일을
         <br /> 등록하세요
       </S.Point2Description>
-      <S.Point2Img src={point2} alt="포인트2 이미지" />
+      <S.Point2Img src={point2} alt="포인트2 이미지" priority />
     </S.Point2>
   );
 }

@@ -5,7 +5,7 @@ import mainImg from '@public/images/landing.png';
 function LandingMain() {
   return (
     <S.Main>
-      <S.MainImg src={mainImg} alt="메인 이미지" />
+      <S.MainImg src={mainImg} alt="메인 이미지" priority />
       <S.Title>
         <S.MainTitle>
           새로운 일정 관리
