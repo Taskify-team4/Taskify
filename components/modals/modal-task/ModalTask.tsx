@@ -1,6 +1,5 @@
 import * as S from '@components/modals/modal-task/ModalTask.style';
 import Image from 'next/image';
-import { TColorKey } from '@components/chips/Chip.type';
 import { ModalBaseProps } from '@components/modals/Modal.type';
 import TaskComments from './TaskComments';
 import closeImg from '@public/icons/close.svg';
@@ -8,22 +7,9 @@ import moreImg from '@public/icons/more.svg';
 import TaskContentInfo from './TaskContentInfo';
 import { useState } from 'react';
 import { deleteCard } from '@pages/dashboard/api';
-import { useDashContext } from '@contexts/dashContext';
 import { TCard, TColumn } from '@pages/dashboard/Dashboard.type';
 
-type TagProps = {
-  text: string;
-  color: TColorKey;
-};
 export type ModalTaskProps = ModalBaseProps & {
-  id: number;
-  imageUrl: string | null;
-  title: string;
-  description: string;
-  tags: TagProps[];
-  dueDate: string;
-  assignee: { nickname: string };
-  columnid: number;
   fetchCards: (columnid: number) => {};
   card: TCard;
   column: TColumn;

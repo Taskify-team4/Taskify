@@ -4,6 +4,7 @@ import TaskDeadline from './TaskDeadline';
 import { ModalTaskProps } from './ModalTask';
 
 type TaskContentInfoProps = Pick<ModalTaskProps, 'description' | 'tags' | 'dueDate' | 'assignee'>;
+
 function TaskContentInfo({ description, tags, dueDate, assignee, columntitle }: TaskContentInfoProps) {
   return (
     <S.TaskContentInfo>

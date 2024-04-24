@@ -7,11 +7,10 @@ import DateInput from '@components/inputs/modalInput/dateInput/DateInput';
 import TagInput from '@components/inputs/modalInput/tagInput/TagInput';
 import ImageInput from '@components/inputs/modalInput/imageInput/ImageInput';
 import Button from '@components/buttons/Button';
-import { TCard } from '@pages/dashboard/Dashboard.type';
+import { TCardForm } from '@pages/dashboard/Dashboard.type';
 import { ModalBaseProps } from '../Modal.type';
 import { useDashContext } from '@contexts/dashContext';
 import { postNewCard } from '@pages/dashboard/api';
-import Test from './Test';
 
 type CreateToDoPorps = ModalBaseProps & {
   children: ReactNode;
@@ -23,8 +22,7 @@ const test = ['가나다', '라마바'];
 
 function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: CreateToDoPorps) {
   const { myInfo, dashboardId } = useDashContext();
-  // const [tags, setTags] = useState<string[]>([]);
-  const [cardData, setCardData] = useState<TCard>({
+  const [cardData, setCardData] = useState<TCardForm>({
     //임시로 본인의 아이디만 넣도록 구현
     assigneeUserId: myInfo.id,
     dashboardId: Number(dashboardId),
@@ -34,7 +32,6 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
     dueDate: '',
     tags: [],
   });
-  console.log(cardData);
 
   const trigger = () => {
     return close && close();
@@ -68,6 +65,13 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
     }));
   };
 
+  const handleChangeImage = (url: string) => {
+    setCardData((prevState) => ({
+      ...prevState,
+      imageUrl: url,
+    }));
+  };
+
   const handleCreateNewCard = async () => {
     try {
       const res = await postNewCard(cardData);
@@ -80,6 +84,7 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
     }
   };
 
+  console.log(cardData);
   return (
     <S.CreateToDoContainer>
       <S.CreateToDoTitle>{children}</S.CreateToDoTitle>
@@ -105,17 +110,11 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
 
         <DateInput onChange={handleChangeDueDate}>마감일</DateInput>
 
-        <TagInput
-          id="tag"
-          type="text"
-          placeholder="입력 후 Enter"
-          setCardData={setCardData}
-          handleChangeTags={handleChangeTags}
-        >
+        <TagInput id="tag" type="text" placeholder="입력 후 Enter" onChange={handleChangeTags}>
           태그
         </TagInput>
 
-        <ImageInput>이미지</ImageInput>
+        <ImageInput onChange={handleChangeImage}>이미지</ImageInput>
       </S.CreateToDoInputContainer>
       <S.CreateToDoBtnContainer>
         <Button.ModalReject onClick={trigger}>취소</Button.ModalReject>

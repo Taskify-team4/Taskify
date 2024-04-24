@@ -7,6 +7,7 @@ import DatePicker from './DatePicker';
 type TagInputProps = {
   children: ReactNode;
   onRequired?: boolean;
+  onChange: () => void;
 };
 
 function DateInput({ children, onRequired, onChange }: TagInputProps) {

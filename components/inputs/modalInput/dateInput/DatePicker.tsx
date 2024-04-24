@@ -2,17 +2,15 @@ import { forwardRef, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from '@components/inputs/modalInput/dateInput/DatePicker.style';
-import { useDashContext } from '@contexts/dashContext';
 
 type TDatePickerProps = {
-  onChange: () => void;
+  onChange: (formattedData: string) => void;
 };
 
 const DatePicker = ({ onChange }: TDatePickerProps) => {
-  // const { selectedDate, setSelectedDate } = useDashContext();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-  const handleChange = (date: Date | null) => {
+  const handleChange = (date: any) => {
     setSelectedDate(date);
     const formattedData = formatDate(date);
     onChange(formattedData);

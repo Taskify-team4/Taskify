@@ -32,6 +32,7 @@ export type TCardForm = {
   description: string;
   dueDate: string;
   tags: string[];
+  imageUrl?: string;
 };
 
 export type TCard = {

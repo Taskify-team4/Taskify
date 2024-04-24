@@ -12,7 +12,6 @@ import EditColumnModal from '@components/modals/edit_column/Modal';
 import { TCards, TColumn } from '@pages/dashboard/Dashboard.type';
 import { getCards } from '@pages/dashboard/api';
 import CreateToDoModal from '@components/modals/createtodo/Modal';
-import { useDashContext } from '@contexts/dashContext';
 
 type TColumnProps = {
   column: TColumn;
@@ -73,7 +72,7 @@ function Column({ column }: TColumnProps) {
           }
           key={idx}
         >
-          <Card {...card} />
+          <Card card={card} />
         </Modal>
       ))}
     </S.ColumnContainer>

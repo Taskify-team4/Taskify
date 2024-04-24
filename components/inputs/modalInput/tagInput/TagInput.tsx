@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, ReactNode, useState } from 'react';
 import * as S from '@components/inputs/modalInput/tagInput/TagInput.style';
 import Chip from '@components/chips/Chip';
 
@@ -8,23 +8,22 @@ type TagInputProps = {
   type: string;
   placeholder: string;
   onRequired?: boolean;
-  tags: string[];
-  setTags: () => {};
-  setCardData: () => {};
+  onChange: (tagArr: string[]) => void;
 };
 
-function TagInput({ children, id, type, placeholder, onRequired, handleChangeTags }: TagInputProps) {
+function TagInput({ children, id, type, placeholder, onRequired, onChange }: TagInputProps) {
   const [tags, setTags] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
-  const handleInputKeyPress = (e) => {
+  const handleInputKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      setTags([...tags, inputValue]);
-      handleChangeTags(tags);
+      const tagArr = [...tags, inputValue];
+      setTags(tagArr);
+      onChange(tagArr);
       setInputValue('');
     }
   };
@@ -48,7 +47,7 @@ function TagInput({ children, id, type, placeholder, onRequired, handleChangeTag
           placeholder={placeholder}
           value={inputValue}
           onChange={handleInputChange}
-          onKeyPress={handleInputKeyPress}
+          onKeyDown={handleInputKeyPress}
         />
       </S.TagInputContent>
     </S.TagInputContainer>
