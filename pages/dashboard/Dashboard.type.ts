@@ -62,3 +62,23 @@ export type TMyInfo = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type TCommentForm = {
+  content: string;
+  cardId: number;
+  columnId: number;
+  dashboardId: number;
+};
+
+export type TComment = {
+  id: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  cardId: number;
+  author: {
+    profileImageUrl: string;
+    nickname: string;
+    id: number;
+  };
+};

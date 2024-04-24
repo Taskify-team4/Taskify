@@ -1,5 +1,9 @@
 import * as S from '@components/modals/modal-task/ModalTask.style';
 import CommentInput from '@components/inputs/modalInput/commentInput/CommentInput';
+import { use, useEffect, useState } from 'react';
+import { TComment } from '@pages/dashboard/Dashboard.type';
+import { getComments, postNewComment } from '@pages/dashboard/api';
+import { useDashContext } from '@contexts/dashContext';
 // 임시로 만듦
 type commentType = {
   author: {
@@ -35,13 +39,54 @@ const testComments: commentType[] = [
     updatedAt: '2024-04-18 17:00',
   },
 ];
-function TaskComments() {
+
+function TaskComments({ cardid, columnid }) {
+  const { dashboardId } = useDashContext();
+  const [comments, setComments] = useState<TComment[]>([]);
+  const [commentData, setCommentData] = useState({
+    content: '',
+    cardId: cardid,
+    columnId: columnid,
+    dashboardId: Number(dashboardId),
+  });
+
+  const fetchComments = async () => {
+    const res = await getComments(cardid);
+    const result = res.comments;
+    setComments(result);
+  };
+
+  const handleChangeCommentContent = (comment: string) => {
+    setCommentData((prevState) => ({
+      ...prevState,
+      content: comment,
+    }));
+  };
+
+  const handleCreateNewComment = async () => {
+    try {
+      const res = await postNewComment(commentData);
+      if (res.id) {
+        fetchComments();
+      }
+    } catch (error) {
+      console.error('댓글 생성 실패', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchComments();
+  }, []);
+  console.log(comments);
+
   return (
     <>
-      <CommentInput placeholder="댓글 작성하기">댓글</CommentInput>
+      <CommentInput placeholder="댓글 작성하기" onChange={handleChangeCommentContent} onClick={handleCreateNewComment}>
+        댓글
+      </CommentInput>
       <S.CommentList>
-        {testComments
-          ? testComments.map((comment, index) => (
+        {comments
+          ? comments.map((comment, index) => (
               <S.CommentItem key={`${index} ${comment.author.nickname}`}>
                 <S.AuthorProfile>{comment.author.nickname[0]}</S.AuthorProfile>
                 <S.CommentWrapper>

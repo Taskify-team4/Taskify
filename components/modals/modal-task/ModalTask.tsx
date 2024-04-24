@@ -31,7 +31,6 @@ export type ModalTaskProps = ModalBaseProps & {
 
 function ModalTask({ close, fetchCards, card, column }: ModalTaskProps) {
   const [more, setMore] = useState(false);
-  console.log(card);
 
   const trigger = () => {
     setMore(false);
@@ -57,7 +56,7 @@ function ModalTask({ close, fetchCards, card, column }: ModalTaskProps) {
           <Image src={card.imageUrl} alt="Card Image" width={0} height={0} layout="responsive" />
         </S.CardImage>
       ) : null}
-      <TaskComments />
+      <TaskComments cardid={card.id} columnid={column.id} />
 
       <S.CloseImage src={closeImg} alt="close button" onClick={trigger} />
       <S.MoreImage src={moreImg} alt="more button" onClick={() => setMore(!more)} />

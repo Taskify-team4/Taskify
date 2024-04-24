@@ -1,4 +1,4 @@
-import { TCard, TColumnForm } from './Dashboard.type';
+import { TCard, TColumnForm, TCommentForm } from './Dashboard.type';
 
 const BASE_URL = 'https://sp-taskify-api.vercel.app/4-4';
 const ACCESS_TOKEN =
@@ -121,6 +121,31 @@ export async function postNewCard(cardData: TCard) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(cardData),
+  });
+  return response.json();
+}
+
+// 댓글 생성
+export async function postNewComment(commentData: TCommentForm) {
+  const url = `${BASE_URL}/comments`;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(commentData),
+  });
+  return response.json();
+}
+
+// 댓글 조회
+export async function getComments(id: number) {
+  const url = `${BASE_URL}/comments?size=10&cardId=${id}`;
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+    },
   });
   return response.json();
 }

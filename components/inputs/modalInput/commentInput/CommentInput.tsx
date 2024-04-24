@@ -1,5 +1,7 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import * as S from '@components/inputs/modalInput/commentInput/CommentInput.style';
+import { useDashContext } from '@contexts/dashContext';
+import { postNewComment } from '@pages/dashboard/api';
 
 type CommentInputProps = {
   children: ReactNode;
@@ -9,7 +11,7 @@ type CommentInputProps = {
   onChange?: (description: string) => void;
 };
 
-function CommentInput({ children, placeholder, onRequired, onModal, onChange }: CommentInputProps) {
+function CommentInput({ children, placeholder, onRequired, onModal, onChange, onClick }: CommentInputProps) {
   const handleInputChange = (e: { target: { value: string } }) => {
     if (onChange) {
       onChange(e.target.value);
@@ -23,7 +25,7 @@ function CommentInput({ children, placeholder, onRequired, onModal, onChange }: 
         {onRequired && <S.CommentInputRequired>*</S.CommentInputRequired>}
       </S.CommentInputTitleContainer>
       <S.CommentInput placeholder={placeholder} onModal={onModal} onChange={handleInputChange} />
-      {!onModal && <S.CommentBtn>입력</S.CommentBtn>}
+      {!onModal && <S.CommentBtn onClick={onClick}>입력</S.CommentBtn>}
     </S.CommentInputContainer>
   );
 }
