@@ -8,5 +8,5 @@ export type Dashboard = {
   createdByMe?: boolean;
 };
 export type SidemenuProps = {
-  dashboards: Dashboard[];
+  dashboards?: Dashboard[];
 };

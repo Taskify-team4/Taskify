@@ -4,6 +4,9 @@ import { Header } from './Header.style';
 import Image from 'next/image';
 
 export const DashBoardHeader = styled(Header)`
+  width: 100%;
+  border-bottom: 1px solid var(--gray300);
+
   @media ${device.tablet} {
     justify-content: flex-end;
   }
@@ -20,7 +23,7 @@ export const DashBoardTitle = styled.div`
 `;
 
 export const Title = styled.div`
-  margin-left: calc(340px - 26.2px);
+  margin-left: 40px;
   color: var(--black200);
   font-size: 20px;
   font-weight: 700;

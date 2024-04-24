@@ -5,12 +5,10 @@ import ModalInput from '@components/inputs/modalInput/ModalInput';
 import { ModalBaseProps } from '@components/modals/Modal.type';
 import { TColumnForm } from '@pages/dashboard/Dashboard.type';
 import { postNewColumn } from '@pages/dashboard/api';
+import { useDashContext } from '@contexts/dashContext';
 
-type TNewColumnModalProps = ModalBaseProps & {
-  dashboardId: number;
-};
-
-function NewColumnModal({ close, dashboardId }: TNewColumnModalProps) {
+function NewColumnModal({ close }: ModalBaseProps) {
+  const { dashboardId, fetchColumns } = useDashContext();
   const [columnData, setColumnData] = useState<TColumnForm>({ title: '', dashboardId: 0 });
 
   const trigger = () => {
@@ -20,7 +18,7 @@ function NewColumnModal({ close, dashboardId }: TNewColumnModalProps) {
   const handleChange = (title: string) => {
     setColumnData({
       title: title,
-      dashboardId: dashboardId,
+      dashboardId: Number(dashboardId),
     });
   };
 
@@ -28,7 +26,8 @@ function NewColumnModal({ close, dashboardId }: TNewColumnModalProps) {
     try {
       const res = await postNewColumn(columnData);
       if (res.id) {
-        window.location.reload();
+        trigger();
+        fetchColumns();
       }
     } catch (error) {
       console.error('컬럼 생성 실패', error);

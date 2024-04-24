@@ -13,9 +13,10 @@ type InputProps = {
   password?: string;
   passwordCheck?: string;
   passwordCompare?: boolean;
-  onChange: any;
+  onChange?: (value: string) => void;
   onError: any;
   errorMsg: string;
+  disabled?: boolean;
   defaultValue?: string;
 };
 
@@ -32,6 +33,7 @@ function Input({
   onChange,
   onError,
   errorMsg,
+  disabled,
   defaultValue,
 }: InputProps) {
   const handleFocusInput = () => {
@@ -74,9 +76,12 @@ function Input({
         id={id}
         type={type}
         placeholder={placeholder}
+        disabled={disabled}
         defaultValue={defaultValue}
-        onChange={(e) => {
-          onChange(e.target.value);
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          if (onChange) {
+            onChange(e.target.value);
+          }
         }}
         onFocus={handleFocusInput}
         onBlur={handleBlurInput}

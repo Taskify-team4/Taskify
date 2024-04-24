@@ -12,7 +12,7 @@ const chipColorList = {
 
 type ChipStyleProps = {
   $size: TChipSize;
-  $color: TColorKey | TColorCode;
+  $color: TColorKey | string;
 };
 
 export const BasicChip = styled.span<ChipStyleProps>`
@@ -55,7 +55,7 @@ export const ColorTile = styled.div<ChipStyleProps>`
   height: ${({ $size }) => colorTileSizeList[$size]}px;
 
   border-radius: 50%;
-  background-color: ${({ $color }) => colorPaletteList[$color] || $color};
+  background-color: ${({ $color }) => $color};
 `;
 
 export const ColorCheckIcon = styled.span`

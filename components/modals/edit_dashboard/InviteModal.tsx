@@ -5,7 +5,7 @@ import { ModalBaseProps } from '@components/modals/Modal.type';
 import ModalInput from '@components/inputs/modalInput/ModalInput';
 
 export type InviteModalProps = ModalBaseProps & {
-  onInviteClick?: any;
+  onInviteClick?: (inviteEmail: string) => void;
 };
 
 function InviteModal({ close, onInviteClick }: InviteModalProps) {
@@ -13,7 +13,7 @@ function InviteModal({ close, onInviteClick }: InviteModalProps) {
     return close && close();
   };
 
-  const [inviteEmail, setInviteEmail] = useState();
+  const [inviteEmail, setInviteEmail] = useState<string>();
 
   return (
     <S.ModalContainer>
@@ -25,7 +25,9 @@ function InviteModal({ close, onInviteClick }: InviteModalProps) {
         <Button.ModalReject onClick={trigger}>취소</Button.ModalReject>
         <Button.ModalConfirm
           onClick={() => {
-            onInviteClick(inviteEmail);
+            if (onInviteClick && inviteEmail) {
+              onInviteClick(inviteEmail);
+            }
             trigger();
           }}
         >

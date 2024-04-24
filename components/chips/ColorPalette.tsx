@@ -10,7 +10,7 @@ function ColorPalette({
 }: {
   size: TChipSize;
   className?: string;
-  onClick?: any;
+  onClick?: (color: TColorCode) => void;
   initialColor: string;
 }) {
   const colorList: TColorCode[] = ['#760dde', '#e876ea', '#ffa500', '#76a5ea', '#7ac555'];

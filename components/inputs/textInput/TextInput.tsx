@@ -8,11 +8,12 @@ type TextInputProps = {
   placeholder: string;
   email?: string;
   nickname?: string;
-  onChange?: any;
+  disabled?: boolean;
+  onChange?: (value: string) => void;
   defaultValue?: string;
 };
 
-function TextInput({ children, id, placeholder, email, nickname, onChange, defaultValue }: TextInputProps) {
+function TextInput({ children, id, placeholder, email, nickname, disabled, onChange, defaultValue }: TextInputProps) {
   const [errorMsg, setErrorMsg] = useState('');
 
   return (

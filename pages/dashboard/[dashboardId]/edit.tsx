@@ -16,7 +16,6 @@ import {
   getDashboardInvites,
   getDashboardList,
   getDashboardMembers,
-  getMyData,
   postDashboardInvites,
   updateDashboard,
 } from '@utils/editDashboard/api';
@@ -27,6 +26,9 @@ import { EditPageProps } from '@utils/editDashboard/edit.type';
 import ModalBase from '@components/modals/ModalBase';
 import Modal from '@components/modals/Modal';
 import ConfirmModal from '@components/modals/edit_dashboard/ConfirmModal';
+import useWindowSize from '@hooks/useWindowSize';
+import { useMyData } from '@contexts/myDataContext';
+import { useDashboardList } from '@contexts/DashboardListContext';
 
 export async function getServerSideProps(context: any) {
   const dashboardId = context.query['dashboardId'];
@@ -34,16 +36,12 @@ export async function getServerSideProps(context: any) {
   const dashboardData = await getDashboard(dashboardId);
   const { invitees, totalInvitees } = await getDashboardInvites(dashboardId, 1);
   const { members, totalMembers } = await getDashboardMembers(dashboardId, 1);
-  const myData = await getMyData();
-  const dashboardList = await getDashboardList();
 
   return {
     props: {
       dashboardData,
       invitees,
       members,
-      myData,
-      dashboardList,
       totalInvitees,
       totalMembers,
     },
@@ -56,13 +54,9 @@ function Edit({
   totalInvitees,
   members: initialMembers,
   totalMembers,
-  myData,
-  dashboardList: initialDashboardList,
 }: EditPageProps) {
-  const [windowWidth, setWindowWidth] = useState(1920);
   const [selectedColor, setSelectedColor] = useState<TColorCode>(initialDashboardData.color);
 
-  const [dashboardList, setDashboardList] = useState(initialDashboardList);
   const [dashboardData, setDashboardData] = useState(initialDashboardData);
   const [dashboardName, setDashboardName] = useState(initialDashboardData.title);
 
@@ -73,6 +67,10 @@ function Edit({
 
   const limitInvitePage = Number(Math.ceil(totalInvitees / PAGE_SIZE));
   const limitMemberPage = Number(Math.ceil(totalMembers / PAGE_SIZE));
+
+  const { dashboardList, setDashboardList } = useDashboardList();
+  const { myData } = useMyData();
+  const { windowWidth } = useWindowSize();
 
   const router = useRouter();
   const dashboardId = router.query['dashboardId']?.toString();
@@ -118,7 +116,7 @@ function Edit({
   const handleDeleteDashboardClick = async () => {
     if (dashboardId) {
       await deleteDashboard(dashboardId);
-      router.push(`/dashboard/${dashboardId}`);
+      await router.push(`/dashboard/${dashboardId}`);
     }
   };
 
@@ -164,23 +162,6 @@ function Edit({
     });
   };
 
-  // 브라우저 넓이 받아오기
-  useEffect(() => {
-    const resizeHandler = () => {
-      setTimeout(() => {
-        setWindowWidth(window.innerWidth);
-      }, 500);
-    };
-
-    resizeHandler();
-
-    window.addEventListener('resize', resizeHandler);
-
-    return () => {
-      window.removeEventListener('resize', resizeHandler);
-    };
-  }, []);
-
   useEffect(() => {
     if (dashboardId) {
       handleInvitesPageClick();
@@ -196,7 +177,7 @@ function Edit({
   return (
     <S.PageContainer>
       <div>
-        <Sidemenu dashboards={dashboardList} />
+        <Sidemenu />
       </div>
       <S.RightSection>
         <DashBoardHeader
@@ -207,11 +188,11 @@ function Edit({
             email: myData.email || '',
           }}
           userList={initialMembers}
-          crown={true}
+          crown={dashboardData.createdByMe}
           onInviteClick={handleInviteClick}
         />
         <S.PageContents>
-          <S.GoBackButton href={`/dashboards/${dashboardId}`}>
+          <S.GoBackButton href={`/dashboard/${dashboardId}`}>
             <Image src={leftarrowIcon.src} width={20} height={20} alt="돌아가기 버튼" /> 돌아가기
           </S.GoBackButton>
           <EditName

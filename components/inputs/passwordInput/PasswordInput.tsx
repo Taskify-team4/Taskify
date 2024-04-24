@@ -6,7 +6,7 @@ import * as S from '@components/inputs/passwordInput/PaswwrodInput.style';
 type PasswordInputProps = {
   children: ReactNode;
   id: string;
-  type: string;
+  type?: string;
   placeholder: string;
   password?: string;
   passwordCheck?: string;

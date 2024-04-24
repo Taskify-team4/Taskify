@@ -14,10 +14,10 @@ function InviteTable({
   pageInfo,
 }: {
   users: Invitations[];
-  onInviteClick?: any;
-  onCancelInviteClick?: any;
-  onNextClick?: any;
-  onPreviousClick?: any;
+  onInviteClick?: (inviteEmail: string) => void;
+  onCancelInviteClick?: (cancelId: number) => void;
+  onNextClick?: () => void;
+  onPreviousClick?: () => void;
   pageInfo?: PagenationInfo;
 }) {
   return (
