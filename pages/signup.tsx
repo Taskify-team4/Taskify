@@ -5,6 +5,9 @@ import logoImg from '@public/icons/logo_img.svg';
 import logoTaskify from '@public/icons/logo_taskify.svg';
 import TextInput from '@components/inputs/textInput/TextInput';
 import PasswordInput from '@components/inputs/passwordInput/PasswordInput';
+import Modal from '@components/modals/Modal';
+import ModalBase from '@components/modals/ModalBase';
+import PasswordModal from '@components/modals/inconsistent_password/Modal';
 
 const BASE_URL = `https://sp-taskify-api.vercel.app/4-4`;
 
@@ -41,10 +44,10 @@ function Signup() {
 
       if (response.ok) {
         console.log(result);
+        setErrorMsg('가입이 완료되었습니다!');
         // router.push('/dashboard/:dashboardId');
       } else {
         setErrorMsg(result.message);
-        console.log(result.message);
       }
     } catch (error) {
       console.log(error);
@@ -72,7 +75,12 @@ function Signup() {
       label: '비밀번호 확인',
     },
   ];
-
+  // console.log(email);
+  // console.log(nickname);
+  // console.log(password);
+  // console.log(passwordCheck);
+  // console.log(checkBox);
+  // console.log(errorMsg);
   return (
     <S.SignupContainner>
       <S.SignupLogoContainner href={'/'}>
@@ -110,7 +118,15 @@ function Signup() {
           <S.SignupCheckBox type="checkbox" onChange={handleCheckBoxChange} />
           <S.SignupCheckBoxComment>이용약관에 동의합니다.</S.SignupCheckBoxComment>
         </S.SignupRuleWrap>
-        <S.SignupBtn disabled={!email || !password || !passwordCheck || !checkBox}>가입하기</S.SignupBtn>
+        <Modal
+          content={
+            <ModalBase>
+              <PasswordModal errorMsg={errorMsg} />
+            </ModalBase>
+          }
+        >
+          <S.SignupBtn disabled={!email || !password || !passwordCheck || !checkBox}>가입하기</S.SignupBtn>
+        </Modal>
       </S.SignupInputContainer>
       <S.CheckUserWrap>
         이미 가입하셨나요? <S.LoginPath href={'/login'}>로그인하기</S.LoginPath>
