@@ -110,14 +110,17 @@ export const DashBoardCrown = styled(Image)`
   }
 `;
 export const DashBoardPagination = styled.div`
-  position: absolute;
-  bottom: 32px;
-  right: 32px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: end;
   justify-content: flex-end;
   gap: 16px;
+  margin-top: auto;
+  padding-right: 12px;
+  padding-bottom: 24px;
+  @media ${device.mobile} {
+    padding: 0;
+  }
 `;
 export const PageButton = styled.span`
   display: flex;
@@ -126,4 +129,7 @@ export const PagenationText = styled.span`
   color: var(--black200);
   font-size: 14px;
   font-weight: 400;
+  @media ${device.mobile} {
+    display: none;
+  }
 `;

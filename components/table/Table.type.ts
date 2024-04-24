@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 import { DashBoardMember, Invitations, PagenationInfo } from '@utils/editDashboard/edit.type';
 
 export type HeaderProps = {
@@ -49,4 +49,9 @@ export type InvitedDashListProps = {
   data: TInvitation[];
   buttonText?: string;
   onCancelInviteClick?: (cancelId: number) => void;
+  IsObserverEnd?: IsEndStateObject;
+};
+type IsEndStateObject = {
+  cursorId: number;
+  setCursorId: Dispatch<SetStateAction<number>>;
 };

@@ -28,7 +28,6 @@ export const DashboardListProvider = ({ children }: { children: ReactNode }) => 
   };
   useEffect(() => {
     fetchData();
-    console.log(dashboardList);
   }, []);
 
   return (

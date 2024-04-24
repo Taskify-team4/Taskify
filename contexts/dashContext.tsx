@@ -84,7 +84,6 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
   };
   const handleDashPageClick = async () => {
     const { dashboards: nowDashboards } = await getMyDashboardsByPagination(dashPage);
-    console.log(nowDashboards);
     setMyDashboards(nowDashboards);
   };
   useEffect(() => {

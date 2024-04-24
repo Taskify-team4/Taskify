@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Dashboard } from '@components/sidemenu/Sidemenu.type';
 
 const TEMP_TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAyNSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNTk5NjAzLCJpc3MiOiJzcC10YXNraWZ5In0.LEYdnW0mcRvx9mAKczvnJWXGqZrQBA3ALmmqdM7iMq0';
@@ -55,17 +54,31 @@ export const postAddDashboard = async (title: string, color: string) => {
   });
   return response;
 };
-export const getInvitations = async () => {
-  try {
-    const res = await instance.get('/invitations', {
-      headers: {
-        Authorization: `Bearer ${TEMP_TOKEN}`,
-      },
-    });
-    const products = res.data.invitations;
-    return products;
-  } catch (error) {
-    console.error(error);
+export const getInvitations = async (cursorId?: number) => {
+  if (cursorId === undefined) {
+    try {
+      const res = await instance.get('/invitations', {
+        headers: {
+          Authorization: `Bearer ${TEMP_TOKEN}`,
+        },
+      });
+      const products = res.data.invitations;
+      return products;
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    try {
+      const res = await instance.get(`/invitations?cursorId=${cursorId}`, {
+        headers: {
+          Authorization: `Bearer ${TEMP_TOKEN}`,
+        },
+      });
+      const products = res.data.invitations;
+      return products;
+    } catch (error) {
+      console.error(error);
+    }
   }
 };
 export const postInvitation = async (dashId: number) => {

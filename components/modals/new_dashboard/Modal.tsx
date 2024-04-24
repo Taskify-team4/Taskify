@@ -11,7 +11,7 @@ function NewDashBoardModal({ close }: ModalBaseProps) {
   const trigger = () => {
     return close && close();
   };
-  const { fetchDashboards, fetchDashboardsPagination } = useDashContext();
+  const { fetchDashboardsPagination } = useDashContext();
   const [selectedColor, setSelectedColor] = useState('#760dde');
   const handleCreateClick = async () => {
     let inputValue = (document.getElementById('dashboardName') as HTMLInputElement).value;
@@ -19,7 +19,6 @@ function NewDashBoardModal({ close }: ModalBaseProps) {
       const res = await postAddDashboard(inputValue, selectedColor);
       if (res.status) {
         trigger();
-        fetchDashboards();
         fetchDashboardsPagination();
       }
     } catch (error) {

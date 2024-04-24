@@ -3,30 +3,20 @@ import Sidemenu from '@components/sidemenu/Sidemenu';
 import DashBoardHeader from '@components/headers/DashBoardHeader';
 import MyDashboardList from '@components/pages/mydashboard/MyDashboardList';
 import InvitedDashTable from '@components/table/invitedDash/InvitedDashTable';
-import { getInvitations, postInvitation } from './api';
-import React, { useEffect, useState } from 'react';
-import { TInvitation } from '@components/table/Table.type';
-import { useDashContext } from '@contexts/dashContext';
+import { postInvitation } from './api';
 import { useMyData } from '@contexts/myDataContext';
 
 function Mydashboard() {
   const { myData } = useMyData();
 
-  const [myInvitation, setMyInvitation] = useState<TInvitation[]>([]);
-
-  const fetchMyInvitation = async () => {
-    const res = await getInvitations();
-    setMyInvitation(res);
-  };
   // const handletest = async () => {
-  //   const res = await postInvitation(6631);
+  //   const res = await postInvitation(6709);
   //   console.log(res);
   // };
 
-  useEffect(() => {
-    fetchMyInvitation();
-    // handletest();
-  }, []);
+  // useEffect(() => {
+  //   // handletest();
+  // }, []);
 
   return (
     <S.MyDashboardContainer>
@@ -43,7 +33,7 @@ function Mydashboard() {
         />
         <S.MyDashboardContent>
           <MyDashboardList />
-          <InvitedDashTable invitations={myInvitation} />
+          <InvitedDashTable />
         </S.MyDashboardContent>
       </S.MyDashBoardLayout>
     </S.MyDashboardContainer>

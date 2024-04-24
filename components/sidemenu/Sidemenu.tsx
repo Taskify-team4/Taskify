@@ -16,7 +16,7 @@ function Sidemenu() {
   const [dashPageInSideBar, setDashPageInSideBar] = useState(1);
   const [dashPageLimitInSideBar, setdashPageLimitInSideBar] = useState(1);
 
-  const fetchDashboards = async () => {
+  const fetchMyDashboards = async () => {
     const res = await getMyDashboards(dashPageInSideBar);
     const result = res.dashboards;
 
@@ -37,19 +37,14 @@ function Sidemenu() {
   };
   const handleDashPageClick = async () => {
     const { dashboards: nowDashboards } = await getMyDashboards(dashPageInSideBar);
-    console.log(nowDashboards);
     setMyDashboardsInSideBar(nowDashboards);
   };
   useEffect(() => {
-    fetchDashboards();
+    fetchMyDashboards();
   }, []);
   useEffect(() => {
     handleDashPageClick();
   }, [dashPageInSideBar]);
-
-  useEffect(() => {
-    fetchDashboards();
-  }, []);
 
   return (
     <S.SidemenuContainer>
