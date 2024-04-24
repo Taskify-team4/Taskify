@@ -8,7 +8,7 @@ import ModalBase from '@components/modals/ModalBase';
 import NewDashBoardModal from '@components/modals/new_dashboard/Modal';
 
 function MyDashboardList() {
-  const { Pdashboards, dashPage, dashPageLimit } = useDashContext();
+  const { myDashboards, dashPage, dashPageLimit } = useDashContext();
   const { handleNextClick, handlePrevClick } = useDashContext();
   return (
     <S.MyDashBoardListContainer>
@@ -22,15 +22,15 @@ function MyDashboardList() {
         >
           <Button.AddDashboard>대시보드 생성하기</Button.AddDashboard>
         </Modal>
-        {Pdashboards ? (
-          Pdashboards.map((dashboard, index) => (
+        {myDashboards ? (
+          myDashboards.map((dashboard, index) => (
             <Button.Dashboard key={`${index} ${dashboard.title}`} dashboardData={dashboard} />
           ))
         ) : (
           <></>
         )}
       </S.MyDashBoardList>
-      {Pdashboards ? (
+      {myDashboards ? (
         <S.MyDashBoardPagenation>
           <S.PagenationText>
             {dashPageLimit} 페이지 중 {dashPage}

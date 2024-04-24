@@ -3,14 +3,13 @@ import Sidemenu from '@components/sidemenu/Sidemenu';
 import DashBoardHeader from '@components/headers/DashBoardHeader';
 import MyDashboardList from '@components/pages/mydashboard/MyDashboardList';
 import InvitedDashTable from '@components/table/invitedDash/InvitedDashTable';
-import { getInvitations } from './api';
+import { getInvitations, postInvitation } from './api';
 import React, { useEffect, useState } from 'react';
 import { TInvitation } from '@components/table/Table.type';
 import { useDashContext } from '@contexts/dashContext';
 import { useMyData } from '@contexts/myDataContext';
 
 function Mydashboard() {
-  const { fetchDashboards } = useDashContext();
   const { myData } = useMyData();
 
   const [myInvitation, setMyInvitation] = useState<TInvitation[]>([]);
@@ -19,11 +18,14 @@ function Mydashboard() {
     const res = await getInvitations();
     setMyInvitation(res);
   };
+  // const handletest = async () => {
+  //   const res = await postInvitation(6631);
+  //   console.log(res);
+  // };
 
   useEffect(() => {
     fetchMyInvitation();
-
-    fetchDashboards();
+    // handletest();
   }, []);
 
   return (

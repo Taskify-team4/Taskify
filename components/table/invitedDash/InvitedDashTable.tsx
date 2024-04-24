@@ -10,13 +10,14 @@ import { TInvitation } from '@components/table/Table.type';
 
 type TInvitedDashTableProps = { invitations: TInvitation[] };
 function InvitedDashTable({ invitations }: TInvitedDashTableProps) {
+  console.log(invitations);
   return (
     <S.TableContainer $isInvitedDash>
       <TableHeader title="초대받은 대시보드" />
-      {invitations === undefined ? <SearchBar /> : <></>}
+      {invitations !== undefined ? <SearchBar /> : <></>}
       <S.ListsContainer>
         <TableLists isInvitedDash>
-          {invitations === undefined ? (
+          {invitations !== undefined ? (
             <InvitedDashList data={invitations} />
           ) : (
             <S.EmptyInvitation>

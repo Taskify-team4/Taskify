@@ -11,7 +11,7 @@ function NewDashBoardModal({ close }: ModalBaseProps) {
   const trigger = () => {
     return close && close();
   };
-  const { fetchDashboards } = useDashContext();
+  const { fetchDashboards, fetchDashboardsPagination } = useDashContext();
   const [selectedColor, setSelectedColor] = useState('#760dde');
   const handleCreateClick = async () => {
     let inputValue = (document.getElementById('dashboardName') as HTMLInputElement).value;
@@ -20,6 +20,7 @@ function NewDashBoardModal({ close }: ModalBaseProps) {
       if (res.status) {
         trigger();
         fetchDashboards();
+        fetchDashboardsPagination();
       }
     } catch (error) {
       console.error('대시보드 생성 실패', error);

@@ -18,7 +18,7 @@ const initialContext = {
   fetchDashboards: () => {},
   fetchColumns: () => {},
   //
-  Pdashboards: [] as TDashboards,
+  myDashboards: [] as TDashboards,
   dashPage: 1,
   dashPageLimit: 1,
   fetchDashboardsPagination: () => {},
@@ -60,14 +60,14 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     setColumns(result);
   };
 
-  const [Pdashboards, setPDashboards] = useState<TDashboards>([]);
+  const [myDashboards, setMyDashboards] = useState<TDashboards>([]);
   const [dashPage, setDashPage] = useState(1);
   const [dashPageLimit, setdashPageLimit] = useState(1);
   const fetchDashboardsPagination = async () => {
     const res = await getMyDashboardsByPagination(dashPage);
     const result = res.dashboards;
 
-    setPDashboards(result);
+    setMyDashboards(result);
     setdashPageLimit(Math.ceil(res.totalCount / 5));
   };
   const handlePrevClick = () => {
@@ -85,7 +85,7 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
   const handleDashPageClick = async () => {
     const { dashboards: nowDashboards } = await getMyDashboardsByPagination(dashPage);
     console.log(nowDashboards);
-    setPDashboards(nowDashboards);
+    setMyDashboards(nowDashboards);
   };
   useEffect(() => {
     fetchDashboardsPagination();
@@ -110,7 +110,7 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     fetchDashboards,
     fetchColumns,
     //
-    Pdashboards,
+    myDashboards,
     dashPage,
     dashPageLimit,
     fetchDashboardsPagination,
