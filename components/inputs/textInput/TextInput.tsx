@@ -6,11 +6,13 @@ type TextInputProps = {
   children: ReactNode;
   id: string;
   placeholder: string;
+  email?: string;
+  nickname?: string;
   onChange?: any;
   defaultValue?: string;
 };
 
-function TextInput({ children, id, placeholder, onChange, defaultValue }: TextInputProps) {
+function TextInput({ children, id, placeholder, email, nickname, onChange, defaultValue }: TextInputProps) {
   const [errorMsg, setErrorMsg] = useState('');
 
   return (
@@ -21,6 +23,8 @@ function TextInput({ children, id, placeholder, onChange, defaultValue }: TextIn
           type="text"
           inputType="text"
           placeholder={placeholder}
+          email={email}
+          nickname={nickname}
           onChange={onChange}
           onError={setErrorMsg}
           errorMsg={errorMsg}

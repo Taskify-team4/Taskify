@@ -36,11 +36,11 @@ function Login() {
         body: JSON.stringify(formData),
       });
       const result = await response.json();
-      console.log(result);
+
       if (response.ok) {
         const accessToken = result.accessToken;
         sessionStorage.setItem('accessToken', accessToken);
-        // router.push('/dashboard/:dashboardId');
+        router.push('/mydashboard');
       } else {
         setErrorMsg(result.message);
       }
@@ -53,7 +53,6 @@ function Login() {
     setOpenModal(errorMsg !== '');
   }, [errorMsg]);
 
-  console.log(errorMsg);
   return (
     <S.LoginContainner>
       <S.LoginLogoContainner href={'/'}>
@@ -66,10 +65,16 @@ function Login() {
       </S.LoginLogoContainner>
       <S.LoginTitleMsg>오늘도 만나서 반가워요!</S.LoginTitleMsg>
       <S.LoginInputContainer onSubmit={handleSubmitLoginClick}>
-        <TextInput id="email" placeholder="이메일을 입력해 주세요" onChange={setEmail}>
+        <TextInput id="email" placeholder="이메일을 입력해 주세요" email={email} onChange={setEmail}>
           이메일
         </TextInput>
-        <PasswordInput id="password" type="password" placeholder="비밀번호를 입력해 주세요" onChange={setPassword}>
+        <PasswordInput
+          id="password"
+          type="password"
+          placeholder="비밀번호를 입력해 주세요"
+          password={password}
+          onChange={setPassword}
+        >
           비밀번호
         </PasswordInput>
         {openModal ? (

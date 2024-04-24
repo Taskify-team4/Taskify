@@ -8,6 +8,7 @@ import PasswordInput from '@components/inputs/passwordInput/PasswordInput';
 import Modal from '@components/modals/Modal';
 import ModalBase from '@components/modals/ModalBase';
 import PasswordModal from '@components/modals/inconsistent_password/Modal';
+import { useRouter } from 'next/router';
 
 const BASE_URL = `https://sp-taskify-api.vercel.app/4-4`;
 
@@ -18,6 +19,8 @@ function Signup() {
   const [passwordCheck, setPasswordCheck] = useState('');
   const [checkBox, setCheckBox] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const router = useRouter();
+  const passwordCompare = password !== passwordCheck;
 
   const handleCheckBoxChange = () => {
     setCheckBox(!checkBox);
@@ -43,9 +46,10 @@ function Signup() {
       const result = await response.json();
 
       if (response.ok) {
-        console.log(result);
         setErrorMsg('가입이 완료되었습니다!');
-        // router.push('/dashboard/:dashboardId');
+        setTimeout(() => {
+          router.push('/login');
+        }, 1000);
       } else {
         setErrorMsg(result.message);
       }
@@ -55,8 +59,14 @@ function Signup() {
   };
 
   const TextInputList = [
-    { id: 'email', placeholder: '이메일을 입력해 주세요', onChange: setEmail, label: '이메일' },
-    { id: 'nickname', placeholder: '닉네임을 입력해 주세요', onChange: setNickname, label: '닉네임' },
+    { id: 'email', placeholder: '이메일을 입력해 주세요', onChange: setEmail, label: '이메일', email: email },
+    {
+      id: 'nickname',
+      placeholder: '닉네임을 입력해 주세요',
+      onChange: setNickname,
+      label: '닉네임',
+      nickname: nickname,
+    },
   ];
 
   const passwordInputList = [
@@ -66,6 +76,7 @@ function Signup() {
       placeholder: '8자 이상 입력해 주세요',
       onChange: setPassword,
       label: '비밀번호',
+      password: password,
     },
     {
       id: 'passwordCheck',
@@ -73,14 +84,10 @@ function Signup() {
       placeholder: '비밀번호를 한번 더 입력해 주세요',
       onChange: setPasswordCheck,
       label: '비밀번호 확인',
+      passwordCheck: passwordCheck,
     },
   ];
-  // console.log(email);
-  // console.log(nickname);
-  // console.log(password);
-  // console.log(passwordCheck);
-  // console.log(checkBox);
-  // console.log(errorMsg);
+
   return (
     <S.SignupContainner>
       <S.SignupLogoContainner href={'/'}>
@@ -99,6 +106,8 @@ function Signup() {
             id={inputItem.id}
             placeholder={inputItem.placeholder}
             onChange={inputItem.onChange}
+            email={inputItem.email}
+            nickname={inputItem.nickname}
           >
             {inputItem.label}
           </TextInput>
@@ -110,6 +119,9 @@ function Signup() {
             type={inputItem.type}
             placeholder={inputItem.placeholder}
             onChange={inputItem.onChange}
+            password={inputItem.password}
+            passwordCheck={inputItem.passwordCheck}
+            passwordCompare={passwordCompare}
           >
             {inputItem.label}
           </PasswordInput>
@@ -125,7 +137,9 @@ function Signup() {
             </ModalBase>
           }
         >
-          <S.SignupBtn disabled={!email || !password || !passwordCheck || !checkBox}>가입하기</S.SignupBtn>
+          <S.SignupBtn disabled={!email || !password || !passwordCheck || !checkBox || passwordCompare}>
+            가입하기
+          </S.SignupBtn>
         </Modal>
       </S.SignupInputContainer>
       <S.CheckUserWrap>
