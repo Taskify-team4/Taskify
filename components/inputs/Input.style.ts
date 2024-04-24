@@ -15,11 +15,11 @@ export const InputLabel = styled.label`
   line-height: normal;
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{ $errorMsg: string }>`
   width: 100%;
   height: 50px;
   padding: 15px 16px;
-  border: 1px solid var(--gray300);
+  border: 1px solid ${({ $errorMsg }) => ($errorMsg === '' ? 'var(--gray300)' : 'var(--red)')};
   border-radius: 8px;
   background-color: var(--white);
 

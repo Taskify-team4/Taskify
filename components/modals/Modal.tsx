@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { ModalProps, PortalProps } from './Modal.type';
 import usePreventScroll from '@hooks/usePreventScroll';
 
-const BackdropContainer = styled.div`
+export const BackdropContainer = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);

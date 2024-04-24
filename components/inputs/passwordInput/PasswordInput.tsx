@@ -6,13 +6,25 @@ import * as S from '@components/inputs/passwordInput/PaswwrodInput.style';
 type PasswordInputProps = {
   children: ReactNode;
   id: string;
-  type?: string;
+  type: string;
   placeholder: string;
+  password?: string;
+  passwordCheck?: string;
+  passwordCompare?: boolean;
+  onChange?: any;
 };
 
-function PasswordInput({ children, id, placeholder }: PasswordInputProps) {
+function PasswordInput({
+  children,
+  id,
+  placeholder,
+  password,
+  passwordCheck,
+  passwordCompare,
+  onChange,
+}: PasswordInputProps) {
   const [isValue, setIsValue] = useState(false);
-  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleValueChange = () => {
     setIsValue(!isValue);
@@ -21,7 +33,18 @@ function PasswordInput({ children, id, placeholder }: PasswordInputProps) {
   return (
     <S.PasswordInputContainer>
       <S.PasswordInputContent>
-        <Input id={id} type={isValue ? 'text' : 'password'} placeholder={placeholder}>
+        <Input
+          id={id}
+          type={isValue ? 'text' : 'password'}
+          inputType="password"
+          placeholder={placeholder}
+          password={password}
+          passwordCheck={passwordCheck}
+          passwordCompare={passwordCompare}
+          onChange={onChange}
+          onError={setErrorMsg}
+          errorMsg={errorMsg}
+        >
           {children}
         </Input>
         <S.ImageWrapper>
@@ -33,7 +56,7 @@ function PasswordInput({ children, id, placeholder }: PasswordInputProps) {
           />
         </S.ImageWrapper>
       </S.PasswordInputContent>
-      {error && <S.ErrorMessage>ErrorMessage</S.ErrorMessage>}
+      {errorMsg && <S.ErrorMessage>{errorMsg}</S.ErrorMessage>}
     </S.PasswordInputContainer>
   );
 }
