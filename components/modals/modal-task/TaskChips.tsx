@@ -13,8 +13,8 @@ function TaskChips({ tags, columntitle }: TaskChipsProps) {
       <S.ChipStroke />
       <S.ColorChips>
         {tags.map((tag, index) => (
-          <Chip.Square key={`${index} ${tag.text}`} size={'small'} color={tag.color}>
-            {tag.text}
+          <Chip.Square key={`${index} ${tag.text}`} size={'small'} color={'orange'}>
+            {tag}
           </Chip.Square>
         ))}
       </S.ColorChips>

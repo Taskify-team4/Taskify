@@ -22,6 +22,7 @@ export type CardProps = {
 };
 
 function Card(props: CardProps) {
+  console.log(props.tags);
   return (
     <S.CardContainer>
       {props.imageUrl ? (

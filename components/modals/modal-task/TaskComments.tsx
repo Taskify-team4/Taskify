@@ -1,44 +1,9 @@
 import * as S from '@components/modals/modal-task/ModalTask.style';
 import CommentInput from '@components/inputs/modalInput/commentInput/CommentInput';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TComment } from '@pages/dashboard/Dashboard.type';
 import { getComments, postNewComment } from '@pages/dashboard/api';
 import { useDashContext } from '@contexts/dashContext';
-// 임시로 만듦
-type commentType = {
-  author: {
-    nickname: string;
-  };
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-};
-const testComments: commentType[] = [
-  {
-    author: {
-      nickname: '홍성욱1',
-    },
-    content: '언제까지 해야하는건가요?',
-    createdAt: '2024-04-18 14:00',
-    updatedAt: '2024-04-18 14:00',
-  },
-  {
-    author: {
-      nickname: '홍성욱2',
-    },
-    content: '내일까지요',
-    createdAt: '2024-04-18 15:00',
-    updatedAt: '2024-04-18 15:00',
-  },
-  {
-    author: {
-      nickname: '홍성욱1',
-    },
-    content: '수정 완료 했습니다',
-    createdAt: '2024-04-18 16:00',
-    updatedAt: '2024-04-18 17:00',
-  },
-];
 
 function TaskComments({ cardid, columnid }) {
   const { dashboardId } = useDashContext();
@@ -77,7 +42,6 @@ function TaskComments({ cardid, columnid }) {
   useEffect(() => {
     fetchComments();
   }, []);
-  console.log(comments);
 
   return (
     <>

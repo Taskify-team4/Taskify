@@ -11,6 +11,7 @@ import { TCard } from '@pages/dashboard/Dashboard.type';
 import { ModalBaseProps } from '../Modal.type';
 import { useDashContext } from '@contexts/dashContext';
 import { postNewCard } from '@pages/dashboard/api';
+import Test from './Test';
 
 type CreateToDoPorps = ModalBaseProps & {
   children: ReactNode;
@@ -22,7 +23,7 @@ const test = ['가나다', '라마바'];
 
 function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: CreateToDoPorps) {
   const { myInfo, dashboardId } = useDashContext();
-
+  // const [tags, setTags] = useState<string[]>([]);
   const [cardData, setCardData] = useState<TCard>({
     //임시로 본인의 아이디만 넣도록 구현
     assigneeUserId: myInfo.id,
@@ -33,6 +34,7 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
     dueDate: '',
     tags: [],
   });
+  console.log(cardData);
 
   const trigger = () => {
     return close && close();
@@ -56,6 +58,13 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
     setCardData((prevState) => ({
       ...prevState,
       dueDate: selectedDate,
+    }));
+  };
+
+  const handleChangeTags = (tags: string[]) => {
+    setCardData((prevState) => ({
+      ...prevState,
+      tags: tags,
     }));
   };
 
@@ -85,16 +94,27 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
             담당자
           </SelectBox>
         </S.CreateToDoSelectContainer>
+
         <ModalInput id="title" type="text" placeholder="제목을 입력해 주세요." onRequired onChange={handleChangeTitle}>
           제목
         </ModalInput>
+
         <CommentInput placeholder="설명을 입력해 주세요." onRequired onModal onChange={handleChangeDescription}>
           설명
         </CommentInput>
+
         <DateInput onChange={handleChangeDueDate}>마감일</DateInput>
-        <TagInput id="tag" type="text" placeholder="입력 후 Enter">
+
+        <TagInput
+          id="tag"
+          type="text"
+          placeholder="입력 후 Enter"
+          setCardData={setCardData}
+          handleChangeTags={handleChangeTags}
+        >
           태그
         </TagInput>
+
         <ImageInput>이미지</ImageInput>
       </S.CreateToDoInputContainer>
       <S.CreateToDoBtnContainer>
