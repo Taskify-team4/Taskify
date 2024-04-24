@@ -24,7 +24,7 @@ export type TColumnForm = { title: string; dashboardId: number };
 
 export type TColumnTitleChange = { title: string; dashboardId: number };
 
-export type TCard = {
+export type TCardForm = {
   assigneeUserId: number;
   dashboardId: number;
   columnId: number;
@@ -32,6 +32,24 @@ export type TCard = {
   description: string;
   dueDate: string;
   tags: string[];
+};
+
+export type TCard = {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  dueDate: string;
+  assignee: {
+    profileImageUrl: string;
+    nickname: string;
+    id: number;
+  };
+  imageUrl: string;
+  teamId: string;
+  columnId: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type TCards = TCard[];

@@ -15,11 +15,18 @@ function TextInput({ children, id, placeholder, disabled, onChange, defaultValue
   return (
     <S.TextInputContainer>
       <S.TextInputWrapper>
-        <Input id={id} type="text" placeholder={placeholder} disabled={disabled} onChange={onChange} defaultValue={defaultValue}>
+        <Input
+          id={id}
+          type="text"
+          placeholder={placeholder}
+          disabled={disabled}
+          onChange={onChange}
+          defaultValue={defaultValue}
+        >
           {children}
         </Input>
       </S.TextInputWrapper>
-      {error && <S.ErrorMessage>ErrorMessage</S.ErrorMessage>}
+      {/* {error && <S.ErrorMessage>ErrorMessage</S.ErrorMessage>} */}
     </S.TextInputContainer>
   );
 }

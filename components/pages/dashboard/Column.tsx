@@ -19,10 +19,7 @@ type TColumnProps = {
 };
 
 function Column({ column }: TColumnProps) {
-  // const { cards, setCards } = useDashContext();
-  // console.log(cards);
   const [cards, setCards] = useState<TCards>([]);
-
   const fetchCards = async () => {
     const res = await getCards(column.id);
     const result = res.cards;
@@ -39,7 +36,7 @@ function Column({ column }: TColumnProps) {
         <S.TitleWrapper>
           <ColorTile $size={'tiny'} $color="purple" />
           <S.ColumnTitle>{column.title}</S.ColumnTitle>
-          <S.CardsCount>{cards.length}</S.CardsCount>
+          <S.CardsCount>{cards?.length}</S.CardsCount>
         </S.TitleWrapper>
         <Modal
           content={
@@ -71,7 +68,7 @@ function Column({ column }: TColumnProps) {
         <Modal
           content={
             <ModalBase>
-              <ModalTask {...card} columnid={column.id} fetchCards={fetchCards} />
+              <ModalTask card={card} column={column} fetchCards={fetchCards} />
             </ModalBase>
           }
           key={idx}

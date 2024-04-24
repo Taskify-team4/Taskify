@@ -1,4 +1,4 @@
-import { TCardForm, TColumnForm } from './Dashboard.type';
+import { TCard, TColumnForm } from './Dashboard.type';
 
 const BASE_URL = 'https://sp-taskify-api.vercel.app/4-4';
 const ACCESS_TOKEN =
@@ -112,7 +112,7 @@ export async function deleteCard(id: number) {
 }
 
 // 할 일 카드 생성
-export async function postNewCard(cardData: TCardForm) {
+export async function postNewCard(cardData: TCard) {
   const url = `${BASE_URL}/cards`;
   const response = await fetch(url, {
     method: 'POST',

@@ -9,6 +9,7 @@ import TaskContentInfo from './TaskContentInfo';
 import { useState } from 'react';
 import { deleteCard } from '@pages/dashboard/api';
 import { useDashContext } from '@contexts/dashContext';
+import { TCard, TColumn } from '@pages/dashboard/Dashboard.type';
 
 type TagProps = {
   text: string;
@@ -24,21 +25,13 @@ export type ModalTaskProps = ModalBaseProps & {
   assignee: { nickname: string };
   columnid: number;
   fetchCards: (columnid: number) => {};
+  card: TCard;
+  column: TColumn;
 };
 
-function ModalTask({
-  id,
-  close,
-  imageUrl,
-  title,
-  description,
-  tags,
-  dueDate,
-  assignee,
-  columnid,
-  fetchCards,
-}: ModalTaskProps) {
+function ModalTask({ close, fetchCards, card, column }: ModalTaskProps) {
   const [more, setMore] = useState(false);
+  console.log(card);
 
   const trigger = () => {
     setMore(false);
@@ -47,9 +40,9 @@ function ModalTask({
 
   const handleDeleteButtonClick = async () => {
     try {
-      await deleteCard(id);
+      await deleteCard(card.id);
       trigger();
-      fetchCards(columnid);
+      fetchCards(column.id);
     } catch (error) {
       console.error('카드 삭제 실패', error);
     }
@@ -57,11 +50,11 @@ function ModalTask({
 
   return (
     <S.ModalTaskContainer>
-      <S.TaskTitle>{title}</S.TaskTitle>
-      <TaskContentInfo {...{ description, tags, dueDate, assignee }} />
-      {imageUrl ? (
+      <S.TaskTitle>{card.title}</S.TaskTitle>
+      <TaskContentInfo {...card} columntitle={column.title} />
+      {card.imageUrl ? (
         <S.CardImage>
-          <Image src={imageUrl} alt="Card Image" width={0} height={0} layout="responsive" />
+          <Image src={card.imageUrl} alt="Card Image" width={0} height={0} layout="responsive" />
         </S.CardImage>
       ) : null}
       <TaskComments />
