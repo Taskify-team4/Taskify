@@ -62,7 +62,7 @@ function Input({
       onError('8자 이상 작성해 주세요.');
       return;
     }
-    console.log(password !== passwordCheck);
+
     if (passwordCompare && passwordCheckId) {
       onError('비밀번호가 일치하지 않습니다.');
       return;
@@ -76,12 +76,9 @@ function Input({
         id={id}
         type={type}
         placeholder={placeholder}
-        disabled={disabled}
         defaultValue={defaultValue}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          if (onChange) {
-            onChange(e.target.value);
-          }
+        onChange={(e) => {
+          onChange(e.target.value);
         }}
         onFocus={handleFocusInput}
         onBlur={handleBlurInput}
