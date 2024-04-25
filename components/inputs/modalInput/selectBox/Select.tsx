@@ -45,7 +45,7 @@ function Select({ onData, onType, onModify }: SelectProps) {
             ? onData.map((item: string) => (
                 <S.Select key={item}>
                   <S.SelectTitleName str={item} />
-                  <S.SelectTileItem>{item}</S.SelectTileItem>
+                  <S.SelectTileItem>{item.nickname}</S.SelectTileItem>
                 </S.Select>
               ))
             : onData.map((item: string) => (
@@ -53,7 +53,7 @@ function Select({ onData, onType, onModify }: SelectProps) {
                   <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />
                   <Chip.Round size={'large'} color={'purple'}>
                     <S.SelectTile $size={'tiny'} $color={'purple'} />
-                    <S.SelectTileItem>{item}</S.SelectTileItem>
+                    <S.SelectTileItem>{item.nickname}</S.SelectTileItem>
                   </Chip.Round>
                 </S.Select>
               ))}

@@ -227,3 +227,9 @@ export const CommentButton = styled.button`
   font-weight: 400;
   text-decoration-line: underline;
 `;
+export const CardColumnTitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+`;

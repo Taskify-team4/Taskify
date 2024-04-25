@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 export type ModalBaseProps = {
   children?: ReactNode;
   close?: () => void;
+  errorMsg?: string;
 };
 
 export type PortalProps = {
