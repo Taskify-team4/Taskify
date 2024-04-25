@@ -80,6 +80,7 @@ export const CardMeta = styled.div`
 export const CardChips = styled.div`
   display: flex;
   gap: 6px;
+  flex-flow: wrap;
 `;
 
 export const CardDateOwner = styled.div`
