@@ -94,3 +94,16 @@ export const postInvitation = async (dashId: number) => {
     console.error(error);
   }
 };
+export const putInvitation = async (id: number, check: boolean) => {
+  try {
+    const res = await instance.put(`/invitations/${id}`, JSON.stringify({ inviteAccepted: check }), {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${TEMP_TOKEN}`,
+      },
+    });
+    return res;
+  } catch (error) {
+    console.error(error);
+  }
+};

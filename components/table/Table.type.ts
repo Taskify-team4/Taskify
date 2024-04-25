@@ -49,9 +49,11 @@ export type InvitedDashListProps = {
   data: TInvitation[];
   buttonText?: string;
   onCancelInviteClick?: (cancelId: number) => void;
-  IsObserverEnd?: IsEndStateObject;
+  IsObserverEnd?: IsEndStateObject | undefined;
+  handleConfirmClick?: (id: number) => void;
+  handleRejectClick?: (id: number) => void;
 };
 type IsEndStateObject = {
-  cursorId: number;
-  setCursorId: Dispatch<SetStateAction<number>>;
+  cursorId: number | undefined;
+  setCursorId: Dispatch<SetStateAction<number | undefined>>;
 };

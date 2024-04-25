@@ -5,17 +5,18 @@ import MyDashboardList from '@components/pages/mydashboard/MyDashboardList';
 import InvitedDashTable from '@components/table/invitedDash/InvitedDashTable';
 import { postInvitation } from './api';
 import { useMyData } from '@contexts/myDataContext';
+import { useEffect } from 'react';
 
 function Mydashboard() {
   const { myData } = useMyData();
 
   // const handletest = async () => {
-  //   const res = await postInvitation(6709);
+  //   const res = await postInvitation(7078);
   //   console.log(res);
   // };
 
   // useEffect(() => {
-  //   // handletest();
+  //   handletest();
   // }, []);
 
   return (

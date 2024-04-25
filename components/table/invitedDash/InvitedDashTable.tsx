@@ -8,19 +8,43 @@ import Image from 'next/image';
 import EmptyImg from '@public/icons/no_invite.svg';
 import { TInvitation } from '@components/table/Table.type';
 import { useState } from 'react';
-import { getInvitations } from '@pages/mydashboard/api';
+import { getInvitations, putInvitation } from '@pages/mydashboard/api';
 
 function InvitedDashTable() {
   const [myInvitation, setMyInvitation] = useState<TInvitation[]>([]);
-  const [cursorId, setCursorId] = useState(0);
+  const [cursorId, setCursorId] = useState<number | undefined>(undefined);
   const fetchMyInvitation = async (cursorId?: number) => {
     const res = await getInvitations(cursorId);
     console.log(res);
     setMyInvitation(myInvitation.concat(res));
   };
-  useEffect(() => {
-    fetchMyInvitation();
-  }, []);
+  const reloadMyInvitation = async () => {
+    const res = await getInvitations();
+    console.log(res);
+    setMyInvitation(res);
+  };
+
+  const handleConfirmClick = async (id: number) => {
+    try {
+      const res = await putInvitation(id, true);
+      if (res?.status) {
+        reloadMyInvitation();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleRejectClick = async (id: number) => {
+    try {
+      const res = await putInvitation(id, false);
+      if (res?.status) {
+        reloadMyInvitation();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     fetchMyInvitation(cursorId);
   }, [cursorId]);
@@ -32,7 +56,12 @@ function InvitedDashTable() {
       <S.ListsContainer>
         <TableLists isInvitedDash>
           {myInvitation.length !== 0 ? (
-            <InvitedDashList data={myInvitation} IsObserverEnd={{ cursorId, setCursorId }} />
+            <InvitedDashList
+              data={myInvitation}
+              IsObserverEnd={{ cursorId, setCursorId }}
+              handleConfirmClick={handleConfirmClick}
+              handleRejectClick={handleRejectClick}
+            />
           ) : (
             <S.EmptyInvitation>
               <Image src={EmptyImg} alt="초대받은 대시보드가 비어있음" width={100} height={100} />
