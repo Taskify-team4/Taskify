@@ -60,7 +60,7 @@ function Input({
       onError('8자 이상 작성해 주세요.');
       return;
     }
-    console.log(password !== passwordCheck);
+
     if (passwordCompare && passwordCheckId) {
       onError('비밀번호가 일치하지 않습니다.');
       return;
