@@ -167,6 +167,20 @@ export async function postNewComment(commentData: TCommentForm) {
   return response.json();
 }
 
+// 댓글 수정
+export async function updateComment(commentData: TCommentForm, id: number) {
+  const url = `${BASE_URL}/comments/${id}`;
+  const response = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(commentData),
+  });
+  return response.json();
+}
+
 // 댓글 조회
 export async function getComments(id: number) {
   const url = `${BASE_URL}/comments?size=10&cardId=${id}`;

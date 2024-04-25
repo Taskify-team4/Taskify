@@ -3,12 +3,13 @@ import * as S from '@components/inputs/modalInput/commentInput/CommentInput.styl
 
 type CommentInputProps = {
   children: ReactNode;
-  placeholder: string;
+  placeholder?: string;
   onRequired?: boolean;
   onModal?: boolean;
   onChange?: (description: string) => void;
   onClick?: () => void;
   defaultValue?: string;
+  className?: string;
 };
 
 function CommentInput({
@@ -19,6 +20,7 @@ function CommentInput({
   onChange,
   onClick,
   defaultValue,
+  className,
 }: CommentInputProps) {
   const handleInputChange = (e: { target: { value: string } }) => {
     if (onChange) {
@@ -27,7 +29,7 @@ function CommentInput({
   };
 
   return (
-    <S.CommentInputContainer>
+    <S.CommentInputContainer className={className}>
       <S.CommentInputTitleContainer>
         <S.CommentInputLabel onModal={onModal}>{children}</S.CommentInputLabel>
         {onRequired && <S.CommentInputRequired>*</S.CommentInputRequired>}
