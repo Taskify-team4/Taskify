@@ -1,49 +1,39 @@
-import React from 'react';
+import React, { Key } from 'react';
 import * as S from '@components/cards/Card.style';
 import Image from 'next/image';
 import Chip from '@components/chips/Chip';
 
 // 리소스
 import calendarIcon from '@public/icons/calendar.svg';
-import { TColorKey } from '@components/chips/Chip.type';
-
-type TagProps = {
-  text: string;
-  color: TColorKey;
-};
+import { TCard } from '@pages/dashboard/Dashboard.type';
 
 export type CardProps = {
-  imageUrl: string | null;
-  title: string;
-  description: string;
-  tags: TagProps[];
-  dueDate: string;
-  assignee: { nickname: string };
+  card: TCard;
 };
 
-function Card(props: CardProps) {
+function Card({ card }: CardProps) {
   return (
     <S.CardContainer>
-      {props.imageUrl ? (
+      {card.imageUrl ? (
         <S.CardImageContainer>
-          <S.CardImage src={props.imageUrl} alt="Card Image" fill />
+          <S.CardImage src={card.imageUrl} alt="Card Image" fill />
         </S.CardImageContainer>
       ) : null}
       <S.CardContent>
-        <S.CardTitle>{props.title}</S.CardTitle>
+        <S.CardTitle>{card.title}</S.CardTitle>
         <S.CardMeta>
           <S.CardChips>
-            {props.tags.map((tag, idx) => (
-              <Chip.Square size={'small'} key={idx} color="#3f9fff">
-                {tag}
+            {card.tags.map((tag: string, idx: Key) => (
+              <Chip.Square size={'small'} key={idx} color={tag.split(':')[1]}>
+                {tag.split(':')[0]}
               </Chip.Square>
             ))}
           </S.CardChips>
           <S.CardDateOwner>
             <S.CardDate>
-              <Image src={calendarIcon.src} alt="Calendar Icon" width={18} height={18} /> {props.dueDate}
+              <Image src={calendarIcon.src} alt="Calendar Icon" width={18} height={18} /> {card.dueDate}
             </S.CardDate>
-            <S.CardOwner str={props.assignee.nickname[0]} />
+            <S.CardOwner str={card.assignee.nickname[0]} />
           </S.CardDateOwner>
         </S.CardMeta>
       </S.CardContent>

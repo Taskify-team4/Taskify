@@ -7,18 +7,18 @@ import Image from 'next/image';
 import settingIcon from '@public/icons/setting.svg';
 import Modal from '@components/modals/Modal';
 import ModalBase from '@components/modals/ModalBase';
-import EditColumnModal from '@components/modals/edit_column/Modal';
-import { TColumn } from '@pages/dashboard/Dashboard.type';
-import { getCards } from '@pages/dashboard/api';
 import ModalTask from '@components/modals/modal-task/ModalTask';
+import EditColumnModal from '@components/modals/edit_column/Modal';
+import { TCards, TColumn } from '@pages/dashboard/Dashboard.type';
+import { getCards } from '@pages/dashboard/api';
+import CreateToDoModal from '@components/modals/createtodo/Modal';
 
 type TColumnProps = {
   column: TColumn;
 };
 
 function Column({ column }: TColumnProps) {
-  const [cards, setCards] = useState<CardProps[]>([]);
-
+  const [cards, setCards] = useState<TCards>([]);
   const fetchCards = async () => {
     const res = await getCards(column.id);
     const result = res.cards;
@@ -35,7 +35,7 @@ function Column({ column }: TColumnProps) {
         <S.TitleWrapper>
           <ColorTile $size={'tiny'} $color="purple" />
           <S.ColumnTitle>{column.title}</S.ColumnTitle>
-          <S.CardsCount>{cards.length}</S.CardsCount>
+          <S.CardsCount>{cards?.length}</S.CardsCount>
         </S.TitleWrapper>
         <Modal
           content={
@@ -51,20 +51,28 @@ function Column({ column }: TColumnProps) {
       </S.ColumnHeader>
 
       {/* 할일 생성 모달 */}
-      <Modal content={<ModalBase></ModalBase>}>
+      <Modal
+        content={
+          <ModalBase>
+            <CreateToDoModal columnid={column.id} fetchCards={fetchCards}>
+              할 일 생성
+            </CreateToDoModal>
+          </ModalBase>
+        }
+      >
         <Button.AddTodo />
       </Modal>
 
-      {cards.map((card, idx) => (
+      {cards?.map((card, idx) => (
         <Modal
           content={
             <ModalBase>
-              <ModalTask {...card} />
+              <ModalTask card={card} column={column} fetchCards={fetchCards} />
             </ModalBase>
           }
           key={idx}
         >
-          <Card {...card} />
+          <Card card={card} />
         </Modal>
       ))}
     </S.ColumnContainer>

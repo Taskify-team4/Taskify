@@ -9,17 +9,17 @@ import { useDashContext } from '@contexts/dashContext';
 
 function NewColumnModal({ close }: ModalBaseProps) {
   const { dashboardId, fetchColumns } = useDashContext();
-  const [columnData, setColumnData] = useState<TColumnForm>({ title: '', dashboardId: 0 });
+  const [columnData, setColumnData] = useState<TColumnForm>({ title: '', dashboardId: Number(dashboardId) });
 
   const trigger = () => {
     return close && close();
   };
 
   const handleChange = (title: string) => {
-    setColumnData({
+    setColumnData((prevState) => ({
+      ...prevState,
       title: title,
-      dashboardId: Number(dashboardId),
-    });
+    }));
   };
 
   const handleCreateColumnButtonClick = async () => {

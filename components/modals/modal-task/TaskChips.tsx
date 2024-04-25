@@ -4,17 +4,20 @@ import { ColorTile } from '@components/chips/Chip.style';
 import { ModalTaskProps } from './ModalTask';
 
 type TaskChipsProps = Pick<ModalTaskProps, 'tags'>;
-function TaskChips({ tags }: TaskChipsProps) {
+function TaskChips({ tags, columntitle }: TaskChipsProps) {
   return (
     <S.Chips>
       <Chip.Round size={'large'} color={'purple'}>
-        <ColorTile $size={'tiny'} $color={'purple'} /> On Progress
+        <S.CardColumnTitleWrapper>
+          <ColorTile $size={'tiny'} $color={'purple'} />
+          <span>{columntitle}</span>
+        </S.CardColumnTitleWrapper>
       </Chip.Round>
       <S.ChipStroke />
       <S.ColorChips>
         {tags.map((tag, index) => (
-          <Chip.Square key={`${index} ${tag.text}`} size={'small'} color={tag.color}>
-            {tag.text}
+          <Chip.Square key={`${index} ${tag.text}`} size={'small'} color={tag.split(':')[1]}>
+            {tag.split(':')[0]}
           </Chip.Square>
         ))}
       </S.ColorChips>

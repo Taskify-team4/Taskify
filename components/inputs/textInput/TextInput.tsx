@@ -24,6 +24,7 @@ function TextInput({ children, id, placeholder, email, nickname, disabled, onCha
           type="text"
           inputType="text"
           placeholder={placeholder}
+          disabled={disabled}
           email={email}
           nickname={nickname}
           onChange={onChange}
