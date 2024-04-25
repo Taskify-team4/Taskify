@@ -13,9 +13,10 @@ type InputProps = {
   password?: string;
   passwordCheck?: string;
   passwordCompare?: boolean;
-  onChange: any;
+  onChange?: (value: string) => void;
   onError: any;
   errorMsg: string;
+  disabled?: boolean;
   defaultValue?: string;
 };
 
@@ -32,6 +33,7 @@ function Input({
   onChange,
   onError,
   errorMsg,
+  disabled,
   defaultValue,
 }: InputProps) {
   const handleFocusInput = () => {
