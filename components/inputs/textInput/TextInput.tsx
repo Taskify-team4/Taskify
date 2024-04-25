@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Input from '@components/inputs/Input';
 import * as S from '@components/inputs/textInput/TextInput.style';
 
@@ -6,20 +6,34 @@ type TextInputProps = {
   children: ReactNode;
   id: string;
   placeholder: string;
-  disabled?: boolean;
-  onChange?: (value: string) => void;
+  email?: string;
+  nickname?: string;
+  onChange?: any;
   defaultValue?: string;
 };
 
-function TextInput({ children, id, placeholder, disabled, onChange, defaultValue }: TextInputProps) {
+function TextInput({ children, id, placeholder, email, nickname, onChange, defaultValue }: TextInputProps) {
+  const [errorMsg, setErrorMsg] = useState('');
+
   return (
     <S.TextInputContainer>
       <S.TextInputWrapper>
-        <Input id={id} type="text" placeholder={placeholder} disabled={disabled} onChange={onChange} defaultValue={defaultValue}>
+        <Input
+          id={id}
+          type="text"
+          inputType="text"
+          placeholder={placeholder}
+          email={email}
+          nickname={nickname}
+          onChange={onChange}
+          onError={setErrorMsg}
+          errorMsg={errorMsg}
+          defaultValue={defaultValue}
+        >
           {children}
         </Input>
       </S.TextInputWrapper>
-      {error && <S.ErrorMessage>ErrorMessage</S.ErrorMessage>}
+      {errorMsg && <S.ErrorMessage>{errorMsg}</S.ErrorMessage>}
     </S.TextInputContainer>
   );
 }
