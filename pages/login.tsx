@@ -39,7 +39,7 @@ function Login() {
 
       if (response.ok) {
         const accessToken = result.accessToken;
-        sessionStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('accessToken', accessToken);
         router.push('/mydashboard');
       } else {
         setErrorMsg(result.message);

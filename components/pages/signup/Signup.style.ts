@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 export const SignupContainner = styled.div`
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
