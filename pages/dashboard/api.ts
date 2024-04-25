@@ -2,7 +2,7 @@ import { TCard, TCardForm, TColumnForm, TCommentForm } from './Dashboard.type';
 
 const BASE_URL = 'https://sp-taskify-api.vercel.app/4-4';
 const ACCESS_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc0NSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDUyNTc5LCJpc3MiOiJzcC10YXNraWZ5In0.xYXQqIeyqeE-FQw7z7w4P9I430xL277-Dm22VoLVx3I';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAyNSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzODQ1ODQ5LCJpc3MiOiJzcC10YXNraWZ5In0.TX6XvmAngZjr9geZyBxPISigXYsFmxJK9_B7ydCQ6cU';
 
 // 내 정보 조회
 export async function getMyInfo() {

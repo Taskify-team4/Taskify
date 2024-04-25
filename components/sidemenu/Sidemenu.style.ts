@@ -63,11 +63,11 @@ export const DashBoardsList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
-  overflow-y: scroll;
+  /* overflow-y: scroll;
   scrollbar-width: thin;
   @media ${device.mobile} {
     scrollbar-width: none;
-  }
+  } */
 `;
 
 export const DashBoardsItem = styled.div<{ selected: boolean }>`
@@ -105,6 +105,30 @@ export const DashBoardTitle = styled.span`
 export const DashBoardCrown = styled(Image)`
   width: 15px;
   height: 12px;
+  @media ${device.mobile} {
+    display: none;
+  }
+`;
+export const DashBoardPagination = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: auto;
+  padding-right: 12px;
+  padding-bottom: 24px;
+  @media ${device.mobile} {
+    padding: 0;
+  }
+`;
+export const PageButton = styled.span`
+  display: flex;
+`;
+export const PagenationText = styled.span`
+  color: var(--black200);
+  font-size: 14px;
+  font-weight: 400;
   @media ${device.mobile} {
     display: none;
   }

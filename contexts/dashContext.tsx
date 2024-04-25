@@ -1,6 +1,7 @@
 import { TCards, TColumns, TDashInfo, TDashboards } from '@pages/dashboard/Dashboard.type';
 import { getCards, getColumns, getDashboardInfo, getDashboards, getMyInfo } from '@pages/dashboard/api';
 import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react';
+import { getMyDashboardsByPagination } from '@pages/mydashboard/api';
 
 type ProviderProps = {
   children: ReactNode;
@@ -18,6 +19,13 @@ const initialContext = {
   fetchDashboards: () => {},
   fetchColumns: () => {},
   fetchCards: (columnId: number) => {},
+
+  myDashboards: [] as TDashboards,
+  dashPage: 1,
+  dashPageLimit: 1,
+  fetchDashboardsPagination: () => {},
+  handlePrevClick: () => {},
+  handleNextClick: () => {},
 };
 
 const DashContext = createContext(initialContext);
@@ -64,11 +72,44 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     setColumns(result);
   };
 
+  const [myDashboards, setMyDashboards] = useState<TDashboards>([]);
+  const [dashPage, setDashPage] = useState(1);
+  const [dashPageLimit, setdashPageLimit] = useState(1);
+  const fetchDashboardsPagination = async () => {
+    const res = await getMyDashboardsByPagination(dashPage);
+    const result = res.dashboards;
+
+    setMyDashboards(result);
+    setdashPageLimit(Math.ceil(res.totalCount / 5));
+  };
+  const handlePrevClick = () => {
+    setDashPage((prev) => {
+      if (prev > 1) return prev - 1;
+      return prev;
+    });
+  };
+  const handleNextClick = () => {
+    setDashPage((prev) => {
+      if (prev < dashPageLimit) return prev + 1;
+      return prev;
+    });
+  };
+  const handleDashPageClick = async () => {
+    const { dashboards: nowDashboards } = await getMyDashboardsByPagination(dashPage);
+    setMyDashboards(nowDashboards);
+  };
+  
   const fetchCards = async (columnId: number) => {
     const res = await getCards(columnId);
     const result = res?.cards;
     setCards(result);
   };
+  useEffect(() => {
+    fetchDashboardsPagination();
+  }, []);
+  useEffect(() => {
+    handleDashPageClick();
+  }, [dashPage]);
 
   useEffect(() => {
     if (!dashboardId) return;
@@ -92,6 +133,12 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     fetchDashboardInfo,
     fetchDashboards,
     fetchColumns,
+    myDashboards,
+    dashPage,
+    dashPageLimit,
+    fetchDashboardsPagination,
+    handlePrevClick,
+    handleNextClick,
     fetchCards,
   };
 
