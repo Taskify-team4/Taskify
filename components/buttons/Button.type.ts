@@ -10,6 +10,7 @@ export type ButtonProps = {
   children?: ReactNode;
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  className?: string;
 };
 
 export type DashboardButtonProps = ButtonProps & {

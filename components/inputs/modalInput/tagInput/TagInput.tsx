@@ -10,10 +10,11 @@ type TagInputProps = {
   placeholder: string;
   onRequired?: boolean;
   onChange: (tagArr: string[]) => void;
+  defaultValue?: string[];
 };
 
-function TagInput({ children, id, type, placeholder, onRequired, onChange }: TagInputProps) {
-  const [tags, setTags] = useState<string[]>([]);
+function TagInput({ children, id, type, placeholder, onRequired, onChange, defaultValue }: TagInputProps) {
+  const [tags, setTags] = useState<string[]>(defaultValue || []);
   const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

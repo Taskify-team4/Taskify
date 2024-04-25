@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
+import Button from '@components/buttons/Button';
 
 export const ModalTaskContainer = styled.div`
   position: relative;
@@ -156,7 +157,7 @@ export const MoreList = styled.ul`
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
   background-color: var(--white);
 `;
-export const MoreItem = styled.li`
+export const MoreItem = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
