@@ -1,3 +1,5 @@
+import { TColorCode } from '@components/chips/Chip.type';
+
 export type TColumn = {
   id: number;
   title: string;
@@ -9,7 +11,7 @@ export type TColumn = {
 export type TColumns = TColumn[];
 
 export type TDashInfo = {
-  color: string;
+  color: TColorCode;
   createdAt: string;
   createdByMe: boolean;
   id: number;
