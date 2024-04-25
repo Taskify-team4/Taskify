@@ -1,19 +1,22 @@
+import { useRouter } from 'next/router';
 import Header from './Header';
 import * as S from './MainHeader.style';
 import logoImg from '@public/icons/logo_img.svg';
 import logoText from '@public/icons/logo_taskify.svg';
 
 function MainHeader() {
+  const router = useRouter();
+
   const handleLogoClick = () => {
-    // 메인페이지로 이동
+    router.push('/');
   };
 
   const handleLoginClick = () => {
-    // 로그인페이지로 이동
+    router.push('/login');
   };
 
   const handleSignUpClick = () => {
-    // 회원가입 페이지로 이동
+    router.push('/signup');
   };
 
   return (
