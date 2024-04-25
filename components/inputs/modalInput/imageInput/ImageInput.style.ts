@@ -26,6 +26,7 @@ export const ImageWrapper = styled.div`
   justify-content: center;
   border-radius: 6px;
   background-color: #f5f5f5;
+  cursor: pointer;
 
   @media ${device.tablet} {
     width: 58px;
@@ -45,5 +46,21 @@ export const ImageContent = styled.div`
   @media ${device.tablet} {
     width: 21.368px;
     height: 21.368px;
+  }
+`;
+
+export const ImageInputContentContainer = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+
+export const UploagImageWrapper = styled.div`
+  display: flex;
+  position: relative;
+  width: 100px;
+  height: 76px;
+  @media ${device.tablet} {
+    width: 100px;
+    height: 58px;
   }
 `;

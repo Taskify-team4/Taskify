@@ -1,6 +1,5 @@
-import { TColumns, TDashInfo, TDashboards } from '@pages/dashboard/Dashboard.type';
-import { getColumns, getDashboardInfo, getDashboards } from '@pages/dashboard/api';
-import { useRouter } from 'next/router';
+import { TCards, TColumns, TDashInfo, TDashboards } from '@pages/dashboard/Dashboard.type';
+import { getCards, getColumns, getDashboardInfo, getDashboards, getMyInfo } from '@pages/dashboard/api';
 import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { getMyDashboardsByPagination } from '@pages/mydashboard/api';
 
@@ -14,10 +13,13 @@ const initialContext = {
   dashInfo: {} as TDashInfo,
   dashboards: [] as TDashboards,
   columns: [] as TColumns,
+  cards: [] as TCards,
+
   fetchDashboardInfo: () => {},
   fetchDashboards: () => {},
   fetchColumns: () => {},
-  //
+  fetchCards: (columnId: number) => {},
+
   myDashboards: [] as TDashboards,
   dashPage: 1,
   dashPageLimit: 1,
@@ -31,6 +33,7 @@ const DashContext = createContext(initialContext);
 export const useDashContext = () => useContext(DashContext);
 
 export function DashProvider({ children, dashboardId }: ProviderProps) {
+  const [myInfo, setMyInfo] = useState();
   const [dashInfo, setDashInfo] = useState<TDashInfo>({
     color: '',
     createdAt: '',
@@ -42,6 +45,15 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
   });
   const [dashboards, setDashboards] = useState<TDashboards>([]);
   const [columns, setColumns] = useState<TColumns>([]);
+  const [cards, setCards] = useState<TCards>([]);
+
+  // 달력 input에서 선택된 날짜 state
+  const [selectedDate, setSelectedDate] = useState('');
+
+  const fetchMyInfo = async () => {
+    const res = await getMyInfo();
+    setMyInfo(res);
+  };
 
   const fetchDashboardInfo = async () => {
     const res = await getDashboardInfo(dashboardId);
@@ -56,7 +68,7 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
 
   const fetchColumns = async () => {
     const res = await getColumns(dashboardId);
-    const result = res.data;
+    const result = res?.data;
     setColumns(result);
   };
 
@@ -86,6 +98,12 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     const { dashboards: nowDashboards } = await getMyDashboardsByPagination(dashPage);
     setMyDashboards(nowDashboards);
   };
+  
+  const fetchCards = async (columnId: number) => {
+    const res = await getCards(columnId);
+    const result = res?.cards;
+    setCards(result);
+  };
   useEffect(() => {
     fetchDashboardsPagination();
   }, []);
@@ -95,26 +113,33 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
 
   useEffect(() => {
     if (!dashboardId) return;
+    fetchMyInfo();
     fetchDashboardInfo();
     fetchDashboards();
     fetchColumns();
   }, [dashboardId]);
 
   const values = {
+    myInfo,
     dashboardId,
     dashInfo,
     dashboards,
     columns,
+    cards,
+    setCards,
+    selectedDate,
+    setSelectedDate,
+    fetchMyInfo,
     fetchDashboardInfo,
     fetchDashboards,
     fetchColumns,
-    //
     myDashboards,
     dashPage,
     dashPageLimit,
     fetchDashboardsPagination,
     handlePrevClick,
     handleNextClick,
+    fetchCards,
   };
 
   return <DashContext.Provider value={values}>{children}</DashContext.Provider>;
