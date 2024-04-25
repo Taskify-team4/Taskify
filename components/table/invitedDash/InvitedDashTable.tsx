@@ -9,6 +9,9 @@ import EmptyImg from '@public/icons/no_invite.svg';
 import { TInvitation } from '@components/table/Table.type';
 import { useState } from 'react';
 import { getInvitations, putInvitation } from '@pages/mydashboard/api';
+import { ChangeEvent } from 'react';
+
+export type ChangeHandler = (event: ChangeEvent<HTMLInputElement>) => void;
 
 function InvitedDashTable() {
   const [myInvitation, setMyInvitation] = useState<TInvitation[]>([]);
@@ -20,7 +23,6 @@ function InvitedDashTable() {
   };
   const reloadMyInvitation = async () => {
     const res = await getInvitations();
-    console.log(res);
     setMyInvitation(res);
   };
 
@@ -44,6 +46,9 @@ function InvitedDashTable() {
       console.error(error);
     }
   };
+  const handleSearchInvitation: ChangeHandler = async (event) => {
+    console.log(event.target.value);
+  };
 
   useEffect(() => {
     fetchMyInvitation(cursorId);
@@ -59,8 +64,9 @@ function InvitedDashTable() {
             <InvitedDashList
               data={myInvitation}
               IsObserverEnd={{ cursorId, setCursorId }}
-              handleConfirmClick={handleConfirmClick}
-              handleRejectClick={handleRejectClick}
+              onConfirmClick={handleConfirmClick}
+              onRejectClick={handleRejectClick}
+              onSearchInvitation={handleSearchInvitation}
             />
           ) : (
             <S.EmptyInvitation>

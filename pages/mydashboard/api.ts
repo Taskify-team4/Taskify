@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const TEMP_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAyNSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNTk5NjAzLCJpc3MiOiJzcC10YXNraWZ5In0.LEYdnW0mcRvx9mAKczvnJWXGqZrQBA3ALmmqdM7iMq0';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzExNSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzE0MDM2OTI4LCJpc3MiOiJzcC10YXNraWZ5In0.QW_2msgjk4CFwx7KuDMngfSOxLm-zWDJHyzBP8MFBpQ';
 
 const instance = axios.create({ baseURL: 'https://sp-taskify-api.vercel.app/4-4' });
 
@@ -83,7 +83,7 @@ export const getInvitations = async (cursorId?: number) => {
 };
 export const postInvitation = async (dashId: number) => {
   try {
-    const res = await instance.post(`/dashboards/${dashId}/invitations`, JSON.stringify({ email: 'hsw@test.com' }), {
+    const res = await instance.post(`/dashboards/${dashId}/invitations`, JSON.stringify({ email: 'hsw1@test.com' }), {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${TEMP_TOKEN}`,
