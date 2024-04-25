@@ -1,6 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useState } from 'react';
 import * as S from '@components/inputs/modalInput/tagInput/TagInput.style';
 import Chip from '@components/chips/Chip';
+import { makeRandomChipColor } from '@utils/randomChipColor';
 
 type TagInputProps = {
   children: ReactNode;
@@ -21,7 +22,8 @@ function TagInput({ children, id, type, placeholder, onRequired, onChange }: Tag
 
   const handleInputKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      const tagArr = [...tags, inputValue];
+      const randColor = makeRandomChipColor();
+      const tagArr = [...tags, `${inputValue}:${randColor}`];
       setTags(tagArr);
       onChange(tagArr);
       setInputValue('');
@@ -36,8 +38,8 @@ function TagInput({ children, id, type, placeholder, onRequired, onChange }: Tag
       </S.TagInputTitleContainer>
       <S.TagInputContent>
         {tags.map((tag, index) => (
-          <Chip.Square key={index} size={'large'} color={'orange'}>
-            {tag}
+          <Chip.Square key={index} size={'large'} color={tag.split(':')[1]}>
+            {tag.split(':')[0]}
           </Chip.Square>
         ))}
 

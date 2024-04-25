@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import * as S from '@components/modals/createtodo/Modal.style';
 import SelectBox from '@components/inputs/modalInput/selectBox/SelectBox';
 import ModalInput from '@components/inputs/modalInput/ModalInput';
@@ -10,7 +10,7 @@ import Button from '@components/buttons/Button';
 import { TCardForm } from '@pages/dashboard/Dashboard.type';
 import { ModalBaseProps } from '../Modal.type';
 import { useDashContext } from '@contexts/dashContext';
-import { postNewCard } from '@pages/dashboard/api';
+import { getDashboardMembers, postNewCard } from '@pages/dashboard/api';
 
 type CreateToDoPorps = ModalBaseProps & {
   children: ReactNode;
@@ -22,6 +22,7 @@ const test = ['가나다', '라마바'];
 
 function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: CreateToDoPorps) {
   const { myInfo, dashboardId } = useDashContext();
+  const [members, setMembers] = useState([]);
   const [cardData, setCardData] = useState<TCardForm>({
     //임시로 본인의 아이디만 넣도록 구현
     assigneeUserId: myInfo.id,
@@ -35,6 +36,12 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
 
   const trigger = () => {
     return close && close();
+  };
+
+  const fetchDashMembers = async () => {
+    const res = await getDashboardMembers(dashboardId);
+    const result = res.members;
+    setMembers(result);
   };
 
   const handleChangeTitle = (title: string) => {
@@ -84,7 +91,10 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
     }
   };
 
-  console.log(cardData);
+  useEffect(() => {
+    fetchDashMembers();
+  }, []);
+
   return (
     <S.CreateToDoContainer>
       <S.CreateToDoTitle>{children}</S.CreateToDoTitle>
@@ -95,7 +105,7 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
               상태
             </SelectBox>
           )}
-          <SelectBox onData={test} onType onModify>
+          <SelectBox onData={members} onType onModify>
             담당자
           </SelectBox>
         </S.CreateToDoSelectContainer>
@@ -114,7 +124,9 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
           태그
         </TagInput>
 
-        <ImageInput onChange={handleChangeImage}>이미지</ImageInput>
+        <ImageInput onChange={handleChangeImage} columnid={columnid}>
+          이미지
+        </ImageInput>
       </S.CreateToDoInputContainer>
       <S.CreateToDoBtnContainer>
         <Button.ModalReject onClick={trigger}>취소</Button.ModalReject>

@@ -2,14 +2,20 @@ import React, { ChangeEvent, ReactNode, useState } from 'react';
 import Image from 'next/image';
 import * as S from '@components/inputs/modalInput/imageInput/ImageInput.style';
 import addIcon from '@public/icons/add_violet.svg';
+import { postCardImage } from '@pages/dashboard/api';
 
 type ImageInputProps = {
   children: ReactNode;
   onChange: (uploadImgUrl: string) => void;
+  columnid: number;
 };
 
-function ImageInput({ children, onChange }: ImageInputProps) {
+function ImageInput({ children, onChange, columnid }: ImageInputProps) {
   const [uploadImgUrl, setUploadImgUrl] = useState('');
+
+  // const fetchPostCardImage = async () => {
+  //   const res = await postCardImage(columnid);
+  // };
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;

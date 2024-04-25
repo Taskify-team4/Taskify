@@ -24,8 +24,8 @@ function Card({ card }: CardProps) {
         <S.CardMeta>
           <S.CardChips>
             {card.tags.map((tag: string, idx: Key) => (
-              <Chip.Square size={'small'} key={idx} color="#3f9fff">
-                {tag}
+              <Chip.Square size={'small'} key={idx} color={tag.split(':')[1]}>
+                {tag.split(':')[0]}
               </Chip.Square>
             ))}
           </S.CardChips>

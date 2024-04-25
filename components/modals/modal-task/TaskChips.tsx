@@ -8,13 +8,16 @@ function TaskChips({ tags, columntitle }: TaskChipsProps) {
   return (
     <S.Chips>
       <Chip.Round size={'large'} color={'purple'}>
-        <ColorTile $size={'tiny'} $color={'purple'} /> {columntitle}
+        <S.CardColumnTitleWrapper>
+          <ColorTile $size={'tiny'} $color={'purple'} />
+          <span>{columntitle}</span>
+        </S.CardColumnTitleWrapper>
       </Chip.Round>
       <S.ChipStroke />
       <S.ColorChips>
         {tags.map((tag, index) => (
-          <Chip.Square key={`${index} ${tag.text}`} size={'small'} color={'orange'}>
-            {tag}
+          <Chip.Square key={`${index} ${tag.text}`} size={'small'} color={tag.split(':')[1]}>
+            {tag.split(':')[0]}
           </Chip.Square>
         ))}
       </S.ColorChips>

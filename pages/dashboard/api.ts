@@ -88,7 +88,7 @@ export async function postChangeColumnTitle(id: number, title: { title: string }
   return response;
 }
 
-// 할 잏 카드 목록 조회
+// 할 알 카드 목록 조회
 export async function getCards(id: number) {
   const url = `${BASE_URL}/cards?columnId=${id}`;
   const response = await fetch(url, {
@@ -125,6 +125,20 @@ export async function postNewCard(cardData: TCardForm) {
   return response.json();
 }
 
+// 할 일 카드 이미지 업로드
+export async function postCardImage(id: number, cardImage) {
+  const url = `${BASE_URL}/columns/${id}/card-image`;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(cardImage),
+  });
+  return response.json();
+}
+
 // 댓글 생성
 export async function postNewComment(commentData: TCommentForm) {
   const url = `${BASE_URL}/comments`;
@@ -142,6 +156,17 @@ export async function postNewComment(commentData: TCommentForm) {
 // 댓글 조회
 export async function getComments(id: number) {
   const url = `${BASE_URL}/comments?size=10&cardId=${id}`;
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+    },
+  });
+  return response.json();
+}
+
+// 대시보드 멤버 목록 조회
+export async function getDashboardMembers(id: number) {
+  const url = `${BASE_URL}/members?dashboardId=${id}`;
   const response = await fetch(url, {
     headers: {
       Authorization: `Bearer ${ACCESS_TOKEN}`,
