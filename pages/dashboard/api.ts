@@ -126,17 +126,17 @@ export async function postNewCard(cardData: TCardForm) {
 }
 
 // 할 일 카드 이미지 업로드
-export async function postCardImage(id: number, cardImage) {
+export async function postCardImage(id: number, formData) {
   const url = `${BASE_URL}/columns/${id}/card-image`;
   const response = await fetch(url, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${ACCESS_TOKEN}`,
-      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(cardImage),
+    body: formData,
   });
-  return response.json();
+  const data = await response.json();
+  return data.imageUrl;
 }
 
 // 댓글 생성

@@ -13,23 +13,23 @@ type ImageInputProps = {
 function ImageInput({ children, onChange, columnid }: ImageInputProps) {
   const [uploadImgUrl, setUploadImgUrl] = useState('');
 
-  // const fetchPostCardImage = async () => {
-  //   const res = await postCardImage(columnid);
-  // };
-
-  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (!files || files.length === 0) {
       return;
     }
     const uploadFile = files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(uploadFile);
-    reader.onloadend = () => {
-      const imageUrl = reader.result as string;
+
+    const formData = new FormData();
+    formData.append('image', uploadFile);
+
+    try {
+      const imageUrl = await postCardImage(columnid, formData);
       setUploadImgUrl(imageUrl);
       onChange(imageUrl);
-    };
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
   };
 
   return (
@@ -48,7 +48,7 @@ function ImageInput({ children, onChange, columnid }: ImageInputProps) {
             <Image src={uploadImgUrl} fill alt="업로드 이미지 미리보기" style={{ objectFit: 'contain' }} />
           </S.UploagImageWrapper>
         )}
-        <input type="file" id="file" style={{ display: 'none' }} onChange={handleImageUpload} />
+        <input type="file" id="file" style={{ display: 'none' }} onChange={handleFileChange} />
       </S.ImageInputContentContainer>
     </S.ImageInputContainer>
   );
