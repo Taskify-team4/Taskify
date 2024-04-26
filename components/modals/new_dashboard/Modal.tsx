@@ -4,8 +4,8 @@ import ColorPalette from '@components/chips/ColorPalette';
 import Button from '@components/buttons/Button';
 import ModalInput from '@components/inputs/modalInput/ModalInput';
 import { ModalBaseProps } from '@components/modals/Modal.type';
-import { postNewDashboard } from '@utils/api';
 import { useDashContext } from '@contexts/dashContext';
+import { postAddDashboard } from '@utils/api';
 
 function NewDashBoardModal({ close }: ModalBaseProps) {
   const trigger = () => {
@@ -13,10 +13,11 @@ function NewDashBoardModal({ close }: ModalBaseProps) {
   };
   const { fetchDashboardsPagination } = useDashContext();
   const [selectedColor, setSelectedColor] = useState('#760dde');
+
   const handleCreateClick = async () => {
     let inputValue = (document.getElementById('dashboardName') as HTMLInputElement).value;
     try {
-      const res = await postNewDashboard(inputValue, selectedColor);
+      const res = await postAddDashboard(inputValue !== '' && inputValue, selectedColor);
       if (res.status) {
         trigger();
         fetchDashboardsPagination();
