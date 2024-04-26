@@ -11,7 +11,7 @@ export type TColumn = {
 export type TColumns = TColumn[];
 
 export type TDashInfo = {
-  color: TColorCode;
+  color: TColorCode | string;
   createdAt: string;
   createdByMe: boolean;
   id: number;
@@ -27,6 +27,7 @@ export type TColumnForm = { title: string; dashboardId: number };
 export type TColumnTitleChange = { title: string; dashboardId: number };
 
 export type TCardForm = {
+  id: number;
   assigneeUserId: number;
   dashboardId: number;
   columnId: number;

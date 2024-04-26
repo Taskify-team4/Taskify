@@ -3,23 +3,31 @@ import { ColorTile } from '@components/chips/Chip.style';
 import crownImg from '@public/icons/crown.svg';
 import React, { useState } from 'react';
 import { TDashboards } from '@pages/dashboard/Dashboard.type';
+import { useDashContext } from '@contexts/dashContext';
+import { useRouter } from 'next/router';
 
 type DashboardListProps = {
   dashboards: TDashboards;
 };
 function DashboardList({ dashboards }: DashboardListProps) {
+  const { dashboardId } = useDashContext();
+  const router = useRouter();
   const [itemIndex, setItemIndex] = useState<number>();
 
   const handleItemClick = (index: number) => {
     setItemIndex(index);
   };
+
   return (
     <S.DashBoardsList>
       {dashboards ? (
         dashboards.map((dashboard, index) => (
           <S.DashBoardsItem
             key={`${index} ${dashboard.title}`}
-            onClick={() => handleItemClick(index)}
+            onClick={() => {
+              handleItemClick(index);
+              router.push(`/dashboard/${dashboardId}`);
+            }}
             selected={itemIndex === index}
           >
             <ColorTile $size={'tiny'} $color={dashboard.color} />

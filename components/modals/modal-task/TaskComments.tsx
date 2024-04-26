@@ -2,23 +2,24 @@ import * as S from '@components/modals/modal-task/ModalTask.style';
 import CommentInput from '@components/inputs/modalInput/commentInput/CommentInput';
 import { useEffect, useState } from 'react';
 import { TComment } from '@pages/dashboard/Dashboard.type';
-import { getComments, postNewComment } from '@pages/dashboard/api';
 import { useDashContext } from '@contexts/dashContext';
+import { getComments, postNewComment, updateComment } from '@utils/api';
 
 function TaskComments({ cardid, columnid }) {
   const { dashboardId } = useDashContext();
   const [comments, setComments] = useState<TComment[]>([]);
   const [commentData, setCommentData] = useState({
+    id: 0,
     content: '',
     cardId: cardid,
     columnId: columnid,
     dashboardId: Number(dashboardId),
   });
+  const [isEdit, setIsEdit] = useState(false);
 
   const fetchComments = async () => {
     const res = await getComments(cardid);
-    const result = res.comments;
-    setComments(result);
+    setComments(res);
   };
 
   const handleChangeCommentContent = (comment: string) => {
@@ -31,6 +32,17 @@ function TaskComments({ cardid, columnid }) {
   const handleCreateNewComment = async () => {
     try {
       const res = await postNewComment(commentData);
+      if (res.id) {
+        fetchComments();
+      }
+    } catch (error) {
+      console.error('댓글 생성 실패', error);
+    }
+  };
+
+  const handleUpdateComment = async (id: number) => {
+    try {
+      const res = await updateComment(commentData, id);
       if (res.id) {
         fetchComments();
       }
@@ -58,9 +70,21 @@ function TaskComments({ cardid, columnid }) {
                     <S.AuthorName>{comment.author.nickname}</S.AuthorName>
                     <S.CreatedTime>{comment.updatedAt}</S.CreatedTime>
                   </S.CommentInfo>
-                  <S.CommentContent>{comment.content}</S.CommentContent>
+                  {isEdit ? (
+                    <S.EditCommentInput
+                      defaultValue={comment.content}
+                      onChange={handleChangeCommentContent}
+                      onClick={() => {
+                        handleUpdateComment(comment.id);
+                        setIsEdit(false);
+                      }}
+                      children={''}
+                    />
+                  ) : (
+                    <S.CommentContent>{comment.content}</S.CommentContent>
+                  )}
                   <S.Buttons>
-                    <S.CommentButton>수정</S.CommentButton>
+                    <S.CommentButton onClick={() => setIsEdit(true)}>수정</S.CommentButton>
                     <S.CommentButton>삭제</S.CommentButton>
                   </S.Buttons>
                 </S.CommentWrapper>

@@ -1,7 +1,15 @@
-import { TCards, TColumns, TDashInfo, TDashboards } from '@pages/dashboard/Dashboard.type';
-import { getCards, getColumns, getDashboardInfo, getDashboards, getMyInfo } from '@pages/dashboard/api';
-import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-import { getMyDashboardsByPagination } from '@pages/mydashboard/api';
+import { TCards, TColumns, TDashboards, TDashInfo } from '@pages/dashboard/Dashboard.type';
+
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import {
+  getCards,
+  getColumns,
+  getDashboardInfo,
+  getDashboardList,
+  getMyDashboardsByPagination,
+  getMyData,
+} from '@utils/api';
+import { DashBoardMember } from '@utils/editDashboard/edit.type';
 
 type ProviderProps = {
   children: ReactNode;
@@ -33,7 +41,7 @@ const DashContext = createContext(initialContext);
 export const useDashContext = () => useContext(DashContext);
 
 export function DashProvider({ children, dashboardId }: ProviderProps) {
-  const [myInfo, setMyInfo] = useState();
+  const [myInfo, setMyInfo] = useState<DashBoardMember>();
   const [dashInfo, setDashInfo] = useState<TDashInfo>({
     color: '#760dde',
     createdAt: '',
@@ -51,24 +59,23 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
   const [selectedDate, setSelectedDate] = useState('');
 
   const fetchMyInfo = async () => {
-    const res = await getMyInfo();
+    const res = await getMyData();
     setMyInfo(res);
   };
 
   const fetchDashboardInfo = async () => {
-    const res = await getDashboardInfo(dashboardId);
+    const res = await getDashboardInfo(dashboardId.toString());
     setDashInfo(res);
   };
 
   const fetchDashboards = async () => {
-    const res = await getDashboards();
-    const result = res.dashboards;
-    setDashboards(result);
+    const res = await getDashboardList();
+    setDashboards(res);
   };
 
   const fetchColumns = async () => {
     const res = await getColumns(dashboardId);
-    const result = res?.data;
+    const result = res.data;
     setColumns(result);
   };
 
@@ -101,8 +108,7 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
 
   const fetchCards = async (columnId: number) => {
     const res = await getCards(columnId);
-    const result = res?.cards;
-    setCards(result);
+    setCards(res);
   };
   useEffect(() => {
     fetchDashboardsPagination();
@@ -132,7 +138,7 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     fetchMyInfo,
     fetchDashboardInfo,
     fetchDashboards,
-    fetchColumns,
+    // fetchColumns,
     myDashboards,
     dashPage,
     dashPageLimit,

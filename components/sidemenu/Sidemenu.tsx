@@ -8,8 +8,8 @@ import ModalBase from '@components/modals/ModalBase';
 import NewDashBoardModal from '@components/modals/new_dashboard/Modal';
 import React, { useEffect, useState } from 'react';
 import { TDashboards } from '@pages/dashboard/Dashboard.type';
-import { getMyDashboards } from '@pages/mydashboard/api';
 import Button from '@components/buttons/Button';
+import { getMyDashboards } from '@utils/api';
 
 function Sidemenu() {
   const [myDashboardsInSideBar, setMyDashboardsInSideBar] = useState<TDashboards>([]);
@@ -23,25 +23,30 @@ function Sidemenu() {
     setMyDashboardsInSideBar(result);
     setdashPageLimitInSideBar(Math.ceil(res.totalCount / 10));
   };
+
   const handlePrevClick = () => {
     setDashPageInSideBar((prev) => {
       if (prev > 1) return prev - 1;
       return prev;
     });
   };
+
   const handleNextClick = () => {
     setDashPageInSideBar((prev) => {
       if (prev < dashPageLimitInSideBar) return prev + 1;
       return prev;
     });
   };
+
   const handleDashPageClick = async () => {
     const { dashboards: nowDashboards } = await getMyDashboards(dashPageInSideBar);
     setMyDashboardsInSideBar(nowDashboards);
   };
+
   useEffect(() => {
     fetchMyDashboards();
   }, []);
+
   useEffect(() => {
     handleDashPageClick();
   }, [dashPageInSideBar]);

@@ -1,6 +1,6 @@
 // 현재 접속한 유저가 속한 대시보드 리스트
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { getDashboardList } from '@utils/editDashboard/api';
+import { getDashboardList } from '@utils/api';
 import { TDashInfo } from '@pages/dashboard/Dashboard.type';
 
 type DashboardListContextType = {

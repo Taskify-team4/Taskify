@@ -7,10 +7,11 @@ import DatePicker from './DatePicker';
 type TagInputProps = {
   children: ReactNode;
   onRequired?: boolean;
-  onChange: () => void;
+  onChange: (selectedDate: string) => void;
+  defaultValue?: string;
 };
 
-function DateInput({ children, onRequired, onChange }: TagInputProps) {
+function DateInput({ children, onRequired, onChange, defaultValue }: TagInputProps) {
   return (
     <S.DateInputContainer>
       <S.DateInputTitleContainer>
@@ -19,7 +20,7 @@ function DateInput({ children, onRequired, onChange }: TagInputProps) {
       </S.DateInputTitleContainer>
       <S.DateInputContent>
         <Image src={calendarIcon} width={20} height={20} alt="calendarIcon" />
-        <DatePicker onChange={onChange} />
+        <DatePicker onChange={onChange} defaultValue={defaultValue} />
       </S.DateInputContent>
     </S.DateInputContainer>
   );

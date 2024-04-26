@@ -10,9 +10,10 @@ import ColumnList from '@components/pages/dashboard/ColumnList';
 import { useMyData } from '@contexts/myDataContext';
 
 import { useDashContext } from '@contexts/dashContext';
-import { getDashboardInvites, postDashboardInvites } from '@utils/editDashboard/api';
-import { getDashboardMembers } from './api';
+
 import { useRouter } from 'next/router';
+import { getDashboardMembers, postDashboardInvites } from '@utils/api';
+import { DashBoardMember } from '@utils/editDashboard/edit.type';
 
 function Dashboard() {
   const { myData } = useMyData();
@@ -20,10 +21,10 @@ function Dashboard() {
   const router = useRouter();
   const { dashboardId }: { dashboardId: number } = router.query as unknown as { dashboardId: number };
 
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState<DashBoardMember[]>([]);
   const [invitees, setInvitees] = useState([]);
 
-  const fetchDashMembers = async (id) => {
+  const fetchDashMembers = async (id: string) => {
     const res = await getDashboardMembers(id);
     setMembers(res.members);
   };
@@ -34,12 +35,10 @@ function Dashboard() {
 
   useEffect(() => {
     if (dashboardId !== undefined) {
-      fetchDashMembers(dashboardId);
+      fetchDashMembers(dashboardId.toString());
     }
     // fetchDashInvitees();
   }, [dashboardId]);
-
-  console.log(members);
 
   return (
     <S.DashboardContainer>
@@ -55,6 +54,7 @@ function Dashboard() {
           crown={dashInfo.createdByMe}
           onInviteClick={handleInviteClick}
         />
+
         <S.ColumnContainer>
           <ColumnList />
           <S.AddColumnButtonWrapper>
