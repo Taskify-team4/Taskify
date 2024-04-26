@@ -75,7 +75,8 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
 
   const fetchColumns = async () => {
     const res = await getColumns(dashboardId);
-    setColumns(res);
+    const result = res.data;
+    setColumns(result);
   };
 
   const [myDashboards, setMyDashboards] = useState<TDashboards>([]);
@@ -137,7 +138,7 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     fetchMyInfo,
     fetchDashboardInfo,
     fetchDashboards,
-    fetchColumns,
+    // fetchColumns,
     myDashboards,
     dashPage,
     dashPageLimit,

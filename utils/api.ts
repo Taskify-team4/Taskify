@@ -263,7 +263,13 @@ export const deleteDashboard = async (id: string) => {
 
 // 컬럼 목록 조회
 export const getColumns = async (id: number): Promise<TColumn[]> => {
-  return await axios.get(`columns?dashboardId=${id}`).then((res) => res.data);
+  return await axios
+    .get(`columns?dashboardId=${id}`, {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    })
+    .then((res) => res.data);
 };
 
 // 컬럼 생성
@@ -313,7 +319,12 @@ export const updateColumnTitle = async (id: number, title: { title: string }): P
 // 할 일 카드 목록 조회
 export const getCards = async (id: number): Promise<TCard[]> => {
   return await axios
-    .get(`cards?columnId=${id}`)
+    .get(`cards?columnId=${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    })
     .then((res) => res.data)
     .then((data) => data.cards);
 };

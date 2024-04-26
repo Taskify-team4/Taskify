@@ -54,7 +54,7 @@ function Dashboard() {
           crown={dashInfo.createdByMe}
           onInviteClick={handleInviteClick}
         />
-        회
+
         <S.ColumnContainer>
           <ColumnList />
           <S.AddColumnButtonWrapper>

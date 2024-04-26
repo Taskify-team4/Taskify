@@ -7,8 +7,8 @@ function ColorPalette({
   className,
   onClick,
   initialColor,
-  selectedColor,
-  setSelectedColor,
+  // selectedColor,
+  // setSelectedColor,
 }: {
   size: TChipSize;
   className?: string;
