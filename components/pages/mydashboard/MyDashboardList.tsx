@@ -6,9 +6,12 @@ import { useDashContext } from '@contexts/dashContext';
 import Modal from '@components/modals/Modal';
 import ModalBase from '@components/modals/ModalBase';
 import NewDashBoardModal from '@components/modals/new_dashboard/Modal';
+import { useRouter } from 'next/router';
 
 function MyDashboardList() {
   const { myDashboards, dashPage, dashPageLimit } = useDashContext();
+  console.log(myDashboards);
+  const router = useRouter();
   const { handleNextClick, handlePrevClick } = useDashContext();
   return (
     <S.MyDashBoardListContainer>
@@ -24,7 +27,11 @@ function MyDashboardList() {
         </Modal>
         {myDashboards ? (
           myDashboards.map((dashboard, index) => (
-            <Button.Dashboard key={`${index} ${dashboard.title}`} dashboardData={dashboard} />
+            <Button.Dashboard
+              key={`${index} ${dashboard.title}`}
+              dashboardData={dashboard}
+              onClick={() => router.push(`/dashboard/${dashboard.id}`)}
+            />
           ))
         ) : (
           <></>
