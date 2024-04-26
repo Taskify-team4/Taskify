@@ -44,6 +44,8 @@ function Input({
     const emailId = id === 'email';
     const nicknameId = id === 'nickname';
     const passwordId = id === 'password';
+    const newPasswordId = id === 'newPassword';
+    const newPasswordCheckID = id === 'newPasswordCheck';
     const passwordCheckId = id === 'passwordCheck';
 
     if (email === '' || nickname === '' || password === '' || passwordCheck === '') return;
@@ -58,12 +60,12 @@ function Input({
       return;
     }
 
-    if (!password?.match(passwordRegex) && passwordId) {
+    if (!password?.match(passwordRegex) && (passwordId || newPasswordId)) {
       onError('8자 이상 작성해 주세요.');
       return;
     }
 
-    if (passwordCompare && passwordCheckId) {
+    if (passwordCompare && (passwordCheckId || newPasswordCheckID)) {
       onError('비밀번호가 일치하지 않습니다.');
       return;
     }

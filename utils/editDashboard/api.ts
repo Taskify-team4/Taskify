@@ -16,11 +16,13 @@ import {
   NO_DASHBOARD_MESSAGE,
   NO_INVITATION_MESSAGE,
   NO_USER_MESSAGE,
+  NICKNAME_LESS_10,
+  WRONG_PASSWORD,
 } from '@constants/error';
 import { TDashInfo } from '@pages/dashboard/Dashboard.type';
 
 const ACCESS_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc0NSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDUyNTc5LCJpc3MiOiJzcC10YXNraWZ5In0.xYXQqIeyqeE-FQw7z7w4P9I430xL277-Dm22VoLVx3I';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTczMCwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzE0MTIzNDc1LCJpc3MiOiJzcC10YXNraWZ5In0.FB83JcbATwArZzJhSavD6EnD7hUUhKBjMwBGC1Or3aw';
 const axios = baseAxios.create({
   baseURL: 'https://sp-taskify-api.vercel.app/4-4/',
 });
@@ -105,6 +107,62 @@ export const getMyData = async (): Promise<DashBoardMember> => {
     .catch((error: Error) => {
       if (error.message === ERROR_404_MESSAGE) alert(NO_USER_MESSAGE);
       else if (error.message === ERROR_401_MESSAGE) alert(NO_AUTHORITY_MESSAGE);
+      throw NETWORK_ERROR(error);
+    });
+};
+
+// 내 정보 수정
+export const putMyData = async (nickname: string, profileImageUrl?: string | null) => {
+  return await axios
+    .put(`users/me`, JSON.stringify({ nickname, profileImageUrl }), {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    })
+    .then(() => {
+      return alert('내 정보가 정상적으로 수정되었습니다.');
+    })
+    .catch((error: Error) => {
+      if (error.message === ERROR_400_MESSAGE) return alert(NICKNAME_LESS_10);
+      else if (error.message === ERROR_401_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
+      throw NETWORK_ERROR(error);
+    });
+};
+
+// 이미지 업로드
+export const upLoadImg = async (file: any) => {
+  const formData = new FormData();
+  formData.append('image', file);
+
+  return await axios
+    .post(`users/me/image`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    })
+    .then((response) => response.data.profileImageUrl)
+    .catch((error: Error) => {
+      throw NETWORK_ERROR(error);
+    });
+};
+
+// 비밀번호 변경
+export const changePassword = async (password: string, newPassword: string) => {
+  return await axios
+    .put(`auth/password`, JSON.stringify({ password, newPassword }), {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    })
+    .then(() => {
+      return alert('비밀번호가 성공적으로 변경되었습니다.');
+    })
+    .catch((error: Error) => {
+      if (error.message === ERROR_400_MESSAGE) return alert(WRONG_PASSWORD);
+      else if (error.message === ERROR_404_MESSAGE) return alert(NO_USER_MESSAGE);
       throw NETWORK_ERROR(error);
     });
 };
