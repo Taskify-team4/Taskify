@@ -15,17 +15,13 @@ function InvitedDashTable() {
   const [cursorId, setCursorId] = useState<number | undefined>(undefined);
   const fetchMyInvitation = async (cursorId?: number) => {
     const res = await getInvitations(cursorId);
-    setMyInvitation(myInvitation.concat(res));
-  };
-  const reloadMyInvitation = async () => {
-    const res = await getInvitations();
-    setMyInvitation(res);
+    setMyInvitation(cursorId ? myInvitation.concat(res) : res);
   };
   const searchMyInvitation = async (title: string) => {
     setMyInvitation([]);
     if (title === '') {
-      const res = await getInvitations();
-      setMyInvitation(res);
+      setCursorId(undefined);
+      fetchMyInvitation();
     } else {
       const res = await getInvitations(undefined, title);
       setMyInvitation(res);
@@ -36,7 +32,7 @@ function InvitedDashTable() {
     try {
       const res = await reactDashboardInvites(id, true);
       if (res?.status) {
-        reloadMyInvitation();
+        fetchMyInvitation();
       }
     } catch (error) {
       console.error(error);
@@ -46,7 +42,7 @@ function InvitedDashTable() {
     try {
       const res = await reactDashboardInvites(id, false);
       if (res?.status) {
-        reloadMyInvitation();
+        fetchMyInvitation();
       }
     } catch (error) {
       console.error(error);

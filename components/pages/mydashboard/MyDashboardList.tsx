@@ -10,7 +10,6 @@ import { useRouter } from 'next/router';
 
 function MyDashboardList() {
   const { myDashboards, dashPage, dashPageLimit } = useDashContext();
-  console.log(myDashboards);
   const router = useRouter();
   const { handleNextClick, handlePrevClick } = useDashContext();
   return (
