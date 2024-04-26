@@ -46,13 +46,17 @@ export const getMyDashboardsByPagination = async (page: number) => {
 };
 export const postAddDashboard = async (title: string, color: string) => {
   // temp
-  const response = await instance.post('/dashboards', JSON.stringify({ title: title, color: color }), {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${TEMP_TOKEN}`,
-    },
-  });
-  return response;
+  try {
+    const response = await instance.post('/dashboards', JSON.stringify({ title: title, color: color }), {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${TEMP_TOKEN}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    alert('대시보드 생성 실패');
+  }
 };
 export const getInvitations = async (cursorId?: number, title?: string) => {
   const titleStr = cursorId === undefined ? `?title=${title}` : `&title=${title}`;

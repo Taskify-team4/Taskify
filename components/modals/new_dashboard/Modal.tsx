@@ -16,13 +16,16 @@ function NewDashBoardModal({ close }: ModalBaseProps) {
   const handleCreateClick = async () => {
     let inputValue = (document.getElementById('dashboardName') as HTMLInputElement).value;
     try {
+      if (inputValue === '') {
+        throw Error;
+      }
       const res = await postAddDashboard(inputValue, selectedColor);
-      if (res.status) {
+      if (res?.status) {
         trigger();
         fetchDashboardsPagination();
       }
     } catch (error) {
-      console.error('대시보드 생성 실패', error);
+      alert('대시보드 이름을 입력해주세요');
     }
   };
   return (

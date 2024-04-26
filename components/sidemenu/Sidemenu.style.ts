@@ -7,12 +7,16 @@ export const SidemenuContainer = styled.div`
   top: 0;
   display: flex;
   flex-direction: column;
-  width: fit-content;
+  width: 250px;
   height: 100vh;
   padding: 0 12px;
   border-right: 1px solid var(--gray300);
   background-color: var(--white);
+  @media ${device.tablet} {
+    width: 140px;
+  }
   @media ${device.mobile} {
+    width: 50px;
     align-items: center;
   }
 `;
@@ -63,11 +67,6 @@ export const DashBoardsList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
-  /* overflow-y: scroll;
-  scrollbar-width: thin;
-  @media ${device.mobile} {
-    scrollbar-width: none;
-  } */
 `;
 
 export const DashBoardsItem = styled.div<{ selected: boolean }>`
@@ -95,6 +94,7 @@ export const DashBoardTitle = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex-shrink: 10;
   @media ${device.tablet} {
     max-width: 68px;
   }
@@ -119,11 +119,15 @@ export const DashBoardPagination = styled.div`
   padding-right: 12px;
   padding-bottom: 24px;
   @media ${device.mobile} {
-    padding: 0;
+    padding: 0 12px 0 0;
+    margin-top: 24px;
   }
 `;
 export const PageButton = styled.span`
   display: flex;
+  @media ${device.mobile} {
+    width: 24px;
+  }
 `;
 export const PagenationText = styled.span`
   color: var(--black200);

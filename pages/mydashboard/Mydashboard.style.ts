@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import device from '@utils/breakpointsDevice';
 
 export const MyDashboardContainer = styled.div`
   display: flex;
@@ -7,6 +8,13 @@ export const MyDashboardContainer = styled.div`
 export const MyDashBoardLayout = styled.div`
   display: flex;
   flex-direction: column;
+  width: calc(100% - 250px);
+  @media ${device.tablet} {
+    width: calc(100% - 140px);
+  }
+  @media ${device.mobile} {
+    width: calc(100% - 50px);
+  }
 `;
 export const MyDashboardContent = styled.div`
   display: flex;

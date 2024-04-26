@@ -220,6 +220,7 @@ export const DashboardButton = styled.button`
   ${AddButtonStyle}
   /* max-width: 332px;
   height: 70px; */
+  width:100%;
   font-size: 16px;
   font-weight: 600;
   padding: 20px;
@@ -244,6 +245,7 @@ export const Dashboard = styled.div`
 export const UserData = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
 `;
 
 export const ColorChip = styled.div`
@@ -253,6 +255,7 @@ export const ColorChip = styled.div`
   background-color: ${({ color }) => color};
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 `;
 
 export const DashboardTitle = styled.span`
@@ -264,12 +267,16 @@ export const DashboardTitle = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex-shrink: 10;
+  @media (max-width: 1250px) {
+    max-width: 90px;
+  }
   @media ${device.tablet} {
-    max-width: 82px;
+    max-width: 60px;
   }
   //
   @media ${device.mobile} {
     font-size: 14px;
-    max-width: 156px;
+    max-width: 120px;
   }
 `;
