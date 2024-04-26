@@ -23,25 +23,30 @@ function Sidemenu() {
     setMyDashboardsInSideBar(result);
     setdashPageLimitInSideBar(Math.ceil(res.totalCount / 10));
   };
+
   const handlePrevClick = () => {
     setDashPageInSideBar((prev) => {
       if (prev > 1) return prev - 1;
       return prev;
     });
   };
+
   const handleNextClick = () => {
     setDashPageInSideBar((prev) => {
       if (prev < dashPageLimitInSideBar) return prev + 1;
       return prev;
     });
   };
+
   const handleDashPageClick = async () => {
     const { dashboards: nowDashboards } = await getMyDashboards(dashPageInSideBar);
     setMyDashboardsInSideBar(nowDashboards);
   };
+
   useEffect(() => {
     fetchMyDashboards();
-  }, []);
+  }, [myDashboardsInSideBar]);
+
   useEffect(() => {
     handleDashPageClick();
   }, [dashPageInSideBar]);

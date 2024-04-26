@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import * as S from './Chip.style';
 import { TChipSize, TColorCode } from './Chip.type';
 
 function ColorPalette({
   size,
   className,
-  onClick,
   initialColor,
   selectedColor,
   setSelectedColor,
 }: {
   size: TChipSize;
   className?: string;
-  onClick?: (color: TColorCode) => void;
   initialColor: TColorCode;
   selectedColor: string;
-  setSelectedColor: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedColor: React.Dispatch<React.SetStateAction<string>> | React.Dispatch<React.SetStateAction<TColorCode>>;
 }) {
   const colorList: TColorCode[] = ['#760dde', '#e876ea', '#ffa500', '#76a5ea', '#7ac555'];
-  const [selectedColor, setSelectedColor] = useState<TColorCode>(initialColor);
 
   const handleClickTile = (color: TColorCode) => {
     setSelectedColor(color);
-    if (onClick) onClick(color);
   };
 
   useEffect(() => {

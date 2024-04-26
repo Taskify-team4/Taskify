@@ -21,11 +21,14 @@ export const ListsContainer = styled.div`
   display: flex;
 `;
 
-export const EmptyInvitation = styled.div`
+type EmptyInvitationProps = {
+  $isMyDashboard: boolean;
+};
+export const EmptyInvitation = styled.div<EmptyInvitationProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 128px;
+  ${({ $isMyDashboard }) => ($isMyDashboard ? `padding-bottom:128px` : `padding:100px`)}
 `;
 export const EmptyText = styled.span`
   color: var(--gray400);
