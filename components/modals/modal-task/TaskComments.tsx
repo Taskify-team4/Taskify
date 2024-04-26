@@ -2,8 +2,8 @@ import * as S from '@components/modals/modal-task/ModalTask.style';
 import CommentInput from '@components/inputs/modalInput/commentInput/CommentInput';
 import { useEffect, useState } from 'react';
 import { TComment } from '@pages/dashboard/Dashboard.type';
-import { getComments, postNewComment, updateComment } from '@pages/dashboard/api';
 import { useDashContext } from '@contexts/dashContext';
+import { getComments, postNewComment, updateComment } from '@utils/api';
 
 function TaskComments({ cardid, columnid }) {
   const { dashboardId } = useDashContext();
@@ -19,8 +19,7 @@ function TaskComments({ cardid, columnid }) {
 
   const fetchComments = async () => {
     const res = await getComments(cardid);
-    const result = res.comments;
-    setComments(result);
+    setComments(res);
   };
 
   const handleChangeCommentContent = (comment: string) => {

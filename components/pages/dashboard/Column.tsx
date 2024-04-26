@@ -10,8 +10,8 @@ import ModalBase from '@components/modals/ModalBase';
 import ModalTask from '@components/modals/modal-task/ModalTask';
 import EditColumnModal from '@components/modals/edit_column/Modal';
 import { TCards, TColumn } from '@pages/dashboard/Dashboard.type';
-import { getCards } from '@pages/dashboard/api';
 import CreateToDoModal from '@components/modals/createtodo/Modal';
+import { getCards } from '@utils/api';
 
 type TColumnProps = {
   column: TColumn;
@@ -22,8 +22,7 @@ function Column({ column }: TColumnProps) {
   const [editId, setEditId] = useState(0);
   const fetchCards = async () => {
     const res = await getCards(column.id);
-    const result = res.cards;
-    setCards(result);
+    setCards(res);
   };
 
   useEffect(() => {

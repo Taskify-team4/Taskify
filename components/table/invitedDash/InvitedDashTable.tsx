@@ -5,26 +5,25 @@ import TableLists from '@components/table/TableList';
 import InvitedDashList from '@components/table/invitedDash/InvitedDashList';
 import SearchBar from '@components/table/invitedDash/SearchBar';
 import { TInvitation } from '@components/table/Table.type';
-import { getInvitations, putInvitation } from '@pages/mydashboard/api';
+import { getInvitations, reactDashboardInvites } from '@utils/api';
 import Empty from '@components/table/invite/Empty';
+
 
 function InvitedDashTable() {
   const [myInvitation, setMyInvitation] = useState<TInvitation[]>([]);
   const [cursorId, setCursorId] = useState<number | undefined>(undefined);
   const fetchMyInvitation = async (cursorId?: number) => {
     const res = await getInvitations(cursorId);
-    console.log(res);
     setMyInvitation(myInvitation.concat(res));
   };
   const reloadMyInvitation = async () => {
     const res = await getInvitations();
-    console.log(res);
     setMyInvitation(res);
   };
 
   const handleConfirmClick = async (id: number) => {
     try {
-      const res = await putInvitation(id, true);
+      const res = await reactDashboardInvites(id, true);
       if (res?.status) {
         reloadMyInvitation();
       }
@@ -34,7 +33,7 @@ function InvitedDashTable() {
   };
   const handleRejectClick = async (id: number) => {
     try {
-      const res = await putInvitation(id, false);
+      const res = await reactDashboardInvites(id, false);
       if (res?.status) {
         reloadMyInvitation();
       }

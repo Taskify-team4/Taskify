@@ -1,13 +1,12 @@
 import * as S from '@components/modals/modal-task/ModalTask.style';
-import Image from 'next/image';
 import { ModalBaseProps } from '@components/modals/Modal.type';
 import TaskComments from './TaskComments';
 import closeImg from '@public/icons/close.svg';
 import moreImg from '@public/icons/more.svg';
 import TaskContentInfo from './TaskContentInfo';
 import React, { useState } from 'react';
-import { deleteCard } from '@pages/dashboard/api';
 import { TCard, TColumn } from '@pages/dashboard/Dashboard.type';
+import { deleteCard } from '@utils/api';
 
 export type ModalTaskProps = ModalBaseProps & {
   fetchCards: (columnid: number) => {};

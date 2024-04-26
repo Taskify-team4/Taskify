@@ -7,7 +7,7 @@ import { TColorCode } from '@components/chips/Chip.type';
 type EditNameProps = {
   isMobile: boolean;
   title: string;
-  color: TColorCode;
+  color: TColorCode | string;
   selectedColor: string;
   setSelectedColor: React.Dispatch<React.SetStateAction<string>> | React.Dispatch<React.SetStateAction<TColorCode>>;
   onClick?: () => void;

@@ -1,7 +1,7 @@
 // 현재 접속한 유저 데이터
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { getMyData } from '@utils/editDashboard/api';
 import { DashBoardMember } from '@utils/editDashboard/edit.type';
+import { getMyData } from '@utils/api';
 
 type MyDataContextType = {
   myData: DashBoardMember;

@@ -11,7 +11,7 @@ export type TColumn = {
 export type TColumns = TColumn[];
 
 export type TDashInfo = {
-  color: TColorCode;
+  color: TColorCode | string;
   createdAt: string;
   createdByMe: boolean;
   id: number;

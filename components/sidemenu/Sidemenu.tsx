@@ -8,8 +8,8 @@ import ModalBase from '@components/modals/ModalBase';
 import NewDashBoardModal from '@components/modals/new_dashboard/Modal';
 import React, { useEffect, useState } from 'react';
 import { TDashboards } from '@pages/dashboard/Dashboard.type';
-import { getMyDashboards } from '@pages/mydashboard/api';
 import Button from '@components/buttons/Button';
+import { getMyDashboards } from '@utils/api';
 
 function Sidemenu() {
   const [myDashboardsInSideBar, setMyDashboardsInSideBar] = useState<TDashboards>([]);

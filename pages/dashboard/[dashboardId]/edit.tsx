@@ -8,15 +8,6 @@ import Image from 'next/image';
 import EditName from '@components/pages/dashboardEdit/editName/EditName';
 import size from '@constants/breakpointsSize';
 import InviteTable from '@components/table/invite/InviteTable';
-import {
-  deleteDashboard,
-  deleteInvite,
-  deleteMember,
-  getDashboardInvites,
-  getDashboardMembers,
-  postDashboardInvites,
-  updateDashboard,
-} from '@utils/editDashboard/api';
 import { TColorCode } from '@components/chips/Chip.type';
 import { useRouter } from 'next/router';
 import { PAGE_SIZE } from '@constants/page';
@@ -27,6 +18,15 @@ import ConfirmModal from '@components/modals/edit_dashboard/ConfirmModal';
 import useWindowSize from '@hooks/useWindowSize';
 import { useMyData } from '@contexts/myDataContext';
 import { useDashContext } from '@contexts/dashContext';
+import {
+  deleteDashboard,
+  deleteInvite,
+  deleteMember,
+  getDashboardInvites,
+  getDashboardMembers,
+  postDashboardInvites,
+  updateDashboard,
+} from '@utils/api';
 
 export async function getServerSideProps(context: any) {
   const dashboardId = context.query['dashboardId'];
@@ -50,7 +50,7 @@ function Edit({ invitees: initialInvitees, totalInvitees, members: initialMember
   const { myData } = useMyData();
   const { windowWidth } = useWindowSize();
 
-  const [selectedColor, setSelectedColor] = useState<TColorCode>(dashInfo.color);
+  const [selectedColor, setSelectedColor] = useState<TColorCode | string>(dashInfo.color);
 
   const [dashboardName, setDashboardName] = useState(dashInfo.title);
 
