@@ -3,7 +3,7 @@ import CommentInput from '@components/inputs/modalInput/commentInput/CommentInpu
 import { useEffect, useState } from 'react';
 import { TComment } from '@pages/dashboard/Dashboard.type';
 import { useDashContext } from '@contexts/dashContext';
-import { getComments, postNewComment, updateComment } from '@utils/api';
+import { deleteComment, getComments, postNewComment, updateComment } from '@utils/api';
 
 function TaskComments({ cardid, columnid }) {
   const { dashboardId } = useDashContext();
@@ -51,12 +51,21 @@ function TaskComments({ cardid, columnid }) {
     }
   };
 
+  const handleDeleteComment = async (id: number) => {
+    try {
+      await deleteComment(id);
+      fetchComments();
+    } catch (error) {
+      console.error('댓글 삭제 실패', error);
+    }
+  };
+
   useEffect(() => {
     fetchComments();
   }, []);
 
   return (
-    <>
+    <S.CommentContainer>
       <CommentInput placeholder="댓글 작성하기" onChange={handleChangeCommentContent} onClick={handleCreateNewComment}>
         댓글
       </CommentInput>
@@ -64,7 +73,7 @@ function TaskComments({ cardid, columnid }) {
         {comments
           ? comments.map((comment, index) => (
               <S.CommentItem key={`${index} ${comment.author.nickname}`}>
-                <S.AuthorProfile>{comment.author.nickname[0]}</S.AuthorProfile>
+                <S.AuthorProfile str={comment.author.nickname[0]} />
                 <S.CommentWrapper>
                   <S.CommentInfo>
                     <S.AuthorName>{comment.author.nickname}</S.AuthorName>
@@ -85,14 +94,14 @@ function TaskComments({ cardid, columnid }) {
                   )}
                   <S.Buttons>
                     <S.CommentButton onClick={() => setIsEdit(true)}>수정</S.CommentButton>
-                    <S.CommentButton>삭제</S.CommentButton>
+                    <S.CommentButton onClick={() => handleDeleteComment(comment.id)}>삭제</S.CommentButton>
                   </S.Buttons>
                 </S.CommentWrapper>
               </S.CommentItem>
             ))
           : null}
       </S.CommentList>
-    </>
+    </S.CommentContainer>
   );
 }
 

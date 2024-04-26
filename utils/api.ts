@@ -394,17 +394,16 @@ export const updateCard = async (cardData: TCardForm, id: number | undefined): P
 };
 
 // 할 일 카드 이미지 업로드
-export const postCardImage = async (id: number, formData) => {
+export const postCardImage = async (id: number, formData: any) => {
   return await axios
     .post(`columns/${id}/card-image`, formData, {
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     })
     .then((res) => res.data)
     .then((data) => data.imageUrl)
-    .catch((error) => alert('댓글 생성 실패'));
+    .catch((error) => alert('이미지 생성 실패'));
 };
 
 // 댓글 생성
@@ -448,6 +447,15 @@ export const getComments = async (id: number): Promise<TComment[]> => {
     })
     .then((res) => res.data)
     .then((data) => data.comments);
+};
+
+//댓글 삭제
+export const deleteComment = async (id: number) => {
+  await axios.delete(`comments/${id}`, {
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+    },
+  });
 };
 
 // 내 대시보드 목록 조회
