@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from '@components/table/Table.style';
 import TableHeader from '@components/table/TableHeader';
 import TableLists from '@components/table/TableList';
 import InvitedDashList from '@components/table/invitedDash/InvitedDashList';
 import SearchBar from '@components/table/invitedDash/SearchBar';
-import Image from 'next/image';
-import EmptyImg from '@public/icons/no_invite.svg';
 import { TInvitation } from '@components/table/Table.type';
-import { useState } from 'react';
 import { getInvitations, putInvitation } from '@pages/mydashboard/api';
+import Empty from '@components/table/invite/Empty';
 
 function InvitedDashTable() {
   const [myInvitation, setMyInvitation] = useState<TInvitation[]>([]);
@@ -63,10 +61,7 @@ function InvitedDashTable() {
               handleRejectClick={handleRejectClick}
             />
           ) : (
-            <S.EmptyInvitation>
-              <Image src={EmptyImg} alt="초대받은 대시보드가 비어있음" width={100} height={100} />
-              <S.EmptyText>아직 초대받은 대시보드가 없어요</S.EmptyText>
-            </S.EmptyInvitation>
+            <Empty isMyDashboard={true}>아직 초대받은 대시보드가 없어요</Empty>
           )}
         </TableLists>
       </S.ListsContainer>
