@@ -45,7 +45,7 @@ function Sidemenu() {
 
   useEffect(() => {
     fetchMyDashboards();
-  }, [myDashboardsInSideBar]);
+  }, []);
 
   useEffect(() => {
     handleDashPageClick();
