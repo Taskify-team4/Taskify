@@ -7,33 +7,37 @@ import DateInput from '@components/inputs/modalInput/dateInput/DateInput';
 import TagInput from '@components/inputs/modalInput/tagInput/TagInput';
 import ImageInput from '@components/inputs/modalInput/imageInput/ImageInput';
 import Button from '@components/buttons/Button';
-import { TCardForm } from '@pages/dashboard/Dashboard.type';
+import { TCard, TCardForm } from '@pages/dashboard/Dashboard.type';
 import { ModalBaseProps } from '../Modal.type';
 import { useDashContext } from '@contexts/dashContext';
-import { getDashboardMembers, postNewCard } from '@pages/dashboard/api';
+import { getDashboardMembers, postNewCard, updateCard } from '@pages/dashboard/api';
+import { useMyData } from '@contexts/myDataContext';
 
 type CreateToDoPorps = ModalBaseProps & {
   children: ReactNode;
   onModify?: boolean;
   columnid: number;
   fetchCards: (columnid: number) => {};
+  card?: TCard;
+  isEdit?: boolean;
 };
 const test = ['가나다', '라마바'];
 
-function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: CreateToDoPorps) {
-  const { myInfo, dashboardId } = useDashContext();
+function CreateToDoModal({ children, onModify, columnid, close, fetchCards, card }: CreateToDoPorps) {
+  const { dashboardId } = useDashContext();
+  const { myData: myInfo } = useMyData();
   const [members, setMembers] = useState([]);
   const [cardData, setCardData] = useState<TCardForm>({
     //임시로 본인의 아이디만 넣도록 구현
+    id: card?.id || 0,
     assigneeUserId: myInfo.id,
     dashboardId: Number(dashboardId),
     columnId: Number(columnid),
-    title: '',
-    description: '',
-    dueDate: '',
-    tags: [],
+    title: card?.title || '',
+    description: card?.description || '',
+    dueDate: card?.dueDate || '',
+    tags: card?.tags || [],
   });
-
   const trigger = () => {
     return close && close();
   };
@@ -91,6 +95,18 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
     }
   };
 
+  const handleUpdateCard = async () => {
+    try {
+      const res = await updateCard(cardData, card?.id);
+      if (res.id) {
+        trigger();
+        fetchCards(columnid);
+      }
+    } catch (error) {
+      console.error('카드 생성 실패', error);
+    }
+  };
+
   useEffect(() => {
     fetchDashMembers();
   }, []);
@@ -110,17 +126,38 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
           </SelectBox>
         </S.CreateToDoSelectContainer>
 
-        <ModalInput id="title" type="text" placeholder="제목을 입력해 주세요." onRequired onChange={handleChangeTitle}>
+        <ModalInput
+          id="title"
+          type="text"
+          placeholder="제목을 입력해 주세요."
+          onRequired
+          onChange={handleChangeTitle}
+          defaultValue={card?.title}
+        >
           제목
         </ModalInput>
 
-        <CommentInput placeholder="설명을 입력해 주세요." onRequired onModal onChange={handleChangeDescription}>
+        <CommentInput
+          placeholder="설명을 입력해 주세요."
+          onRequired
+          onModal
+          onChange={handleChangeDescription}
+          defaultValue={card?.description}
+        >
           설명
         </CommentInput>
 
-        <DateInput onChange={handleChangeDueDate}>마감일</DateInput>
+        <DateInput onChange={handleChangeDueDate} defaultValue={card?.dueDate}>
+          마감일
+        </DateInput>
 
-        <TagInput id="tag" type="text" placeholder="입력 후 Enter" onChange={handleChangeTags}>
+        <TagInput
+          id="tag"
+          type="text"
+          placeholder="입력 후 Enter"
+          onChange={handleChangeTags}
+          defaultValue={card?.tags}
+        >
           태그
         </TagInput>
 
@@ -130,7 +167,7 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards }: Cr
       </S.CreateToDoInputContainer>
       <S.CreateToDoBtnContainer>
         <Button.ModalReject onClick={trigger}>취소</Button.ModalReject>
-        <Button.ModalConfirm onClick={handleCreateNewCard}>확인</Button.ModalConfirm>
+        <Button.ModalConfirm onClick={onModify ? handleUpdateCard : handleCreateNewCard}>확인</Button.ModalConfirm>
       </S.CreateToDoBtnContainer>
     </S.CreateToDoContainer>
   );

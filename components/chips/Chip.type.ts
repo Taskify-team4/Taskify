@@ -9,5 +9,5 @@ export type TChipSize = 'large' | 'small' | 'tiny';
 export type TChipProps = {
   children: ReactNode;
   size: TChipSize;
-  color: TColorKey;
+  color: TColorKey | string;
 };

@@ -5,9 +5,10 @@ import * as S from '@components/inputs/modalInput/dateInput/DatePicker.style';
 
 type TDatePickerProps = {
   onChange: (formattedData: string) => void;
+  defaultValue?: string;
 };
 
-const DatePicker = ({ onChange }: TDatePickerProps) => {
+const DatePicker = ({ onChange, defaultValue }: TDatePickerProps) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const handleChange = (date: any) => {
@@ -29,7 +30,12 @@ const DatePicker = ({ onChange }: TDatePickerProps) => {
   const CustomInput = forwardRef((props, ref: React.ForwardedRef<HTMLInputElement>) => {
     return (
       <S.CalendarInputWrap>
-        <S.CalendarInput {...props} ref={ref} type="text" placeholder="날짜를 입력해 주세요." />
+        <S.CalendarInput
+          {...props}
+          ref={ref}
+          type="text"
+          placeholder={defaultValue ? defaultValue : '날짜를 입력해 주세요.'}
+        />
       </S.CalendarInputWrap>
     );
   });

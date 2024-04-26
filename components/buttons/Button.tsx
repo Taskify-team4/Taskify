@@ -10,9 +10,9 @@ import rightArrowIcon from '@public/icons/right_arrow.svg';
 import leftArrowIcon from '@public/icons/left_arrow.svg';
 import crownIcon from '@public/icons/crown.svg';
 
-function Button({ children, disabled, onClick }: ButtonProps) {
+function Button({ children, disabled, onClick, className }: ButtonProps) {
   return (
-    <button onClick={onClick} disabled={disabled}>
+    <button onClick={onClick} disabled={disabled} className={className}>
       {children}
     </button>
   );

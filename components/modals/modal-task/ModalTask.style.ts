@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
+import Button from '@components/buttons/Button';
+import CommentInput from '@components/inputs/modalInput/commentInput/CommentInput';
 
 export const ModalTaskContainer = styled.div`
   position: relative;
@@ -157,7 +159,7 @@ export const MoreList = styled.ul`
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
   background-color: var(--white);
 `;
-export const MoreItem = styled.li`
+export const MoreItem = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -196,6 +198,8 @@ export const AuthorProfile = styled.span`
 export const CommentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  width: 100%;
 `;
 export const CommentInfo = styled.div`
   display: flex;
@@ -233,4 +237,8 @@ export const CardColumnTitleWrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 6px;
+`;
+
+export const EditCommentInput = styled(CommentInput)`
+  margin-bottom: 10px;
 `;

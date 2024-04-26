@@ -15,6 +15,7 @@ export type ButtonProps = {
   children?: ReactNode;
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  className?: string;
   onConfirmClick?: (id: number) => void;
 };
 

@@ -1,4 +1,4 @@
-import { TCard, TCardForm, TColumnForm, TCommentForm } from './Dashboard.type';
+import { TCardForm, TColumnForm, TCommentForm } from './Dashboard.type';
 
 const BASE_URL = 'https://sp-taskify-api.vercel.app/4-4';
 const ACCESS_TOKEN =
@@ -125,6 +125,20 @@ export async function postNewCard(cardData: TCardForm) {
   return response.json();
 }
 
+// 할 일 카드 수정
+export async function updateCard(cardData: TCardForm, id: number | undefined) {
+  const url = `${BASE_URL}/cards/${id}`;
+  const response = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(cardData),
+  });
+  return response.json();
+}
+
 // 할 일 카드 이미지 업로드
 export async function postCardImage(id: number, formData) {
   const url = `${BASE_URL}/columns/${id}/card-image`;
@@ -144,6 +158,20 @@ export async function postNewComment(commentData: TCommentForm) {
   const url = `${BASE_URL}/comments`;
   const response = await fetch(url, {
     method: 'POST',
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(commentData),
+  });
+  return response.json();
+}
+
+// 댓글 수정
+export async function updateComment(commentData: TCommentForm, id: number) {
+  const url = `${BASE_URL}/comments/${id}`;
+  const response = await fetch(url, {
+    method: 'PUT',
     headers: {
       Authorization: `Bearer ${ACCESS_TOKEN}`,
       'Content-Type': 'application/json',

@@ -5,7 +5,7 @@ import TaskComments from './TaskComments';
 import closeImg from '@public/icons/close.svg';
 import moreImg from '@public/icons/more.svg';
 import TaskContentInfo from './TaskContentInfo';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { deleteCard } from '@pages/dashboard/api';
 import { TCard, TColumn } from '@pages/dashboard/Dashboard.type';
 
@@ -13,9 +13,10 @@ export type ModalTaskProps = ModalBaseProps & {
   fetchCards: (columnid: number) => {};
   card: TCard;
   column: TColumn;
+  onUpdateClick?: any;
 };
 
-function ModalTask({ close, fetchCards, card, column }: ModalTaskProps) {
+function ModalTask({ close, fetchCards, card, column, onUpdateClick }: ModalTaskProps) {
   const [more, setMore] = useState(false);
 
   const trigger = () => {
@@ -33,6 +34,11 @@ function ModalTask({ close, fetchCards, card, column }: ModalTaskProps) {
     }
   };
 
+  const handleUpdateButtonClick = async () => {
+    onUpdateClick(card.id);
+    close && close();
+  };
+
   return (
     <S.ModalTaskContainer>
       <S.TaskTitle>{card.title}</S.TaskTitle>
@@ -42,10 +48,8 @@ function ModalTask({ close, fetchCards, card, column }: ModalTaskProps) {
       <S.MoreImage src={moreImg} alt="more button" onClick={() => setMore(!more)} />
       {more ? (
         <S.MoreList>
-          <S.MoreItem>수정하기</S.MoreItem>
-          <button onClick={handleDeleteButtonClick}>
-            <S.MoreItem>삭제하기</S.MoreItem>
-          </button>
+          <S.MoreItem onClick={handleUpdateButtonClick}>수정하기</S.MoreItem>
+          <S.MoreItem onClick={handleDeleteButtonClick}>삭제하기</S.MoreItem>
         </S.MoreList>
       ) : null}
     </S.ModalTaskContainer>
