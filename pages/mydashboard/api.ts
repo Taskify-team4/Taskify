@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const TEMP_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzExNSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzE0MDM2OTI4LCJpc3MiOiJzcC10YXNraWZ5In0.QW_2msgjk4CFwx7KuDMngfSOxLm-zWDJHyzBP8MFBpQ';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAyNSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzE0MTA4NjkyLCJpc3MiOiJzcC10YXNraWZ5In0.WQO0lfsN14qfVW7Tw_cNA5uOSuJP5YkYUmHwCQvcKWA';
 
 const instance = axios.create({ baseURL: 'https://sp-taskify-api.vercel.app/4-4' });
 
@@ -54,36 +54,24 @@ export const postAddDashboard = async (title: string, color: string) => {
   });
   return response;
 };
-export const getInvitations = async (cursorId?: number) => {
-  if (cursorId === undefined) {
-    try {
-      const res = await instance.get('/invitations', {
-        headers: {
-          Authorization: `Bearer ${TEMP_TOKEN}`,
-        },
-      });
-      const products = res.data.invitations;
-      return products;
-    } catch (error) {
-      console.error(error);
-    }
-  } else {
-    try {
-      const res = await instance.get(`/invitations?cursorId=${cursorId}`, {
-        headers: {
-          Authorization: `Bearer ${TEMP_TOKEN}`,
-        },
-      });
-      const products = res.data.invitations;
-      return products;
-    } catch (error) {
-      console.error(error);
-    }
+export const getInvitations = async (cursorId?: number, title?: string) => {
+  const titleStr = cursorId === undefined ? `?title=${title}` : `&title=${title}`;
+  try {
+    const res = await instance.get(`/invitations${cursorId ? `?cursorId=${cursorId}` : ''}${title ? titleStr : ''}`, {
+      headers: {
+        Authorization: `Bearer ${TEMP_TOKEN}`,
+      },
+    });
+    const products = res.data.invitations;
+    console.log(res.data);
+    return products;
+  } catch (error) {
+    console.error(error);
   }
 };
 export const postInvitation = async (dashId: number) => {
   try {
-    const res = await instance.post(`/dashboards/${dashId}/invitations`, JSON.stringify({ email: 'hsw1@test.com' }), {
+    const res = await instance.post(`/dashboards/${dashId}/invitations`, JSON.stringify({ email: 'hsw@test.com' }), {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${TEMP_TOKEN}`,

@@ -4,13 +4,7 @@ import Button from '@components/buttons/Button';
 import { InvitedDashListProps } from '@components/table/Table.type';
 
 const NOT_LAST = 9;
-function InvitedDashList({
-  data,
-  IsObserverEnd,
-  onConfirmClick,
-  onRejectClick,
-  onSearchInvitation,
-}: InvitedDashListProps) {
+function InvitedDashList({ data, IsObserverEnd, onConfirmClick, onRejectClick }: InvitedDashListProps) {
   const myEndRef = useRef(null);
   const handleIntersection: IntersectionObserverCallback = (entries) => {
     entries.forEach((entry) => {
@@ -29,7 +23,7 @@ function InvitedDashList({
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [data]);
 
   return (
     <>

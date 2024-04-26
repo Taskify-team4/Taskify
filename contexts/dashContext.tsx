@@ -35,7 +35,7 @@ export const useDashContext = () => useContext(DashContext);
 export function DashProvider({ children, dashboardId }: ProviderProps) {
   const [myInfo, setMyInfo] = useState();
   const [dashInfo, setDashInfo] = useState<TDashInfo>({
-    color: '',
+    color: '#760dde',
     createdAt: '',
     createdByMe: false,
     id: 0,
@@ -98,7 +98,7 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     const { dashboards: nowDashboards } = await getMyDashboardsByPagination(dashPage);
     setMyDashboards(nowDashboards);
   };
-  
+
   const fetchCards = async (columnId: number) => {
     const res = await getCards(columnId);
     const result = res?.cards;

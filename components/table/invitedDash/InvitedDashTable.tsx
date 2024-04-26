@@ -18,12 +18,21 @@ function InvitedDashTable() {
   const [cursorId, setCursorId] = useState<number | undefined>(undefined);
   const fetchMyInvitation = async (cursorId?: number) => {
     const res = await getInvitations(cursorId);
-    console.log(res);
     setMyInvitation(myInvitation.concat(res));
   };
   const reloadMyInvitation = async () => {
     const res = await getInvitations();
     setMyInvitation(res);
+  };
+  const searchMyInvitation = async (title: string) => {
+    setMyInvitation([]);
+    if (title === '') {
+      const res = await getInvitations();
+      setMyInvitation(res);
+    } else {
+      const res = await getInvitations(undefined, title);
+      setMyInvitation(res);
+    }
   };
 
   const handleConfirmClick = async (id: number) => {
@@ -48,6 +57,7 @@ function InvitedDashTable() {
   };
   const handleSearchInvitation: ChangeHandler = async (event) => {
     console.log(event.target.value);
+    searchMyInvitation(event.target.value);
   };
 
   useEffect(() => {
@@ -57,7 +67,8 @@ function InvitedDashTable() {
   return (
     <S.TableContainer $isInvitedDash>
       <TableHeader title="초대받은 대시보드" />
-      {myInvitation.length !== 0 ? <SearchBar /> : <></>}
+      <SearchBar onSearchInvitation={handleSearchInvitation} />
+
       <S.ListsContainer>
         <TableLists isInvitedDash>
           {myInvitation.length !== 0 ? (
@@ -66,7 +77,6 @@ function InvitedDashTable() {
               IsObserverEnd={{ cursorId, setCursorId }}
               onConfirmClick={handleConfirmClick}
               onRejectClick={handleRejectClick}
-              onSearchInvitation={handleSearchInvitation}
             />
           ) : (
             <S.EmptyInvitation>

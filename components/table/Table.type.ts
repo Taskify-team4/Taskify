@@ -53,7 +53,6 @@ export type InvitedDashListProps = {
   IsObserverEnd?: IsEndStateObject | undefined;
   onConfirmClick?: (id: number) => void;
   onRejectClick?: (id: number) => void;
-  onSearchInvitation?: ChangeHandler;
 };
 type IsEndStateObject = {
   cursorId: number | undefined;
