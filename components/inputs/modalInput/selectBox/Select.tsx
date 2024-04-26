@@ -4,15 +4,43 @@ import Chip from '@components/chips/Chip';
 import * as S from '@components/inputs/modalInput/selectBox/Select.style';
 import dropDownIcon from '@public/icons/drop_down.svg';
 import checkIcon from '@public/icons/check.svg';
+import { TColumn } from '@pages/dashboard/Dashboard.type';
 
-type SelectProps = {
-  onData: string[];
-  onType?: boolean;
-  onModify?: boolean;
+export type TMember = {
+  id: number;
+  email: string;
+  nickname: string;
+  profileImageUrl: null;
+  createdAt: string;
+  updatedAt: string;
+  isOwner: boolean;
+  userId: number;
 };
 
-function Select({ onData, onType, onModify }: SelectProps) {
+type SelectProps = {
+  columns: TColumn[];
+  members: TMember[];
+  onType: boolean;
+  onChangeColumn: (id: number) => void;
+  onChangeAssignee: (id: number) => void;
+};
+
+function Select({ columns, members, onType, onChangeColumn, onChangeAssignee }: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [assignee, setAssignee] = useState('');
+  const [column, setColumn] = useState('');
+
+  const handleClickMember = (member: TMember) => {
+    onChangeAssignee(member.userId);
+    setAssignee(member.nickname);
+    handleOpen();
+  };
+
+  const handleClickColumn = (column: TColumn) => {
+    onChangeColumn(column.id);
+    setColumn(column.title);
+    handleOpen();
+  };
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -23,18 +51,13 @@ function Select({ onData, onType, onModify }: SelectProps) {
       <S.SelectTitle onClick={handleOpen}>
         {onType ? (
           <>
-            <S.SelectTitleInput placeholder="이름을 입력해 주세요." />
-            {!onModify && (
-              <S.SelectTitleContainer>
-                <S.SelectTitleName str="가나다" />
-                <S.SelectTileItem>가나다</S.SelectTileItem>
-              </S.SelectTitleContainer>
-            )}
+            {assignee && <S.SelectTitleName str={assignee} />}
+            <S.SelectTitleInput placeholder="이름을 입력해 주세요." value={assignee} />
           </>
         ) : (
           <Chip.Round size={'large'} color={'purple'}>
             <S.SelectTile $size={'tiny'} $color={'purple'} />
-            To Do
+            {column}
           </Chip.Round>
         )}
         <Image src={dropDownIcon.src} width={26} height={26} alt="dropDownIcon" />
@@ -42,18 +65,18 @@ function Select({ onData, onType, onModify }: SelectProps) {
       {isOpen && (
         <S.SelectOption>
           {onType
-            ? onData.map((item: string) => (
-                <S.Select key={item}>
-                  <S.SelectTitleName str={item} />
-                  <S.SelectTileItem>{item.nickname}</S.SelectTileItem>
+            ? members.map((member) => (
+                <S.Select key={member.id} onClick={() => handleClickMember(member)}>
+                  <S.SelectTitleName str={member.nickname} />
+                  <S.SelectTileItem>{member.nickname}</S.SelectTileItem>
                 </S.Select>
               ))
-            : onData.map((item: string) => (
-                <S.Select key={item}>
+            : columns.map((column) => (
+                <S.Select key={column.id} onClick={() => handleClickColumn(column)}>
                   <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />
                   <Chip.Round size={'large'} color={'purple'}>
                     <S.SelectTile $size={'tiny'} $color={'purple'} />
-                    <S.SelectTileItem>{item.nickname}</S.SelectTileItem>
+                    <S.SelectTileItem>{column.title}</S.SelectTileItem>
                   </Chip.Round>
                 </S.Select>
               ))}

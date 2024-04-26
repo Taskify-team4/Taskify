@@ -18,19 +18,16 @@ type CreateToDoPorps = ModalBaseProps & {
   children: ReactNode;
   onModify?: boolean;
   columnid: number;
-  fetchCards: (columnid: number) => {};
+  fetchCards: () => {};
   card?: TCard;
   isEdit?: boolean;
 };
-const test = ['가나다', '라마바'];
 
 function CreateToDoModal({ children, onModify, columnid, close, fetchCards, card }: CreateToDoPorps) {
-  const { dashboardId } = useDashContext();
+  const { dashboardId, columns, fetchColumns } = useDashContext();
   const { myData: myInfo } = useMyData();
   const [members, setMembers] = useState<DashBoardMember[]>([]);
   const [cardData, setCardData] = useState<TCardForm>({
-    //임시로 본인의 아이디만 넣도록 구현
-    id: card?.id || 0,
     assigneeUserId: myInfo.id,
     dashboardId: Number(dashboardId),
     columnId: Number(columnid),
@@ -47,6 +44,13 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards, card
     const res = await getDashboardMembers(dashboardId.toString());
     const result = res.members;
     setMembers(result);
+  };
+
+  const handleChangeAssignee = (memberId: number) => {
+    setCardData((prevState) => ({
+      ...prevState,
+      assigneeUserId: memberId,
+    }));
   };
 
   const handleChangeTitle = (title: string) => {
@@ -84,12 +88,19 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards, card
     }));
   };
 
+  const handleChangeColumn = (id: number) => {
+    setCardData((prevState) => ({
+      ...prevState,
+      columnId: id,
+    }));
+  };
+
   const handleCreateNewCard = async () => {
     try {
       const res = await postNewCard(cardData);
       if (res.id) {
         trigger();
-        fetchCards(columnid);
+        fetchCards();
       }
     } catch (error) {
       console.error('카드 생성 실패', error);
@@ -100,11 +111,13 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards, card
     try {
       const res = await updateCard(cardData, card?.id);
       if (res.id) {
+        fetchCards();
         trigger();
-        fetchCards(columnid);
+        // 이 부분 수정 필요
+        location.reload();
       }
     } catch (error) {
-      console.error('카드 생성 실패', error);
+      console.error('카드 수정 실패', error);
     }
   };
 
@@ -118,11 +131,11 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards, card
       <S.CreateToDoInputContainer>
         <S.CreateToDoSelectContainer>
           {onModify && (
-            <SelectBox onData={test} onType={false}>
+            <SelectBox columns={columns} onType={false} onChangeColumn={handleChangeColumn}>
               상태
             </SelectBox>
           )}
-          <SelectBox onData={members} onType onModify>
+          <SelectBox members={members} onType onChangeAssignee={handleChangeAssignee}>
             담당자
           </SelectBox>
         </S.CreateToDoSelectContainer>

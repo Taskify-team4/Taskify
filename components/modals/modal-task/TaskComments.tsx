@@ -4,8 +4,14 @@ import { useEffect, useState } from 'react';
 import { TComment } from '@pages/dashboard/Dashboard.type';
 import { useDashContext } from '@contexts/dashContext';
 import { deleteComment, getComments, postNewComment, updateComment } from '@utils/api';
+import { formatDate } from '@utils/formatDate';
 
-function TaskComments({ cardid, columnid }) {
+type TTaskCommentsProps = {
+  cardid: number;
+  columnid: number;
+};
+
+function TaskComments({ cardid, columnid }: TTaskCommentsProps) {
   const { dashboardId } = useDashContext();
   const [comments, setComments] = useState<TComment[]>([]);
   const [commentData, setCommentData] = useState({
@@ -77,7 +83,7 @@ function TaskComments({ cardid, columnid }) {
                 <S.CommentWrapper>
                   <S.CommentInfo>
                     <S.AuthorName>{comment.author.nickname}</S.AuthorName>
-                    <S.CreatedTime>{comment.updatedAt}</S.CreatedTime>
+                    <S.CreatedTime>{formatDate(new Date(comment.updatedAt))}</S.CreatedTime>
                   </S.CommentInfo>
                   {isEdit ? (
                     <S.EditCommentInput

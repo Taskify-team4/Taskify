@@ -35,11 +35,14 @@ export const SelectTitle = styled.button`
 `;
 
 export const SelectTitleInput = styled.input`
-  width: 100%;
+  width: 120px;
   color: var(--black200);
   font-size: 16px;
   font-weight: 400;
   line-height: normal;
+  @media ${device.tablet} {
+    width: 100%;
+  }
 `;
 
 export const SelectOption = styled.div`
@@ -91,6 +94,7 @@ export const SelectTitleName = styled(ProfileIcon)`
   width: 26px;
   height: 26px;
   font-size: 12px;
+  border-radius: 50%;
 `;
 
 export const SelectTileItem = styled.span`

@@ -8,7 +8,7 @@ function TaskDeadline({ dueDate, assignee }: TaskDeadlineProps) {
       <S.DeadlineWrapper>
         <S.DeadlineText>담당자</S.DeadlineText>
         <S.OwnerWrapper>
-          <S.OwnerProfile>{assignee.nickname[0]}</S.OwnerProfile>
+          <S.OwnerProfile str={assignee.nickname[0]} />
           <S.OwnerName>{assignee.nickname}</S.OwnerName>
         </S.OwnerWrapper>
       </S.DeadlineWrapper>

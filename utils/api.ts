@@ -291,12 +291,14 @@ export const getColumns = async (id: number): Promise<TColumn[]> => {
 
 // 컬럼 생성
 export const postNewColumn = async (columnData: TColumnForm): Promise<TColumn> => {
-  return await axios.post(`columns`, JSON.stringify(columnData), {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
-    },
-  });
+  return await axios
+    .post(`columns`, JSON.stringify(columnData), {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    })
+    .then((res) => res.data);
 };
 
 // 컬럼 삭제
@@ -307,7 +309,7 @@ export const deleteColumn = async (id: number): Promise<any> => {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     })
-    .then((res) => res.data)
+    .then((res) => res)
     .catch((error: Error) => {
       if (error.message === ERROR_404_MESSAGE) return alert(NO_DASHBOARD_MESSAGE);
       else if (error.message === ERROR_403_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
