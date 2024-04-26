@@ -8,12 +8,13 @@ type EditNameProps = {
   isMobile: boolean;
   title: string;
   color: TColorCode | string;
-  onTileClick?: (color: TColorCode) => void;
+  selectedColor: string;
+  setSelectedColor: React.Dispatch<React.SetStateAction<string>> | React.Dispatch<React.SetStateAction<TColorCode>>;
   onClick?: () => void;
   onChange?: (value: string) => void;
 };
 
-function EditName({ isMobile, title, color, onTileClick, onClick, onChange }: EditNameProps) {
+function EditName({ isMobile, title, color, selectedColor, setSelectedColor, onClick, onChange }: EditNameProps) {
   return (
     <S.EditDashboardName>
       <S.EditNameTitle>
@@ -21,7 +22,12 @@ function EditName({ isMobile, title, color, onTileClick, onClick, onChange }: Ed
         {isMobile ? (
           <ColorTile $size={'large'} $color={color} />
         ) : (
-          <S.StyledColorPalette size={'large'} onClick={onTileClick} initialColor={color} />
+          <S.StyledColorPalette
+            size={'large'}
+            initialColor={color}
+            selectedColor={selectedColor}
+            setSelectedColor={setSelectedColor}
+          />
         )}
       </S.EditNameTitle>
       <TextInput id={'dashboardName'} placeholder={title} onChange={onChange} defaultValue={title}>

@@ -186,7 +186,8 @@ function Edit({ invitees: initialInvitees, totalInvitees, members: initialMember
             isMobile={windowWidth <= size.tablet}
             title={dashInfo.title}
             color={dashInfo.color}
-            onTileClick={setSelectedColor}
+            selectedColor={selectedColor}
+            setSelectedColor={setSelectedColor}
             onClick={handleUpdateClick}
             onChange={setDashboardName}
           />
