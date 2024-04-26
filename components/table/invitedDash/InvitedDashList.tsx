@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import * as S from '@components/table/TableList.style';
 import Button from '@components/buttons/Button';
 import { InvitedDashListProps } from '@components/table/Table.type';
 
-function InvitedDashList({ data }: InvitedDashListProps) {
+const NOT_LAST = 9;
+function InvitedDashList({ data, IsObserverEnd, handleConfirmClick, handleRejectClick }: InvitedDashListProps) {
+  const myEndRef = useRef(null);
+  const handleIntersection: IntersectionObserverCallback = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && data[NOT_LAST]) {
+        IsObserverEnd?.setCursorId(data[NOT_LAST].id);
+      }
+    });
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection);
+    if (myEndRef.current) {
+      observer.observe(myEndRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <>
       <S.InvitedDashListTitleContainer>
@@ -13,21 +34,38 @@ function InvitedDashList({ data }: InvitedDashListProps) {
           <span>수락여부</span>
         </S.ListData>
       </S.InvitedDashListTitleContainer>
-
-      {data.map((item) => (
-        <S.TableList key={item.id}>
-          <S.ListData $isInvitedDash>
-            <S.DashTitle>{item.dashboard.title}</S.DashTitle>
-            <S.InviterName>{item.inviter.nickname}</S.InviterName>
-            <span>
-              <S.InvitedDashButtonsContainer>
-                <Button.Confirm>수락</Button.Confirm>
-                <Button.Reject>거절</Button.Reject>
-              </S.InvitedDashButtonsContainer>
-            </span>
-          </S.ListData>
-        </S.TableList>
-      ))}
+      <S.TableListScrollBox>
+        {data?.map((item, index) => (
+          <S.TableList key={item.id} ref={index === data.length - 1 ? myEndRef : null}>
+            <S.ListData $isInvitedDash>
+              <S.DashTitle>{item.dashboard.title}</S.DashTitle>
+              <S.InviterName>{item.invitee.nickname}</S.InviterName>
+              <span>
+                <S.InvitedDashButtonsContainer>
+                  <Button.Confirm
+                    onClick={() => {
+                      if (handleConfirmClick) {
+                        handleConfirmClick(item.id);
+                      }
+                    }}
+                  >
+                    수락
+                  </Button.Confirm>
+                  <Button.Reject
+                    onClick={() => {
+                      if (handleRejectClick) {
+                        handleRejectClick(item.id);
+                      }
+                    }}
+                  >
+                    거절
+                  </Button.Reject>
+                </S.InvitedDashButtonsContainer>
+              </span>
+            </S.ListData>
+          </S.TableList>
+        ))}
+      </S.TableListScrollBox>
     </>
   );
 }

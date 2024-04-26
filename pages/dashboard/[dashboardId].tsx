@@ -39,8 +39,6 @@ function Dashboard() {
     // fetchDashInvitees();
   }, [dashboardId]);
 
-  console.log(members);
-
   return (
     <S.DashboardContainer>
       <Sidemenu />

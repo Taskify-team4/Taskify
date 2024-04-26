@@ -12,7 +12,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { useDashContext } from '@contexts/dashContext';
 
-function DashBoardHeader({ mydata, userList, onInviteClick }: DashBoardPros) {
+function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPros) {
   const { dashInfo } = useDashContext();
 
   const router = useRouter();
@@ -28,7 +28,7 @@ function DashBoardHeader({ mydata, userList, onInviteClick }: DashBoardPros) {
   return (
     <S.DashBoardHeader>
       <S.DashBoardTitle>
-        <S.Title>{dashInfo.title}</S.Title>
+        {title ? <S.Title>{title}</S.Title> : <S.Title>{dashInfo.title}</S.Title>}
         {dashInfo.createdByMe ? <S.CrownIcon src={crownIcon} alt="왕관 아이콘" /> : null}
       </S.DashBoardTitle>
       <S.ManagementContainer>
@@ -53,10 +53,14 @@ function DashBoardHeader({ mydata, userList, onInviteClick }: DashBoardPros) {
         </S.Buttons>
         <ProfileIconContainer data={userList} />
         <S.Line />
-        <S.Profile>
-          <ProfileIcon str={mydata.nickname} />
-          <S.MyProfileName>{mydata.nickname}</S.MyProfileName>
-        </S.Profile>
+        {mydata ? (
+          <S.Profile>
+            <ProfileIcon str={mydata.nickname} />
+            <S.MyProfileName>{mydata.nickname}</S.MyProfileName>
+          </S.Profile>
+        ) : (
+          <></>
+        )}
       </S.ManagementContainer>
     </S.DashBoardHeader>
   );

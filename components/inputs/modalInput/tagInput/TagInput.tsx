@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, ReactNode, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, ReactNode, useRef, useState } from 'react';
 import * as S from '@components/inputs/modalInput/tagInput/TagInput.style';
 import Chip from '@components/chips/Chip';
 import { makeRandomChipColor } from '@utils/randomChipColor';
@@ -16,18 +16,29 @@ type TagInputProps = {
 function TagInput({ children, id, type, placeholder, onRequired, onChange, defaultValue }: TagInputProps) {
   const [tags, setTags] = useState<string[]>(defaultValue || []);
   const [inputValue, setInputValue] = useState('');
+  const inputValueRef = useRef<string>('');
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+    const { value } = e.target;
+    setInputValue(value);
+    inputValueRef.current = value;
   };
 
   const handleInputKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      const randColor = makeRandomChipColor();
-      const tagArr = [...tags, `${inputValue}:${randColor}`];
-      setTags(tagArr);
-      onChange(tagArr);
-      setInputValue('');
+    if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
+      const valueToAdd = inputValueRef.current.trim();
+      if (valueToAdd !== '') {
+        const randColor = makeRandomChipColor();
+        const tagArr = [...tags, `${inputValue}:${randColor}`];
+        setTags(tagArr);
+        onChange(tagArr);
+        setInputValue('');
+      }
+      console.log(inputValue);
+    } else if (e.key === 'Backspace' && inputValue === '' && tags.length > 0) {
+      const newTags = tags.slice(0, -1);
+      setTags(newTags);
+      onChange(newTags);
     }
   };
 

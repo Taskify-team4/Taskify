@@ -17,6 +17,7 @@ export const TaskContentInfo = styled.div`
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
+
   @media ${device.tablet} {
     flex-direction: column;
     gap: 12px;

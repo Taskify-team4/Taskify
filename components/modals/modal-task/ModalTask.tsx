@@ -43,13 +43,7 @@ function ModalTask({ close, fetchCards, card, column, onUpdateClick }: ModalTask
     <S.ModalTaskContainer>
       <S.TaskTitle>{card.title}</S.TaskTitle>
       <TaskContentInfo {...card} columntitle={column.title} />
-      {card.imageUrl ? (
-        <S.CardImage>
-          <Image src={card.imageUrl} alt="Card Image" width={0} height={0} layout="responsive" />
-        </S.CardImage>
-      ) : null}
       <TaskComments cardid={card.id} columnid={column.id} />
-
       <S.CloseImage src={closeImg} alt="close button" onClick={trigger} />
       <S.MoreImage src={moreImg} alt="more button" onClick={() => setMore(!more)} />
       {more ? (
