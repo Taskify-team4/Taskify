@@ -7,7 +7,7 @@ import { TColorCode } from '@components/chips/Chip.type';
 type EditNameProps = {
   isMobile: boolean;
   title: string;
-  color: TColorCode;
+  color: TColorCode | string;
   onTileClick?: (color: TColorCode) => void;
   onClick?: () => void;
   onChange?: (value: string) => void;

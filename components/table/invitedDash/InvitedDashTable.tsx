@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from '@components/table/Table.style';
 import TableHeader from '@components/table/TableHeader';
 import TableLists from '@components/table/TableList';
@@ -7,26 +7,23 @@ import SearchBar from '@components/table/invitedDash/SearchBar';
 import Image from 'next/image';
 import EmptyImg from '@public/icons/no_invite.svg';
 import { TInvitation } from '@components/table/Table.type';
-import { useState } from 'react';
-import { getInvitations, putInvitation } from '@pages/mydashboard/api';
+import { getInvitations, reactDashboardInvites } from '@utils/api';
 
 function InvitedDashTable() {
   const [myInvitation, setMyInvitation] = useState<TInvitation[]>([]);
   const [cursorId, setCursorId] = useState<number | undefined>(undefined);
   const fetchMyInvitation = async (cursorId?: number) => {
     const res = await getInvitations(cursorId);
-    console.log(res);
     setMyInvitation(myInvitation.concat(res));
   };
   const reloadMyInvitation = async () => {
     const res = await getInvitations();
-    console.log(res);
     setMyInvitation(res);
   };
 
   const handleConfirmClick = async (id: number) => {
     try {
-      const res = await putInvitation(id, true);
+      const res = await reactDashboardInvites(id, true);
       if (res?.status) {
         reloadMyInvitation();
       }
@@ -36,7 +33,7 @@ function InvitedDashTable() {
   };
   const handleRejectClick = async (id: number) => {
     try {
-      const res = await putInvitation(id, false);
+      const res = await reactDashboardInvites(id, false);
       if (res?.status) {
         reloadMyInvitation();
       }

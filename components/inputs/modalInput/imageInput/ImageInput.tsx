@@ -2,7 +2,7 @@ import React, { ChangeEvent, ReactNode, useState } from 'react';
 import Image from 'next/image';
 import * as S from '@components/inputs/modalInput/imageInput/ImageInput.style';
 import addIcon from '@public/icons/add_violet.svg';
-import { postCardImage } from '@pages/dashboard/api';
+import { postCardImage } from '@utils/api';
 
 type ImageInputProps = {
   children: ReactNode;

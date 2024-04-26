@@ -4,8 +4,8 @@ import Button from '@components/buttons/Button';
 import ModalInput from '@components/inputs/modalInput/ModalInput';
 import { ModalBaseProps } from '@components/modals/Modal.type';
 import { TColumnForm } from '@pages/dashboard/Dashboard.type';
-import { postNewColumn } from '@pages/dashboard/api';
 import { useDashContext } from '@contexts/dashContext';
+import { postNewColumn } from '@utils/api';
 
 function NewColumnModal({ close }: ModalBaseProps) {
   const { dashboardId, fetchColumns } = useDashContext();

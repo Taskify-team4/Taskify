@@ -4,7 +4,7 @@ import ColorPalette from '@components/chips/ColorPalette';
 import Button from '@components/buttons/Button';
 import ModalInput from '@components/inputs/modalInput/ModalInput';
 import { ModalBaseProps } from '@components/modals/Modal.type';
-import { postAddDashboard } from '@pages/mydashboard/api';
+import { postNewDashboard } from '@utils/api';
 import { useDashContext } from '@contexts/dashContext';
 
 function NewDashBoardModal({ close }: ModalBaseProps) {
@@ -16,7 +16,7 @@ function NewDashBoardModal({ close }: ModalBaseProps) {
   const handleCreateClick = async () => {
     let inputValue = (document.getElementById('dashboardName') as HTMLInputElement).value;
     try {
-      const res = await postAddDashboard(inputValue, selectedColor);
+      const res = await postNewDashboard(inputValue, selectedColor);
       if (res.status) {
         trigger();
         fetchDashboardsPagination();

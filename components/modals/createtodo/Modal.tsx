@@ -10,8 +10,9 @@ import Button from '@components/buttons/Button';
 import { TCard, TCardForm } from '@pages/dashboard/Dashboard.type';
 import { ModalBaseProps } from '../Modal.type';
 import { useDashContext } from '@contexts/dashContext';
-import { getDashboardMembers, postNewCard, updateCard } from '@pages/dashboard/api';
 import { useMyData } from '@contexts/myDataContext';
+import { getDashboardMembers, postNewCard, updateCard } from '@utils/api';
+import { DashBoardMember } from '@utils/editDashboard/edit.type';
 
 type CreateToDoPorps = ModalBaseProps & {
   children: ReactNode;
@@ -26,7 +27,7 @@ const test = ['가나다', '라마바'];
 function CreateToDoModal({ children, onModify, columnid, close, fetchCards, card }: CreateToDoPorps) {
   const { dashboardId } = useDashContext();
   const { myData: myInfo } = useMyData();
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState<DashBoardMember[]>([]);
   const [cardData, setCardData] = useState<TCardForm>({
     //임시로 본인의 아이디만 넣도록 구현
     id: card?.id || 0,
@@ -43,7 +44,7 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards, card
   };
 
   const fetchDashMembers = async () => {
-    const res = await getDashboardMembers(dashboardId);
+    const res = await getDashboardMembers(dashboardId.toString());
     const result = res.members;
     setMembers(result);
   };

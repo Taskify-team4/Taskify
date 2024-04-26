@@ -3,8 +3,8 @@ import * as S from '@components/modals/edit_column/Modal.style';
 import Button from '@components/buttons/Button';
 import ModalInput from '@components/inputs/modalInput/ModalInput';
 import { ModalBaseProps } from '@components/modals/Modal.type';
-import { deleteColumn, postChangeColumnTitle } from '@pages/dashboard/api';
 import { useDashContext } from '@contexts/dashContext';
+import { deleteColumn, updateColumnTitle } from '@utils/api';
 
 type TEditColumnModalProps = ModalBaseProps & {
   columnid: number;
@@ -25,7 +25,7 @@ function EditColumnModal({ close, columnid }: TEditColumnModalProps) {
 
   const fetchPostChangeColumnTitle = async () => {
     try {
-      const res = await postChangeColumnTitle(columnid, columnTitle);
+      const res = await updateColumnTitle(columnid, columnTitle);
       if (res.ok) {
         fetchColumns();
         console.log('이름 변경!');
