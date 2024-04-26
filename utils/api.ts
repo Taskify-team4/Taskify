@@ -166,19 +166,36 @@ export const reactDashboardInvites = async (id: number, check: boolean): Promise
     });
 };
 
+// // 새로운 대시보드 생성하기
+// export const postNewDashboard = async (title: string, color: string): Promise<any> => {
+//   await axios
+//     .post('/dashboards', JSON.stringify({ title: title, color: color }), {
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Authorization: `Bearer ${ACCESS_TOKEN}`,
+//       },
+//     })
+//     .then((res) => {
+//       console.log(res.data);
+//       return res.data;
+//     })
+//     .catch((error) => alert('대시보드 생성 실패'));
+// };
+
 // 새로운 대시보드 생성하기
-export const postNewDashboard = async (title: string, color: string): Promise<any> => {
-  await axios
-    .post('/dashboards', JSON.stringify({ title: title, color: color }), {
+export const postAddDashboard = async (title: string, color: string) => {
+  // temp
+  try {
+    const response = await axios.post('/dashboards', JSON.stringify({ title: title, color: color }), {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
-    })
-    .then((res) => {
-      return res.data;
-    })
-    .catch((error) => alert('대시보드 생성 실패'));
+    });
+    return response;
+  } catch (error) {
+    alert('대시보드 생성 실패');
+  }
 };
 
 // 대시보드 목록 조회
@@ -424,7 +441,11 @@ export const updateComment = async (commentData: TCommentForm, id: number) => {
 // 댓글 조회
 export const getComments = async (id: number): Promise<TComment[]> => {
   return await axios
-    .get(`comments?size=10&cardId=${id}`)
+    .get(`comments?size=10&cardId=${id}`, {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    })
     .then((res) => res.data)
     .then((data) => data.comments);
 };

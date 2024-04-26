@@ -6,8 +6,8 @@ function ColorPalette({
   size,
   className,
   initialColor,
-  // selectedColor,
-  // setSelectedColor,
+  selectedColor,
+  setSelectedColor,
 }: {
   size: TChipSize;
   className?: string;
