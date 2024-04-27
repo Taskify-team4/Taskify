@@ -10,23 +10,19 @@ import ModalBase from '@components/modals/ModalBase';
 import PasswordModal from '@components/modals/inconsistent_password/Modal';
 
 function Profile() {
-  const { myData, updateNickname } = useMyData();
-  const [nickName, setNickName] = useState(myData.nickname);
+  const { myData, updateNickname, updateImg } = useMyData();
+  const [nickName, setNickName] = useState('');
   const [profileImgUrl, setProfileImgUrl] = useState('');
-  const [previewImg, setPreviewImg]: any = useState(myData.profileImageUrl);
+  const [previewImg, setPreviewImg]: any = useState('');
+  const [isChangeImg, setIsChangeImg] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const profileInputList = [
     { id: 'email', placeholder: myData.email, label: '이메일', disabled: true },
-    { id: 'nickname', placeholder: nickName, label: '닉네임', disabled: false },
+    { id: 'nickname', placeholder: myData.nickname, label: '닉네임', disabled: false },
   ];
-
-  useEffect(() => {
-    setPreviewImg(myData.profileImageUrl);
-    setNickName(myData.nickname);
-  }, [myData.profileImageUrl, myData.nickname, openModal, message]);
 
   // 내 정보 수정
   const handleModifyMyDataClick = async () => {
@@ -34,14 +30,18 @@ function Profile() {
     if (nickName && profileImgUrl) {
       res = await putMyData(nickName, profileImgUrl);
       updateNickname(nickName);
+      updateImg(profileImgUrl);
     } else if (nickName) {
       res = await putMyData(nickName);
       updateNickname(nickName);
-    } else if (profileImgUrl) {
-      res = await putMyData(profileImgUrl);
+    } else {
+      res = await putMyData(myData.nickname, profileImgUrl);
+      updateImg(profileImgUrl);
     }
+
     setOpenModal(true);
     setMessage(res);
+    setIsChangeImg(false);
   };
 
   // 파일 입력창 열기
@@ -56,7 +56,8 @@ function Profile() {
     const preview = new FileReader();
     preview.onload = function (e) {
       const imageDataURL = e.target?.result as string;
-      setPreviewImg(imageDataURL);
+      // setPreviewImg(imageDataURL);
+      updateImg(imageDataURL);
     };
     preview.readAsDataURL(file);
   };
@@ -66,12 +67,18 @@ function Profile() {
     const file = e.target.files?.[0];
     // 미리보기 이미지 설정
     PreviewImg(file);
+    setIsChangeImg(true);
 
     // 이미지 업로드 및 url 획득
     upLoadImg(file).then((profileImageUrl) => {
       setProfileImgUrl(profileImageUrl);
     });
   };
+
+  useEffect(() => {
+    setPreviewImg(myData.profileImageUrl);
+    console.log(nickName, myData.nickname);
+  }, [myData.profileImageUrl, myData.nickname, openModal, message, nickName]);
 
   return (
     <S.MyPageProfileContainer>
@@ -105,7 +112,14 @@ function Profile() {
         </S.MyPageProfileInputContainer>
       </S.MyPageProfileInfoContainer>
       <S.MyPageBtnWrap>
-        <S.MyPageBtn onClick={handleModifyMyDataClick} disabled={!nickName && !previewImg}>
+        <S.MyPageBtn
+          onClick={handleModifyMyDataClick}
+          disabled={(nickName == '' || nickName == myData.nickname || nickName.length > 10) && !isChangeImg}
+        >
+          {/* <S.MyPageBtn
+          onClick={handleModifyMyDataClick}
+          disabled={nickName == '' || nickName == myData.nickname || nickName.length > 10}
+        > */}
           저장
         </S.MyPageBtn>
       </S.MyPageBtnWrap>
