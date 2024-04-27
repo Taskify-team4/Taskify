@@ -88,6 +88,7 @@ function Input({
         onBlur={handleBlurInput}
         $errorMsg={errorMsg}
         value={inputValue}
+        disabled={disabled}
       />
     </S.InputContainer>
   );

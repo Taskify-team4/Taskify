@@ -19,7 +19,7 @@ function Profile() {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const profileInputList = [
-    { id: 'email', placeholder: 'asdf1234@naver.com', label: '이메일', disabled: true },
+    { id: 'email', placeholder: myData.email, label: '이메일', disabled: true },
     { id: 'nickname', placeholder: nickName, label: '닉네임', disabled: false },
   ];
 
