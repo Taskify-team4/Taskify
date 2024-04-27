@@ -43,7 +43,7 @@ function Dashboard() {
   return (
     <S.DashboardContainer>
       <Sidemenu />
-      <div>
+      <S.DashboardContentContainer>
         <DashBoardHeader
           mydata={{
             id: myData.userId,
@@ -69,7 +69,7 @@ function Dashboard() {
             </Modal>
           </S.AddColumnButtonWrapper>
         </S.ColumnContainer>
-      </div>
+      </S.DashboardContentContainer>
     </S.DashboardContainer>
   );
 }

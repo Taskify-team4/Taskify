@@ -20,14 +20,15 @@ type TColumnProps = {
 function Column({ column }: TColumnProps) {
   const [cards, setCards] = useState<TCards>([]);
   const [editId, setEditId] = useState(0);
-  const fetchCards = async () => {
-    const res = await getCards(column.id);
+
+  const fetchCards = async (id: number) => {
+    const res = await getCards(id);
     setCards(res);
   };
 
   useEffect(() => {
-    fetchCards();
-  }, [column.id]);
+    fetchCards(column.id);
+  }, []);
 
   return (
     <S.ColumnContainer>
@@ -54,7 +55,7 @@ function Column({ column }: TColumnProps) {
       <Modal
         content={
           <ModalBase>
-            <CreateToDoModal columnid={column.id} fetchCards={fetchCards}>
+            <CreateToDoModal column={column} fetchCards={fetchCards}>
               할 일 생성
             </CreateToDoModal>
           </ModalBase>
@@ -64,7 +65,7 @@ function Column({ column }: TColumnProps) {
       </Modal>
 
       {cards?.map((card, idx) => (
-        <>
+        <li key={card.id}>
           <Modal
             content={
               <ModalBase>
@@ -82,13 +83,13 @@ function Column({ column }: TColumnProps) {
                   setEditId(0);
                 }}
               >
-                <CreateToDoModal card={card} onModify={true} columnid={column.id} fetchCards={fetchCards}>
+                <CreateToDoModal card={card} onModify={true} column={column} fetchCards={fetchCards}>
                   할 일 수정
                 </CreateToDoModal>
               </ModalBase>
             </BackdropContainer>
           )}
-        </>
+        </li>
       ))}
     </S.ColumnContainer>
   );

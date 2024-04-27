@@ -7,7 +7,7 @@ import DateInput from '@components/inputs/modalInput/dateInput/DateInput';
 import TagInput from '@components/inputs/modalInput/tagInput/TagInput';
 import ImageInput from '@components/inputs/modalInput/imageInput/ImageInput';
 import Button from '@components/buttons/Button';
-import { TCard, TCardForm } from '@pages/dashboard/Dashboard.type';
+import { TCard, TCardForm, TColumn } from '@pages/dashboard/Dashboard.type';
 import { ModalBaseProps } from '../Modal.type';
 import { useDashContext } from '@contexts/dashContext';
 import { useMyData } from '@contexts/myDataContext';
@@ -17,25 +17,27 @@ import { DashBoardMember } from '@utils/editDashboard/edit.type';
 type CreateToDoPorps = ModalBaseProps & {
   children: ReactNode;
   onModify?: boolean;
-  columnid: number;
-  fetchCards: () => {};
+  column: TColumn;
+  fetchCards: (columnId: number) => {};
   card?: TCard;
   isEdit?: boolean;
 };
 
-function CreateToDoModal({ children, onModify, columnid, close, fetchCards, card }: CreateToDoPorps) {
+function CreateToDoModal({ children, onModify, column, close, fetchCards, card }: CreateToDoPorps) {
   const { dashboardId, columns, fetchColumns } = useDashContext();
   const { myData: myInfo } = useMyData();
   const [members, setMembers] = useState<DashBoardMember[]>([]);
+  const [selectedColumn, setSelectedColumn] = useState('');
   const [cardData, setCardData] = useState<TCardForm>({
     assigneeUserId: myInfo.id,
     dashboardId: Number(dashboardId),
-    columnId: Number(columnid),
+    columnId: Number(column?.id),
     title: card?.title || '',
     description: card?.description || '',
     dueDate: card?.dueDate || '',
     tags: card?.tags || [],
   });
+
   const trigger = () => {
     return close && close();
   };
@@ -98,9 +100,9 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards, card
   const handleCreateNewCard = async () => {
     try {
       const res = await postNewCard(cardData);
-      if (res.id) {
+      if (res?.id) {
         trigger();
-        fetchCards();
+        fetchCards(column?.id);
       }
     } catch (error) {
       console.error('카드 생성 실패', error);
@@ -111,10 +113,9 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards, card
     try {
       const res = await updateCard(cardData, card?.id);
       if (res.id) {
-        fetchCards();
+        fetchCards(column?.id);
+
         trigger();
-        // 이 부분 수정 필요
-        location.reload();
       }
     } catch (error) {
       console.error('카드 수정 실패', error);
@@ -131,11 +132,23 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards, card
       <S.CreateToDoInputContainer>
         <S.CreateToDoSelectContainer>
           {onModify && (
-            <SelectBox columns={columns} onType={false} onChangeColumn={handleChangeColumn}>
+            <SelectBox
+              currentColumn={column}
+              columns={columns}
+              onType={false}
+              onChangeColumn={handleChangeColumn}
+              selectedColumn={selectedColumn}
+              setSelectedColumn={setSelectedColumn}
+            >
               상태
             </SelectBox>
           )}
-          <SelectBox members={members} onType onChangeAssignee={handleChangeAssignee}>
+          <SelectBox
+            members={members}
+            onType
+            onChangeAssignee={handleChangeAssignee}
+            currentAssignee={card?.assignee.nickname}
+          >
             담당자
           </SelectBox>
         </S.CreateToDoSelectContainer>
@@ -175,7 +188,7 @@ function CreateToDoModal({ children, onModify, columnid, close, fetchCards, card
           태그
         </TagInput>
 
-        <ImageInput onChange={handleChangeImage} columnid={columnid}>
+        <ImageInput onChange={handleChangeImage} columnid={column?.id}>
           이미지
         </ImageInput>
       </S.CreateToDoInputContainer>

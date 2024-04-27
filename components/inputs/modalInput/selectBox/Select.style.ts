@@ -98,9 +98,8 @@ export const SelectTitleName = styled(ProfileIcon)`
 `;
 
 export const SelectTileItem = styled.span`
-  color: var(--black200);
-  font-size: 16px;
-  font-weight: 400;
+  color: var(--violet);
+  font-size: 12px;
   line-height: normal;
 
   @media ${device.tablet} {

@@ -18,17 +18,30 @@ export type TMember = {
 };
 
 type SelectProps = {
+  currentColumn: TColumn;
+  currentAssignee: string;
   columns: TColumn[];
   members: TMember[];
   onType: boolean;
   onChangeColumn: (id: number) => void;
   onChangeAssignee: (id: number) => void;
+  selectedColumn: TColumn;
+  setSelectedColumn: (selectedColumn: TColumn) => {};
 };
 
-function Select({ columns, members, onType, onChangeColumn, onChangeAssignee }: SelectProps) {
+function Select({
+  currentColumn,
+  currentAssignee,
+  columns,
+  members,
+  onType,
+  onChangeColumn,
+  onChangeAssignee,
+  selectedColumn,
+  setSelectedColumn,
+}: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [assignee, setAssignee] = useState('');
-  const [column, setColumn] = useState('');
 
   const handleClickMember = (member: TMember) => {
     onChangeAssignee(member.userId);
@@ -36,9 +49,9 @@ function Select({ columns, members, onType, onChangeColumn, onChangeAssignee }: 
     handleOpen();
   };
 
-  const handleClickColumn = (column: TColumn) => {
-    onChangeColumn(column.id);
-    setColumn(column.title);
+  const handleClickColumn = (selectedColumn: TColumn) => {
+    onChangeColumn(selectedColumn.id);
+    setSelectedColumn(selectedColumn);
     handleOpen();
   };
 
@@ -51,13 +64,13 @@ function Select({ columns, members, onType, onChangeColumn, onChangeAssignee }: 
       <S.SelectTitle onClick={handleOpen}>
         {onType ? (
           <>
-            {assignee && <S.SelectTitleName str={assignee} />}
-            <S.SelectTitleInput placeholder="이름을 입력해 주세요." value={assignee} />
+            <S.SelectTitleName str={assignee ? assignee : currentAssignee} />
+            <S.SelectTitleInput value={assignee ? assignee : currentAssignee} />
           </>
         ) : (
           <Chip.Round size={'large'} color={'purple'}>
             <S.SelectTile $size={'tiny'} $color={'purple'} />
-            {column}
+            {selectedColumn ? selectedColumn.title : currentColumn.title}
           </Chip.Round>
         )}
         <Image src={dropDownIcon.src} width={26} height={26} alt="dropDownIcon" />
@@ -73,7 +86,10 @@ function Select({ columns, members, onType, onChangeColumn, onChangeAssignee }: 
               ))
             : columns.map((column) => (
                 <S.Select key={column.id} onClick={() => handleClickColumn(column)}>
-                  <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />
+                  {!selectedColumn && currentColumn === column && (
+                    <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />
+                  )}
+                  {selectedColumn === column && <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />}
                   <Chip.Round size={'large'} color={'purple'}>
                     <S.SelectTile $size={'tiny'} $color={'purple'} />
                     <S.SelectTileItem>{column.title}</S.SelectTileItem>

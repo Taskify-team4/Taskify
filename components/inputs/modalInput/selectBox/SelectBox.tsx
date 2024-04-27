@@ -13,16 +13,31 @@ type SelectBoxProps = {
   onChangeAssignee?: (id: number) => void;
 };
 
-function SelectBox({ children, columns, members, onType, onChangeColumn, onChangeAssignee }: SelectBoxProps) {
+function SelectBox({
+  children,
+  currentColumn,
+  currentAssignee,
+  columns,
+  members,
+  onType,
+  onChangeColumn,
+  onChangeAssignee,
+  selectedColumn,
+  setSelectedColumn,
+}: SelectBoxProps) {
   return (
     <S.SelectBoxContainer>
       <S.SelectBoxTitle>{children}</S.SelectBoxTitle>
       <Select
+        currentColumn={currentColumn}
+        currentAssignee={currentAssignee}
         columns={columns}
         members={members}
         onType={onType}
         onChangeAssignee={onChangeAssignee}
         onChangeColumn={onChangeColumn}
+        selectedColumn={selectedColumn}
+        setSelectedColumn={setSelectedColumn}
       />
     </S.SelectBoxContainer>
   );

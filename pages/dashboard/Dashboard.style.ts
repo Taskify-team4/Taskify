@@ -5,6 +5,15 @@ export const DashboardContainer = styled.div`
   display: flex;
   height: 100%;
 `;
+export const DashboardContentContainer = styled.div`
+  width: calc(100% - 250px);
+  @media ${device.tablet} {
+    width: calc(100% - 140px);
+  }
+  @media ${device.mobile} {
+    width: calc(100% - 50px);
+  }
+`;
 
 export const ColumnContainer = styled.div`
   display: flex;
