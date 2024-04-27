@@ -34,6 +34,14 @@ export const Title = styled.div`
     display: none;
   }
 `;
+export const TitleMydash = styled.div`
+  margin-left: 40px;
+  color: var(--black200);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+  white-space: nowrap;
+`;
 
 export const CrownIcon = styled(Image)`
   width: 20.103px;
@@ -43,6 +51,9 @@ export const CrownIcon = styled(Image)`
 export const ManagementContainer = styled.div`
   display: flex;
   gap: 32px;
+  @media ${device.tablet} {
+    gap: 20px;
+  }
 `;
 
 export const Buttons = styled.div`
