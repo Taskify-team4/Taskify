@@ -10,7 +10,7 @@ import ModalBase from '@components/modals/ModalBase';
 import PasswordModal from '@components/modals/inconsistent_password/Modal';
 
 function Profile() {
-  const { myData } = useMyData();
+  const { myData, updateNickname } = useMyData();
   const [nickName, setNickName] = useState(myData.nickname);
   const [profileImgUrl, setProfileImgUrl] = useState('');
   const [previewImg, setPreviewImg]: any = useState(myData.profileImageUrl);
@@ -33,8 +33,10 @@ function Profile() {
     let res = '';
     if (nickName && profileImgUrl) {
       res = await putMyData(nickName, profileImgUrl);
+      updateNickname(nickName);
     } else if (nickName) {
       res = await putMyData(nickName);
+      updateNickname(nickName);
     } else if (profileImgUrl) {
       res = await putMyData(profileImgUrl);
     }
