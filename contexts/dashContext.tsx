@@ -124,7 +124,6 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     }
   };
   const handleDashPageClick = async (isInSide?: boolean) => {
-    console.log('a');
     if (isInSide) {
       const { dashboards: nowDashboards } = await getMyDashboards(dashPageInSideBar, true);
       setMyDashboardsInSideBar(nowDashboards);

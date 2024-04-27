@@ -1,7 +1,5 @@
 import * as S from '@components/pages/mydashboard/MyDashboardList.style';
 import Button from '@components/buttons/Button';
-
-// test
 import { useDashContext } from '@contexts/dashContext';
 import Modal from '@components/modals/Modal';
 import ModalBase from '@components/modals/ModalBase';

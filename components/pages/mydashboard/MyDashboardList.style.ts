@@ -10,7 +10,6 @@ export const MyDashBoardListContainer = styled.div`
 export const MyDashBoardList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  /* height: 150px; */
   gap: 10px;
   @media ${device.tablet} {
     grid-template-columns: repeat(2, minmax(0, 1fr));

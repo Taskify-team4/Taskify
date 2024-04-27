@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from 'react';
+import React from 'react';
 import * as S from '@components/table/invitedDash/SearchBar.style';
 import Image from 'next/image';
 import searchIcon from '@public/icons/search.svg';
