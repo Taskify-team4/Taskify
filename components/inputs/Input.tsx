@@ -69,6 +69,12 @@ function Input({
     }
   };
 
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(e.target.value);
+    }
+  };
+
   return (
     <S.InputContainer>
       <S.InputLabel htmlFor={id}>{children}</S.InputLabel>
@@ -77,9 +83,7 @@ function Input({
         type={type}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        onChange={(e) => {
-          onChange(e.target.value);
-        }}
+        onChange={handleChangeInput}
         onFocus={handleFocusInput}
         onBlur={handleBlurInput}
         $errorMsg={errorMsg}
