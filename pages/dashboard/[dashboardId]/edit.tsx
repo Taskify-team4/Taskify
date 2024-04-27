@@ -45,7 +45,7 @@ export async function getServerSideProps(context: any) {
 }
 
 function Edit({ invitees: initialInvitees, totalInvitees, members: initialMembers, totalMembers }: EditPageProps) {
-  const { fetchDashboards, fetchDashboardInfo, dashInfo } = useDashContext();
+  const { fetchMyDashboardsAll, fetchDashboardInfo, dashInfo } = useDashContext();
 
   const { myData } = useMyData();
   const { windowWidth } = useWindowSize();
@@ -68,9 +68,8 @@ function Edit({ invitees: initialInvitees, totalInvitees, members: initialMember
   const handleUpdateClick = async () => {
     if (dashboardId) {
       await updateDashboard(dashboardId, dashboardName, selectedColor);
-
       fetchDashboardInfo();
-      fetchDashboards();
+      fetchMyDashboardsAll();
     }
   };
 
@@ -104,6 +103,7 @@ function Edit({ invitees: initialInvitees, totalInvitees, members: initialMember
   const handleDeleteDashboardClick = async () => {
     if (dashboardId) {
       await deleteDashboard(dashboardId);
+      fetchMyDashboardsAll();
       await router.push(`/mydashboard`);
     }
   };

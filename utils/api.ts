@@ -214,22 +214,6 @@ export const postAddDashboard = async (title: string, color: string) => {
   }
 };
 
-// 대시보드 목록 조회
-export const getDashboardList = async (): Promise<TDashInfo[]> => {
-  return await axios
-    .get(`dashboards?navigationMethod=infiniteScroll`, {
-      headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
-      },
-    })
-    .then((res) => res.data)
-    .then((data) => data.dashboards)
-    .catch((error: Error) => {
-      if (error.message === ERROR_401_MESSAGE) alert(NO_AUTHORITY_MESSAGE);
-      throw NETWORK_ERROR(error);
-    });
-};
-
 // 대시보드 정보 수정
 export const updateDashboard = async (id: string, title: string, color: string) => {
   return await axios
@@ -477,27 +461,26 @@ export const deleteComment = async (id: number) => {
 };
 
 // 내 대시보드 목록 조회
-export const getMyDashboards = async (page: number) => {
-  return await axios
-    .get(`/dashboards?navigationMethod=pagination&page=${page}`, {
-      headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
-      },
-    })
-    .then((res) => res.data)
-    .catch((error) => alert(error));
-};
-
-// 페이지네이션으로 내 대시보드 목록 조회
-export const getMyDashboardsByPagination = async (page: number) => {
-  return await axios
-    .get(`/dashboards?navigationMethod=pagination&page=${page}&size=5`, {
-      headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
-      },
-    })
-    .then((res) => res.data)
-    .catch((error) => alert(error));
+export const getMyDashboards = async (page: number, isInSide?: boolean) => {
+  if (isInSide) {
+    return await axios
+      .get(`/dashboards?navigationMethod=pagination&page=${page}`, {
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+        },
+      })
+      .then((res) => res.data)
+      .catch((error) => alert(error));
+  } else {
+    return await axios
+      .get(`/dashboards?navigationMethod=pagination&page=${page}&size=5`, {
+        headers: {
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+        },
+      })
+      .then((res) => res.data)
+      .catch((error) => alert(error));
+  }
 };
 
 // 초대받은 목록 조회
@@ -533,7 +516,6 @@ export const getInvitations = async (cursorId?: number, title?: string) => {
       },
     });
     const products = res.data.invitations;
-    console.log(res.data);
     return products;
   } catch (error) {
     console.error(error);

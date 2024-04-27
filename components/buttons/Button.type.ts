@@ -14,7 +14,7 @@ export type DashboardData = {
 export type ButtonProps = {
   children?: ReactNode;
   disabled?: boolean;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement> | void;
   className?: string;
   onConfirmClick?: (id: number) => void;
 };
