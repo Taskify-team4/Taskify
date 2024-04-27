@@ -5,12 +5,15 @@ import { TColumn } from '@pages/dashboard/Dashboard.type';
 
 type SelectBoxProps = {
   children: ReactNode;
-  members?: TMember[];
+  currentColumn?: TColumn;
+  currentAssignee?: string;
   columns?: TColumn[];
-  onType?: boolean;
-  onModify?: boolean;
+  members?: TMember[];
+  onType: boolean;
   onChangeColumn?: (id: number) => void;
   onChangeAssignee?: (id: number) => void;
+  selectedColumn?: TColumn;
+  setSelectedColumn?: (selectedColumn: TColumn) => void;
 };
 
 function SelectBox({

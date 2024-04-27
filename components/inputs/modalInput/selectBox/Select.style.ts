@@ -34,14 +34,18 @@ export const SelectTitle = styled.button`
   }
 `;
 
+export const AssigneeContainer = styled.div`
+  display: flex;
+  gap: 5px;
+`;
 export const SelectTitleInput = styled.input`
-  width: 120px;
-  color: var(--black200);
+  width: 70%;
+  color: var(--black300);
   font-size: 16px;
   font-weight: 400;
   line-height: normal;
-  @media ${device.tablet} {
-    width: 100%;
+  &::placeholder {
+    color: var(--gray400);
   }
 `;
 
@@ -98,6 +102,15 @@ export const SelectTitleName = styled(ProfileIcon)`
 `;
 
 export const SelectTileItem = styled.span`
+  color: var(--black);
+  font-size: 12px;
+  line-height: normal;
+
+  @media ${device.tablet} {
+    font-size: 14px;
+  }
+`;
+export const SelectTileColumn = styled.span`
   color: var(--violet);
   font-size: 12px;
   line-height: normal;

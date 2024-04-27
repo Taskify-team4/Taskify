@@ -17,7 +17,7 @@ type TColumnProps = {
   column: TColumn;
 };
 
-function Column({ column }: TColumnProps) {
+function Column({ column, onChangeIsEdited }: TColumnProps) {
   const [cards, setCards] = useState<TCards>([]);
   const [editId, setEditId] = useState(0);
 
@@ -83,7 +83,13 @@ function Column({ column }: TColumnProps) {
                   setEditId(0);
                 }}
               >
-                <CreateToDoModal card={card} onModify={true} column={column} fetchCards={fetchCards}>
+                <CreateToDoModal
+                  card={card}
+                  onModify={true}
+                  column={column}
+                  fetchCards={fetchCards}
+                  onChangeIsEdited={onChangeIsEdited}
+                >
                   할 일 수정
                 </CreateToDoModal>
               </ModalBase>

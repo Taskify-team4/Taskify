@@ -12,7 +12,7 @@ import { ModalBaseProps } from '../Modal.type';
 import { useDashContext } from '@contexts/dashContext';
 import { useMyData } from '@contexts/myDataContext';
 import { getDashboardMembers, postNewCard, updateCard } from '@utils/api';
-import { DashBoardMember } from '@utils/editDashboard/edit.type';
+import { TMember } from '@components/inputs/modalInput/selectBox/Select';
 
 type CreateToDoPorps = ModalBaseProps & {
   children: ReactNode;
@@ -21,13 +21,14 @@ type CreateToDoPorps = ModalBaseProps & {
   fetchCards: (columnId: number) => {};
   card?: TCard;
   isEdit?: boolean;
+  onChangeIsEdited?: () => {};
 };
 
-function CreateToDoModal({ children, onModify, column, close, fetchCards, card }: CreateToDoPorps) {
+function CreateToDoModal({ children, onModify, column, close, fetchCards, card, onChangeIsEdited }: CreateToDoPorps) {
   const { dashboardId, columns, fetchColumns } = useDashContext();
   const { myData: myInfo } = useMyData();
-  const [members, setMembers] = useState<DashBoardMember[]>([]);
-  const [selectedColumn, setSelectedColumn] = useState('');
+  const [members, setMembers] = useState<TMember[]>([]);
+  const [selectedColumn, setSelectedColumn] = useState<TColumn>([]);
   const [cardData, setCardData] = useState<TCardForm>({
     assigneeUserId: myInfo.id,
     dashboardId: Number(dashboardId),
@@ -114,8 +115,8 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card }
       const res = await updateCard(cardData, card?.id);
       if (res.id) {
         fetchCards(column?.id);
-
         trigger();
+        onChangeIsEdited();
       }
     } catch (error) {
       console.error('카드 수정 실패', error);
@@ -125,7 +126,6 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card }
   useEffect(() => {
     fetchDashMembers();
   }, []);
-
   return (
     <S.CreateToDoContainer>
       <S.CreateToDoTitle>{children}</S.CreateToDoTitle>
@@ -133,9 +133,9 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card }
         <S.CreateToDoSelectContainer>
           {onModify && (
             <SelectBox
+              onType={false}
               currentColumn={column}
               columns={columns}
-              onType={false}
               onChangeColumn={handleChangeColumn}
               selectedColumn={selectedColumn}
               setSelectedColumn={setSelectedColumn}
@@ -144,8 +144,8 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card }
             </SelectBox>
           )}
           <SelectBox
-            members={members}
             onType
+            members={members}
             onChangeAssignee={handleChangeAssignee}
             currentAssignee={card?.assignee.nickname}
           >
