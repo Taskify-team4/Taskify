@@ -24,11 +24,20 @@ type CreateToDoPorps = ModalBaseProps & {
   onChangeIsEdited?: () => {};
 };
 
-function CreateToDoModal({ children, onModify, column, close, fetchCards, card, onChangeIsEdited }: CreateToDoPorps) {
+function CreateToDoModal({
+  children,
+  onModify,
+  column,
+  close,
+  fetchCards,
+  card,
+  onChangeIsEdited,
+  selectedColumnId,
+  setCards,
+}: CreateToDoPorps) {
   const { dashboardId, columns, fetchColumns } = useDashContext();
   const { myData: myInfo } = useMyData();
   const [members, setMembers] = useState<TMember[]>([]);
-  const [selectedColumn, setSelectedColumn] = useState<TColumn>([]);
   const [cardData, setCardData] = useState<TCardForm>({
     assigneeUserId: myInfo.id,
     dashboardId: Number(dashboardId),
@@ -72,7 +81,6 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card, 
     try {
       const res = await updateCard(cardData, card?.id);
       if (res.id) {
-        fetchCards(column?.id);
         trigger();
         onChangeIsEdited();
       }
@@ -96,8 +104,6 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card, 
               currentColumn={column}
               columns={columns}
               onChangeColumn={(id: number) => handleChange('columnId', id)}
-              selectedColumn={selectedColumn}
-              setSelectedColumn={setSelectedColumn}
             >
               상태
             </SelectBox>

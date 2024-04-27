@@ -5,6 +5,7 @@ import * as S from '@components/inputs/modalInput/selectBox/Select.style';
 import dropDownIcon from '@public/icons/drop_down.svg';
 import checkIcon from '@public/icons/check.svg';
 import { TColumn } from '@pages/dashboard/Dashboard.type';
+import { useDashContext } from '@contexts/dashContext';
 
 export type TMember = {
   id: number;
@@ -37,9 +38,8 @@ function Select({
   onType,
   onChangeColumn,
   onChangeAssignee,
-  selectedColumn,
-  setSelectedColumn,
 }: SelectProps) {
+  const { selectedColumn, setSelectedColumn } = useDashContext();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedAssignee, setSelectedAssignee] = useState('');
   const handleClickMember = (member: TMember) => {
@@ -53,8 +53,6 @@ function Select({
     setSelectedColumn(selectedColumn);
     handleOpen();
   };
-
-  console.log(selectedColumn);
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -78,7 +76,7 @@ function Select({
         ) : (
           <Chip.Round size={'large'} color={'purple'}>
             <S.SelectTile $size={'tiny'} $color={'purple'} />
-            {selectedColumn && selectedColumn.length !== 0
+            {selectedColumn
               ? selectedColumn.title
               : currentColumn && currentColumn.title}
           </Chip.Round>

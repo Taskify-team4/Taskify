@@ -12,8 +12,6 @@ type SelectBoxProps = {
   onType: boolean;
   onChangeColumn?: (id: number) => void;
   onChangeAssignee?: (id: number) => void;
-  selectedColumn?: TColumn;
-  setSelectedColumn?: (selectedColumn: TColumn) => void;
 };
 
 function SelectBox({
@@ -25,8 +23,6 @@ function SelectBox({
   onType,
   onChangeColumn,
   onChangeAssignee,
-  selectedColumn,
-  setSelectedColumn,
 }: SelectBoxProps) {
   return (
     <S.SelectBoxContainer>
@@ -39,8 +35,6 @@ function SelectBox({
         onType={onType}
         onChangeAssignee={onChangeAssignee}
         onChangeColumn={onChangeColumn}
-        selectedColumn={selectedColumn}
-        setSelectedColumn={setSelectedColumn}
       />
     </S.SelectBoxContainer>
   );

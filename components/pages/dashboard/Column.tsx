@@ -15,11 +15,19 @@ import { getCards } from '@utils/api';
 
 type TColumnProps = {
   column: TColumn;
+  selectedColumnId: number;
+  cards: TCards;
+  setCards: (cards: TCards) => void;
+  fetchAllCards: () => void;
 };
 
-function Column({ column, onChangeIsEdited }: TColumnProps) {
-  const [cards, setCards] = useState<TCards>([]);
+function Column({ column, selectedColumnId, cards, setCards, fetchAllCards }: TColumnProps) {
+  const [isEdited, setIsEdited] = useState<boolean>(false);
   const [editId, setEditId] = useState(0);
+
+  const handleChangeIsEdited = () => {
+    setIsEdited(!isEdited);
+  };
 
   const fetchCards = async (id: number) => {
     const res = await getCards(id);
@@ -27,8 +35,8 @@ function Column({ column, onChangeIsEdited }: TColumnProps) {
   };
 
   useEffect(() => {
-    fetchCards(column.id);
-  }, []);
+    fetchAllCards();
+  }, [isEdited]);
 
   return (
     <S.ColumnContainer>
@@ -91,7 +99,9 @@ function Column({ column, onChangeIsEdited }: TColumnProps) {
                   onModify={true}
                   column={column}
                   fetchCards={fetchCards}
-                  onChangeIsEdited={onChangeIsEdited}
+                  onChangeIsEdited={handleChangeIsEdited}
+                  selectedColumnId={selectedColumnId}
+                  setCards={setCards}
                 >
                   할 일 수정
                 </CreateToDoModal>

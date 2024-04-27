@@ -1,4 +1,4 @@
-import { TCards, TColumns, TDashboards, TDashInfo } from '@pages/dashboard/Dashboard.type';
+import { TCards, TColumn, TColumns, TDashboards, TDashInfo } from '@pages/dashboard/Dashboard.type';
 
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import {
@@ -22,6 +22,8 @@ const initialContext = {
   dashboards: [] as TDashboards,
   columns: [] as TColumns,
   cards: [] as TCards,
+  selectedColumn: {} as TColumn,
+  setSelectedColumn: () => {},
 
   fetchDashboardInfo: () => {},
   fetchDashboards: () => {},
@@ -54,6 +56,7 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
   const [dashboards, setDashboards] = useState<TDashboards>([]);
   const [columns, setColumns] = useState<TColumns>([]);
   const [cards, setCards] = useState<TCards>([]);
+  const [selectedColumn, setSelectedColumn] = useState<TColumn>();
 
   // 달력 input에서 선택된 날짜 state
   const [selectedDate, setSelectedDate] = useState('');
@@ -146,6 +149,8 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     handlePrevClick,
     handleNextClick,
     fetchCards,
+    selectedColumn,
+    setSelectedColumn,
   };
 
   return <DashContext.Provider value={values}>{children}</DashContext.Provider>;
