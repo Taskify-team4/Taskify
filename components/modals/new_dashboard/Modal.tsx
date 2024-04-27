@@ -11,7 +11,7 @@ function NewDashBoardModal({ close }: ModalBaseProps) {
   const trigger = () => {
     return close && close();
   };
-  const { fetchDashboardsPagination } = useDashContext();
+  const { fetchMyDashboardsAll } = useDashContext();
   const [selectedColor, setSelectedColor] = useState('#760dde');
 
   const handleCreateClick = async () => {
@@ -23,7 +23,7 @@ function NewDashBoardModal({ close }: ModalBaseProps) {
       const res = await postAddDashboard(inputValue, selectedColor);
       if (res?.status) {
         trigger();
-        fetchDashboardsPagination();
+        fetchMyDashboardsAll();
       }
     } catch (error) {
       alert('대시보드 이름을 입력해주세요');
