@@ -49,52 +49,10 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card, 
     setMembers(result);
   };
 
-  const handleChangeAssignee = (memberId: number) => {
+  const handleChange = (key: string, value: any) => {
     setCardData((prevState) => ({
       ...prevState,
-      assigneeUserId: memberId,
-    }));
-  };
-
-  const handleChangeTitle = (title: string) => {
-    setCardData((prevState) => ({
-      ...prevState,
-      title: title,
-    }));
-  };
-
-  const handleChangeDescription = (description: string) => {
-    setCardData((prevState) => ({
-      ...prevState,
-      description: description,
-    }));
-  };
-
-  const handleChangeDueDate = (selectedDate: string) => {
-    setCardData((prevState) => ({
-      ...prevState,
-      dueDate: selectedDate,
-    }));
-  };
-
-  const handleChangeTags = (tags: string[]) => {
-    setCardData((prevState) => ({
-      ...prevState,
-      tags: tags,
-    }));
-  };
-
-  const handleChangeImage = (url: string) => {
-    setCardData((prevState) => ({
-      ...prevState,
-      imageUrl: url,
-    }));
-  };
-
-  const handleChangeColumn = (id: number) => {
-    setCardData((prevState) => ({
-      ...prevState,
-      columnId: id,
+      [key]: value,
     }));
   };
 
@@ -126,6 +84,7 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card, 
   useEffect(() => {
     fetchDashMembers();
   }, []);
+
   return (
     <S.CreateToDoContainer>
       <S.CreateToDoTitle>{children}</S.CreateToDoTitle>
@@ -136,7 +95,7 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card, 
               onType={false}
               currentColumn={column}
               columns={columns}
-              onChangeColumn={handleChangeColumn}
+              onChangeColumn={(id: number) => handleChange('columnId', id)}
               selectedColumn={selectedColumn}
               setSelectedColumn={setSelectedColumn}
             >
@@ -146,7 +105,7 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card, 
           <SelectBox
             onType
             members={members}
-            onChangeAssignee={handleChangeAssignee}
+            onChangeAssignee={(id: number) => handleChange('assigneeUserId', id)}
             currentAssignee={card?.assignee.nickname}
           >
             담당자
@@ -158,7 +117,7 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card, 
           type="text"
           placeholder="제목을 입력해 주세요."
           onRequired
-          onChange={handleChangeTitle}
+          onChange={(title: string) => handleChange('title', title)}
           defaultValue={card?.title}
         >
           제목
@@ -168,13 +127,16 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card, 
           placeholder="설명을 입력해 주세요."
           onRequired
           onModal
-          onChange={handleChangeDescription}
+          onChange={(description: string) => handleChange('description', description)}
           defaultValue={card?.description}
         >
           설명
         </CommentInput>
 
-        <DateInput onChange={handleChangeDueDate} defaultValue={card?.dueDate}>
+        <DateInput
+          onChange={(selectedDate: string) => handleChange('dueDate', selectedDate)}
+          defaultValue={card?.dueDate}
+        >
           마감일
         </DateInput>
 
@@ -182,13 +144,13 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card, 
           id="tag"
           type="text"
           placeholder="입력 후 Enter"
-          onChange={handleChangeTags}
+          onChange={(tags: string[]) => handleChange('tags', tags)}
           defaultValue={card?.tags}
         >
           태그
         </TagInput>
 
-        <ImageInput onChange={handleChangeImage} columnid={column?.id}>
+        <ImageInput onChange={(url: string) => handleChange('imageUrl', url)} columnid={column?.id}>
           이미지
         </ImageInput>
       </S.CreateToDoInputContainer>

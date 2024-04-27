@@ -8,13 +8,12 @@ import { deleteColumn, updateColumnTitle } from '@utils/api';
 import { TColumn } from '@pages/dashboard/Dashboard.type';
 
 type TEditColumnModalProps = ModalBaseProps & {
-  columnid: number;
   column: TColumn;
 };
 
 function EditColumnModal({ close, column }: TEditColumnModalProps) {
   const { fetchColumns } = useDashContext();
-  const [columnTitle, setColumnTitle] = useState(column.title);
+  const [columnTitle, setColumnTitle] = useState({ title: column.title });
   const trigger = () => {
     return close && close();
   };
@@ -54,7 +53,7 @@ function EditColumnModal({ close, column }: TEditColumnModalProps) {
         type="text"
         placeholder="변경할 이름을 입력해주세요."
         onChange={handleChange}
-        defaultValue={columnTitle}
+        defaultValue={columnTitle.title}
       >
         이름
       </ModalInput>

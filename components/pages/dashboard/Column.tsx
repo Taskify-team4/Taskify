@@ -38,6 +38,7 @@ function Column({ column, onChangeIsEdited }: TColumnProps) {
           <S.ColumnTitle>{column.title}</S.ColumnTitle>
           <S.CardsCount>{cards?.length}</S.CardsCount>
         </S.TitleWrapper>
+        {/* 컬럼 설정 모달 */}
         <Modal
           content={
             <ModalBase>
@@ -66,6 +67,7 @@ function Column({ column, onChangeIsEdited }: TColumnProps) {
 
       {cards?.map((card, idx) => (
         <li key={card.id}>
+          {/* 카드 모달 */}
           <Modal
             content={
               <ModalBase>
@@ -78,6 +80,7 @@ function Column({ column, onChangeIsEdited }: TColumnProps) {
           </Modal>
           {editId === card.id && (
             <BackdropContainer>
+              {/* 할 일 수정 모달 */}
               <ModalBase
                 close={() => {
                   setEditId(0);

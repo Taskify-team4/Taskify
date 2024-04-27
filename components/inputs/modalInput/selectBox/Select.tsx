@@ -54,6 +54,8 @@ function Select({
     handleOpen();
   };
 
+  console.log(selectedColumn);
+
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
