@@ -1,5 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react';
 import { DashBoardMember, Invitations, PagenationInfo } from '@utils/editDashboard/edit.type';
+import { ChangeHandler } from './invitedDash/InvitedDashTable';
 
 export type HeaderProps = {
   title: string;
@@ -50,8 +51,8 @@ export type InvitedDashListProps = {
   buttonText?: string;
   onCancelInviteClick?: (cancelId: number) => void;
   IsObserverEnd?: IsEndStateObject | undefined;
-  handleConfirmClick?: (id: number) => void;
-  handleRejectClick?: (id: number) => void;
+  onConfirmClick?: (id: number) => void;
+  onRejectClick?: (id: number) => void;
 };
 type IsEndStateObject = {
   cursorId: number | undefined;

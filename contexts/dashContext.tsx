@@ -43,7 +43,7 @@ export const useDashContext = () => useContext(DashContext);
 export function DashProvider({ children, dashboardId }: ProviderProps) {
   const [myInfo, setMyInfo] = useState<DashBoardMember>();
   const [dashInfo, setDashInfo] = useState<TDashInfo>({
-    color: '',
+    color: '#760dde',
     createdAt: '',
     createdByMe: false,
     id: 0,

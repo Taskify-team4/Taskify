@@ -4,7 +4,7 @@ import Button from '@components/buttons/Button';
 import { InvitedDashListProps } from '@components/table/Table.type';
 
 const NOT_LAST = 9;
-function InvitedDashList({ data, IsObserverEnd, handleConfirmClick, handleRejectClick }: InvitedDashListProps) {
+function InvitedDashList({ data, IsObserverEnd, onConfirmClick, onRejectClick }: InvitedDashListProps) {
   const myEndRef = useRef(null);
   const handleIntersection: IntersectionObserverCallback = (entries) => {
     entries.forEach((entry) => {
@@ -23,7 +23,7 @@ function InvitedDashList({ data, IsObserverEnd, handleConfirmClick, handleReject
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [data]);
 
   return (
     <>
@@ -39,13 +39,13 @@ function InvitedDashList({ data, IsObserverEnd, handleConfirmClick, handleReject
           <S.TableList key={item.id} ref={index === data.length - 1 ? myEndRef : null}>
             <S.ListData $isInvitedDash>
               <S.DashTitle>{item.dashboard.title}</S.DashTitle>
-              <S.InviterName>{item.invitee.nickname}</S.InviterName>
+              <S.InviterName>{item.inviter.nickname}</S.InviterName>
               <span>
                 <S.InvitedDashButtonsContainer>
                   <Button.Confirm
                     onClick={() => {
-                      if (handleConfirmClick) {
-                        handleConfirmClick(item.id);
+                      if (onConfirmClick) {
+                        onConfirmClick(item.id);
                       }
                     }}
                   >
@@ -53,8 +53,8 @@ function InvitedDashList({ data, IsObserverEnd, handleConfirmClick, handleReject
                   </Button.Confirm>
                   <Button.Reject
                     onClick={() => {
-                      if (handleRejectClick) {
-                        handleRejectClick(item.id);
+                      if (onRejectClick) {
+                        onRejectClick(item.id);
                       }
                     }}
                   >

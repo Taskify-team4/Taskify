@@ -28,8 +28,9 @@ import {
 } from '@pages/dashboard/Dashboard.type';
 
 const ACCESS_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc0NSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDUyNTc5LCJpc3MiOiJzcC10YXNraWZ5In0.xYXQqIeyqeE-FQw7z7w4P9I430xL277-Dm22VoLVx3I';
-//성욱's 토큰 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAyNSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNTk5NjAzLCJpc3MiOiJzcC10YXNraWZ5In0.LEYdnW0mcRvx9mAKczvnJWXGqZrQBA3ALmmqdM7iMq0';
+  // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc0NSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDUyNTc5LCJpc3MiOiJzcC10YXNraWZ5In0.xYXQqIeyqeE-FQw7z7w4P9I430xL277-Dm22VoLVx3I';
+  // 성욱's 토큰
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAyNSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNTk5NjAzLCJpc3MiOiJzcC10YXNraWZ5In0.LEYdnW0mcRvx9mAKczvnJWXGqZrQBA3ALmmqdM7iMq0';
 
 const axios = baseAxios.create({
   baseURL: 'https://sp-taskify-api.vercel.app/4-4/',
@@ -147,23 +148,38 @@ export const postDashboardInvites = async (id: string, email: string) => {
 };
 
 // 대시보드 초대 응답하기
-export const reactDashboardInvites = async (id: number, check: boolean): Promise<any> => {
-  await axios
-    .put(`/invitations/${id}`, JSON.stringify({ inviteAccepted: check }), {
+// export const reactDashboardInvites = async (id: number, check: boolean): Promise<any> => {
+//   await axios
+//     .put(`/invitations/${id}`, JSON.stringify({ inviteAccepted: check }), {
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Authorization: `Bearer ${ACCESS_TOKEN}`,
+//       },
+//     })
+//     .then((res) => {
+//       return res.data;
+//     })
+//     .catch((error: Error) => {
+//       if (error.message === ERROR_404_MESSAGE) return alert(NO_INVITATION_MESSAGE);
+//       else if (error.message === ERROR_403_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
+//       else if (error.message === ERROR_400_MESSAGE) return alert(INVALID_REQUEST_MESSAGE);
+//       throw NETWORK_ERROR(error);
+//     });
+// };
+export const reactDashboardInvites = async (id: number, check: boolean) => {
+  try {
+    const res = await axios.put(`/invitations/${id}`, JSON.stringify({ inviteAccepted: check }), {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
-    })
-    .then((res) => {
-      return res.data;
-    })
-    .catch((error: Error) => {
-      if (error.message === ERROR_404_MESSAGE) return alert(NO_INVITATION_MESSAGE);
-      else if (error.message === ERROR_403_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
-      else if (error.message === ERROR_400_MESSAGE) return alert(INVALID_REQUEST_MESSAGE);
-      throw NETWORK_ERROR(error);
     });
+    return res;
+  } catch (error: any) {
+    if (error.message === ERROR_404_MESSAGE) return alert(NO_INVITATION_MESSAGE);
+    else if (error.message === ERROR_403_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
+    else if (error.message === ERROR_400_MESSAGE) return alert(INVALID_REQUEST_MESSAGE);
+  }
 };
 
 // // 새로운 대시보드 생성하기
@@ -475,26 +491,41 @@ export const getMyDashboardsByPagination = async (page: number) => {
 };
 
 // 초대받은 목록 조회
-export const getInvitations = async (cursorId?: number) => {
-  if (cursorId === undefined) {
-    return await axios
-      .get('/invitations', {
-        headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
-        },
-      })
-      .then((res) => res.data)
-      .then((data) => data.invitations)
-      .catch((error) => alert(error));
-  } else {
-    return await axios
-      .get(`/invitations?cursorId=${cursorId}`, {
-        headers: {
-          Authorization: `Bearer ${ACCESS_TOKEN}`,
-        },
-      })
-      .then((res) => res.data)
-      .then((data) => data.invitations)
-      .catch((error) => alert(error));
+// export const getInvitations = async (cursorId?: number) => {
+//   if (cursorId === undefined) {
+//     return await axios
+//       .get('/invitations', {
+//         headers: {
+//           Authorization: `Bearer ${ACCESS_TOKEN}`,
+//         },
+//       })
+//       .then((res) => res.data)
+//       .then((data) => data.invitations)
+//       .catch((error) => alert(error));
+//   } else {
+//     return await axios
+//       .get(`/invitations?cursorId=${cursorId}`, {
+//         headers: {
+//           Authorization: `Bearer ${ACCESS_TOKEN}`,
+//         },
+//       })
+//       .then((res) => res.data)
+//       .then((data) => data.invitations)
+//       .catch((error) => alert(error));
+//   }
+// };
+export const getInvitations = async (cursorId?: number, title?: string) => {
+  const titleStr = cursorId === undefined ? `?title=${title}` : `&title=${title}`;
+  try {
+    const res = await axios.get(`/invitations${cursorId ? `?cursorId=${cursorId}` : ''}${title ? titleStr : ''}`, {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    });
+    const products = res.data.invitations;
+    console.log(res.data);
+    return products;
+  } catch (error) {
+    console.error(error);
   }
 };
