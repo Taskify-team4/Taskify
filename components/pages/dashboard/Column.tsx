@@ -41,7 +41,7 @@ function Column({ column, onChangeIsEdited }: TColumnProps) {
         <Modal
           content={
             <ModalBase>
-              <EditColumnModal columnid={column.id} />
+              <EditColumnModal column={column} />
             </ModalBase>
           }
         >

@@ -10,6 +10,10 @@ function ColumnList() {
     console.log(isEdited);
   };
 
+  useEffect(() => {
+    console.log('수정되었노라');
+  }, [isEdited]);
+
   return (
     <>
       {columns?.map((column) => (
