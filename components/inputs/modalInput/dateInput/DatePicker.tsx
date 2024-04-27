@@ -2,6 +2,7 @@ import { forwardRef, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from '@components/inputs/modalInput/dateInput/DatePicker.style';
+import { formatDate } from '@utils/formatDate';
 
 type TDatePickerProps = {
   onChange: (formattedData: string) => void;
@@ -15,16 +16,6 @@ const DatePicker = ({ onChange, defaultValue }: TDatePickerProps) => {
     setSelectedDate(date);
     const formattedData = formatDate(date);
     onChange(formattedData);
-  };
-
-  const formatDate = (date: Date): string => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-
-    return `${year}-${month}-${day} ${hours}:${minutes}`;
   };
 
   const CustomInput = forwardRef((props, ref: React.ForwardedRef<HTMLInputElement>) => {

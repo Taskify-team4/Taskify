@@ -3,6 +3,7 @@ import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
 import Button from '@components/buttons/Button';
 import CommentInput from '@components/inputs/modalInput/commentInput/CommentInput';
+import ProfileIcon from '@components/profileIcon/ProfileIcon';
 
 export const ModalTaskContainer = styled.div`
   position: relative;
@@ -104,15 +105,15 @@ export const OwnerWrapper = styled.div`
   align-items: center;
   gap: 8px;
 `;
-export const OwnerProfile = styled.span`
-  width: 24px;
-  height: 24px;
-  color: var(--white);
-  background-color: var(--green);
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+export const OwnerProfile = styled(ProfileIcon)`
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  @media ${device.mobile} {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
 `;
 export const OwnerName = styled.span`
   color: var(--black200);
@@ -177,29 +178,27 @@ export const MoreItem = styled(Button)`
 // TaskComment style
 export const CommentContainer = styled.div``;
 export const CommentList = styled.div`
+  margin-top: 25px;
   display: flex;
   flex-direction: column;
 `;
 export const CommentItem = styled.div`
   display: flex;
-  gap: 10px;
   margin-bottom: 12px;
 `;
-export const AuthorProfile = styled.span`
+export const AuthorProfile = styled(ProfileIcon)`
   width: 32px;
   height: 32px;
-  color: var(--white);
-  background-color: var(--green);
   border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  margin-right: 10px;
 `;
 export const CommentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-
-  width: 100%;
+  width: 600px;
+  @media ${device.tablet} {
+    width: 80%;
+  }
 `;
 export const CommentInfo = styled.div`
   display: flex;
@@ -216,7 +215,8 @@ export const CreatedTime = styled.span`
   font-size: 12px;
   font-weight: 400;
 `;
-export const CommentContent = styled.span`
+export const CommentContent = styled.p`
+  word-wrap: break-word;
   color: var(--black200);
   font-size: 14px;
   font-weight: 400;

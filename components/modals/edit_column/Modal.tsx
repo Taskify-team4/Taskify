@@ -26,10 +26,9 @@ function EditColumnModal({ close, columnid }: TEditColumnModalProps) {
   const fetchPostChangeColumnTitle = async () => {
     try {
       const res = await updateColumnTitle(columnid, columnTitle);
-      if (res.ok) {
-        fetchColumns();
-        console.log('이름 변경!');
+      if (res.id) {
         trigger();
+        fetchColumns();
       }
     } catch (error) {
       console.error('컬럼 이름 수정 실패', error);
@@ -38,18 +37,11 @@ function EditColumnModal({ close, columnid }: TEditColumnModalProps) {
 
   const fetchDeleteColumn = async () => {
     const res = await deleteColumn(columnid);
-    if (res.ok) {
+    console.log(res);
+    if (res.status === 204) {
       trigger();
       fetchColumns();
     }
-  };
-
-  const handleChangeButtonClick = () => {
-    fetchPostChangeColumnTitle();
-  };
-
-  const handleDeleteButtonClick = () => {
-    fetchDeleteColumn();
   };
 
   return (
@@ -61,12 +53,12 @@ function EditColumnModal({ close, columnid }: TEditColumnModalProps) {
 
       <S.EditButtonsContainer>
         <S.DeleteButtonWrapper>
-          <S.DeleteColumnButton onClick={handleDeleteButtonClick}>삭제하기</S.DeleteColumnButton>
+          <S.DeleteColumnButton onClick={fetchDeleteColumn}>삭제하기</S.DeleteColumnButton>
         </S.DeleteButtonWrapper>
 
         <S.ModalButtons>
           <Button.ModalReject onClick={trigger}>취소</Button.ModalReject>
-          <Button.ModalConfirm onClick={handleChangeButtonClick}>변경</Button.ModalConfirm>
+          <Button.ModalConfirm onClick={fetchPostChangeColumnTitle}>변경</Button.ModalConfirm>
         </S.ModalButtons>
       </S.EditButtonsContainer>
     </S.ModalContainer>

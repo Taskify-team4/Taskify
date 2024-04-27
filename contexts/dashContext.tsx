@@ -138,7 +138,7 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     fetchMyInfo,
     fetchDashboardInfo,
     fetchDashboards,
-    // fetchColumns,
+    fetchColumns,
     myDashboards,
     dashPage,
     dashPageLimit,
