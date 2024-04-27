@@ -18,6 +18,7 @@ type InputProps = {
   errorMsg: string;
   disabled?: boolean;
   defaultValue?: string;
+  inputValue?: string;
 };
 
 function Input({
@@ -35,6 +36,7 @@ function Input({
   errorMsg,
   disabled,
   defaultValue,
+  inputValue,
 }: InputProps) {
   const handleFocusInput = () => {
     onError('');
@@ -85,6 +87,7 @@ function Input({
         onFocus={handleFocusInput}
         onBlur={handleBlurInput}
         $errorMsg={errorMsg}
+        value={inputValue}
       />
     </S.InputContainer>
   );

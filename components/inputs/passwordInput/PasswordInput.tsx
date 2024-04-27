@@ -12,6 +12,7 @@ type PasswordInputProps = {
   passwordCheck?: string;
   passwordCompare?: boolean;
   onChange?: any;
+  inputValue?: string;
 };
 
 function PasswordInput({
@@ -22,6 +23,7 @@ function PasswordInput({
   passwordCheck,
   passwordCompare,
   onChange,
+  inputValue,
 }: PasswordInputProps) {
   const [isValue, setIsValue] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -44,6 +46,7 @@ function PasswordInput({
           onChange={onChange}
           onError={setErrorMsg}
           errorMsg={errorMsg}
+          inputValue={inputValue}
         >
           {children}
         </Input>

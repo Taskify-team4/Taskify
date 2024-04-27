@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react';
 import * as S from '@components/pages/myPage/password/Password.style';
 import PasswordInput from '@components/inputs/passwordInput/PasswordInput';
 import { changePassword } from '@utils/editDashboard/api';
+import { BackdropContainer } from '@components/modals/Modal';
+import ModalBase from '@components/modals/ModalBase';
+import PasswordModal from '@components/modals/inconsistent_password/Modal';
 
 function Password() {
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordCheck, setNewPasswordCheck] = useState('');
+  const [openModal, setOpenModal] = useState(false);
+  const [message, setMessage] = useState('');
 
   const passwordInputList = [
     {
@@ -16,6 +21,7 @@ function Password() {
       onChange: setPassword,
       label: '현재 비밀번호',
       password: password,
+      inputValue: password,
     },
     {
       id: 'newPassword',
@@ -24,6 +30,7 @@ function Password() {
       onChange: setNewPassword,
       label: '새 비밀번호',
       password: newPassword,
+      inputValue: newPassword,
     },
     {
       id: 'newPasswordCheck',
@@ -32,6 +39,7 @@ function Password() {
       onChange: setNewPasswordCheck,
       label: '새 비밀번호 확인',
       passwordCheck: newPasswordCheck,
+      inputValue: newPasswordCheck,
     },
   ];
 
@@ -40,12 +48,15 @@ function Password() {
   };
 
   const handleChangePwdClick = async () => {
-    await changePassword(password, newPassword);
+    const res = await changePassword(password, newPassword);
+    setOpenModal(true);
+    setMessage(res);
+    setPassword('');
+    setNewPassword('');
+    setNewPasswordCheck('');
   };
 
-  useEffect(() => {
-    console.log(passwordCompare());
-  }, [password, newPassword, newPasswordCheck]);
+  useEffect(() => {}, [password, newPassword, newPasswordCheck, openModal, message]);
 
   return (
     <S.MyPagePasswordContainer>
@@ -61,6 +72,7 @@ function Password() {
             password={inputItem.password}
             passwordCheck={inputItem.passwordCheck}
             passwordCompare={!passwordCompare()}
+            inputValue={inputItem.inputValue}
           >
             {inputItem.label}
           </PasswordInput>
@@ -74,6 +86,20 @@ function Password() {
           변경
         </S.MyPageBtn>
       </S.MyPageBtnWrap>
+      {openModal ? (
+        <BackdropContainer>
+          <ModalBase
+            close={() => {
+              setOpenModal((prev) => !prev);
+              setMessage('');
+            }}
+          >
+            <PasswordModal errorMsg={message} />
+          </ModalBase>
+        </BackdropContainer>
+      ) : (
+        <></>
+      )}
     </S.MyPagePasswordContainer>
   );
 }

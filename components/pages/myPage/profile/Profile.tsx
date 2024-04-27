@@ -5,12 +5,17 @@ import TextInput from '@components/inputs/textInput/TextInput';
 import Image from 'next/image';
 import { upLoadImg, putMyData } from '@utils/editDashboard/api';
 import { useMyData } from '@contexts/myDataContext';
+import { BackdropContainer } from '@components/modals/Modal';
+import ModalBase from '@components/modals/ModalBase';
+import PasswordModal from '@components/modals/inconsistent_password/Modal';
 
 function Profile() {
   const { myData } = useMyData();
   const [nickName, setNickName] = useState(myData.nickname);
   const [profileImgUrl, setProfileImgUrl] = useState('');
   const [previewImg, setPreviewImg]: any = useState(myData.profileImageUrl);
+  const [openModal, setOpenModal] = useState(false);
+  const [message, setMessage] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const profileInputList = [
@@ -21,17 +26,20 @@ function Profile() {
   useEffect(() => {
     setPreviewImg(myData.profileImageUrl);
     setNickName(myData.nickname);
-  }, [myData.profileImageUrl, myData.nickname]);
+  }, [myData.profileImageUrl, myData.nickname, openModal, message]);
 
   // 내 정보 수정
   const handleModifyMyDataClick = async () => {
+    let res = '';
     if (nickName && profileImgUrl) {
-      await putMyData(nickName, profileImgUrl);
+      res = await putMyData(nickName, profileImgUrl);
     } else if (nickName) {
-      await putMyData(nickName);
+      res = await putMyData(nickName);
     } else if (profileImgUrl) {
-      await putMyData(profileImgUrl);
+      res = await putMyData(profileImgUrl);
     }
+    setOpenModal(true);
+    setMessage(res);
   };
 
   // 파일 입력창 열기
@@ -99,6 +107,20 @@ function Profile() {
           저장
         </S.MyPageBtn>
       </S.MyPageBtnWrap>
+      {openModal ? (
+        <BackdropContainer>
+          <ModalBase
+            close={() => {
+              setOpenModal((prev) => !prev);
+              setMessage('');
+            }}
+          >
+            <PasswordModal errorMsg={message} />
+          </ModalBase>
+        </BackdropContainer>
+      ) : (
+        <></>
+      )}
     </S.MyPageProfileContainer>
   );
 }

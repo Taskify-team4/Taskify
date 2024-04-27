@@ -121,12 +121,10 @@ export const putMyData = async (nickname: string, profileImageUrl?: string | nul
       },
     })
     .then(() => {
-      return alert('내 정보가 정상적으로 수정되었습니다.');
+      return '내 정보가 정상적으로 수정되었습니다.';
     })
-    .catch((error: Error) => {
-      if (error.message === ERROR_400_MESSAGE) return alert(NICKNAME_LESS_10);
-      else if (error.message === ERROR_401_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
-      throw NETWORK_ERROR(error);
+    .catch((error) => {
+      return error.response.data.message;
     });
 };
 
@@ -143,8 +141,8 @@ export const upLoadImg = async (file: any) => {
       },
     })
     .then((response) => response.data.profileImageUrl)
-    .catch((error: Error) => {
-      throw NETWORK_ERROR(error);
+    .catch((error) => {
+      return error.response.data.message;
     });
 };
 
@@ -158,12 +156,10 @@ export const changePassword = async (password: string, newPassword: string) => {
       },
     })
     .then(() => {
-      return alert('비밀번호가 성공적으로 변경되었습니다.');
+      return '비밀번호가 성공적으로 변경되었습니다.';
     })
-    .catch((error: Error) => {
-      if (error.message === ERROR_400_MESSAGE) return alert(WRONG_PASSWORD);
-      else if (error.message === ERROR_404_MESSAGE) return alert(NO_USER_MESSAGE);
-      throw NETWORK_ERROR(error);
+    .catch((error) => {
+      return error.response.data.message;
     });
 };
 
@@ -193,6 +189,7 @@ export const reactDashboardInvites = async (id: number) => {
       },
     })
     .catch((error: Error) => {
+      console.log(error.message);
       if (error.message === ERROR_404_MESSAGE) return alert(NO_INVITATION_MESSAGE);
       else if (error.message === ERROR_403_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
       else if (error.message === ERROR_400_MESSAGE) return alert(INVALID_REQUEST_MESSAGE);
