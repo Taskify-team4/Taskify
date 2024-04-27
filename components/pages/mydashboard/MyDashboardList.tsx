@@ -1,7 +1,5 @@
 import * as S from '@components/pages/mydashboard/MyDashboardList.style';
 import Button from '@components/buttons/Button';
-
-// test
 import { useDashContext } from '@contexts/dashContext';
 import Modal from '@components/modals/Modal';
 import ModalBase from '@components/modals/ModalBase';
@@ -42,8 +40,8 @@ function MyDashboardList() {
             {dashPageLimit} 페이지 중 {dashPage}
           </S.PagenationText>
           <S.PagenationButton>
-            <Button.PagenationLeft onClick={handlePrevClick} />
-            <Button.PagenationRight onClick={handleNextClick} />
+            <Button.PagenationLeft onClick={handlePrevClick()} />
+            <Button.PagenationRight onClick={handleNextClick()} />
           </S.PagenationButton>
         </S.MyDashBoardPagenation>
       ) : (
