@@ -9,7 +9,7 @@ type EditNameProps = {
   title: string;
   color: TColorCode | string;
   selectedColor: string;
-  setSelectedColor: React.Dispatch<React.SetStateAction<string>> | React.Dispatch<React.SetStateAction<TColorCode>>;
+  setSelectedColor: React.Dispatch<React.SetStateAction<string>>;
   onClick?: () => void;
   onChange?: (value: string) => void;
 };
