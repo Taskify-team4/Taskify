@@ -11,6 +11,7 @@ import Modal from '@components/modals/Modal';
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDashContext } from '@contexts/dashContext';
+import Link from 'next/link';
 
 function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPros) {
   const { dashInfo } = useDashContext();
@@ -25,7 +26,6 @@ function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPr
     router.push(`/dashboard/${dashboardId}/edit`);
   };
 
-  //
   const handleAddClick = () => {};
 
   const handleMydashPath = () => {
@@ -34,6 +34,10 @@ function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPr
     } else {
       setInMydash(false);
     }
+  };
+
+  const handleLogoutClick = () => {
+    localStorage.removeItem('accessToken');
   };
 
   useEffect(() => {
@@ -104,9 +108,15 @@ function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPr
             <S.MyProfileName>{mydata.nickname}</S.MyProfileName>
             {viewDropdown ? (
               <S.DropdownMenu>
-                <S.DropdownMenuLi>로그아웃</S.DropdownMenuLi>
-                <S.DropdownMenuLi>내정보</S.DropdownMenuLi>
-                <S.DropdownMenuLi>내 대시보드</S.DropdownMenuLi>
+                <S.DropdownMenuLi onClick={handleLogoutClick}>
+                  <S.Li href="/">로그아웃</S.Li>
+                </S.DropdownMenuLi>
+                <S.DropdownMenuLi>
+                  <S.Li href="/mypage">내정보</S.Li>
+                </S.DropdownMenuLi>
+                <S.DropdownMenuLi>
+                  <S.Li href="/mydashboard">내 대시보드</S.Li>
+                </S.DropdownMenuLi>
               </S.DropdownMenu>
             ) : (
               <></>

@@ -2,6 +2,7 @@ import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
 import { Header } from './Header.style';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const DashBoardHeader = styled(Header)`
   width: 100%;
@@ -150,14 +151,22 @@ export const DropdownMenu = styled.ul`
 
 export const DropdownMenuLi = styled.li`
   width: 100%;
-  font-size: 16px;
-  line-height: 250%;
   cursor: pointer;
   text-align: center;
   border-radius: 6px;
 
   &:hover {
     background-color: #f1effd;
+  }
+`;
+
+export const Li = styled(Link)`
+  font-size: 16px;
+  line-height: 250%;
+  text-decoration: none;
+  color: black;
+
+  &:hover {
     color: blue;
   }
 `;
