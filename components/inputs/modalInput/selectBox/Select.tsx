@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Chip from '@components/chips/Chip';
 import * as S from '@components/inputs/modalInput/selectBox/Select.style';
@@ -26,8 +26,8 @@ type SelectProps = {
   onType: boolean;
   onChangeColumn?: (id: number) => void;
   onChangeAssignee?: (id: number) => void;
-  selectedColumn?: TColumn;
-  setSelectedColumn?: (selectedColumn: TColumn) => void;
+  onChangeIsEdited?: () => void;
+  isEdited?: boolean;
 };
 
 function Select({
@@ -43,13 +43,13 @@ function Select({
   const [isOpen, setIsOpen] = useState(false);
   const [selectedAssignee, setSelectedAssignee] = useState('');
   const handleClickMember = (member: TMember) => {
-    onChangeAssignee(member.userId);
+    onChangeAssignee?.(member.userId);
     setSelectedAssignee(member.nickname);
     handleOpen();
   };
 
   const handleClickColumn = (selectedColumn: TColumn) => {
-    onChangeColumn(selectedColumn.id);
+    onChangeColumn?.(selectedColumn.id);
     setSelectedColumn(selectedColumn);
     handleOpen();
   };
@@ -57,6 +57,7 @@ function Select({
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <S.SelectContainer>
       <S.SelectTitle onClick={handleOpen}>
@@ -70,15 +71,14 @@ function Select({
             <S.SelectTitleInput
               disabled
               placeholder="담당자를 선택해 주세요"
-              value={selectedAssignee ? selectedAssignee : currentAssignee}
+              value={currentAssignee ?? selectedAssignee ?? ''}
+              onChange={(e) => setSelectedAssignee(e.target.value)}
             />
           </S.AssigneeContainer>
         ) : (
           <Chip.Round size={'large'} color={'purple'}>
             <S.SelectTile $size={'tiny'} $color={'purple'} />
-            {selectedColumn
-              ? selectedColumn.title
-              : currentColumn && currentColumn.title}
+            {selectedColumn.title !== '' ? selectedColumn.title : currentColumn?.title}
           </Chip.Round>
         )}
         <Image src={dropDownIcon.src} width={26} height={26} alt="dropDownIcon" />

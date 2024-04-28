@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import { useDashContext } from '@contexts/dashContext';
+import { deleteColumn, updateColumnTitle } from '@utils/api';
+import { TColumn } from '@pages/dashboard/Dashboard.type';
 import * as S from '@components/modals/edit_column/Modal.style';
 import Button from '@components/buttons/Button';
 import ModalInput from '@components/inputs/modalInput/ModalInput';
 import { ModalBaseProps } from '@components/modals/Modal.type';
-import { useDashContext } from '@contexts/dashContext';
-import { deleteColumn, updateColumnTitle } from '@utils/api';
-import { TColumn } from '@pages/dashboard/Dashboard.type';
 
 type TEditColumnModalProps = ModalBaseProps & {
   column: TColumn;

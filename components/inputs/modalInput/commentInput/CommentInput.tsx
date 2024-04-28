@@ -31,15 +31,10 @@ function CommentInput({
   return (
     <S.CommentInputContainer className={className}>
       <S.CommentInputTitleContainer>
-        <S.CommentInputLabel onModal={onModal}>{children}</S.CommentInputLabel>
+        <S.CommentInputLabel>{children}</S.CommentInputLabel>
         {onRequired && <S.CommentInputRequired>*</S.CommentInputRequired>}
       </S.CommentInputTitleContainer>
-      <S.CommentInput
-        placeholder={placeholder}
-        onModal={onModal}
-        onChange={handleInputChange}
-        defaultValue={defaultValue}
-      />
+      <S.CommentInput placeholder={placeholder} onChange={handleInputChange} defaultValue={defaultValue} />
       {!onModal && <S.CommentBtn onClick={onClick}>입력</S.CommentBtn>}
     </S.CommentInputContainer>
   );

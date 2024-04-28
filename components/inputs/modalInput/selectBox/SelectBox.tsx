@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import * as S from '@components/inputs/modalInput/selectBox/SelectBox.style';
 import Select, { TMember } from './Select';
 import { TColumn } from '@pages/dashboard/Dashboard.type';
+import { DashBoardMember } from '@utils/editDashboard/edit.type';
 
 type SelectBoxProps = {
   children: ReactNode;

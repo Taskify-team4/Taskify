@@ -1,7 +1,7 @@
 import { TColorCode } from '@components/chips/Chip.type';
 
 export type TColumn = {
-  [x: string]: number;
+  length: number;
   id: number;
   title: string;
   teamId: string;
