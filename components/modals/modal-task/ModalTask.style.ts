@@ -137,6 +137,7 @@ export const CloseImage = styled(Image)`
   right: 0;
   width: 32px;
   height: 32px;
+  cursor: pointer;
 `;
 export const MoreImage = styled(Image)`
   position: absolute;
@@ -144,6 +145,7 @@ export const MoreImage = styled(Image)`
   right: 56px;
   width: 28px;
   height: 28px;
+  cursor: pointer;
 `;
 export const MoreList = styled.ul`
   display: flex;

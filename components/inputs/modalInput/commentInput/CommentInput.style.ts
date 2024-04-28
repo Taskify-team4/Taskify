@@ -45,12 +45,14 @@ export const CommentInput = styled.textarea<{ onModal?: boolean }>`
   border: 1px solid var(--gray300);
   background-color: var(--white);
   resize: none;
-
-  color: var(--gray400);
   font-family: Pretendard;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   line-height: normal;
+
+  &::placeholder {
+    color: var(--gray400);
+  }
 
   &:focus {
     border: 1px solid var(--violet);
