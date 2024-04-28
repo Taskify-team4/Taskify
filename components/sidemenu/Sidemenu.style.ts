@@ -24,6 +24,7 @@ export const LogoWrapper = styled.div`
   display: flex;
   align-items: baseline;
   padding: 20px 8px 60px 8px;
+  cursor: pointer;
   @media ${device.mobile} {
     padding-bottom: 40px;
   }
