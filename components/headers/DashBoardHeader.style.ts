@@ -110,6 +110,8 @@ export const Profile = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
+  position: relative;
 `;
 
 export const MyProfileName = styled.div`
@@ -121,5 +123,41 @@ export const MyProfileName = styled.div`
 
   @media ${device.mobile} {
     display: none;
+  }
+`;
+
+export const DropdownMenu = styled.ul`
+  width: 100px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: absolute;
+  top: 40px;
+  background-color: var(--gray100);
+  border-radius: 6px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &:hover {
+    box-shadow:
+      0 14px 28px rgba(0, 0, 0, 0.25),
+      0 10px 10px rgba(0, 0, 0, 0.22);
+  }
+`;
+
+export const DropdownMenuLi = styled.li`
+  width: 100%;
+  font-size: 16px;
+  line-height: 250%;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 6px;
+
+  &:hover {
+    background-color: #f1effd;
+    color: blue;
   }
 `;
