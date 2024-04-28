@@ -77,7 +77,6 @@ function Profile() {
 
   useEffect(() => {
     setPreviewImg(myData.profileImageUrl);
-    console.log(nickName, myData.nickname);
   }, [myData.profileImageUrl, myData.nickname, openModal, message, nickName]);
 
   return (

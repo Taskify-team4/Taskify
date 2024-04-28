@@ -11,24 +11,11 @@ import { useMyData } from '@contexts/myDataContext';
 function mypage() {
   const { myData } = useMyData();
 
-  const users = [
-    {
-      id: 1,
-      nickname: '짱구',
-      email: 'asdf1234@naver.com',
-    },
-    {
-      id: 2,
-      nickname: '유리',
-      email: 'asdf1234@naver.com',
-    },
-  ];
-
   return (
     <S.MyPageContainer>
       <Sidemenu />
-      <S.MyPageMainCotainer>
-        <DashBoardHeader title="계정관리" mydata={myData} userList={users} />
+      <S.MyPageMainContainer>
+        <DashBoardHeader title="계정관리" mydata={myData} />
         <S.MyPageMainContent>
           <S.MyPageMainHead>
             <S.ImgWrap>
@@ -39,7 +26,7 @@ function mypage() {
           <Profile />
           <Password />
         </S.MyPageMainContent>
-      </S.MyPageMainCotainer>
+      </S.MyPageMainContainer>
     </S.MyPageContainer>
   );
 }

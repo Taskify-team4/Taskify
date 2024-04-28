@@ -27,9 +27,8 @@ function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPr
   const handleAddClick = () => {};
 
   const handleMydashPath = () => {
-    if (router.pathname === '/mydashboard') {
+    if (router.pathname === '/mydashboard' || router.pathname === '/mypage') {
       setInMydash(true);
-      console.log('mymy');
     } else {
       setInMydash(false);
     }
@@ -73,7 +72,7 @@ function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPr
         ) : (
           <></>
         )}
-        <ProfileIconContainer data={userList} />
+        {userList ? <ProfileIconContainer data={userList} /> : <></>}
         <S.Line />
         {mydata ? (
           <S.Profile>
