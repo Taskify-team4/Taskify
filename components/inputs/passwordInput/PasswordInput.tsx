@@ -6,12 +6,13 @@ import * as S from '@components/inputs/passwordInput/PaswwrodInput.style';
 type PasswordInputProps = {
   children: ReactNode;
   id: string;
-  type: string;
+  type?: string;
   placeholder: string;
   password?: string;
   passwordCheck?: string;
   passwordCompare?: boolean;
   onChange?: any;
+  inputValue?: string;
 };
 
 function PasswordInput({
@@ -22,6 +23,7 @@ function PasswordInput({
   passwordCheck,
   passwordCompare,
   onChange,
+  inputValue,
 }: PasswordInputProps) {
   const [isValue, setIsValue] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -44,6 +46,7 @@ function PasswordInput({
           onChange={onChange}
           onError={setErrorMsg}
           errorMsg={errorMsg}
+          inputValue={inputValue}
         >
           {children}
         </Input>
