@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import * as S from '@components/pages/myPage/MyPage.style';
 import Sidemenu from '@components/sidemenu/Sidemenu';
@@ -6,14 +6,10 @@ import DashBoardHeader from '@components/headers/DashBoardHeader';
 import leftArrow from '@public/icons/left_arrow.svg';
 import Profile from '@components/pages/myPage/profile/Profile';
 import Password from '@components/pages/myPage/password/Password';
+import { useMyData } from '@contexts/myDataContext';
 
 function mypage() {
-  // 임시데이터
-  const user = {
-    id: 1,
-    nickname: '짱구',
-    email: 'asdf1234@naver.com',
-  };
+  const { myData } = useMyData();
 
   const users = [
     {
@@ -32,7 +28,7 @@ function mypage() {
     <S.MyPageContainer>
       <Sidemenu />
       <S.MyPageMainCotainer>
-        <DashBoardHeader title="계정관리" mydata={user} userList={users} />
+        <DashBoardHeader title="계정관리" mydata={myData} userList={users} />
         <S.MyPageMainContent>
           <S.MyPageMainHead>
             <S.ImgWrap>

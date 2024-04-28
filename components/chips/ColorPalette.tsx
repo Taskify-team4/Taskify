@@ -11,9 +11,9 @@ function ColorPalette({
 }: {
   size: TChipSize;
   className?: string;
-  initialColor: TColorCode;
+  initialColor: string;
   selectedColor: string;
-  setSelectedColor: React.Dispatch<React.SetStateAction<string>> | React.Dispatch<React.SetStateAction<TColorCode>>;
+  setSelectedColor: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const colorList: TColorCode[] = ['#760dde', '#e876ea', '#ffa500', '#76a5ea', '#7ac555'];
 

@@ -5,6 +5,8 @@ import { getMyData } from '@utils/api';
 
 type MyDataContextType = {
   myData: DashBoardMember;
+  updateNickname: (newNickname: string) => void;
+  updateImg: (Img: string) => void;
 };
 
 const MyDataContext = createContext<MyDataContextType | undefined>(undefined);
@@ -22,11 +24,20 @@ export const MyDataProvider = ({ children }: { children: ReactNode }) => {
     const myNewData = await getMyData();
     setMyData(myNewData);
   };
+
+  const updateNickname = (newNickname: string) => {
+    setMyData({ ...myData, nickname: newNickname });
+  };
+
+  const updateImg = (newImg: string) => {
+    setMyData({ ...myData, profileImageUrl: newImg });
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
 
-  return <MyDataContext.Provider value={{ myData }}>{children}</MyDataContext.Provider>;
+  return <MyDataContext.Provider value={{ myData, updateNickname, updateImg }}>{children}</MyDataContext.Provider>;
 };
 
 export const useMyData = () => {
