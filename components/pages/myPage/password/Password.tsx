@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as S from '@components/pages/myPage/password/Password.style';
 import PasswordInput from '@components/inputs/passwordInput/PasswordInput';
-import { changePassword } from '@utils/editDashboard/api';
+import { changePassword } from '@utils/api';
 import { BackdropContainer } from '@components/modals/Modal';
 import ModalBase from '@components/modals/ModalBase';
 import PasswordModal from '@components/modals/inconsistent_password/Modal';
