@@ -1,35 +1,40 @@
-import { useDashContext } from '@contexts/dashContext';
 import React, { useEffect, useState } from 'react';
+import { useDashContext } from '@contexts/dashContext';
 import Column from './Column';
 import { getCards } from '@utils/api';
+import { TCards } from '@pages/dashboard/Dashboard.type';
 
 function ColumnList() {
-  const { columns, selectedColumn } = useDashContext();
-  const [cards, setCards] = useState({});
+  const { columns } = useDashContext();
+  const [newCards, setNewCards] = useState<{ [key: number]: TCards }>({});
+  const [isEdited, setIsEdited] = useState<boolean>(false);
+
+  const handleChangeIsEdited = () => {
+    setIsEdited(!isEdited);
+  };
 
   const fetchAllCards = async () => {
-    const cardsData = {};
+    const cardsData: { [key: number]: TCards } = {};
     for (const column of columns) {
       const cards = await getCards(column.id);
       cardsData[column.id] = cards;
     }
-    console.log(cardsData);
-    setCards(cardsData);
+    setNewCards(cardsData);
   };
+
   useEffect(() => {
     fetchAllCards();
-  }, []);
+  }, [isEdited]);
 
   return (
     <>
       {columns?.map((column) => (
         <Column
-          column={column}
           key={column.id}
-          selectedColumnId={selectedColumn?.id}
-          cards={cards[column.id]}
-          setCards={setCards}
-          fetchAllCards={fetchAllCards}
+          column={column}
+          newCards={newCards[column.id]}
+          isEdited={isEdited}
+          handleChangeIsEdited={handleChangeIsEdited}
         />
       ))}
     </>

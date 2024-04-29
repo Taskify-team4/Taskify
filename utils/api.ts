@@ -26,6 +26,7 @@ import {
   TCommentForm,
   TDashInfo,
 } from '@pages/dashboard/Dashboard.type';
+import { TMember } from '@components/inputs/modalInput/selectBox/Select';
 
 const ACCESS_TOKEN = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
 
@@ -81,7 +82,7 @@ export const getDashboardMembers = async (
   id: string,
   page = 1,
 ): Promise<{
-  members: DashBoardMember[];
+  members: TMember[];
   totalMembers: number;
 }> => {
   return await axios
@@ -92,7 +93,7 @@ export const getDashboardMembers = async (
     })
     .then((res) => res.data)
     .then((data) => {
-      const newMembers: DashBoardMember[] = [];
+      const newMembers: TMember[] = [];
 
       data.members.forEach((newData: any) => {
         if (!newMembers.some((prevData) => prevData.userId === newData.userId)) {

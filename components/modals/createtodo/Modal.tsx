@@ -1,4 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react';
+//components
 import * as S from '@components/modals/createtodo/Modal.style';
 import SelectBox from '@components/inputs/modalInput/selectBox/SelectBox';
 import ModalInput from '@components/inputs/modalInput/ModalInput';
@@ -7,6 +8,7 @@ import DateInput from '@components/inputs/modalInput/dateInput/DateInput';
 import TagInput from '@components/inputs/modalInput/tagInput/TagInput';
 import ImageInput from '@components/inputs/modalInput/imageInput/ImageInput';
 import Button from '@components/buttons/Button';
+
 import { TCard, TCardForm, TColumn } from '@pages/dashboard/Dashboard.type';
 import { ModalBaseProps } from '../Modal.type';
 import { useDashContext } from '@contexts/dashContext';
@@ -21,20 +23,10 @@ type CreateToDoPorps = ModalBaseProps & {
   fetchCards: (columnId: number) => {};
   card?: TCard;
   isEdit?: boolean;
-  onChangeIsEdited?: () => {};
+  onChangeIsEdited?: () => void;
 };
 
-function CreateToDoModal({
-  children,
-  onModify,
-  column,
-  close,
-  fetchCards,
-  card,
-  onChangeIsEdited,
-  selectedColumnId,
-  setCards,
-}: CreateToDoPorps) {
+function CreateToDoModal({ children, onModify, column, close, fetchCards, card, onChangeIsEdited }: CreateToDoPorps) {
   const { dashboardId, columns, fetchColumns } = useDashContext();
   const { myData: myInfo } = useMyData();
   const [members, setMembers] = useState<TMember[]>([]);
@@ -82,7 +74,7 @@ function CreateToDoModal({
       const res = await updateCard(cardData, card?.id);
       if (res.id) {
         trigger();
-        onChangeIsEdited();
+        onChangeIsEdited?.();
       }
     } catch (error) {
       console.error('카드 수정 실패', error);
