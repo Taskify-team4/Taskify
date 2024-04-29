@@ -6,15 +6,9 @@ import DashBoardHeader from '@components/headers/DashBoardHeader';
 import leftArrow from '@public/icons/left_arrow.svg';
 import Profile from '@components/pages/myPage/profile/Profile';
 import Password from '@components/pages/myPage/password/Password';
+import { MyDataProvider } from '@contexts/myDataContext';
 
 function mypage() {
-  // 임시데이터
-  const user = {
-    id: 1,
-    nickname: '짱구',
-    email: 'asdf1234@naver.com',
-  };
-
   const users = [
     {
       id: 1,
@@ -29,22 +23,24 @@ function mypage() {
   ];
 
   return (
-    <S.MyPageContainer>
-      <Sidemenu />
-      <S.MyPageMainCotainer>
-        <DashBoardHeader title="계정관리" mydata={user} userList={users} />
-        <S.MyPageMainContent>
-          <S.MyPageMainHead>
-            <S.ImgWrap>
-              <Image fill src={leftArrow} alt="leftArrow" />
-            </S.ImgWrap>
-            <S.HeadTitle>돌아가기</S.HeadTitle>
-          </S.MyPageMainHead>
-          <Profile />
-          <Password />
-        </S.MyPageMainContent>
-      </S.MyPageMainCotainer>
-    </S.MyPageContainer>
+    <MyDataProvider>
+      <S.MyPageContainer>
+        <Sidemenu />
+        <S.MyPageMainContainer>
+          <DashBoardHeader title="계정관리" />
+          <S.MyPageMainContent>
+            <S.MyPageMainHead>
+              <S.ImgWrap>
+                <Image fill src={leftArrow} alt="leftArrow" />
+              </S.ImgWrap>
+              <S.HeadTitle>돌아가기</S.HeadTitle>
+            </S.MyPageMainHead>
+            <Profile />
+            <Password />
+          </S.MyPageMainContent>
+        </S.MyPageMainContainer>
+      </S.MyPageContainer>
+    </MyDataProvider>
   );
 }
 

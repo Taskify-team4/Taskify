@@ -1,7 +1,18 @@
 import styled from 'styled-components';
-import { TChipSize, TColorCode, TColorKey } from '@components/chips/Chip.type';
+import { TChipSize, TColorKey } from '@components/chips/Chip.type';
 
-const chipColorList = {
+type ColorListProps = {
+  green: { background: string; color: string };
+  purple: { background: string; color: string };
+  pink: { background: string; color: string };
+  orange: { background: string; color: string };
+  blue: { background: string; color: string };
+  gray: { background: string; color: string };
+
+  [key: string]: { background: string; color: string };
+};
+
+const chipColorList: ColorListProps = {
   green: { background: '#E7F7DB', color: '#86D549' },
   purple: { background: 'var(--violetlight)', color: 'var(--violet)' },
   pink: { background: '#F7DBF0', color: '#D549B6' },

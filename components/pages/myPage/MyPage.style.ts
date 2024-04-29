@@ -5,7 +5,7 @@ export const MyPageContainer = styled.div`
   display: flex;
 `;
 
-export const MyPageMainCotainer = styled.div`
+export const MyPageMainContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;

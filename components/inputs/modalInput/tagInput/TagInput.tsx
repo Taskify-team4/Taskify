@@ -34,7 +34,6 @@ function TagInput({ children, id, type, placeholder, onRequired, onChange, defau
         onChange(tagArr);
         setInputValue('');
       }
-      console.log(inputValue);
     } else if (e.key === 'Backspace' && inputValue === '' && tags.length > 0) {
       const newTags = tags.slice(0, -1);
       setTags(newTags);

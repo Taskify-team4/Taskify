@@ -20,8 +20,8 @@ export type ProfileProps = {
 
 export type DashBoardPros = {
   title?: string;
-  mydata: User | undefined;
-  userList: User[] | DashBoardMember[];
+  // mydata?: User | undefined;
+  userList?: User[] | DashBoardMember[];
   crown?: boolean;
   onInviteClick?: (inviteEmail: string) => void;
 };

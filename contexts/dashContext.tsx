@@ -1,4 +1,4 @@
-import { TCards, TColumns, TDashboards, TDashInfo } from '@pages/dashboard/Dashboard.type';
+import { TCards, TColumn, TColumns, TDashboards, TDashInfo } from '@pages/dashboard/Dashboard.type';
 
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { getCards, getColumns, getDashboardInfo, getMyDashboards, getMyData } from '@utils/api';
@@ -14,10 +14,12 @@ const initialContext = {
   dashInfo: {} as TDashInfo,
   columns: [] as TColumns,
   cards: [] as TCards,
+  selectedColumn: {} as TColumn,
+  setSelectedColumn: (_selectedColumn: TColumn) => {},
 
   fetchDashboardInfo: () => {},
   fetchColumns: () => {},
-  fetchCards: (columnId: number) => {},
+  fetchCards: (_columnId: number) => {},
 
   myDashboards: [] as TDashboards,
   dashPage: 1,
@@ -25,10 +27,10 @@ const initialContext = {
   myDashboardsInSideBar: [] as TDashboards,
   dashPageInSideBar: 1,
   dashPageLimitInSideBar: 1,
-  fetchMyDashboards: (inInSide?: boolean) => {},
+  fetchMyDashboards: (_inInSide?: boolean) => {},
   fetchMyDashboardsAll: () => {},
-  handlePrevClick: (inInSide?: boolean) => {},
-  handleNextClick: (inInSide?: boolean) => {},
+  handlePrevClick: (_inInSide?: boolean) => {},
+  handleNextClick: (_inInSide?: boolean) => {},
 };
 
 const DashContext = createContext(initialContext);
@@ -48,6 +50,14 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
   });
   const [columns, setColumns] = useState<TColumns>([]);
   const [cards, setCards] = useState<TCards>([]);
+  const [selectedColumn, setSelectedColumn] = useState<TColumn>({
+    length: 0,
+    id: 0,
+    title: '',
+    teamId: '',
+    dashboardId: 0,
+    createdAt: '',
+  });
 
   // 달력 input에서 선택된 날짜 state
   const [selectedDate, setSelectedDate] = useState('');
@@ -63,7 +73,7 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
   };
 
   const fetchColumns = async () => {
-    const res = await getColumns(dashboardId);
+    const res: any = await getColumns(dashboardId);
     const result = res.data;
     setColumns(result);
   };
@@ -95,7 +105,7 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     fetchMyDashboards(true);
     fetchMyDashboards();
   };
-  const handlePrevClick = (isInSide?: boolean) => (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handlePrevClick = (isInSide?: boolean) => (_event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (isInSide) {
       setDashPageInSideBar((prev) => {
         if (prev > 1) return prev - 1;
@@ -108,7 +118,7 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
       });
     }
   };
-  const handleNextClick = (isInSide?: boolean) => (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleNextClick = (isInSide?: boolean) => (_event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (isInSide) {
       setDashPageInSideBar((prev) => {
         if (prev < dashPageLimitInSideBar) return prev + 1;
@@ -176,6 +186,8 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     handlePrevClick,
     handleNextClick,
     fetchCards,
+    selectedColumn,
+    setSelectedColumn,
   };
 
   return <DashContext.Provider value={values}>{children}</DashContext.Provider>;

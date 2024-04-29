@@ -10,10 +10,10 @@ import Empty from '@components/table/invite/Empty';
 function InviteList({ data, buttonText, onCancelInviteClick }: InvitedDashListProps) {
   return (
     <>
-      {data.length === 0 ? (
+      {data?.length === 0 ? (
         <Empty isMyDashboard={false}>아직 초대한 멤버가 없어요</Empty>
       ) : (
-        data.map((item) => (
+        data?.map((item) => (
           <S.TableList key={item.id}>
             <S.ListData>{item.invitee.email}</S.ListData>
             {buttonText && (

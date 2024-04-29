@@ -61,6 +61,20 @@ export const MyPageProfileWrap = styled(ImageWrapper)`
   }
 `;
 
+export const ImgUpLoad = styled.input`
+  display: none;
+`;
+
+export const PreviewImg = styled.img`
+  width: 182px;
+  height: 182px;
+
+  @media ${device.tablet} {
+    width: 100px;
+    height: 100px;
+  }
+`;
+
 export const MyPageProfileImgContent = styled(ImageContent)`
   width: 30px;
   height: 30px;

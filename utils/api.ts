@@ -26,11 +26,9 @@ import {
   TCommentForm,
   TDashInfo,
 } from '@pages/dashboard/Dashboard.type';
+import { TMember } from '@components/inputs/modalInput/selectBox/Select';
 
 const ACCESS_TOKEN = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
-// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc0NSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNDUyNTc5LCJpc3MiOiJzcC10YXNraWZ5In0.xYXQqIeyqeE-FQw7z7w4P9I430xL277-Dm22VoLVx3I';
-// 성욱's 토큰
-// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAyNSwidGVhbUlkIjoiNC00IiwiaWF0IjoxNzEzNTk5NjAzLCJpc3MiOiJzcC10YXNraWZ5In0.LEYdnW0mcRvx9mAKczvnJWXGqZrQBA3ALmmqdM7iMq0';
 
 const axios = baseAxios.create({
   baseURL: 'https://sp-taskify-api.vercel.app/4-4/',
@@ -84,7 +82,7 @@ export const getDashboardMembers = async (
   id: string,
   page = 1,
 ): Promise<{
-  members: DashBoardMember[];
+  members: TMember[];
   totalMembers: number;
 }> => {
   return await axios
@@ -95,7 +93,7 @@ export const getDashboardMembers = async (
     })
     .then((res) => res.data)
     .then((data) => {
-      const newMembers: DashBoardMember[] = [];
+      const newMembers: TMember[] = [];
 
       data.members.forEach((newData: any) => {
         if (!newMembers.some((prevData) => prevData.userId === newData.userId)) {
@@ -486,4 +484,56 @@ export const getInvitations = async (cursorId?: number, title?: string) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+// 내 정보 수정
+export const putMyData = async (nickname: string, profileImageUrl?: string | null) => {
+  return await axios
+    .put(`users/me`, JSON.stringify({ nickname, profileImageUrl }), {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    })
+    .then(() => {
+      return '내 정보가 정상적으로 수정되었습니다.';
+    })
+    .catch((error) => {
+      return error.response.data.message;
+    });
+};
+
+// 이미지 업로드
+export const upLoadImg = async (file: any) => {
+  const formData = new FormData();
+  formData.append('image', file);
+
+  return await axios
+    .post(`users/me/image`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    })
+    .then((response) => response.data.profileImageUrl)
+    .catch((error) => {
+      return error.response.data.message;
+    });
+};
+
+// 비밀번호 변경
+export const changePassword = async (password: string, newPassword: string) => {
+  return await axios
+    .put(`auth/password`, JSON.stringify({ password, newPassword }), {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    })
+    .then(() => {
+      return '비밀번호가 성공적으로 변경되었습니다.';
+    })
+    .catch((error) => {
+      return error.response.data.message;
+    });
 };

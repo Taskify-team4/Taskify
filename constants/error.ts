@@ -11,6 +11,8 @@ export const NO_USER_MESSAGE = '존재하지 않는 유저입니다';
 export const NO_INVITATION_MESSAGE = '존재하지 않는 초대입니다';
 export const INVALID_REQUEST_MESSAGE = '올바른 입력값이 아닙니다.';
 export const CONSISTENT_INVITATION = '이미 대시보드에 초대된 멤버입니다.';
+export const NICKNAME_LESS_10 = '닉네임은 10자 이하로 작성해주세요.';
+export const WRONG_PASSWORD = '현재 비밀번호가 틀렸습니다.';
 
 export const NETWORK_ERROR = (error: Error) => {
   return new Error(`NETWORK 에러 - ${error.message}`);

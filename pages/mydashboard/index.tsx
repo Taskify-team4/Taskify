@@ -3,29 +3,30 @@ import Sidemenu from '@components/sidemenu/Sidemenu';
 import DashBoardHeader from '@components/headers/DashBoardHeader';
 import MyDashboardList from '@components/pages/mydashboard/MyDashboardList';
 import InvitedDashTable from '@components/table/invitedDash/InvitedDashTable';
-import { useMyData } from '@contexts/myDataContext';
+import { MyDataProvider } from '@contexts/myDataContext';
+import React from 'react';
+import { DashProvider } from '@contexts/dashContext';
+import { useRouter } from '@node_modules/next/router';
 
 function Mydashboard() {
-  const { myData } = useMyData();
+  const router = useRouter();
+  const { dashboardId }: { dashboardId: number } = router.query as unknown as { dashboardId: number };
 
   return (
-    <S.MyDashboardContainer>
-      <Sidemenu />
-      <S.MyDashBoardLayout>
-        <DashBoardHeader
-          mydata={{
-            id: myData.userId,
-            nickname: myData.nickname,
-            email: myData.email || '',
-          }}
-          userList={[]}
-        />
-        <S.MyDashboardContent>
-          <MyDashboardList />
-          <InvitedDashTable />
-        </S.MyDashboardContent>
-      </S.MyDashBoardLayout>
-    </S.MyDashboardContainer>
+    <MyDataProvider>
+      <DashProvider dashboardId={dashboardId}>
+        <S.MyDashboardContainer>
+          <Sidemenu />
+          <S.MyDashBoardLayout>
+            <DashBoardHeader />
+            <S.MyDashboardContent>
+              <MyDashboardList />
+              <InvitedDashTable />
+            </S.MyDashboardContent>
+          </S.MyDashBoardLayout>
+        </S.MyDashboardContainer>
+      </DashProvider>
+    </MyDataProvider>
   );
 }
 

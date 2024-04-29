@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Chip from '@components/chips/Chip';
 import * as S from '@components/inputs/modalInput/selectBox/Select.style';
 import dropDownIcon from '@public/icons/drop_down.svg';
 import checkIcon from '@public/icons/check.svg';
 import { TColumn } from '@pages/dashboard/Dashboard.type';
+import { useDashContext } from '@contexts/dashContext';
 
 export type TMember = {
   id: number;
@@ -18,27 +19,38 @@ export type TMember = {
 };
 
 type SelectProps = {
-  columns: TColumn[];
-  members: TMember[];
+  currentColumn?: TColumn;
+  currentAssignee?: string;
+  columns?: TColumn[];
+  members?: TMember[];
   onType: boolean;
-  onChangeColumn: (id: number) => void;
-  onChangeAssignee: (id: number) => void;
+  onChangeColumn?: (id: number) => void;
+  onChangeAssignee?: (id: number) => void;
+  onChangeIsEdited?: () => void;
+  isEdited?: boolean;
 };
 
-function Select({ columns, members, onType, onChangeColumn, onChangeAssignee }: SelectProps) {
+function Select({
+  currentColumn,
+  currentAssignee,
+  columns,
+  members,
+  onType,
+  onChangeColumn,
+  onChangeAssignee,
+}: SelectProps) {
+  const { selectedColumn, setSelectedColumn } = useDashContext();
   const [isOpen, setIsOpen] = useState(false);
-  const [assignee, setAssignee] = useState('');
-  const [column, setColumn] = useState('');
-
+  const [selectedAssignee, setSelectedAssignee] = useState('');
   const handleClickMember = (member: TMember) => {
-    onChangeAssignee(member.userId);
-    setAssignee(member.nickname);
+    onChangeAssignee?.(member.userId);
+    setSelectedAssignee(member.nickname);
     handleOpen();
   };
 
-  const handleClickColumn = (column: TColumn) => {
-    onChangeColumn(column.id);
-    setColumn(column.title);
+  const handleClickColumn = (selectedColumn: TColumn) => {
+    onChangeColumn?.(selectedColumn.id);
+    setSelectedColumn(selectedColumn);
     handleOpen();
   };
 
@@ -50,14 +62,23 @@ function Select({ columns, members, onType, onChangeColumn, onChangeAssignee }: 
     <S.SelectContainer>
       <S.SelectTitle onClick={handleOpen}>
         {onType ? (
-          <>
-            {assignee && <S.SelectTitleName str={assignee} />}
-            <S.SelectTitleInput placeholder="이름을 입력해 주세요." value={assignee} />
-          </>
+          <S.AssigneeContainer>
+            {currentAssignee ? (
+              <S.SelectTitleName str={selectedAssignee ? selectedAssignee : currentAssignee} />
+            ) : (
+              selectedAssignee && <S.SelectTitleName str={selectedAssignee} />
+            )}
+            <S.SelectTitleInput
+              disabled
+              placeholder="담당자를 선택해 주세요"
+              value={currentAssignee ?? selectedAssignee ?? ''}
+              onChange={(e) => setSelectedAssignee(e.target.value)}
+            />
+          </S.AssigneeContainer>
         ) : (
           <Chip.Round size={'large'} color={'purple'}>
             <S.SelectTile $size={'tiny'} $color={'purple'} />
-            {column}
+            {selectedColumn.title !== '' ? selectedColumn.title : currentColumn?.title}
           </Chip.Round>
         )}
         <Image src={dropDownIcon.src} width={26} height={26} alt="dropDownIcon" />
@@ -65,18 +86,23 @@ function Select({ columns, members, onType, onChangeColumn, onChangeAssignee }: 
       {isOpen && (
         <S.SelectOption>
           {onType
-            ? members.map((member) => (
+            ? members &&
+              members.map((member) => (
                 <S.Select key={member.id} onClick={() => handleClickMember(member)}>
                   <S.SelectTitleName str={member.nickname} />
                   <S.SelectTileItem>{member.nickname}</S.SelectTileItem>
                 </S.Select>
               ))
-            : columns.map((column) => (
+            : columns &&
+              columns.map((column) => (
                 <S.Select key={column.id} onClick={() => handleClickColumn(column)}>
-                  <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />
+                  {selectedColumn && selectedColumn.length === 0 && currentColumn === column && (
+                    <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />
+                  )}
+                  {selectedColumn === column && <Image src={checkIcon.src} width={22} height={22} alt="checkIcon" />}
                   <Chip.Round size={'large'} color={'purple'}>
                     <S.SelectTile $size={'tiny'} $color={'purple'} />
-                    <S.SelectTileItem>{column.title}</S.SelectTileItem>
+                    <S.SelectTileColumn>{column.title}</S.SelectTileColumn>
                   </Chip.Round>
                 </S.Select>
               ))}

@@ -1,6 +1,5 @@
 import { TColorCode } from '@components/chips/Chip.type';
 import { User } from '@utils/testData';
-import { Dashboard } from '@components/sidemenu/Sidemenu.type';
 
 export type DashBoardNameData = { title: string; color: TColorCode; createdByMe: boolean };
 
@@ -21,14 +20,4 @@ export type Invitations = {
 export type PagenationInfo = {
   current: number;
   limit: number;
-};
-
-export type EditPageProps = {
-  dashboardData: DashBoardNameData;
-  invitees: Invitations[];
-  totalInvitees: number;
-  members: DashBoardMember[];
-  totalMembers: number;
-  myData: DashBoardMember;
-  dashboardList: Dashboard[];
 };

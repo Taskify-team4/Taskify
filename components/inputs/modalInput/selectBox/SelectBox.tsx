@@ -2,22 +2,35 @@ import React, { ReactNode } from 'react';
 import * as S from '@components/inputs/modalInput/selectBox/SelectBox.style';
 import Select, { TMember } from './Select';
 import { TColumn } from '@pages/dashboard/Dashboard.type';
+import { DashBoardMember } from '@utils/editDashboard/edit.type';
 
 type SelectBoxProps = {
   children: ReactNode;
-  members?: TMember[];
+  currentColumn?: TColumn;
+  currentAssignee?: string;
   columns?: TColumn[];
-  onType?: boolean;
-  onModify?: boolean;
+  members?: TMember[];
+  onType: boolean;
   onChangeColumn?: (id: number) => void;
   onChangeAssignee?: (id: number) => void;
 };
 
-function SelectBox({ children, columns, members, onType, onChangeColumn, onChangeAssignee }: SelectBoxProps) {
+function SelectBox({
+  children,
+  currentColumn,
+  currentAssignee,
+  columns,
+  members,
+  onType,
+  onChangeColumn,
+  onChangeAssignee,
+}: SelectBoxProps) {
   return (
     <S.SelectBoxContainer>
       <S.SelectBoxTitle>{children}</S.SelectBoxTitle>
       <Select
+        currentColumn={currentColumn}
+        currentAssignee={currentAssignee}
         columns={columns}
         members={members}
         onType={onType}
