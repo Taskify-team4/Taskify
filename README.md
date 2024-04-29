@@ -1,40 +1,142 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# <img src="https://github.com/Taskify-team4/Taskify/assets/97032929/9441e696-ceb7-4257-9733-947f53b1ca45"> 프로젝트 소개
+```javascript
+프로젝트 소개 내용
 ```
+<table>
+  <tbody>
+    <tr>
+      <td>개발 기간</td>
+      <td>2024.04.15 ~ 2024.05.01</td>
+    </tr>
+    <tr>
+      <td>URL</td>
+      <td>배포주소</td>
+    </tr>
+  </tbody>
+</table>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br />
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+# <img src="https://github.com/Taskify-team4/Taskify/assets/97032929/9441e696-ceb7-4257-9733-947f53b1ca45"> 사용 기술 스택
+<table>
+  <tbody>
+    <tr>
+      <tr>
+        <td><p>Framework</p></td>
+        <td><img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white"></td>
+      </tr>
+      <tr>
+        <td><p>Programming Language</p></td>
+        <td><img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"></td>
+      </tr>
+      <tr>
+        <td><p>Styling</p></td>
+        <td><img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/></td>
+      </tr>
+      <tr>
+        <td><p>Version Control</p></td>
+        <td><img src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"></td>
+      </tr>
+      <tr>
+        <td><p>Design</p></td>
+        <td><img src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white"></td>
+      </tr>
+      <tr>
+        <td><p>Communication</p></td>
+        <td><img src="https://img.shields.io/badge/Notion-%23800000.svg?style=for-the-badge&logo=notion&logoColor=white"> <img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"></td>
+      </tr>          
+    </tr>
+  </tbody>
+</table>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+<br />
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+# <img src="https://github.com/Taskify-team4/Taskify/assets/97032929/9441e696-ceb7-4257-9733-947f53b1ca45"> 주요 기능
+<table>
+  <tbody>
+    <tr>
+      <td>gif</td>
+      <td>gif</td>
+    </tr>
+    <tr>
+      <td align="center">기능</td>
+      <td align="center">기능</td>
+    </tr>
+  </tbody>
+</table>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<br />
 
-## Learn More
+# <img src="https://github.com/Taskify-team4/Taskify/assets/97032929/9441e696-ceb7-4257-9733-947f53b1ca45"> 트러블 슈팅
+<details>
+  <summary>트러블 슈팅 타이틀</summary> <br />
 
-To learn more about Next.js, take a look at the following resources:
+  ``
+  문제상황
+  ``
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  내용
+  
+  ``
+  해결방안
+  ``
+  
+  내용
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  <br />
+</details>
 
-## Deploy on Vercel
+<br />
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# <img src="https://github.com/Taskify-team4/Taskify/assets/97032929/9441e696-ceb7-4257-9733-947f53b1ca45"> 프론트엔드 팀원 소개
+<table>
+  <tbody>
+    <tr>
+      <tr>
+        <th colspan="2">이름</th>
+        <th width="250">담당</th>
+        <th width="330">Github</th>
+      </tr>
+      <tr>
+        <td align="center"><p>🚩<br />신민철</p></td>
+        <td><img src="https://avatars.githubusercontent.com/u/97032929?v=4" width=100 height=100></td>
+        <td align="center">
+          내용
+        </td>
+        <td>https://github.com/MinCheolS</td>
+      </tr>
+      <tr>
+        <td align="center"><p>김동현</p></td>
+        <td><img src="https://avatars.githubusercontent.com/u/66206266?v=4" width=100 height=100></td>
+        <td align="center">
+          내용
+        </td>
+        <td>https://github.com/dtc03003</td>
+      </tr>
+      <tr>
+        <td align="center"><p>김준영</p></td>
+        <td><img src="https://avatars.githubusercontent.com/u/40304565?v=4" width=100 height=100> </td>
+        <td align="center">
+          내용
+        </td>
+        <td>https://github.com/yohan11</td>
+      </tr>
+      <tr>
+        <td align="center"><p>황경수</p></td>
+        <td><img src="https://avatars.githubusercontent.com/u/75316998?v=4" width=100 height=100> </td>
+        <td align="center">
+          내용
+        </td>
+        <td>https://github.com/dali1999</td>
+      </tr>
+      <tr>
+        <td align="center"><p>홍성욱</p></td>
+        <td><img src="https://avatars.githubusercontent.com/u/155031984?v=4" width=100 height=100> </td>
+        <td align="center">
+          내용
+        </td>
+        <td>https://github.com/SeongWook-Hong</td>
+      </tr>
+    </tr>
+  </tbody>
+</table>
