@@ -7,6 +7,7 @@ import { MyDataProvider } from '@contexts/myDataContext';
 import React from 'react';
 import { DashProvider } from '@contexts/dashContext';
 import { useRouter } from 'next/router';
+import { Helmet } from 'react-helmet-async';
 
 function Mydashboard() {
   const router = useRouter();
