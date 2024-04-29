@@ -498,7 +498,7 @@ export const upLoadImg = async (file: any) => {
     });
 };
 
-// 비밀번호 변경
+// 비밀번호 수정
 export const changePassword = async (password: string, newPassword: string) => {
   return await axios
     .put(`auth/password`, JSON.stringify({ password, newPassword }), {
