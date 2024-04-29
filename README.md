@@ -13,7 +13,7 @@
     </tr>
     <tr>
       <td>URL</td>
-      <td>배포주소</td>
+      <td>https://taskify-sepia-seven.vercel.app/</td>
     </tr>
   </tbody>
 </table>
@@ -152,27 +152,6 @@
     </tr>
   </tbody>
 </table>
-
-<br />
-
-# <img src="https://github.com/Taskify-team4/Taskify/assets/97032929/9441e696-ceb7-4257-9733-947f53b1ca45"> 트러블 슈팅
-<details>
-  <summary>트러블 슈팅 타이틀</summary> <br />
-
-  ``
-  문제상황
-  ``
-
-  내용
-  
-  ``
-  해결방안
-  ``
-  
-  내용
-
-  <br />
-</details>
 
 <br />
 
