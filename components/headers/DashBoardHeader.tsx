@@ -8,13 +8,16 @@ import crownIcon from '@public/icons/crown.svg';
 import ModalBase from '@components/modals/ModalBase';
 import InviteModal from '@components/modals/edit_dashboard/InviteModal';
 import Modal from '@components/modals/Modal';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDashContext } from '@contexts/dashContext';
+import Link from 'next/link';
 
 function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPros) {
   const { dashInfo } = useDashContext();
   const [inMydash, setInMydash] = useState(false);
+  const [viewDropdown, setViewDropdown] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null);
 
   const router = useRouter();
   // 세팅페이지 이동
@@ -23,21 +26,34 @@ function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPr
     router.push(`/dashboard/${dashboardId}/edit`);
   };
 
-  //
   const handleAddClick = () => {};
 
   const handleMydashPath = () => {
-    if (router.pathname === '/mydashboard') {
+    if (router.pathname === '/mydashboard' || router.pathname === '/mypage') {
       setInMydash(true);
-      console.log('mymy');
     } else {
       setInMydash(false);
     }
   };
 
+  const handleLogoutClick = () => {
+    localStorage.removeItem('accessToken');
+  };
+
   useEffect(() => {
     handleMydashPath();
-  }, [router.pathname]);
+
+    // 외부 클릭시 드롭다운 사라짐
+    const handleClickOutside = (e: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setViewDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [router.pathname, profileRef]);
 
   return (
     <S.DashBoardHeader>
@@ -49,7 +65,7 @@ function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPr
       ) : (
         <S.TitleMydash>내 대시보드</S.TitleMydash>
       )}
-      <S.ManagementContainer>
+      <S.ManagementContainer ref={profileRef}>
         {!inMydash ? (
           <S.Buttons>
             <S.Button onClick={handleSettingClick}>
@@ -73,12 +89,38 @@ function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPr
         ) : (
           <></>
         )}
-        <ProfileIconContainer data={userList} />
-        <S.Line />
+        {userList ? (
+          <>
+            <ProfileIconContainer data={userList} />
+            <S.Line />
+          </>
+        ) : (
+          <></>
+        )}
+
         {mydata ? (
-          <S.Profile>
+          <S.Profile
+            onClick={() => {
+              setViewDropdown(!viewDropdown);
+            }}
+          >
             <ProfileIcon str={mydata.nickname} />
             <S.MyProfileName>{mydata.nickname}</S.MyProfileName>
+            {viewDropdown ? (
+              <S.DropdownMenu>
+                <S.DropdownMenuLi onClick={handleLogoutClick}>
+                  <S.Li href="/">로그아웃</S.Li>
+                </S.DropdownMenuLi>
+                <S.DropdownMenuLi>
+                  <S.Li href="/mypage">내정보</S.Li>
+                </S.DropdownMenuLi>
+                <S.DropdownMenuLi>
+                  <S.Li href="/mydashboard">내 대시보드</S.Li>
+                </S.DropdownMenuLi>
+              </S.DropdownMenu>
+            ) : (
+              <></>
+            )}
           </S.Profile>
         ) : (
           <></>

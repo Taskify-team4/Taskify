@@ -18,7 +18,6 @@ function Mydashboard() {
             nickname: myData.nickname,
             email: myData.email || '',
           }}
-          userList={[]}
         />
         <S.MyDashboardContent>
           <MyDashboardList />
