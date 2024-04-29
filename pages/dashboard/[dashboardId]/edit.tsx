@@ -30,7 +30,16 @@ import { TDashInfo } from '@pages/dashboard/Dashboard.type';
 import { DashBoardMember, Invitations } from '@utils/editDashboard/edit.type';
 import { DashProvider } from '@contexts/dashContext';
 
-function Edit() {
+export const getServerSideProps = async (context: any) => {
+  const { dashboardId } = context.query;
+  return {
+    props: {
+      dashboardId,
+    },
+  };
+};
+
+function Edit({ dashboardId }: { dashboardId: string }) {
   const { windowWidth } = useWindowSize();
 
   const [selectedColor, setSelectedColor] = useState<TColorCode | string>('');
@@ -58,7 +67,6 @@ function Edit() {
   const limitMemberPage = Number(Math.ceil(totalMembers / PAGE_SIZE));
 
   const router = useRouter();
-  const dashboardId = router.query['dashboardId']?.toString() || '';
 
   const fetchDashInfo = async () => {
     const res = await getDashboardInfo(dashboardId);
