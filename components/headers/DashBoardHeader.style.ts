@@ -147,6 +147,10 @@ export const DropdownMenu = styled.ul`
       0 14px 28px rgba(0, 0, 0, 0.25),
       0 10px 10px rgba(0, 0, 0, 0.22);
   }
+
+  @media ${device.mobile} {
+    right: -10px;
+  }
 `;
 
 export const DropdownMenuLi = styled.li`
@@ -154,19 +158,22 @@ export const DropdownMenuLi = styled.li`
   cursor: pointer;
   text-align: center;
   border-radius: 6px;
+  font-size: 16px;
+  line-height: 250%;
 
   &:hover {
     background-color: #f1effd;
-  }
-`;
-
-export const Li = styled(Link)`
-  font-size: 16px;
-  line-height: 250%;
-  text-decoration: none;
-  color: black;
-
-  &:hover {
     color: blue;
   }
 `;
+
+// export const Li = styled(Link)`
+//   font-size: 16px;
+//   line-height: 250%;
+//   text-decoration: none;
+//   color: black;
+
+//   &:hover {
+//     color: blue;
+//   }
+// `;
