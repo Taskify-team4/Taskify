@@ -63,7 +63,7 @@ function Edit({ dashboardId }: { dashboardId: string }) {
   const [totalMembers, setTotalMembers] = useState(0);
   const [isEdited, setIsEdited] = useState(false);
 
-  const limitInvitePage = Number(Math.ceil(totalInvitees / PAGE_SIZE));
+  const limitInvitePage = totalInvitees === 0 ? 1 : Number(Math.ceil(totalInvitees / PAGE_SIZE));
   const limitMemberPage = Number(Math.ceil(totalMembers / PAGE_SIZE));
 
   const router = useRouter();
@@ -96,8 +96,9 @@ function Edit({ dashboardId }: { dashboardId: string }) {
   const handleInviteClick = async (inviteEmail: string) => {
     if (dashboardId && !invitees.some((item) => item.invitee.email === inviteEmail)) {
       await postDashboardInvites(dashboardId, inviteEmail);
-      const { invitees: newInvitees } = await getDashboardInvites(dashboardId, 1);
+      const { invitees: newInvitees, totalInvitees: newTotalInvitees } = await getDashboardInvites(dashboardId, 1);
       setInvitees(newInvitees);
+      setTotalInvitees(newTotalInvitees);
     } else if (invitees.some((item) => item.invitee.email === inviteEmail)) {
       alert('이미 초대된 사용자입니다.');
     }
@@ -107,16 +108,21 @@ function Edit({ dashboardId }: { dashboardId: string }) {
     if (dashboardId) {
       await deleteInvite(dashboardId, cancelId);
 
-      const { invitees: newInvitees } = await getDashboardInvites(dashboardId, invitesPage);
+      const { invitees: newInvitees, totalInvitees: newTotalInvitees } = await getDashboardInvites(
+        dashboardId,
+        invitesPage,
+      );
       setInvitees(newInvitees);
+      setTotalInvitees(newTotalInvitees);
     }
   };
 
   const handleDeleteMemberClick = async (deleteId: number) => {
     if (dashboardId) {
       await deleteMember(deleteId);
-      const { members: newMembers } = await getDashboardMembers(dashboardId, memberPage);
+      const { members: newMembers, totalMembers: newTotalMembers } = await getDashboardMembers(dashboardId, memberPage);
       setMembers(newMembers);
+      setTotalMembers(newTotalMembers);
     }
   };
 
