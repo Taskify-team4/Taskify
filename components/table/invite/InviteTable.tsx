@@ -4,6 +4,7 @@ import TableHeader from '@components/table/TableHeader';
 import TableLists from '@components/table/TableList';
 import InviteList from '@components/table/invite/InviteList';
 import { Invitations, PagenationInfo } from '@pages/dashboard/[dashboardId]/edit.type';
+import { TInvitationIdAndInvitee } from '../Table.type';
 
 function InviteTable({
   users,
@@ -13,7 +14,7 @@ function InviteTable({
   onPreviousClick,
   pageInfo,
 }: {
-  users: Invitations[];
+  users: TInvitationIdAndInvitee[];
   onInviteClick?: (inviteEmail: string) => void;
   onCancelInviteClick?: (cancelId: number) => void;
   onNextClick?: () => void;

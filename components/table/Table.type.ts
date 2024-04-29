@@ -45,9 +45,10 @@ export type TInvitation = {
   updatedAt: string;
 };
 
-type TInvitationIdAndInvitee = Pick<TInvitation, 'id' | 'invitee' | 'dashboard' | 'inviter'>;
+export type TInvitationIdAndInvitee = Pick<TInvitation, 'id' | 'invitee'>;
+export type TInvitationIdAndInviteeAndDash = Pick<TInvitation, 'id' | 'invitee' | 'dashboard' | 'inviter'>;
 export type InvitedDashListProps = {
-  data: TInvitationIdAndInvitee[];
+  data: TInvitationIdAndInviteeAndDash[];
   buttonText?: string;
   onCancelInviteClick?: (cancelId: number) => void;
   IsObserverEnd?: IsEndStateObject | undefined;

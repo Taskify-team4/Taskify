@@ -1,13 +1,21 @@
 import React from 'react';
 import * as S from '@components/table/TableList.style';
 import Button from '@components/buttons/Button';
-import { InvitedDashListProps } from '@components/table/Table.type';
+import { InvitedDashListProps, TInvitationIdAndInvitee } from '@components/table/Table.type';
 import ModalBase from '@components/modals/ModalBase';
 import Modal from '@components/modals/Modal';
 import ConfirmModal from '@components/modals/edit_dashboard/ConfirmModal';
 import Empty from '@components/table/invite/Empty';
 
-function InviteList({ data, buttonText, onCancelInviteClick }: InvitedDashListProps) {
+function InviteList({
+  data,
+  buttonText,
+  onCancelInviteClick,
+}: {
+  data: TInvitationIdAndInvitee[];
+  buttonText: string;
+  onCancelInviteClick?: (cancelId: number) => void;
+}) {
   return (
     <>
       {data?.length === 0 ? (
