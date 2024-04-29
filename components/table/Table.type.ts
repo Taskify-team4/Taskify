@@ -45,7 +45,7 @@ export type TInvitation = {
   updatedAt: string;
 };
 
-type TInvitationIdAndInvitee = Pick<TInvitation, 'id' | 'invitee'>;
+type TInvitationIdAndInvitee = Pick<TInvitation, 'id' | 'invitee' | 'dashboard' | 'inviter'>;
 export type InvitedDashListProps = {
   data: TInvitationIdAndInvitee[];
   buttonText?: string;

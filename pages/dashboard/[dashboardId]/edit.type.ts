@@ -1,5 +1,5 @@
 import { TColorCode } from '@components/chips/Chip.type';
-import { User } from '@utils/testData';
+import { User } from '@components/headers/Header.type';
 
 export type DashBoardNameData = { title: string; color: TColorCode; createdByMe: boolean };
 
