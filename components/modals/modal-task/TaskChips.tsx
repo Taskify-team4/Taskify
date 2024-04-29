@@ -1,9 +1,12 @@
 import * as S from '@components/modals/modal-task/ModalTask.style';
 import Chip from '@components/chips/Chip';
 import { ColorTile } from '@components/chips/Chip.style';
-import { ModalTaskProps } from './ModalTask';
 
-type TaskChipsProps = Pick<ModalTaskProps, 'tags'>;
+type TaskChipsProps = {
+  tags: string[];
+  columntitle: string;
+};
+
 function TaskChips({ tags, columntitle }: TaskChipsProps) {
   return (
     <S.Chips>
@@ -15,11 +18,14 @@ function TaskChips({ tags, columntitle }: TaskChipsProps) {
       </Chip.Round>
       <S.ChipStroke />
       <S.ColorChips>
-        {tags.map((tag, index) => (
-          <Chip.Square key={`${index} ${tag.text}`} size={'small'} color={tag.split(':')[1]}>
-            {tag.split(':')[0]}
-          </Chip.Square>
-        ))}
+        {tags.map((tagString, index) => {
+          const [text, color] = tagString.split(':');
+          return (
+            <Chip.Square key={`${index} ${text}`} size={'small'} color={color}>
+              {text}
+            </Chip.Square>
+          );
+        })}
       </S.ColorChips>
     </S.Chips>
   );

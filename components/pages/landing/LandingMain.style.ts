@@ -21,7 +21,6 @@ export const MainImg = styled(Image)`
   width: 100%;
   max-width: 722px;
   height: auto;
-  /* padding: 0 63px; */
 
   @media ${device.tablet} {
     max-width: 537px;
@@ -76,7 +75,6 @@ export const Violet = styled.span`
   color: var(--violet);
   font-size: 90px;
   font-weight: 700;
-  /* line-height: 65px; */
 
   /* 애니메이션 */
   white-space: nowrap;
@@ -97,10 +95,7 @@ export const Violet = styled.span`
     position: absolute;
     color: var(--violet);
     overflow: hidden;
-    /* top: 0;
-    left: 0; */
     width: 100%;
-    /* height: 100%; */
     border-right: 10px solid transparent;
     animation: ${typing} 1s steps(18) 1;
   }

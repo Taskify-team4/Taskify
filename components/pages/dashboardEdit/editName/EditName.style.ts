@@ -6,17 +6,12 @@ import device from '@utils/breakpointsDevice';
 export const EditDashboardName = styled.div`
   max-width: 620px;
   height: 256px;
-
   padding: 30px;
-
   position: relative;
-
   display: flex;
   flex-direction: column;
   gap: 20px;
-
   background-color: white;
-
   @media ${device.mobile} {
     max-width: 100%;
   }
