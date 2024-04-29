@@ -13,7 +13,7 @@ import { DashProvider, useDashContext } from '@contexts/dashContext';
 
 import { useRouter } from 'next/router';
 import { getDashboardMembers, postDashboardInvites } from '@utils/api';
-import { DashBoardMember } from '@utils/editDashboard/edit.type';
+import { DashBoardMember } from '@pages/dashboard/[dashboardId]/edit.type';
 
 function Dashboard() {
   const { fetchDashboardInfo, dashInfo } = useDashContext();

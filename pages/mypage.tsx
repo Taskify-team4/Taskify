@@ -7,12 +7,19 @@ import leftArrow from '@public/icons/left_arrow.svg';
 import Profile from '@components/pages/myPage/profile/Profile';
 import Password from '@components/pages/myPage/password/Password';
 import { MyDataProvider } from '@contexts/myDataContext';
+import { DashProvider } from '@contexts/dashContext';
+import { useRouter } from 'next/router';
 
 function mypage() {
+  const router = useRouter();
+  const { dashboardId }: { dashboardId: number } = router.query as unknown as { dashboardId: number };
+
   return (
     <MyDataProvider>
       <S.MyPageContainer>
-        <Sidemenu />
+        <DashProvider dashboardId={dashboardId}>
+          <Sidemenu />
+        </DashProvider>
         <S.MyPageMainContainer>
           <DashBoardHeader title="계정관리" />
           <S.MyPageMainContent>

@@ -13,9 +13,9 @@ import { useRouter } from 'next/router';
 import { useDashContext } from '@contexts/dashContext';
 import { useMyData } from '@contexts/myDataContext';
 
-function DashBoardHeader({ title, userList, onInviteClick }: DashBoardPros) {
+function DashBoardHeader({ title, userList, onInviteClick, isDashboardEdited, setIsDashboardEdited }: DashBoardPros) {
   const { myData } = useMyData();
-  const { dashInfo } = useDashContext();
+  const { dashInfo, fetchDashboardInfo } = useDashContext();
   const [inMydash, setInMydash] = useState(false);
   const [viewDropdown, setViewDropdown] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
@@ -56,6 +56,12 @@ function DashBoardHeader({ title, userList, onInviteClick }: DashBoardPros) {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [router.pathname, profileRef]);
+
+  useEffect(() => {
+    if (isDashboardEdited) {
+      fetchDashboardInfo();
+    }
+  }, [isDashboardEdited]);
 
   return (
     <S.DashBoardHeader>
@@ -102,7 +108,7 @@ function DashBoardHeader({ title, userList, onInviteClick }: DashBoardPros) {
               setViewDropdown(!viewDropdown);
             }}
           >
-            <ProfileIcon str={myData.nickname} />
+            <ProfileIcon str={myData.nickname} profileImageUrl={myData.profileImageUrl} />
             <S.MyProfileName>{myData.nickname}</S.MyProfileName>
             {viewDropdown ? (
               <S.DropdownMenu>

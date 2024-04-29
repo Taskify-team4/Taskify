@@ -9,11 +9,26 @@ import NewDashBoardModal from '@components/modals/new_dashboard/Modal';
 import Button from '@components/buttons/Button';
 import { useDashContext } from '@contexts/dashContext';
 import { useRouter } from 'next/router';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 
-function Sidemenu() {
+function Sidemenu({
+  isDashboardEdited,
+  setIsDashboardEdited,
+}: {
+  isDashboardEdited?: boolean;
+  setIsDashboardEdited?: Dispatch<SetStateAction<boolean>>;
+}) {
   const router = useRouter();
-  const { myDashboardsInSideBar, dashPageInSideBar, dashPageLimitInSideBar } = useDashContext();
+  const { myDashboardsInSideBar, dashPageInSideBar, dashPageLimitInSideBar, fetchMyDashboardsAll } = useDashContext();
   const { handleNextClick, handlePrevClick } = useDashContext();
+
+  useEffect(() => {
+    if (isDashboardEdited) {
+      fetchMyDashboardsAll();
+      if (setIsDashboardEdited) setIsDashboardEdited(false);
+    }
+  }, [isDashboardEdited]);
+
   return (
     <S.SidemenuContainer>
       <S.LogoWrapper onClick={() => router.push(`/mydashboard`)}>
@@ -33,7 +48,7 @@ function Sidemenu() {
         </S.DashBoardsWrapper>
       </Modal>
 
-      <DashboardList />
+      <DashboardList myDashboardsInSideBar={myDashboardsInSideBar} />
       {myDashboardsInSideBar ? (
         <S.DashBoardPagination>
           <S.PagenationText>
