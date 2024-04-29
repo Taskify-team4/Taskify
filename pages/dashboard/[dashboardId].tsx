@@ -44,21 +44,23 @@ function Dashboard() {
       <DashProvider dashboardId={dashboardId}>
         <S.DashboardContainer>
           <Sidemenu />
-          <DashBoardHeader userList={members} crown={dashInfo.createdByMe} onInviteClick={handleInviteClick} />
-          <S.ColumnContainer>
-            <ColumnList />
-            <S.AddColumnButtonWrapper>
-              <Modal
-                content={
-                  <ModalBase>
-                    <NewColumnModal />
-                  </ModalBase>
-                }
-              >
-                <Button.AddColumn>새로운 컬럼 추가하기</Button.AddColumn>
-              </Modal>
-            </S.AddColumnButtonWrapper>
-          </S.ColumnContainer>
+          <S.DashboardContentContainer>
+            <DashBoardHeader userList={members} crown={dashInfo.createdByMe} onInviteClick={handleInviteClick} />
+            <S.ColumnContainer>
+              <ColumnList />
+              <S.AddColumnButtonWrapper>
+                <Modal
+                  content={
+                    <ModalBase>
+                      <NewColumnModal />
+                    </ModalBase>
+                  }
+                >
+                  <Button.AddColumn>새로운 컬럼 추가하기</Button.AddColumn>
+                </Modal>
+              </S.AddColumnButtonWrapper>
+            </S.ColumnContainer>
+          </S.DashboardContentContainer>
         </S.DashboardContainer>
       </DashProvider>
     </MyDataProvider>
