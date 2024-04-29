@@ -97,7 +97,8 @@ export const ModalConfirmButton = styled.button`
   ${OutlineButtonStyles}
   ${ModalButtonStyle}
   color: var(--white);
-  background-color: var(--violet);
+  background-color: ${({ disabled }) => (disabled ? 'var(--gray300)' : 'var(--violet)')};
+  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 `;
 
 export const ModalRejectButton = styled.button`

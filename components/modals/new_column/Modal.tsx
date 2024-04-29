@@ -10,6 +10,7 @@ import { postNewColumn } from '@utils/api';
 function NewColumnModal({ close }: ModalBaseProps) {
   const { dashboardId, fetchColumns } = useDashContext();
   const [columnData, setColumnData] = useState<TColumnForm>({ title: '', dashboardId: Number(dashboardId) });
+  const [isDiabled, setIsDisabled] = useState(true);
 
   const trigger = () => {
     return close && close();
@@ -37,12 +38,20 @@ function NewColumnModal({ close }: ModalBaseProps) {
   return (
     <S.ModalContainer>
       <S.ModalTitle>새 컬럼 생성</S.ModalTitle>
-      <ModalInput id="dashboardName" type="text" placeholder="컬럼 이름을 입력해주세요." onChange={handleChange}>
+      <ModalInput
+        id="dashboardName"
+        type="text"
+        placeholder="컬럼 이름을 입력해주세요."
+        onChange={handleChange}
+        setIsDisabled={setIsDisabled}
+      >
         이름
       </ModalInput>
       <S.ModalButtons>
         <Button.ModalReject onClick={trigger}>취소</Button.ModalReject>
-        <Button.ModalConfirm onClick={handleCreateColumnButtonClick}>생성</Button.ModalConfirm>
+        <Button.ModalConfirm onClick={handleCreateColumnButtonClick} disabled={isDiabled}>
+          생성
+        </Button.ModalConfirm>
       </S.ModalButtons>
     </S.ModalContainer>
   );
