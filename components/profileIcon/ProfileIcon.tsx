@@ -6,7 +6,7 @@ function ProfileIcon({ str, children, className, profileImageUrl }: ProfileIconP
   return (
     <>
       {profileImageUrl ? (
-        <S.ProfileIcon imageUrl={profileImageUrl} className={className} />
+        <S.ProfileIcon $imageUrl={profileImageUrl} className={className} />
       ) : (
         <S.ProfileIcon color={stringToColor(str[0])} className={className}>
           {children ? children : str[0]}

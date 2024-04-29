@@ -18,7 +18,7 @@ export type DataListProps = {
 
 export type ProfileProps = {
   color?: string;
-  imageUrl?: string | null;
+  $imageUrl?: string | null;
 };
 
 export type DashBoardPros = {

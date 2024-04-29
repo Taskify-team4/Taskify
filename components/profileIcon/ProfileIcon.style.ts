@@ -19,7 +19,7 @@ export const Icon = styled.div`
 `;
 
 export const ProfileIcon = styled(Icon)<ProfileProps>`
-  background: ${({ imageUrl, color }) => (imageUrl ? `url(${imageUrl})` : `#${color}`)};
+  background: ${({ $imageUrl, color }) => ($imageUrl ? `url(${$imageUrl})` : `#${color}`)};
   background-size: cover;
   background-position: center;
 
