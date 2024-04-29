@@ -3,7 +3,7 @@ import { ModalTaskProps } from './ModalTask';
 
 type TaskDeadlineProps = {
   dueDate: string;
-  assignee: { nickname: string };
+  assignee: { nickname: string; profileImageUrl: string };
 };
 function TaskDeadline({ dueDate, assignee }: TaskDeadlineProps) {
   return (
@@ -11,7 +11,7 @@ function TaskDeadline({ dueDate, assignee }: TaskDeadlineProps) {
       <S.DeadlineWrapper>
         <S.DeadlineText>담당자</S.DeadlineText>
         <S.OwnerWrapper>
-          <S.OwnerProfile str={assignee.nickname[0]} />
+          <S.OwnerProfile str={assignee.nickname[0]} profileImageUrl={assignee.profileImageUrl} />
           <S.OwnerName>{assignee.nickname}</S.OwnerName>
         </S.OwnerWrapper>
       </S.DeadlineWrapper>

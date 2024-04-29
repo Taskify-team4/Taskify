@@ -22,6 +22,7 @@ export const ProfileIcon = styled(Icon)<ProfileProps>`
   background: ${({ $imageUrl, color }) => ($imageUrl ? `url(${$imageUrl})` : `#${color}`)};
   background-size: cover;
   background-position: center;
+  border: ${({ $imageUrl }) => ($imageUrl ? '1px solid var(--gray300)' : 'none')};
 
   &:nth-child(n + 2) {
     margin-left: -10px;

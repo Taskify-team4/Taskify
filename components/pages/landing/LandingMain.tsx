@@ -19,7 +19,9 @@ function LandingMain() {
           <S.Violet>Taskify</S.Violet>
         </S.MainTitle>
       </S.Title>
-      <S.MainSubTitle>서비스의 메인 설명 들어갑니다.</S.MainSubTitle>
+      <S.MainSubTitle>
+        Taskify로 모든 일을 한 곳에서 처리하고 빠르게 작업을 완료할 수 있습니다. 무료로 사용해보세요!
+      </S.MainSubTitle>
       <S.LoginButton onClick={handleLoginClick}>로그인하기</S.LoginButton>
     </S.Main>
   );

@@ -76,7 +76,7 @@ export type TMember = {
   id: number;
   email: string;
   nickname: string;
-  profileImageUrl: null;
+  profileImageUrl: string;
   createdAt: string;
   updatedAt: string;
   isOwner: boolean;

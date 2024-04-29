@@ -83,6 +83,9 @@ export const MemberProfile = styled.div`
   width: 37px;
   height: 37px;
   border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+
   @media ${device.mobile} {
     width: 32px;
     height: 32px;

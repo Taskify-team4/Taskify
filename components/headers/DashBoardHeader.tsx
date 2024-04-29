@@ -70,7 +70,7 @@ function DashBoardHeader({ title, userList, onInviteClick, isDashboardEdited, se
         {dashInfo.createdByMe ? <S.CrownIcon src={crownIcon} alt="왕관 아이콘" /> : null}
       </S.DashBoardTitle>
       <S.ManagementContainer ref={profileRef}>
-        {!inMydash ? (
+        {dashInfo.createdByMe ? (
           <S.Buttons>
             <S.Button onClick={handleSettingClick}>
               <S.Icon src={settingIcon} alt="관리 아이콘" />

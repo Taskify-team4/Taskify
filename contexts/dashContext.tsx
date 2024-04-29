@@ -29,8 +29,8 @@ const initialContext = {
   dashPageLimitInSideBar: 1,
   fetchMyDashboards: (_inInSide?: boolean) => {},
   fetchMyDashboardsAll: () => {},
-  handlePrevClick: (_inInSide?: boolean) => {},
-  handleNextClick: (_inInSide?: boolean) => {},
+  handlePrevClick: (isInSide?: boolean) => (_event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {},
+  handleNextClick: (isInSide?: boolean) => (_event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {},
 };
 
 const DashContext = createContext(initialContext);

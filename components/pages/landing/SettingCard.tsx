@@ -4,7 +4,7 @@ import { SettingProps } from './Landing.type';
 
 function SettingCard({ img, title, description, className }: SettingProps) {
   return (
-    <S.SettingCard className={className} data-aos="zoom-in" data-aos-offset="500">
+    <S.SettingCard className={className} data-aos="zoom-in" data-aos-offset="400">
       <S.SettingImgWrap>
         <S.SettingImg src={img} alt="셋팅 카드 이미지" priority />
       </S.SettingImgWrap>

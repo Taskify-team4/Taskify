@@ -79,7 +79,7 @@ function TaskComments({ cardid, columnid }: TTaskCommentsProps) {
         {comments
           ? comments.map((comment, index) => (
               <S.CommentItem key={`${index} ${comment.author.nickname}`}>
-                <S.AuthorProfile str={comment.author.nickname[0]} />
+                <S.AuthorProfile str={comment.author.nickname[0]} profileImageUrl={comment.author.profileImageUrl} />
                 <S.CommentWrapper>
                   <S.CommentInfo>
                     <S.AuthorName>{comment.author.nickname}</S.AuthorName>
