@@ -27,7 +27,7 @@ import {
   updateDashboard,
 } from '@utils/api';
 import { TDashInfo } from '@pages/dashboard/Dashboard.type';
-import { DashBoardMember, Invitations } from '@utils/editDashboard/edit.type';
+import { DashBoardMember, Invitations } from '@pages/dashboard/[dashboardId]/edit.type';
 import { DashProvider } from '@contexts/dashContext';
 
 export const getServerSideProps = async (context: any) => {

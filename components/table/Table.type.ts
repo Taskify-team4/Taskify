@@ -1,6 +1,5 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react';
-import { DashBoardMember, Invitations, PagenationInfo } from '@utils/editDashboard/edit.type';
-import { ChangeHandler } from './invitedDash/InvitedDashTable';
+import { DashBoardMember, PagenationInfo } from '@pages/dashboard/[dashboardId]/edit.type';
 
 export type HeaderProps = {
   title: string;
