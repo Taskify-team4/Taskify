@@ -20,9 +20,11 @@ function Select({
   const { selectedColumn, setSelectedColumn } = useDashContext();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedAssignee, setSelectedAssignee] = useState('');
+  const [selectedAssigneeImg, setSelectedAssigneeImg] = useState('');
   const handleClickMember = (member: TMember) => {
     onChangeAssignee?.(member.userId);
     setSelectedAssignee(member.nickname);
+    setSelectedAssigneeImg(member.profileImageUrl);
     handleOpen();
   };
 
@@ -42,9 +44,12 @@ function Select({
         {onType ? (
           <S.AssigneeContainer>
             {currentAssignee ? (
-              <S.SelectTitleName str={selectedAssignee ? selectedAssignee : currentAssignee} />
+              <S.SelectTitleName
+                str={selectedAssignee ? selectedAssignee : currentAssignee}
+                profileImageUrl={selectedAssigneeImg}
+              />
             ) : (
-              selectedAssignee && <S.SelectTitleName str={selectedAssignee} />
+              selectedAssignee && <S.SelectTitleName str={selectedAssignee} profileImageUrl={selectedAssigneeImg} />
             )}
             <S.SelectTitleInput
               disabled
@@ -67,7 +72,7 @@ function Select({
             ? members &&
               members.map((member) => (
                 <S.Select key={member.id} onClick={() => handleClickMember(member)}>
-                  <S.SelectTitleName str={member.nickname} />
+                  <S.SelectTitleName str={member.nickname} profileImageUrl={member.profileImageUrl} />
                   <S.SelectTileItem>{member.nickname}</S.SelectTileItem>
                 </S.Select>
               ))

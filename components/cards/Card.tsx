@@ -33,7 +33,7 @@ function Card({ card }: CardProps) {
             <S.CardDate>
               <Image src={calendarIcon.src} alt="Calendar Icon" width={18} height={18} /> {card.dueDate}
             </S.CardDate>
-            <S.CardOwner str={card.assignee.nickname[0]} />
+            <S.CardOwner str={card.assignee.nickname[0]} profileImageUrl={card.assignee.profileImageUrl} />
           </S.CardDateOwner>
         </S.CardMeta>
       </S.CardContent>
