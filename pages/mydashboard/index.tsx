@@ -18,7 +18,7 @@ function Mydashboard() {
         <S.MyDashboardContainer>
           <Sidemenu />
           <S.MyDashBoardLayout>
-            <DashBoardHeader />
+            <DashBoardHeader title="내 대시보드" />
             <S.MyDashboardContent>
               <MyDashboardList />
               <InvitedDashTable />

@@ -58,14 +58,10 @@ function DashBoardHeader({ title, userList, onInviteClick }: DashBoardPros) {
 
   return (
     <S.DashBoardHeader>
-      {!inMydash ? (
-        <S.DashBoardTitle>
-          {title ? <S.Title>{title}</S.Title> : <S.Title>{dashInfo.title}</S.Title>}
-          {dashInfo.createdByMe ? <S.CrownIcon src={crownIcon} alt="왕관 아이콘" /> : null}
-        </S.DashBoardTitle>
-      ) : (
-        <S.TitleMydash>내 대시보드</S.TitleMydash>
-      )}
+      <S.DashBoardTitle>
+        {title ? <S.Title>{title}</S.Title> : <S.Title>{dashInfo.title}</S.Title>}
+        {dashInfo.createdByMe ? <S.CrownIcon src={crownIcon} alt="왕관 아이콘" /> : null}
+      </S.DashBoardTitle>
       <S.ManagementContainer ref={profileRef}>
         {!inMydash ? (
           <S.Buttons>
@@ -113,7 +109,7 @@ function DashBoardHeader({ title, userList, onInviteClick }: DashBoardPros) {
                   <S.Li href="/">로그아웃</S.Li>
                 </S.DropdownMenuLi>
                 <S.DropdownMenuLi>
-                  <S.Li href="/mypage">내정보</S.Li>
+                  <S.Li href="/mypage">계정관리</S.Li>
                 </S.DropdownMenuLi>
                 <S.DropdownMenuLi>
                   <S.Li href="/mydashboard">내 대시보드</S.Li>
