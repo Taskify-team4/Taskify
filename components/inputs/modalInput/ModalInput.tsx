@@ -19,7 +19,6 @@ function ModalInput({
     }
     if (e.target.value === '') {
       setIsDisabled(true);
-      console.log('이름 적어라');
     } else {
       setIsDisabled(false);
       setError('');

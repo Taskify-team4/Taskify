@@ -12,8 +12,6 @@ function NewColumnModal({ close }: ModalBaseProps) {
   const [columnData, setColumnData] = useState<TColumnForm>({ title: '', dashboardId: Number(dashboardId) });
   const [isDiabled, setIsDisabled] = useState(true);
 
-  console.log(isDiabled);
-
   const trigger = () => {
     return close && close();
   };
