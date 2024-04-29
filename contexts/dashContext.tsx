@@ -12,7 +12,6 @@ type ProviderProps = {
 const initialContext = {
   dashboardId: 0,
   dashInfo: {} as TDashInfo,
-  dashboards: [] as TDashboards,
   columns: [] as TColumns,
   cards: [] as TCards,
   selectedColumn: {} as TColumn,
@@ -49,7 +48,6 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     updatedAt: '',
     userId: 0,
   });
-  const [dashboards, setDashboards] = useState<TDashboards>([]);
   const [columns, setColumns] = useState<TColumns>([]);
   const [cards, setCards] = useState<TCards>([]);
   const [selectedColumn, setSelectedColumn] = useState<TColumn>({
@@ -169,7 +167,6 @@ export function DashProvider({ children, dashboardId }: ProviderProps) {
     myInfo,
     dashboardId,
     dashInfo,
-    dashboards,
     columns,
     cards,
     setCards,

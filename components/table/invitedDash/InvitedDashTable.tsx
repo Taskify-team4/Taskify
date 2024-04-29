@@ -9,10 +9,13 @@ import { ChangeEvent } from 'react';
 export type ChangeHandler = (event: ChangeEvent<HTMLInputElement>) => void;
 import { getInvitations, reactDashboardInvites } from '@utils/api';
 import Empty from '@components/table/invite/Empty';
+import { useDashContext } from '@contexts/dashContext';
 
 function InvitedDashTable() {
   const [myInvitation, setMyInvitation] = useState<TInvitation[]>([]);
   const [cursorId, setCursorId] = useState<number | undefined>(undefined);
+  const { fetchMyDashboardsAll } = useDashContext();
+
   const fetchMyInvitation = async (cursorId?: number) => {
     const res = await getInvitations(cursorId);
     setMyInvitation(cursorId ? myInvitation.concat(res) : res);
@@ -33,6 +36,7 @@ function InvitedDashTable() {
       const res = await reactDashboardInvites(id, true);
       if (res?.status) {
         fetchMyInvitation();
+        fetchMyDashboardsAll();
       }
     } catch (error) {
       console.error(error);
@@ -49,7 +53,6 @@ function InvitedDashTable() {
     }
   };
   const handleSearchInvitation: ChangeHandler = async (event) => {
-    console.log(event.target.value);
     searchMyInvitation(event.target.value);
   };
 

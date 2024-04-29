@@ -145,25 +145,6 @@ export const postDashboardInvites = async (id: string, email: string) => {
     });
 };
 
-// 대시보드 초대 응답하기
-// export const reactDashboardInvites = async (id: number, check: boolean): Promise<any> => {
-//   await axios
-//     .put(`/invitations/${id}`, JSON.stringify({ inviteAccepted: check }), {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${ACCESS_TOKEN}`,
-//       },
-//     })
-//     .then((res) => {
-//       return res.data;
-//     })
-//     .catch((error: Error) => {
-//       if (error.message === ERROR_404_MESSAGE) return alert(NO_INVITATION_MESSAGE);
-//       else if (error.message === ERROR_403_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
-//       else if (error.message === ERROR_400_MESSAGE) return alert(INVALID_REQUEST_MESSAGE);
-//       throw NETWORK_ERROR(error);
-//     });
-// };
 export const reactDashboardInvites = async (id: number, check: boolean) => {
   try {
     const res = await axios.put(`/invitations/${id}`, JSON.stringify({ inviteAccepted: check }), {
@@ -177,24 +158,9 @@ export const reactDashboardInvites = async (id: number, check: boolean) => {
     if (error.message === ERROR_404_MESSAGE) return alert(NO_INVITATION_MESSAGE);
     else if (error.message === ERROR_403_MESSAGE) return alert(NO_AUTHORITY_MESSAGE);
     else if (error.message === ERROR_400_MESSAGE) return alert(INVALID_REQUEST_MESSAGE);
+    else return NETWORK_ERROR(error);
   }
 };
-
-// // 새로운 대시보드 생성하기
-// export const postNewDashboard = async (title: string, color: string): Promise<any> => {
-//   await axios
-//     .post('/dashboards', JSON.stringify({ title: title, color: color }), {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${ACCESS_TOKEN}`,
-//       },
-//     })
-//     .then((res) => {
-//       console.log(res.data);
-//       return res.data;
-//     })
-//     .catch((error) => alert('대시보드 생성 실패'));
-// };
 
 // 새로운 대시보드 생성하기
 export const postAddDashboard = async (title: string, color: string) => {
