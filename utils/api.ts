@@ -1,6 +1,6 @@
 import baseAxios from '@node_modules/axios';
 import { User } from '@utils/testData';
-import { DashBoardMember, Invitations } from '@utils/editDashboard/edit.type';
+import { DashBoardMember, Invitations } from '@pages/dashboard/[dashboardId]/edit.type';
 import { PAGE_SIZE } from '@constants/page';
 import {
   CONSISTENT_INVITATION,

@@ -2,7 +2,7 @@ import { TCards, TColumn, TColumns, TDashboards, TDashInfo } from '@pages/dashbo
 
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { getCards, getColumns, getDashboardInfo, getMyDashboards, getMyData } from '@utils/api';
-import { DashBoardMember } from '@utils/editDashboard/edit.type';
+import { DashBoardMember } from '@pages/dashboard/[dashboardId]/edit.type';
 
 type ProviderProps = {
   children: ReactNode;

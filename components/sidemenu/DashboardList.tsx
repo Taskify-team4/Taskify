@@ -2,11 +2,10 @@ import * as S from '@components/sidemenu/Sidemenu.style';
 import { ColorTile } from '@components/chips/Chip.style';
 import crownImg from '@public/icons/crown.svg';
 import React, { useState } from 'react';
-import { useDashContext } from '@contexts/dashContext';
 import { useRouter } from 'next/router';
+import { TDashboards } from '@pages/dashboard/Dashboard.type';
 
-function DashboardList() {
-  const { myDashboardsInSideBar: dashboards } = useDashContext();
+function DashboardList({ myDashboardsInSideBar: dashboards }: { myDashboardsInSideBar: TDashboards }) {
   const router = useRouter();
   const [itemIndex, setItemIndex] = useState<number>();
 

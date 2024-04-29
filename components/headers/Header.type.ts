@@ -1,4 +1,5 @@
-import { DashBoardMember } from '@utils/editDashboard/edit.type';
+import { DashBoardMember } from '@pages/dashboard/[dashboardId]/edit.type';
+import { Dispatch, SetStateAction } from 'react';
 
 export type HeaderProps = {
   children?: React.ReactNode;
@@ -20,10 +21,11 @@ export type ProfileProps = {
 
 export type DashBoardPros = {
   title?: string;
-  // mydata?: User | undefined;
   userList?: User[] | DashBoardMember[];
   crown?: boolean;
   onInviteClick?: (inviteEmail: string) => void;
+  isDashboardEdited?: boolean;
+  setIsDashboardEdited?: Dispatch<SetStateAction<boolean>>;
 };
 
 export type ProfileIconProps = {
