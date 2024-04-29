@@ -338,9 +338,10 @@ export const postNewCard = async (cardData: TCardForm): Promise<any> => {
       },
     })
     .then((res) => res.data)
-    .catch((error) => alert('카드 생성 실패'));
+    .catch((error) => {
+      alert(error.response.data.message);
+    });
 };
-
 // 할 일 카드 수정
 export const updateCard = async (cardData: TCardForm, id: number | undefined): Promise<any> => {
   return await axios

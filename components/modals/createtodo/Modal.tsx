@@ -58,26 +58,18 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card, 
   };
 
   const handleCreateNewCard = async () => {
-    try {
-      const res = await postNewCard(cardData);
-      if (res?.id) {
-        trigger();
-        fetchCards(column?.id);
-      }
-    } catch (error) {
-      console.error('카드 생성 실패', error);
+    const res = await postNewCard(cardData);
+    if (res?.id) {
+      trigger();
+      fetchCards(column?.id);
     }
   };
 
   const handleUpdateCard = async () => {
-    try {
-      const res = await updateCard(cardData, card?.id);
-      if (res.id) {
-        trigger();
-        onChangeIsEdited?.();
-      }
-    } catch (error) {
-      console.error('카드 수정 실패', error);
+    const res = await updateCard(cardData, card?.id);
+    if (res.id) {
+      trigger();
+      onChangeIsEdited?.();
     }
   };
 
@@ -133,6 +125,7 @@ function CreateToDoModal({ children, onModify, column, close, fetchCards, card, 
 
         <DateInput
           onChange={(selectedDate: string) => handleChange('dueDate', selectedDate)}
+          onRequired
           defaultValue={card?.dueDate}
         >
           마감일

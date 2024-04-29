@@ -55,13 +55,17 @@ export const ManagementContainer = styled.div`
   @media ${device.tablet} {
     gap: 20px;
   }
+
+  @media ${device.tablet} {
+    gap: 10px;
+  }
 `;
 
 export const Buttons = styled.div`
   display: flex;
 
   @media ${device.mobile} {
-    gap: 6px;
+    /* gap: 6px; */
   }
 `;
 
@@ -83,7 +87,8 @@ export const Button = styled.button`
   line-height: normal;
 
   @media ${device.mobile} {
-    padding: 6px 12px;
+    padding: 8px 10px;
+    margin: 0 5px;
     font-size: 14px;
   }
 `;
@@ -103,7 +108,6 @@ export const Line = styled.div`
 
   @media ${device.mobile} {
     height: 34px;
-    margin: 0 12px 0 16px;
   }
 `;
 
@@ -137,15 +141,11 @@ export const DropdownMenu = styled.ul`
   top: 40px;
   background-color: var(--gray100);
   border-radius: 6px;
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.12),
-    0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   &:hover {
-    box-shadow:
-      0 14px 28px rgba(0, 0, 0, 0.25),
-      0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   }
 
   @media ${device.mobile} {
