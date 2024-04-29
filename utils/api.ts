@@ -447,30 +447,6 @@ export const getMyDashboards = async (page: number, isInSide?: boolean) => {
   }
 };
 
-// 초대받은 목록 조회
-// export const getInvitations = async (cursorId?: number) => {
-//   if (cursorId === undefined) {
-//     return await axios
-//       .get('/invitations', {
-//         headers: {
-//           Authorization: `Bearer ${ACCESS_TOKEN}`,
-//         },
-//       })
-//       .then((res) => res.data)
-//       .then((data) => data.invitations)
-//       .catch((error) => alert(error));
-//   } else {
-//     return await axios
-//       .get(`/invitations?cursorId=${cursorId}`, {
-//         headers: {
-//           Authorization: `Bearer ${ACCESS_TOKEN}`,
-//         },
-//       })
-//       .then((res) => res.data)
-//       .then((data) => data.invitations)
-//       .catch((error) => alert(error));
-//   }
-// };
 export const getInvitations = async (cursorId?: number, title?: string) => {
   const titleStr = cursorId === undefined ? `?title=${title}` : `&title=${title}`;
   try {
