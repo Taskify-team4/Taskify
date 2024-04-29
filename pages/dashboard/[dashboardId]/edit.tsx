@@ -11,65 +11,74 @@ import InviteTable from '@components/table/invite/InviteTable';
 import { TColorCode } from '@components/chips/Chip.type';
 import { useRouter } from 'next/router';
 import { PAGE_SIZE } from '@constants/page';
-import { EditPageProps } from '@utils/editDashboard/edit.type';
 import ModalBase from '@components/modals/ModalBase';
 import Modal from '@components/modals/Modal';
 import ConfirmModal from '@components/modals/edit_dashboard/ConfirmModal';
 import useWindowSize from '@hooks/useWindowSize';
-import { useMyData } from '@contexts/myDataContext';
-import { useDashContext } from '@contexts/dashContext';
+import { MyDataProvider } from '@contexts/myDataContext';
 import {
   deleteDashboard,
   deleteInvite,
   deleteMember,
+  getDashboardInfo,
   getDashboardInvites,
   getDashboardMembers,
   postDashboardInvites,
   updateDashboard,
 } from '@utils/api';
+import { TDashInfo } from '@pages/dashboard/Dashboard.type';
+import { DashBoardMember, Invitations } from '@utils/editDashboard/edit.type';
 
-export async function getServerSideProps(context: any) {
-  const dashboardId = context.query['dashboardId'];
-
-  const { invitees, totalInvitees } = await getDashboardInvites(dashboardId, 1);
-  const { members, totalMembers } = await getDashboardMembers(dashboardId, 1);
-
-  return {
-    props: {
-      invitees,
-      members,
-      totalInvitees,
-      totalMembers,
-    },
-  };
-}
-
-function Edit({ invitees: initialInvitees, totalInvitees, members: initialMembers, totalMembers }: EditPageProps) {
-  const { fetchMyDashboardsAll, fetchDashboardInfo, dashInfo } = useDashContext();
-
-  const { myData } = useMyData();
+function Edit() {
+  // const { fetchMyDashboardsAll, fetchDashboardInfo, dashInfo } = useDashContext();
   const { windowWidth } = useWindowSize();
 
-  const [selectedColor, setSelectedColor] = useState<TColorCode | string>(dashInfo.color);
+  const [selectedColor, setSelectedColor] = useState<TColorCode | string>('');
 
-  const [dashboardName, setDashboardName] = useState(dashInfo.title);
+  const [dashboardName, setDashboardName] = useState<string>('');
 
-  const [invitees, setInvitees] = useState(initialInvitees);
-  const [members, setMembers] = useState(initialMembers);
+  const [invitees, setInvitees] = useState<Invitations[]>([]);
+  const [members, setMembers] = useState<DashBoardMember[]>([]);
   const [invitesPage, setInvitesPage] = useState(1);
   const [memberPage, setMemberPage] = useState(1);
+  const [dashInfo, setDashInfo] = useState<TDashInfo>({
+    color: '',
+    createdAt: '',
+    createdByMe: false,
+    id: 0,
+    title: '',
+    updatedAt: '',
+    userId: 0,
+  });
+  const [totalInvitees, setTotalInvitees] = useState(0);
+  const [totalMembers, setTotalMembers] = useState(0);
 
   const limitInvitePage = Number(Math.ceil(totalInvitees / PAGE_SIZE));
   const limitMemberPage = Number(Math.ceil(totalMembers / PAGE_SIZE));
 
   const router = useRouter();
-  const dashboardId = router.query['dashboardId']?.toString();
+  const dashboardId = router.query['dashboardId']?.toString() || '';
+
+  const fetchDashInfo = async () => {
+    const res = await getDashboardInfo(dashboardId);
+    setDashInfo(res);
+  };
+
+  const fetchInvitees = async () => {
+    const res = await getDashboardInvites(dashboardId, 1);
+    setInvitees(res.invitees);
+    setTotalInvitees(res.totalInvitees);
+  };
+
+  const fetchMembers = async () => {
+    const res = await getDashboardMembers(dashboardId, 1);
+    setMembers(res.members);
+    setTotalMembers(res.totalMembers);
+  };
 
   const handleUpdateClick = async () => {
     if (dashboardId) {
       await updateDashboard(dashboardId, dashboardName, selectedColor);
-      fetchDashboardInfo();
-      fetchMyDashboardsAll();
     }
   };
 
@@ -103,7 +112,6 @@ function Edit({ invitees: initialInvitees, totalInvitees, members: initialMember
   const handleDeleteDashboardClick = async () => {
     if (dashboardId) {
       await deleteDashboard(dashboardId);
-      fetchMyDashboardsAll();
       await router.push(`/mydashboard`);
     }
   };
@@ -162,62 +170,64 @@ function Edit({ invitees: initialInvitees, totalInvitees, members: initialMember
     }
   }, [memberPage]);
 
+  useEffect(() => {
+    fetchDashInfo();
+    fetchMembers();
+    fetchInvitees();
+  }, []);
+
   return (
-    <S.PageContainer>
-      <div>
-        <Sidemenu />
-      </div>
-      <S.RightSection>
-        <DashBoardHeader
-          mydata={{
-            id: myData.userId,
-            nickname: myData.nickname,
-            email: myData.email || '',
-          }}
-          userList={initialMembers}
-          crown={dashInfo.createdByMe}
-          onInviteClick={handleInviteClick}
-        />
-        <S.PageContents>
-          <S.GoBackButton href={`/dashboard/${dashboardId}`}>
-            <Image src={leftarrowIcon.src} width={20} height={20} alt="돌아가기 버튼" /> 돌아가기
-          </S.GoBackButton>
-          <EditName
-            isMobile={windowWidth <= size.tablet}
-            title={dashInfo.title}
-            color={dashInfo.color}
-            selectedColor={selectedColor}
-            setSelectedColor={setSelectedColor}
-            onClick={handleUpdateClick}
-            onChange={setDashboardName}
-          />
-          <MemberTable
-            members={members}
-            onDeleteClick={handleDeleteMemberClick}
-            onNextClick={handleNextMembersPageClick}
-            onPreviousClick={handlePreviousMembersPageClick}
-            pageInfo={{ current: memberPage, limit: limitMemberPage }}
-          />
-          <InviteTable
-            users={invitees}
-            onCancelInviteClick={handleCancelInviteClick}
-            onInviteClick={handleInviteClick}
-            onPreviousClick={handlePreviousInvitesPageClick}
-            onNextClick={handleNextInvitesPageClick}
-            pageInfo={{ current: invitesPage, limit: limitInvitePage }}
-          />
-          <Modal
-            content={
-              <ModalBase>
-                <ConfirmModal text={'정말 대시보드를 삭제하시겠습니까?'} onConfirmClick={handleDeleteDashboardClick} />
-              </ModalBase>
-            }
-          >
-            <S.DeleteDashboardButton> 대시보드 삭제하기 </S.DeleteDashboardButton>
-          </Modal>
-        </S.PageContents>
-      </S.RightSection>
-    </S.PageContainer>
+    <MyDataProvider>
+      <S.PageContainer>
+        <div>
+          <Sidemenu />
+        </div>
+        <S.RightSection>
+          <DashBoardHeader userList={members} crown={dashInfo.createdByMe} onInviteClick={handleInviteClick} />
+          <S.PageContents>
+            <S.GoBackButton href={`/dashboard/${dashboardId}`}>
+              <Image src={leftarrowIcon.src} width={20} height={20} alt="돌아가기 버튼" /> 돌아가기
+            </S.GoBackButton>
+            <EditName
+              isMobile={windowWidth <= size.tablet}
+              title={dashInfo.title}
+              color={dashInfo.color}
+              selectedColor={selectedColor}
+              setSelectedColor={setSelectedColor}
+              onClick={handleUpdateClick}
+              onChange={setDashboardName}
+            />
+            <MemberTable
+              members={members}
+              onDeleteClick={handleDeleteMemberClick}
+              onNextClick={handleNextMembersPageClick}
+              onPreviousClick={handlePreviousMembersPageClick}
+              pageInfo={{ current: memberPage, limit: limitMemberPage }}
+            />
+            <InviteTable
+              users={invitees}
+              onCancelInviteClick={handleCancelInviteClick}
+              onInviteClick={handleInviteClick}
+              onPreviousClick={handlePreviousInvitesPageClick}
+              onNextClick={handleNextInvitesPageClick}
+              pageInfo={{ current: invitesPage, limit: limitInvitePage }}
+            />
+            <Modal
+              content={
+                <ModalBase>
+                  <ConfirmModal
+                    text={'정말 대시보드를 삭제하시겠습니까?'}
+                    onConfirmClick={handleDeleteDashboardClick}
+                  />
+                </ModalBase>
+              }
+            >
+              <S.DeleteDashboardButton> 대시보드 삭제하기 </S.DeleteDashboardButton>
+            </Modal>
+          </S.PageContents>
+        </S.RightSection>
+      </S.PageContainer>
+    </MyDataProvider>
   );
 }
 

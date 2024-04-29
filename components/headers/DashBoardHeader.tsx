@@ -11,9 +11,10 @@ import Modal from '@components/modals/Modal';
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDashContext } from '@contexts/dashContext';
-import Link from 'next/link';
+import { useMyData } from '@contexts/myDataContext';
 
-function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPros) {
+function DashBoardHeader({ title, userList, onInviteClick }: DashBoardPros) {
+  const { myData } = useMyData();
   const { dashInfo } = useDashContext();
   const [inMydash, setInMydash] = useState(false);
   const [viewDropdown, setViewDropdown] = useState(false);
@@ -98,14 +99,14 @@ function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPr
           <></>
         )}
 
-        {mydata ? (
+        {myData ? (
           <S.Profile
             onClick={() => {
               setViewDropdown(!viewDropdown);
             }}
           >
-            <ProfileIcon str={mydata.nickname} />
-            <S.MyProfileName>{mydata.nickname}</S.MyProfileName>
+            <ProfileIcon str={myData.nickname} />
+            <S.MyProfileName>{myData.nickname}</S.MyProfileName>
             {viewDropdown ? (
               <S.DropdownMenu>
                 <S.DropdownMenuLi onClick={handleLogoutClick}>

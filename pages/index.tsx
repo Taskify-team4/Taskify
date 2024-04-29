@@ -10,8 +10,7 @@ import 'aos/dist/aos.css';
 
 function landing() {
   const router = useRouter();
-  const accessToken = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
-
+  const accessToken = typeof window !== 'undefined' ? localStorage?.getItem('accessToken') : null;
   if (accessToken) {
     router.push('/mydashboard');
   }

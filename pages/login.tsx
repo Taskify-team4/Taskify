@@ -39,7 +39,9 @@ function Login() {
 
       if (response.ok) {
         const accessToken = result.accessToken;
-        localStorage.setItem('accessToken', accessToken);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('accessToken', accessToken);
+        }
         router.push('/mydashboard');
       } else {
         setErrorMsg(result.message);

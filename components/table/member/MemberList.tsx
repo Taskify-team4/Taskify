@@ -12,10 +12,10 @@ import Empty from '@components/table/invite/Empty';
 function MemberList({ data, buttonText, onDeleteClick }: DataListProps) {
   return (
     <>
-      {data.length === 0 ? (
+      {data?.length === 0 ? (
         <Empty isMyDashboard={false}>아직 대시보드의 멤버가 없어요</Empty>
       ) : (
-        data.map((item) => (
+        data?.map((item) => (
           <S.TableList key={item.id}>
             <S.MemberDataContainer>
               {item.profileImageUrl ? (
