@@ -1,15 +1,6 @@
 import React, { ReactNode } from 'react';
 import * as S from '@components/inputs/modalInput/ModalInput.style';
-
-type ModalInputProps = {
-  children: ReactNode;
-  id: string;
-  type: string;
-  placeholder: string;
-  onRequired?: boolean;
-  onChange?: (title: string) => void;
-  defaultValue?: string;
-};
+import { ModalInputProps } from '../Input.type';
 
 function ModalInput({ children, id, type, placeholder, onRequired, onChange, defaultValue }: ModalInputProps) {
   const handleInputChange = (e: { target: { value: string } }) => {

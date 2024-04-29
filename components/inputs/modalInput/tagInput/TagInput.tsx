@@ -2,16 +2,7 @@ import React, { ChangeEvent, KeyboardEvent, ReactNode, useRef, useState } from '
 import * as S from '@components/inputs/modalInput/tagInput/TagInput.style';
 import Chip from '@components/chips/Chip';
 import { makeRandomChipColor } from '@utils/randomChipColor';
-
-type TagInputProps = {
-  children: ReactNode;
-  id: string;
-  type: string;
-  placeholder: string;
-  onRequired?: boolean;
-  onChange: (tagArr: string[]) => void;
-  defaultValue?: string[];
-};
+import { TagInputProps } from '@components/inputs/Input.type';
 
 function TagInput({ children, id, type, placeholder, onRequired, onChange, defaultValue }: TagInputProps) {
   const [tags, setTags] = useState<string[]>(defaultValue || []);

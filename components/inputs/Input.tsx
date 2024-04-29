@@ -1,25 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import * as S from '@components/inputs/Input.style';
 import { emailRegex, nicknameRegex, passwordRegex } from '@utils/dataRegex';
-
-type InputProps = {
-  children: ReactNode;
-  id: string;
-  type: string;
-  inputType: string;
-  placeholder: string;
-  email?: string;
-  nickname?: string;
-  password?: string;
-  passwordCheck?: string;
-  passwordCompare?: boolean;
-  onChange?: (value: string) => void;
-  onError: any;
-  errorMsg: string;
-  disabled?: boolean;
-  defaultValue?: string;
-  inputValue?: string;
-};
+import { InputProps } from './Input.type';
 
 function Input({
   children,

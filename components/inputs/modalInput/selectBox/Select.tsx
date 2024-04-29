@@ -6,29 +6,7 @@ import dropDownIcon from '@public/icons/drop_down.svg';
 import checkIcon from '@public/icons/check.svg';
 import { TColumn } from '@pages/dashboard/Dashboard.type';
 import { useDashContext } from '@contexts/dashContext';
-
-export type TMember = {
-  id: number;
-  email: string;
-  nickname: string;
-  profileImageUrl: null;
-  createdAt: string;
-  updatedAt: string;
-  isOwner: boolean;
-  userId: number;
-};
-
-type SelectProps = {
-  currentColumn?: TColumn;
-  currentAssignee?: string;
-  columns?: TColumn[];
-  members?: TMember[];
-  onType: boolean;
-  onChangeColumn?: (id: number) => void;
-  onChangeAssignee?: (id: number) => void;
-  onChangeIsEdited?: () => void;
-  isEdited?: boolean;
-};
+import { SelectProps, TMember } from '@components/inputs/Input.type';
 
 function Select({
   currentColumn,

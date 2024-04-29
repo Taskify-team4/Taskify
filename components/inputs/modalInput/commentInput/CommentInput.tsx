@@ -1,16 +1,6 @@
 import React, { ReactNode } from 'react';
 import * as S from '@components/inputs/modalInput/commentInput/CommentInput.style';
-
-type CommentInputProps = {
-  children: ReactNode;
-  placeholder?: string;
-  onRequired?: boolean;
-  onModal?: boolean;
-  onChange?: (description: string) => void;
-  onClick?: () => void;
-  defaultValue?: string;
-  className?: string;
-};
+import { CommentInputProps } from '@components/inputs/Input.type';
 
 function CommentInput({
   children,
