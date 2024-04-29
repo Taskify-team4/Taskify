@@ -29,7 +29,6 @@ function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPr
   const handleMydashPath = () => {
     if (router.pathname === '/mydashboard') {
       setInMydash(true);
-      console.log('mymy');
     } else {
       setInMydash(false);
     }

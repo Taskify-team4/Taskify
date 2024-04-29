@@ -13,7 +13,7 @@ function SearchBar({ onSearchInvitation }: TInvitationSearchBarProps) {
       <S.SearchIconWrapper>
         <Image src={searchIcon} alt="돋보기 아이콘" />
       </S.SearchIconWrapper>
-      <S.SearchInput onBlur={onSearchInvitation} type="text" placeholder="검색" />
+      <S.SearchInput onChange={onSearchInvitation} type="text" placeholder="검색" />
     </S.SearchBarContainer>
   );
 }
