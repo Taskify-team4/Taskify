@@ -2,15 +2,26 @@ import React, { ReactNode, useState } from 'react';
 import * as S from '@components/inputs/modalInput/ModalInput.style';
 import { ModalInputProps } from '../Input.type';
 
-function ModalInput({ children, id, type, placeholder, onRequired, onChange, defaultValue }: ModalInputProps) {
+function ModalInput({
+  children,
+  id,
+  type,
+  placeholder,
+  onRequired,
+  onChange,
+  defaultValue,
+  setIsDisabled,
+}: ModalInputProps) {
   const [error, setError] = useState('');
   const handleInputChange = (e: { target: { value: string } }) => {
     if (onChange) {
       onChange(e.target.value);
     }
-    if (e.target.value.trim() === '') {
-      setError(`${children}을 작성해 주세요.`);
+    if (e.target.value === '') {
+      setIsDisabled(true);
+      console.log('이름 적어라');
     } else {
+      setIsDisabled(false);
       setError('');
     }
   };
