@@ -66,7 +66,6 @@ export const LoginMarkWrap = styled.div`
 
 export const LoginTitleMsg = styled.span`
   color: var(--black200);
-  font-family: Pretendard;
   font-size: 20px;
   font-weight: 500;
   line-height: normal;
