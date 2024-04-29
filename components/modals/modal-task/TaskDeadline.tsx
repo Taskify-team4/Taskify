@@ -1,7 +1,10 @@
 import * as S from '@components/modals/modal-task/ModalTask.style';
 import { ModalTaskProps } from './ModalTask';
 
-type TaskDeadlineProps = Pick<ModalTaskProps, 'dueDate' | 'assignee'>;
+type TaskDeadlineProps = {
+  dueDate: string;
+  assignee: { nickname: string };
+};
 function TaskDeadline({ dueDate, assignee }: TaskDeadlineProps) {
   return (
     <S.DeadlineContainer>

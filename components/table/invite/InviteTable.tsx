@@ -4,6 +4,7 @@ import TableHeader from '@components/table/TableHeader';
 import TableLists from '@components/table/TableList';
 import InviteList from '@components/table/invite/InviteList';
 import { Invitations, PagenationInfo } from '@utils/editDashboard/edit.type';
+import { User } from '@components/headers/Header.type';
 
 function InviteTable({
   users,

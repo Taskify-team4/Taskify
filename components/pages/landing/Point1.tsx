@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import * as S from './Point1.style';
 import point1 from '@public/images/point1.png';
 

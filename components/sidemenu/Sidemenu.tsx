@@ -40,8 +40,8 @@ function Sidemenu() {
             {dashPageLimitInSideBar} 페이지 중 {dashPageInSideBar}
           </S.PagenationText>
           <S.PageButton>
-            <Button.PagenationLeft onClick={handlePrevClick(true)} />
-            <Button.PagenationRight onClick={handleNextClick(true)} />
+            <Button.PagenationLeft onClick={() => handlePrevClick(true)} />
+            <Button.PagenationRight onClick={() => handleNextClick(true)} />
           </S.PageButton>
         </S.DashBoardPagination>
       ) : (

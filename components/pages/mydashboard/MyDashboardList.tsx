@@ -40,8 +40,8 @@ function MyDashboardList() {
             {dashPageLimit} 페이지 중 {dashPage}
           </S.PagenationText>
           <S.PagenationButton>
-            <Button.PagenationLeft onClick={handlePrevClick()} />
-            <Button.PagenationRight onClick={handleNextClick()} />
+            <Button.PagenationLeft onClick={() => handlePrevClick()} />
+            <Button.PagenationRight onClick={() => handleNextClick()} />
           </S.PagenationButton>
         </S.MyDashBoardPagenation>
       ) : (

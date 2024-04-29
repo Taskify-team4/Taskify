@@ -1,5 +1,4 @@
 import baseAxios from '@node_modules/axios';
-import { User } from '@utils/testData';
 import { DashBoardMember, Invitations } from '@utils/editDashboard/edit.type';
 import { PAGE_SIZE } from '@constants/page';
 import {
@@ -26,7 +25,8 @@ import {
   TCommentForm,
   TDashInfo,
 } from '@pages/dashboard/Dashboard.type';
-import { TMember } from '@components/inputs/modalInput/selectBox/Select';
+import { TMember } from '@components/inputs/Input.type';
+import { User } from '@components/headers/Header.type';
 
 const ACCESS_TOKEN = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
 

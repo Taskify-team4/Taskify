@@ -1,10 +1,16 @@
 import * as S from '@components/modals/modal-task/ModalTask.style';
 import TaskChips from './TaskChips';
 import TaskDeadline from './TaskDeadline';
-import { ModalTaskProps } from './ModalTask';
 import Image from 'next/image';
 
-type TaskContentInfoProps = Pick<ModalTaskProps, 'description' | 'tags' | 'dueDate' | 'assignee'>;
+type TaskContentInfoProps = {
+  imageUrl: string;
+  description: string;
+  tags: string[];
+  dueDate: string;
+  assignee: { profileImageUrl: string; nickname: string; id: number };
+  columntitle: string;
+};
 
 function TaskContentInfo({ imageUrl, description, tags, dueDate, assignee, columntitle }: TaskContentInfoProps) {
   return (
