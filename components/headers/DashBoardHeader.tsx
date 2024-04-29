@@ -108,7 +108,7 @@ function DashBoardHeader({ title, userList, onInviteClick, isDashboardEdited, se
               setViewDropdown(!viewDropdown);
             }}
           >
-            <ProfileIcon str={myData.nickname} />
+            <ProfileIcon str={myData.nickname} profileImageUrl={myData.profileImageUrl} />
             <S.MyProfileName>{myData.nickname}</S.MyProfileName>
             {viewDropdown ? (
               <S.DropdownMenu>

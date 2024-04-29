@@ -6,6 +6,7 @@ export type HeaderProps = {
 };
 
 export type User = {
+  profileImageUrl: string | null | undefined;
   id: number;
   nickname: string;
   email: string;
@@ -16,7 +17,8 @@ export type DataListProps = {
 };
 
 export type ProfileProps = {
-  color: string;
+  color?: string;
+  imageUrl?: string | null;
 };
 
 export type DashBoardPros = {
@@ -32,4 +34,5 @@ export type ProfileIconProps = {
   str: string;
   children?: React.ReactNode;
   className?: string;
+  profileImageUrl?: string | null;
 };
