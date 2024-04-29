@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import * as S from '@components/pages/myPage/MyPage.style';
 import Sidemenu from '@components/sidemenu/Sidemenu';
@@ -27,7 +27,7 @@ function mypage() {
       <S.MyPageContainer>
         <Sidemenu />
         <S.MyPageMainContainer>
-          <DashBoardHeader title="계정관리" userList={users} />
+          <DashBoardHeader title="계정관리" />
           <S.MyPageMainContent>
             <S.MyPageMainHead>
               <S.ImgWrap>

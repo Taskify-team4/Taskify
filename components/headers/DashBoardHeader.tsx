@@ -12,7 +12,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDashContext } from '@contexts/dashContext';
 import { useMyData } from '@contexts/myDataContext';
-import Link from 'next/link';
 
 function DashBoardHeader({ title, userList, onInviteClick }: DashBoardPros) {
   const { myData } = useMyData();
@@ -68,7 +67,7 @@ function DashBoardHeader({ title, userList, onInviteClick }: DashBoardPros) {
       ) : (
         <S.TitleMydash>내 대시보드</S.TitleMydash>
       )}
-      <S.ManagementContainer>
+      <S.ManagementContainer ref={profileRef}>
         {!inMydash ? (
           <S.Buttons>
             <S.Button onClick={handleSettingClick}>
