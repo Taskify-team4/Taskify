@@ -6,10 +6,11 @@ import InvitedDashList from '@components/table/invitedDash/InvitedDashList';
 import SearchBar from '@components/table/invitedDash/SearchBar';
 import { TInvitation } from '@components/table/Table.type';
 import { ChangeEvent } from 'react';
-export type ChangeHandler = (event: ChangeEvent<HTMLInputElement>) => void;
 import { getInvitations, reactDashboardInvites } from '@utils/api';
 import Empty from '@components/table/invite/Empty';
 import { useDashContext } from '@contexts/dashContext';
+
+export type ChangeHandler = (event: ChangeEvent<HTMLInputElement>) => void;
 
 function InvitedDashTable() {
   const [myInvitation, setMyInvitation] = useState<TInvitation[]>([]);

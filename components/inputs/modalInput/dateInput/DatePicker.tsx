@@ -3,11 +3,7 @@ import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import * as S from '@components/inputs/modalInput/dateInput/DatePicker.style';
 import { formatDate } from '@utils/formatDate';
-
-type TDatePickerProps = {
-  onChange: (formattedData: string) => void;
-  defaultValue?: string;
-};
+import { TDatePickerProps } from '@components/inputs/Input.type';
 
 const DatePicker = ({ onChange, defaultValue }: TDatePickerProps) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);

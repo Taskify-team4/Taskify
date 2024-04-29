@@ -1,17 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import Input from '@components/inputs/Input';
 import * as S from '@components/inputs/textInput/TextInput.style';
-
-type TextInputProps = {
-  children: ReactNode;
-  id: string;
-  placeholder: string;
-  email?: string;
-  nickname?: string;
-  disabled?: boolean;
-  onChange?: (value: string) => void;
-  defaultValue?: string;
-};
+import { TextInputProps } from '../Input.type';
 
 function TextInput({ children, id, placeholder, email, nickname, disabled, onChange, defaultValue }: TextInputProps) {
   const [errorMsg, setErrorMsg] = useState('');

@@ -14,7 +14,7 @@ import { ModalBaseProps } from '../Modal.type';
 import { useDashContext } from '@contexts/dashContext';
 import { useMyData } from '@contexts/myDataContext';
 import { getDashboardMembers, postNewCard, updateCard } from '@utils/api';
-import { TMember } from '@components/inputs/modalInput/selectBox/Select';
+import { TMember } from '@components/inputs/Input.type';
 
 type CreateToDoPorps = ModalBaseProps & {
   children: ReactNode;
