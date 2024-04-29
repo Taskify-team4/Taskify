@@ -39,6 +39,7 @@ function DashBoardHeader({ title, userList, onInviteClick }: DashBoardPros) {
 
   const handleLogoutClick = () => {
     localStorage.removeItem('accessToken');
+    router.push(`/`);
   };
 
   useEffect(() => {
@@ -106,13 +107,15 @@ function DashBoardHeader({ title, userList, onInviteClick }: DashBoardPros) {
             {viewDropdown ? (
               <S.DropdownMenu>
                 <S.DropdownMenuLi onClick={handleLogoutClick}>
-                  <S.Li href="/">로그아웃</S.Li>
+                  {/* <S.Li href="/">로그아웃</S.Li> */}
+                  로그아웃
                 </S.DropdownMenuLi>
-                <S.DropdownMenuLi>
-                  <S.Li href="/mypage">계정관리</S.Li>
+                <S.DropdownMenuLi onClick={() => router.push(`/mypage`)}>
+                  {/* <S.Li href="/mypage">계정관리</S.Li> */}
+                  계정관리
                 </S.DropdownMenuLi>
-                <S.DropdownMenuLi>
-                  <S.Li href="/mydashboard">내 대시보드</S.Li>
+                <S.DropdownMenuLi onClick={() => router.push(`/mydashboard`)}>
+                  {/* <S.Li href="/mydashboard">내 대시보드</S.Li> */}내 대시보드
                 </S.DropdownMenuLi>
               </S.DropdownMenu>
             ) : (
