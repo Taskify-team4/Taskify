@@ -5,14 +5,15 @@ import ModalInput from '@components/inputs/modalInput/ModalInput';
 import { ModalBaseProps } from '@components/modals/Modal.type';
 import { useDashContext } from '@contexts/dashContext';
 import { deleteColumn, updateColumnTitle } from '@utils/api';
+import { TColumn } from '@pages/dashboard/Dashboard.type';
 
 type TEditColumnModalProps = ModalBaseProps & {
-  columnid: number;
+  column: TColumn;
 };
 
-function EditColumnModal({ close, columnid }: TEditColumnModalProps) {
+function EditColumnModal({ close, column }: TEditColumnModalProps) {
   const { fetchColumns } = useDashContext();
-  const [columnTitle, setColumnTitle] = useState({ title: '' });
+  const [columnTitle, setColumnTitle] = useState({ title: column.title });
   const trigger = () => {
     return close && close();
   };
@@ -25,7 +26,7 @@ function EditColumnModal({ close, columnid }: TEditColumnModalProps) {
 
   const fetchPostChangeColumnTitle = async () => {
     try {
-      const res = await updateColumnTitle(columnid, columnTitle);
+      const res = await updateColumnTitle(column.id, columnTitle);
       if (res.id) {
         trigger();
         fetchColumns();
@@ -36,7 +37,7 @@ function EditColumnModal({ close, columnid }: TEditColumnModalProps) {
   };
 
   const fetchDeleteColumn = async () => {
-    const res = await deleteColumn(columnid);
+    const res = await deleteColumn(column.id);
     console.log(res);
     if (res.status === 204) {
       trigger();
@@ -47,7 +48,13 @@ function EditColumnModal({ close, columnid }: TEditColumnModalProps) {
   return (
     <S.ModalContainer>
       <S.ModalTitle>컬럼 관리</S.ModalTitle>
-      <ModalInput id="dashboardName" type="text" placeholder="변경할 이름을 입력해주세요." onChange={handleChange}>
+      <ModalInput
+        id="dashboardName"
+        type="text"
+        placeholder="변경할 이름을 입력해주세요."
+        onChange={handleChange}
+        defaultValue={columnTitle.title}
+      >
         이름
       </ModalInput>
 

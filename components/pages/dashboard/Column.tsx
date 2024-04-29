@@ -15,19 +15,28 @@ import { getCards } from '@utils/api';
 
 type TColumnProps = {
   column: TColumn;
+  selectedColumnId: number;
+  cards: TCards;
+  setCards: (cards: TCards) => void;
+  fetchAllCards: () => void;
 };
 
-function Column({ column }: TColumnProps) {
-  const [cards, setCards] = useState<TCards>([]);
+function Column({ column, selectedColumnId, cards, setCards, fetchAllCards }: TColumnProps) {
+  const [isEdited, setIsEdited] = useState<boolean>(false);
   const [editId, setEditId] = useState(0);
-  const fetchCards = async () => {
-    const res = await getCards(column.id);
+
+  const handleChangeIsEdited = () => {
+    setIsEdited(!isEdited);
+  };
+
+  const fetchCards = async (id: number) => {
+    const res = await getCards(id);
     setCards(res);
   };
 
   useEffect(() => {
-    fetchCards();
-  }, [column.id]);
+    fetchAllCards();
+  }, [isEdited]);
 
   return (
     <S.ColumnContainer>
@@ -37,10 +46,11 @@ function Column({ column }: TColumnProps) {
           <S.ColumnTitle>{column.title}</S.ColumnTitle>
           <S.CardsCount>{cards?.length}</S.CardsCount>
         </S.TitleWrapper>
+        {/* 컬럼 설정 모달 */}
         <Modal
           content={
             <ModalBase>
-              <EditColumnModal columnid={column.id} />
+              <EditColumnModal column={column} />
             </ModalBase>
           }
         >
@@ -54,7 +64,7 @@ function Column({ column }: TColumnProps) {
       <Modal
         content={
           <ModalBase>
-            <CreateToDoModal columnid={column.id} fetchCards={fetchCards}>
+            <CreateToDoModal column={column} fetchCards={fetchCards}>
               할 일 생성
             </CreateToDoModal>
           </ModalBase>
@@ -64,7 +74,8 @@ function Column({ column }: TColumnProps) {
       </Modal>
 
       {cards?.map((card, idx) => (
-        <>
+        <li key={card.id}>
+          {/* 카드 모달 */}
           <Modal
             content={
               <ModalBase>
@@ -77,18 +88,27 @@ function Column({ column }: TColumnProps) {
           </Modal>
           {editId === card.id && (
             <BackdropContainer>
+              {/* 할 일 수정 모달 */}
               <ModalBase
                 close={() => {
                   setEditId(0);
                 }}
               >
-                <CreateToDoModal card={card} onModify={true} columnid={column.id} fetchCards={fetchCards}>
+                <CreateToDoModal
+                  card={card}
+                  onModify={true}
+                  column={column}
+                  fetchCards={fetchCards}
+                  onChangeIsEdited={handleChangeIsEdited}
+                  selectedColumnId={selectedColumnId}
+                  setCards={setCards}
+                >
                   할 일 수정
                 </CreateToDoModal>
               </ModalBase>
             </BackdropContainer>
           )}
-        </>
+        </li>
       ))}
     </S.ColumnContainer>
   );

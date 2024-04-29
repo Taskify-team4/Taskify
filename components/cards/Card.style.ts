@@ -8,15 +8,13 @@ export const CardContainer = styled.div`
   display: inline-flex;
   flex-direction: column;
   gap: 12px;
-
   position: relative;
-
   box-sizing: border-box;
   padding: 20px;
   width: 314px;
-
   border: var(--gray300) 1px solid;
   border-radius: 6px;
+  cursor: pointer;
 
   @media ${device.tablet} {
     flex-direction: row;

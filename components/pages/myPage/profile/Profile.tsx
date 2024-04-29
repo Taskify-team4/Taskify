@@ -3,7 +3,7 @@ import * as S from '@components/pages/myPage/profile/Profile.style';
 import addIcon from '@public/icons/add_violet.svg';
 import TextInput from '@components/inputs/textInput/TextInput';
 import Image from 'next/image';
-import { upLoadImg, putMyData } from '@utils/editDashboard/api';
+import { upLoadImg, putMyData } from '@utils/api';
 import { useMyData } from '@contexts/myDataContext';
 import { BackdropContainer } from '@components/modals/Modal';
 import ModalBase from '@components/modals/ModalBase';
@@ -77,7 +77,6 @@ function Profile() {
 
   useEffect(() => {
     setPreviewImg(myData.profileImageUrl);
-    console.log(nickName, myData.nickname);
   }, [myData.profileImageUrl, myData.nickname, openModal, message, nickName]);
 
   return (

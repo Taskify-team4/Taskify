@@ -17,6 +17,9 @@ export const CalendarInput = styled.input`
   font-weight: 400;
   line-height: normal;
 
+  &::placeholder {
+    color: var(--gray400);
+  }
   &:focus {
     outline: none;
   }

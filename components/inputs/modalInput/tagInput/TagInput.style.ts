@@ -37,6 +37,7 @@ export const TagInputRequired = styled.span`
 
 export const TagInputContent = styled.div`
   width: 100%;
+  overflow: hidden;
   height: 48px;
   display: flex;
   align-items: center;
@@ -53,9 +54,11 @@ export const TagInputContent = styled.div`
 
 export const TagInput = styled.input`
   flex: 1;
-  color: var(--gray400);
   font-family: Pretendard;
   font-size: 16px;
-  font-weight: 400;
   line-height: normal;
+
+  &::placeholder {
+    color: var(--gray400);
+  }
 `;

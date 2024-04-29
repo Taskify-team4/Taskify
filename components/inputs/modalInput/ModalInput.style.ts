@@ -43,12 +43,13 @@ export const ModalInput = styled.input`
   border-radius: 6px;
   background-color: var(--white);
 
-  color: var(--gray400);
   font-family: Pretendard;
   font-size: 16px;
   font-weight: 400;
   line-height: normal;
-
+  &::placeholder {
+    color: var(--gray400);
+  }
   &:focus {
     border: 1px solid var(--violet);
   }
