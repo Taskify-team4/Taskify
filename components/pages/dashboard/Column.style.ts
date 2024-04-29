@@ -2,7 +2,8 @@ import device from '@utils/breakpointsDevice';
 import styled from 'styled-components';
 
 export const ColumnContainer = styled.div`
-  border: 1px solid var(--gray100);
+
+border: 1px solid var(--gray200);
   padding: 22px 20px;
   display: flex;
   flex-direction: column;

@@ -16,6 +16,8 @@ export const DashboardContentContainer = styled.div`
 `;
 
 export const ColumnContainer = styled.div`
+  background-color: var(--gray100);
+  height: calc(100% - 70px);
   display: flex;
   width: fit-content;
 
@@ -25,8 +27,8 @@ export const ColumnContainer = styled.div`
 `;
 
 export const AddColumnButtonWrapper = styled.div`
-  padding: 72px 0 0 20px;
-
+  border: 1px solid var(--gray200);
+  padding: 72px 20px 0 20px;
   @media ${device.tablet} {
     flex-direction: column;
     padding: 20px;
