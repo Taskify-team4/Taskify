@@ -4,7 +4,7 @@ import Chip from '@components/chips/Chip';
 import * as S from '@components/inputs/modalInput/selectBox/Select.style';
 import dropDownIcon from '@public/icons/drop_down.svg';
 import checkIcon from '@public/icons/check.svg';
-import { TColumn } from '@pages/dashboard/Dashboard.type';
+import { TColumn } from '@components/pages/dashboard/Dashboard.type';
 import { useDashContext } from '@contexts/dashContext';
 import { SelectProps, TMember } from '@components/inputs/Input.type';
 

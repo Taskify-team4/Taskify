@@ -1,8 +1,8 @@
-import { TCards, TColumn, TColumns, TDashboards, TDashInfo } from '@pages/dashboard/Dashboard.type';
+import { TCards, TColumn, TColumns, TDashboards, TDashInfo } from '@components/pages/dashboard/Dashboard.type';
 
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { getCards, getColumns, getDashboardInfo, getMyDashboards, getMyData } from '@utils/api';
-import { DashBoardMember } from '@pages/dashboard/[dashboardId]/edit.type';
+import { DashBoardMember } from '@components/pages/dashboard/dashboardId/edit.type';
 
 type ProviderProps = {
   children: ReactNode;

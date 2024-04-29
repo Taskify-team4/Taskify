@@ -1,7 +1,7 @@
 import * as S from '@components/modals/modal-task/ModalTask.style';
 import CommentInput from '@components/inputs/modalInput/commentInput/CommentInput';
 import { useEffect, useState } from 'react';
-import { TComment } from '@pages/dashboard/Dashboard.type';
+import { TComment } from '@components/pages/dashboard/Dashboard.type';
 import { useDashContext } from '@contexts/dashContext';
 import { deleteComment, getComments, postNewComment, updateComment } from '@utils/api';
 import { formatDate } from '@utils/formatDate';

@@ -1,5 +1,5 @@
 import baseAxios from '@node_modules/axios';
-import { DashBoardMember, Invitations } from '@pages/dashboard/[dashboardId]/edit.type';
+import { DashBoardMember, Invitations } from '@components/pages/dashboard/dashboardId/edit.type';
 import { PAGE_SIZE } from '@constants/page';
 import {
   CONSISTENT_INVITATION,
@@ -24,7 +24,7 @@ import {
   TComment,
   TCommentForm,
   TDashInfo,
-} from '@pages/dashboard/Dashboard.type';
+} from '@components/pages/dashboard/Dashboard.type';
 import { TMember } from '@components/inputs/Input.type';
 import { User } from '@components/headers/Header.type';
 

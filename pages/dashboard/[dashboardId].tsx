@@ -1,7 +1,7 @@
 import DashBoardHeader from '@components/headers/DashBoardHeader';
 import Sidemenu from '@components/sidemenu/Sidemenu';
 import React, { useEffect, useState } from 'react';
-import * as S from '@pages/dashboard/Dashboard.style';
+import * as S from '@components/pages/dashboard/Dashboard.style';
 import Button from '@components/buttons/Button';
 import Modal from '@components/modals/Modal';
 import ModalBase from '@components/modals/ModalBase';
@@ -11,9 +11,9 @@ import { MyDataProvider } from '@contexts/myDataContext';
 import { DashProvider } from '@contexts/dashContext';
 import { useRouter } from 'next/router';
 import { getDashboardInfo, getDashboardMembers, postDashboardInvites } from '@utils/api';
-import { DashBoardMember } from '@pages/dashboard/[dashboardId]/edit.type';
+import { DashBoardMember } from '@components/pages/dashboard/dashboardId/edit.type';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { TDashInfo } from './Dashboard.type';
+import { TDashInfo } from '../../components/pages/dashboard/Dashboard.type';
 
 function Dashboard() {
   const router = useRouter();

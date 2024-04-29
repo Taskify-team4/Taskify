@@ -3,7 +3,7 @@ import * as S from '@components/table/Table.style';
 import TableHeader from '@components/table/TableHeader';
 import TableList from '@components/table/TableList';
 import MemberList from '@components/table/member/MemberList';
-import { DashBoardMember, PagenationInfo } from '@pages/dashboard/[dashboardId]/edit.type';
+import { DashBoardMember, PagenationInfo } from '@components/pages/dashboard/dashboardId/edit.type';
 
 function MemberTable({
   members,

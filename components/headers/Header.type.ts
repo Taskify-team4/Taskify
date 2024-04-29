@@ -1,4 +1,4 @@
-import { DashBoardMember } from '@pages/dashboard/[dashboardId]/edit.type';
+import { DashBoardMember } from '@components/pages/dashboard/dashboardId/edit.type';
 import { Dispatch, SetStateAction } from 'react';
 
 export type HeaderProps = {

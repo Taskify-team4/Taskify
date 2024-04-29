@@ -1,4 +1,4 @@
-import * as S from '@pages/mydashboard/Mydashboard.style';
+import * as S from '@components/pages/mydashboard/Mydashboard.style';
 import Sidemenu from '@components/sidemenu/Sidemenu';
 import DashBoardHeader from '@components/headers/DashBoardHeader';
 import MyDashboardList from '@components/pages/mydashboard/MyDashboardList';

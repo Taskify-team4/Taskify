@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import settingIcon from '@public/icons/setting.svg';
-import { TCards, TColumn } from '@pages/dashboard/Dashboard.type';
+import { TCards, TColumn } from '@components/pages/dashboard/Dashboard.type';
 import { getCards } from '@utils/api';
 // components
 import Button from '@components/buttons/Button';

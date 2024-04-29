@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Sidemenu from '@components/sidemenu/Sidemenu';
-import * as S from '@pages/dashboard/[dashboardId]/edit.style';
+import * as S from '@components/pages/dashboard/dashboardId/edit.style';
 import DashBoardHeader from '@components/headers/DashBoardHeader';
 import MemberTable from '@components/table/member/MemberTable';
 import leftarrowIcon from '@public/icons/left_arrow.svg';
@@ -26,8 +26,8 @@ import {
   postDashboardInvites,
   updateDashboard,
 } from '@utils/api';
-import { TDashInfo } from '@pages/dashboard/Dashboard.type';
-import { DashBoardMember, Invitations } from '@pages/dashboard/[dashboardId]/edit.type';
+import { TDashInfo } from '@components/pages/dashboard/Dashboard.type';
+import { DashBoardMember, Invitations } from '@components/pages/dashboard/dashboardId/edit.type';
 import { DashProvider } from '@contexts/dashContext';
 
 export const getServerSideProps = async (context: any) => {

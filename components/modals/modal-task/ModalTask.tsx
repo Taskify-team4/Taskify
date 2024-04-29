@@ -5,7 +5,7 @@ import closeImg from '@public/icons/close.svg';
 import moreImg from '@public/icons/more.svg';
 import TaskContentInfo from './TaskContentInfo';
 import React, { useState } from 'react';
-import { TCard, TColumn } from '@pages/dashboard/Dashboard.type';
+import { TCard, TColumn } from '@components/pages/dashboard/Dashboard.type';
 import { deleteCard } from '@utils/api';
 
 export type ModalTaskProps = ModalBaseProps & {

@@ -9,7 +9,7 @@ import TagInput from '@components/inputs/modalInput/tagInput/TagInput';
 import ImageInput from '@components/inputs/modalInput/imageInput/ImageInput';
 import Button from '@components/buttons/Button';
 
-import { TCard, TCardForm, TColumn } from '@pages/dashboard/Dashboard.type';
+import { TCard, TCardForm, TColumn } from '@components/pages/dashboard/Dashboard.type';
 import { ModalBaseProps } from '../Modal.type';
 import { useDashContext } from '@contexts/dashContext';
 import { useMyData } from '@contexts/myDataContext';

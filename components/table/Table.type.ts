@@ -1,5 +1,5 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react';
-import { DashBoardMember, PagenationInfo } from '@pages/dashboard/[dashboardId]/edit.type';
+import { DashBoardMember, PagenationInfo } from '@components/pages/dashboard/dashboardId/edit.type';
 
 export type HeaderProps = {
   title: string;

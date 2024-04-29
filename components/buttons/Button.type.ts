@@ -1,5 +1,5 @@
 import { MouseEventHandler, ReactNode } from 'react';
-import { TDashInfo } from '@pages/dashboard/Dashboard.type';
+import { TDashInfo } from '@components/pages/dashboard/Dashboard.type';
 
 export type DashboardData = {
   color: string;

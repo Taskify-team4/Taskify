@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDashContext } from '@contexts/dashContext';
 import Column from './Column';
 import { getCards } from '@utils/api';
-import { TCards } from '@pages/dashboard/Dashboard.type';
+import { TCards } from '@components/pages/dashboard/Dashboard.type';
 
 function ColumnList() {
   const { columns } = useDashContext();

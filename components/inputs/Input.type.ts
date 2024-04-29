@@ -1,4 +1,4 @@
-import { TColumn } from '@pages/dashboard/Dashboard.type';
+import { TColumn } from '@components/pages/dashboard/Dashboard.type';
 import { ReactNode } from 'react';
 
 export type InputProps = {

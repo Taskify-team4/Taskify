@@ -5,7 +5,7 @@ import Chip from '@components/chips/Chip';
 
 // 리소스
 import calendarIcon from '@public/icons/calendar.svg';
-import { TCard } from '@pages/dashboard/Dashboard.type';
+import { TCard } from '@components/pages/dashboard/Dashboard.type';
 
 export type CardProps = {
   card: TCard;

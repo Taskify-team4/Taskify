@@ -3,7 +3,7 @@ import { ColorTile } from '@components/chips/Chip.style';
 import crownImg from '@public/icons/crown.svg';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { TDashboards } from '@pages/dashboard/Dashboard.type';
+import { TDashboards } from '@components/pages/dashboard/Dashboard.type';
 
 function DashboardList({ myDashboardsInSideBar: dashboards }: { myDashboardsInSideBar: TDashboards }) {
   const router = useRouter();

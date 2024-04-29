@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDashContext } from '@contexts/dashContext';
 import { deleteColumn, updateColumnTitle } from '@utils/api';
-import { TColumn } from '@pages/dashboard/Dashboard.type';
+import { TColumn } from '@components/pages/dashboard/Dashboard.type';
 import * as S from '@components/modals/edit_column/Modal.style';
 import Button from '@components/buttons/Button';
 import ModalInput from '@components/inputs/modalInput/ModalInput';
