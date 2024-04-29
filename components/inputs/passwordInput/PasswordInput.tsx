@@ -2,18 +2,7 @@ import React, { ReactNode, useState } from 'react';
 import Image from 'next/image';
 import Input from '@components/inputs/Input';
 import * as S from '@components/inputs/passwordInput/PaswwrodInput.style';
-
-type PasswordInputProps = {
-  children: ReactNode;
-  id: string;
-  type?: string;
-  placeholder: string;
-  password?: string;
-  passwordCheck?: string;
-  passwordCompare?: boolean;
-  onChange?: any;
-  inputValue?: string;
-};
+import { PasswordInputProps } from '../Input.type';
 
 function PasswordInput({
   children,

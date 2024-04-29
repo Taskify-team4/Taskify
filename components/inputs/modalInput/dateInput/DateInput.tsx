@@ -3,15 +3,9 @@ import Image from 'next/image';
 import * as S from '@components/inputs/modalInput/dateInput/DateInput.style';
 import calendarIcon from '@public/icons/calendar.svg';
 import DatePicker from './DatePicker';
+import { DateInputProps } from '@components/inputs/Input.type';
 
-type TagInputProps = {
-  children: ReactNode;
-  onRequired?: boolean;
-  onChange: (selectedDate: string) => void;
-  defaultValue?: string;
-};
-
-function DateInput({ children, onRequired, onChange, defaultValue }: TagInputProps) {
+function DateInput({ children, onRequired, onChange, defaultValue }: DateInputProps) {
   return (
     <S.DateInputContainer>
       <S.DateInputTitleContainer>

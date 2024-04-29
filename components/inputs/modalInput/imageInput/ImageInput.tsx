@@ -3,12 +3,7 @@ import Image from 'next/image';
 import * as S from '@components/inputs/modalInput/imageInput/ImageInput.style';
 import addIcon from '@public/icons/add_violet.svg';
 import { postCardImage } from '@utils/api';
-
-type ImageInputProps = {
-  children: ReactNode;
-  onChange: (uploadImgUrl: string) => void;
-  columnid: number;
-};
+import { ImageInputProps } from '@components/inputs/Input.type';
 
 function ImageInput({ children, onChange, columnid }: ImageInputProps) {
   const [uploadImgUrl, setUploadImgUrl] = useState('');
