@@ -24,10 +24,12 @@ function mypage() {
           <DashBoardHeader title="계정관리" />
           <S.MyPageMainContent>
             <S.MyPageMainHead>
-              <S.ImgWrap>
-                <Image fill src={leftArrow} alt="leftArrow" />
-              </S.ImgWrap>
-              <S.HeadTitle>돌아가기</S.HeadTitle>
+              <S.GoBack onClick={() => router.push(`/mydashboard`)}>
+                <S.ImgWrap>
+                  <Image fill src={leftArrow} alt="leftArrow" />
+                </S.ImgWrap>
+                <S.HeadTitle>돌아가기</S.HeadTitle>
+              </S.GoBack>
             </S.MyPageMainHead>
             <Profile />
             <Password />
