@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import * as S from '@components/inputs/modalInput/dateInput/DateInput.style';
 import calendarIcon from '@public/icons/calendar.svg';
