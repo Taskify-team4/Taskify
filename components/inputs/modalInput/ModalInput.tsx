@@ -18,9 +18,9 @@ function ModalInput({
       onChange(e.target.value);
     }
     if (e.target.value === '') {
-      setIsDisabled(true);
+      setIsDisabled?.(true);
     } else {
-      setIsDisabled(false);
+      setIsDisabled?.(false);
       setError('');
     }
   };

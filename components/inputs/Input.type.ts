@@ -124,5 +124,5 @@ export type ModalInputProps = {
   onRequired?: boolean;
   onChange?: (title: string) => void;
   defaultValue?: string;
-  setIsDisabled: (isDisabled: boolean) => void;
+  setIsDisabled?: (isDisabled: boolean) => void;
 };
