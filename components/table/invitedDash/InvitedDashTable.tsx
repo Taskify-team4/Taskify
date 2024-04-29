@@ -34,7 +34,9 @@ function InvitedDashTable() {
   const handleConfirmClick = async (id: number) => {
     try {
       const res = await reactDashboardInvites(id, true);
-      if (res?.status) {
+      if (res instanceof Error) {
+        throw res;
+      } else {
         fetchMyInvitation();
         fetchMyDashboardsAll();
       }
@@ -45,8 +47,11 @@ function InvitedDashTable() {
   const handleRejectClick = async (id: number) => {
     try {
       const res = await reactDashboardInvites(id, false);
-      if (res?.status) {
+      if (res instanceof Error) {
+        throw res;
+      } else {
         fetchMyInvitation();
+        fetchMyDashboardsAll();
       }
     } catch (error) {
       console.error(error);

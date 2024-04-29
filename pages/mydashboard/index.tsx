@@ -6,7 +6,7 @@ import InvitedDashTable from '@components/table/invitedDash/InvitedDashTable';
 import { MyDataProvider } from '@contexts/myDataContext';
 import React from 'react';
 import { DashProvider } from '@contexts/dashContext';
-import { useRouter } from '@node_modules/next/router';
+import { useRouter } from 'next/router';
 
 function Mydashboard() {
   const router = useRouter();
