@@ -7,16 +7,15 @@ import Modal from '@components/modals/Modal';
 import ModalBase from '@components/modals/ModalBase';
 import NewColumnModal from '@components/modals/new_column/Modal';
 import ColumnList from '@components/pages/dashboard/ColumnList';
-import { useMyData } from '@contexts/myDataContext';
+import { MyDataProvider } from '@contexts/myDataContext';
 
-import { useDashContext } from '@contexts/dashContext';
+import { DashProvider, useDashContext } from '@contexts/dashContext';
 
 import { useRouter } from 'next/router';
 import { getDashboardMembers, postDashboardInvites } from '@utils/api';
 import { DashBoardMember } from '@utils/editDashboard/edit.type';
 
 function Dashboard() {
-  const { myData } = useMyData();
   const { fetchDashboardInfo, dashInfo } = useDashContext();
   const router = useRouter();
   const { dashboardId }: { dashboardId: number } = router.query as unknown as { dashboardId: number };
@@ -41,36 +40,31 @@ function Dashboard() {
   }, [dashboardId]);
 
   return (
-    <S.DashboardContainer>
-      <Sidemenu />
-      <div>
-        <DashBoardHeader
-          mydata={{
-            id: myData.userId,
-            nickname: myData.nickname,
-            email: myData.email || '',
-          }}
-          userList={members}
-          crown={dashInfo.createdByMe}
-          onInviteClick={handleInviteClick}
-        />
+    <MyDataProvider>
+      <DashProvider dashboardId={dashboardId}>
+        <S.DashboardContainer>
+          <Sidemenu />
+          <div>
+            <DashBoardHeader userList={members} crown={dashInfo.createdByMe} onInviteClick={handleInviteClick} />
 
-        <S.ColumnContainer>
-          <ColumnList />
-          <S.AddColumnButtonWrapper>
-            <Modal
-              content={
-                <ModalBase>
-                  <NewColumnModal />
-                </ModalBase>
-              }
-            >
-              <Button.AddColumn>새로운 컬럼 추가하기</Button.AddColumn>
-            </Modal>
-          </S.AddColumnButtonWrapper>
-        </S.ColumnContainer>
-      </div>
-    </S.DashboardContainer>
+            <S.ColumnContainer>
+              <ColumnList />
+              <S.AddColumnButtonWrapper>
+                <Modal
+                  content={
+                    <ModalBase>
+                      <NewColumnModal />
+                    </ModalBase>
+                  }
+                >
+                  <Button.AddColumn>새로운 컬럼 추가하기</Button.AddColumn>
+                </Modal>
+              </S.AddColumnButtonWrapper>
+            </S.ColumnContainer>
+          </div>
+        </S.DashboardContainer>
+      </DashProvider>
+    </MyDataProvider>
   );
 }
 

@@ -1,6 +1,7 @@
 import { TColorCode } from '@components/chips/Chip.type';
 import { User } from '@utils/testData';
 import { Dashboard } from '@components/sidemenu/Sidemenu.type';
+import { TDashInfo } from '@pages/dashboard/Dashboard.type';
 
 export type DashBoardNameData = { title: string; color: TColorCode; createdByMe: boolean };
 
@@ -31,4 +32,5 @@ export type EditPageProps = {
   totalMembers: number;
   myData: DashBoardMember;
   dashboardList: Dashboard[];
+  dashInfo: TDashInfo;
 };

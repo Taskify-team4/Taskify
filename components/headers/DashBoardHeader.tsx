@@ -11,8 +11,10 @@ import Modal from '@components/modals/Modal';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDashContext } from '@contexts/dashContext';
+import { useMyData } from '@contexts/myDataContext';
 
-function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPros) {
+function DashBoardHeader({ title, userList, onInviteClick }: DashBoardPros) {
+  const { myData } = useMyData();
   const { dashInfo } = useDashContext();
   const [inMydash, setInMydash] = useState(false);
 
@@ -75,10 +77,10 @@ function DashBoardHeader({ title, mydata, userList, onInviteClick }: DashBoardPr
         )}
         <ProfileIconContainer data={userList} />
         <S.Line />
-        {mydata ? (
+        {myData ? (
           <S.Profile>
-            <ProfileIcon str={mydata.nickname} />
-            <S.MyProfileName>{mydata.nickname}</S.MyProfileName>
+            <ProfileIcon str={myData.nickname} />
+            <S.MyProfileName>{myData.nickname}</S.MyProfileName>
           </S.Profile>
         ) : (
           <></>
