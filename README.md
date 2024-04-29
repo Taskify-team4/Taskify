@@ -13,7 +13,7 @@
     </tr>
     <tr>
       <td>URL</td>
-      <td>https://taskify-sepia-seven.vercel.app/</td>
+      <td>https://taskify-team4.vercel.app/</td>
     </tr>
   </tbody>
 </table>
