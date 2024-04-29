@@ -9,19 +9,6 @@ import Password from '@components/pages/myPage/password/Password';
 import { MyDataProvider } from '@contexts/myDataContext';
 
 function mypage() {
-  const users = [
-    {
-      id: 1,
-      nickname: '짱구',
-      email: 'asdf1234@naver.com',
-    },
-    {
-      id: 2,
-      nickname: '유리',
-      email: 'asdf1234@naver.com',
-    },
-  ];
-
   return (
     <MyDataProvider>
       <S.MyPageContainer>
