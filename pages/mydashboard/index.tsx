@@ -18,7 +18,7 @@ function Mydashboard() {
         <S.MyDashboardContainer>
           <Sidemenu />
           <S.MyDashBoardLayout>
-            <DashBoardHeader userList={[]} />
+            <DashBoardHeader />
             <S.MyDashboardContent>
               <MyDashboardList />
               <InvitedDashTable />
