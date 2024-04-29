@@ -27,11 +27,16 @@ export const MyPageMainHead = styled.div`
   display: flex;
   align-items: center;
   padding: 20px 0 25px;
-  gap: 6px;
 
   @media ${device.tablet} {
     padding: 17px 0 20px;
   }
+`;
+
+export const GoBack = styled.div`
+  display: flex;
+  gap: 6px;
+  cursor: pointer;
 `;
 
 export const ImgWrap = styled.div`
